@@ -1,0 +1,27 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @event.name
+%p
+  %b User:
+  = @event.user_id
+%p
+  %b Company:
+  = @event.company_id
+%p
+  %b Date start:
+  = @event.date_start
+%p
+  %b Date end:
+  = @event.date_end
+%p
+  %b City:
+  = @event.city
+%p
+  %b State:
+  = @event.state
+
+= link_to 'Edit', edit_event_path(@event)
+\|
+= link_to 'Back', events_path

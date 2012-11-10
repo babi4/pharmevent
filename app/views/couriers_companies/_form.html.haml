@@ -1,0 +1,14 @@
+= simple_form_for(@couriers_company) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :name
+    = f.input :zip_code
+    = f.input :city
+    = f.input :street
+    = f.input :house
+    = f.input :stroenie
+    = f.input :office
+
+  .form-actions
+    = f.button :submit

@@ -1,0 +1,33 @@
+%p#notice= notice
+
+%p
+  %b User:
+  = @documents_nal_rashod.user_id
+%p
+  %b Company:
+  = @documents_nal_rashod.company
+%p
+  %b Description:
+  = @documents_nal_rashod.description
+%p
+  %b Name:
+  = @documents_nal_rashod.name
+%p
+  %b Telephone:
+  = @documents_nal_rashod.telephone
+%p
+  %b Summ:
+  = @documents_nal_rashod.summ
+%p
+  %b Date:
+  = @documents_nal_rashod.date
+%p
+  %b Lectors:
+  = @documents_nal_rashod.lectors
+%p
+  %b Entire:
+  = @documents_nal_rashod.entire
+
+= link_to 'Edit', edit_documents_nal_rashod_path(@documents_nal_rashod)
+\|
+= link_to 'Back', documents_nal_rashods_path

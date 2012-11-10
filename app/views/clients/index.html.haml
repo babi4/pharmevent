@@ -1,0 +1,35 @@
+%h1 Listing clients
+
+%table
+  %tr
+    %th Name
+    %th Birthday
+    %th Passport number
+    %th Zagran passport number
+    %th Zagran passport use before
+    %th Degree
+    %th Position
+    %th Work
+    %th Notes
+    %th
+    %th
+    %th
+
+  - @clients.each do |client|
+    %tr
+      %td= client.name
+      %td= client.birthday
+      %td= client.passport_number
+      %td= client.zagran_passport_number
+      %td= client.zagran_passport_use_before
+      %td= client.degree
+      %td= client.position
+      %td= client.work
+      %td= client.notes
+      %td= link_to 'Show', client
+      %td= link_to 'Edit', edit_client_path(client)
+      %td= link_to 'Destroy', client, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Client', new_client_path

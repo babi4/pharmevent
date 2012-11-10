@@ -1,0 +1,31 @@
+%h1 Listing events
+
+%table
+  %tr
+    %th Name
+    %th User
+    %th Company
+    %th Date start
+    %th Date end
+    %th City
+    %th State
+    %th
+    %th
+    %th
+
+  - @events.each do |event|
+    %tr
+      %td= event.name
+      %td= event.user_id
+      %td= event.company_id
+      %td= event.date_start
+      %td= event.date_end
+      %td= event.city
+      %td= event.state
+      %td= link_to 'Show', event
+      %td= link_to 'Edit', edit_event_path(event)
+      %td= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Event', new_event_path

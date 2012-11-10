@@ -1,0 +1,35 @@
+%h1 Listing documents_nal_rashods
+
+%table
+  %tr
+    %th User
+    %th Company
+    %th Description
+    %th Name
+    %th Telephone
+    %th Summ
+    %th Date
+    %th Lectors
+    %th Entire
+    %th
+    %th
+    %th
+
+  - @documents_nal_rashods.each do |documents_nal_rashod|
+    %tr
+      %td= documents_nal_rashod.user_id
+      %td= documents_nal_rashod.company
+      %td= documents_nal_rashod.description
+      %td= documents_nal_rashod.name
+      %td= documents_nal_rashod.telephone
+      %td= documents_nal_rashod.summ
+      %td= documents_nal_rashod.date
+      %td= documents_nal_rashod.lectors
+      %td= documents_nal_rashod.entire
+      %td= link_to 'Show', documents_nal_rashod
+      %td= link_to 'Edit', edit_documents_nal_rashod_path(documents_nal_rashod)
+      %td= link_to 'Destroy', documents_nal_rashod, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Documents nal rashod', new_documents_nal_rashod_path

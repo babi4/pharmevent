@@ -1,0 +1,31 @@
+= simple_form_for(@documents_beznal_rashod) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :user_id
+    = f.input :type_company
+    = f.input :company
+    = f.input :description
+    = f.input :name
+    = f.input :telephone
+    = f.input :num_schet
+    = f.input :date_schet
+    = f.input :summ
+    = f.input :nds
+    = f.input :dogovor_num
+    = f.input :dogovor_date
+    = f.input :lectors
+    = f.input :entire
+    = f.input :info_pp
+    = f.input :info_schet_factura
+    = f.input :info_act
+    = f.input :info_date_pay
+    = f.input :info_date_schet
+    = f.input :info_date_act
+    = f.input :info_state_act
+    = f.input :info_return_date
+    = f.input :info_return_act_type
+    = f.input :info_name_sender
+
+  .form-actions
+    = f.button :submit

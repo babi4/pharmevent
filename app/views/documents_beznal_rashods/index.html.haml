@@ -1,0 +1,65 @@
+%h1 Listing documents_beznal_rashods
+
+%table
+  %tr
+    %th User
+    %th Type company
+    %th Company
+    %th Description
+    %th Name
+    %th Telephone
+    %th Num schet
+    %th Date schet
+    %th Summ
+    %th Nds
+    %th Dogovor num
+    %th Dogovor date
+    %th Lectors
+    %th Entire
+    %th Info pp
+    %th Info schet factura
+    %th Info act
+    %th Info date pay
+    %th Info date schet
+    %th Info date act
+    %th Info state act
+    %th Info return date
+    %th Info return act type
+    %th Info name sender
+    %th
+    %th
+    %th
+
+  - @documents_beznal_rashods.each do |documents_beznal_rashod|
+    %tr
+      %td= documents_beznal_rashod.user_id
+      %td= documents_beznal_rashod.type_company
+      %td= documents_beznal_rashod.company
+      %td= documents_beznal_rashod.description
+      %td= documents_beznal_rashod.name
+      %td= documents_beznal_rashod.telephone
+      %td= documents_beznal_rashod.num_schet
+      %td= documents_beznal_rashod.date_schet
+      %td= documents_beznal_rashod.summ
+      %td= documents_beznal_rashod.nds
+      %td= documents_beznal_rashod.dogovor_num
+      %td= documents_beznal_rashod.dogovor_date
+      %td= documents_beznal_rashod.lectors
+      %td= documents_beznal_rashod.entire
+      %td= documents_beznal_rashod.info_pp
+      %td= documents_beznal_rashod.info_schet_factura
+      %td= documents_beznal_rashod.info_act
+      %td= documents_beznal_rashod.info_date_pay
+      %td= documents_beznal_rashod.info_date_schet
+      %td= documents_beznal_rashod.info_date_act
+      %td= documents_beznal_rashod.info_state_act
+      %td= documents_beznal_rashod.info_return_date
+      %td= documents_beznal_rashod.info_return_act_type
+      %td= documents_beznal_rashod.info_name_sender
+      %td= link_to 'Show', documents_beznal_rashod
+      %td= link_to 'Edit', edit_documents_beznal_rashod_path(documents_beznal_rashod)
+      %td= link_to 'Destroy', documents_beznal_rashod, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Documents beznal rashod', new_documents_beznal_rashod_path

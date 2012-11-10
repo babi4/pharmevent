@@ -1,0 +1,44 @@
+= simple_form_for(@company) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :events_id
+    = f.input :name
+    = f.input :company_type
+    = f.input :short_name
+    = f.input :ur_zip_code
+    = f.input :ur_city
+    = f.input :ur_street
+    = f.input :ur_hous
+    = f.input :ur_stroenie
+    = f.input :ur_office
+    = f.input :ur_post_equal
+    = f.input :post_zip_code
+    = f.input :post_city
+    = f.input :post_street
+    = f.input :post_house
+    = f.input :post_stroenie
+    = f.input :post_office
+    = f.input :telephone
+    = f.input :fax
+    = f.input :email
+    = f.input :inn
+    = f.input :kpp
+    = f.input :ogrn
+    = f.input :okpo
+    = f.input :okved
+    = f.input :ispolnitel
+    = f.input :osnovanie_ispolnitel
+    = f.input :bakn_account
+    = f.input :bakn_corr_account
+    = f.input :bank_name
+    = f.input :bank_zip
+    = f.input :bank_city
+    = f.input :bank_street
+    = f.input :bank_house
+    = f.input :bank_stroenie
+    = f.input :bank_office
+    = f.input :bank_bik
+
+  .form-actions
+    = f.button :submit

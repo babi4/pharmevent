@@ -1,0 +1,35 @@
+%h1 Listing couriers_tasks
+
+%table
+  %tr
+    %th User
+    %th Name
+    %th Telephone
+    %th From date
+    %th To date
+    %th Status
+    %th To person
+    %th From couriers company
+    %th To couriers company
+    %th
+    %th
+    %th
+
+  - @couriers_tasks.each do |couriers_task|
+    %tr
+      %td= couriers_task.user_id
+      %td= couriers_task.name
+      %td= couriers_task.telephone
+      %td= couriers_task.from_date
+      %td= couriers_task.to_date
+      %td= couriers_task.status
+      %td= couriers_task.to_person
+      %td= couriers_task.from_couriers_company_id
+      %td= couriers_task.to_couriers_company_id
+      %td= link_to 'Show', couriers_task
+      %td= link_to 'Edit', edit_couriers_task_path(couriers_task)
+      %td= link_to 'Destroy', couriers_task, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Couriers task', new_couriers_task_path

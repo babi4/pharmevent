@@ -1,0 +1,29 @@
+rails generate scaffold Company events_id:integer name:string company_type:string short_name:string ur_zip_code:string ur_city:string ur_street:string ur_hous:string ur_stroenie:string ur_office:string ur_post_equal:string post_zip_code:string post_city:string post_street:string post_house:string post_stroenie:string post_office:string telephone:string fax:string email:string inn:integer kpp:string ogrn:string okpo:string okved:string ispolnitel:string osnovanie_ispolnitel:string bakn_account:string bakn_corr_account:string bank_name:string bank_zip:string bank_city:string bank_street:string bank_house:string bank_stroenie:string bank_office:string bank_bik:string
+
+
+
+
+rails generate scaffold Event name:string user_id:integer company_id:integer date_start:date date_end:date city:string state:string
+
+rails generate scaffold Company_member company_id:integer name:string telephone:string position:string email:string
+
+
+rails generate scaffold Document_beznal_schet user_id:integer company:string description:string name:string telephone:string num_schet:string date_schet:string summ:string dogovor_num:integer dogovor_date:string info_schet_factura:string info_act:string info_date_schet:datetime info_date_act:datetime info_state_act:string info_return_date:datetime info_return_act_type:datetime info_name_sender:string
+
+
+rails generate scaffold document_beznal_rashod  user_id:integer type_company:string company:string description:string name:string telephone:string num_schet:string date_schet:string summ:string nds:string dogovor_num:string dogovor_date:string lectors:string entire:string info_pp:string info_schet_factura:string info_act:string info_date_pay:string info_date_schet:string info_date_act:string info_state_act:string info_return_date:datetime info_return_act_type:string info_name_sender:string
+
+
+
+rails generate scaffold  documents_nal_rashod user_id:integer company:string description:string name:string telephone:string summ:string date:datetime lectors:string entire:string
+
+
+rails generate scaffold documents_nal_prihod user_id:integer company:string description:string name:string telephone:string summ:string date:string
+
+
+rails generate scaffold client name:string birthday:date passport_number:string zagran_passport_number:string zagran_passport_use_before:date degree:string position:string work:string notes:string 
+
+
+rails generate scaffold couriers_company name:string zip_code:string city:string street:string house:string stroenie:string office:string
+
+rails generate scaffold couriers_task user_id:integer name:string telephone:string from_date:string to_date:string status:string to_person:string from_couriers_company_id:string to_couriers_company_id:string

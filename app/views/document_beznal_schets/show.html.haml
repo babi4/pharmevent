@@ -1,0 +1,60 @@
+%p#notice= notice
+
+%p
+  %b User:
+  = @document_beznal_schet.user_id
+%p
+  %b Company:
+  = @document_beznal_schet.company
+%p
+  %b Description:
+  = @document_beznal_schet.description
+%p
+  %b Name:
+  = @document_beznal_schet.name
+%p
+  %b Telephone:
+  = @document_beznal_schet.telephone
+%p
+  %b Num schet:
+  = @document_beznal_schet.num_schet
+%p
+  %b Date schet:
+  = @document_beznal_schet.date_schet
+%p
+  %b Summ:
+  = @document_beznal_schet.summ
+%p
+  %b Dogovor num:
+  = @document_beznal_schet.dogovor_num
+%p
+  %b Dogovor date:
+  = @document_beznal_schet.dogovor_date
+%p
+  %b Info schet factura:
+  = @document_beznal_schet.info_schet_factura
+%p
+  %b Info act:
+  = @document_beznal_schet.info_act
+%p
+  %b Info date schet:
+  = @document_beznal_schet.info_date_schet
+%p
+  %b Info date act:
+  = @document_beznal_schet.info_date_act
+%p
+  %b Info state act:
+  = @document_beznal_schet.info_state_act
+%p
+  %b Info return date:
+  = @document_beznal_schet.info_return_date
+%p
+  %b Info return act type:
+  = @document_beznal_schet.info_return_act_type
+%p
+  %b Info name sender:
+  = @document_beznal_schet.info_name_sender
+
+= link_to 'Edit', edit_document_beznal_schet_path(@document_beznal_schet)
+\|
+= link_to 'Back', document_beznal_schets_path

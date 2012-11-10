@@ -1,0 +1,27 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @couriers_company.name
+%p
+  %b Zip code:
+  = @couriers_company.zip_code
+%p
+  %b City:
+  = @couriers_company.city
+%p
+  %b Street:
+  = @couriers_company.street
+%p
+  %b House:
+  = @couriers_company.house
+%p
+  %b Stroenie:
+  = @couriers_company.stroenie
+%p
+  %b Office:
+  = @couriers_company.office
+
+= link_to 'Edit', edit_couriers_company_path(@couriers_company)
+\|
+= link_to 'Back', couriers_companies_path

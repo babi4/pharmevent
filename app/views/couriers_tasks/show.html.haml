@@ -1,0 +1,33 @@
+%p#notice= notice
+
+%p
+  %b User:
+  = @couriers_task.user_id
+%p
+  %b Name:
+  = @couriers_task.name
+%p
+  %b Telephone:
+  = @couriers_task.telephone
+%p
+  %b From date:
+  = @couriers_task.from_date
+%p
+  %b To date:
+  = @couriers_task.to_date
+%p
+  %b Status:
+  = @couriers_task.status
+%p
+  %b To person:
+  = @couriers_task.to_person
+%p
+  %b From couriers company:
+  = @couriers_task.from_couriers_company_id
+%p
+  %b To couriers company:
+  = @couriers_task.to_couriers_company_id
+
+= link_to 'Edit', edit_couriers_task_path(@couriers_task)
+\|
+= link_to 'Back', couriers_tasks_path

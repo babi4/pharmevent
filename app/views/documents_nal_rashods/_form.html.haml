@@ -1,0 +1,16 @@
+= simple_form_for(@documents_nal_rashod) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :user_id
+    = f.input :company
+    = f.input :description
+    = f.input :name
+    = f.input :telephone
+    = f.input :summ
+    = f.input :date
+    = f.input :lectors
+    = f.input :entire
+
+  .form-actions
+    = f.button :submit

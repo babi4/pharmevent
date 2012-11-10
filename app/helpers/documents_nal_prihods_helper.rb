@@ -1,0 +1,2 @@
+module DocumentsNalPrihodsHelper
+end

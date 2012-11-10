@@ -1,4 +1,23 @@
-%h3 Home
-- @users.each do |user|
-  %p
-    User: #{link_to user.name, user}
+%h3 Действия
+
+= link_to 'Создать мероприятие', events_path
+= link_to 'Заказчики', companies_path
+= link_to 'Сверка с постовщиком', events_path
+%br
+%br
+
+= link_to 'Заказать курьера', couriers_companies_path
+= link_to 'Клиентская база', clients_path
+= link_to 'Найти мероприятие', events_path
+%br
+%br
+
+= link_to 'Поиск финансовых документов', documents_nal_rashods_path
+= link_to 'Отчет менеджера', events_path
+= link_to 'Архив', events_path
+%br
+
+
+
+
+

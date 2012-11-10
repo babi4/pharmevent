@@ -1,0 +1,16 @@
+= simple_form_for(@client) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :name
+    = f.input :birthday
+    = f.input :passport_number
+    = f.input :zagran_passport_number
+    = f.input :zagran_passport_use_before
+    = f.input :degree
+    = f.input :position
+    = f.input :work
+    = f.input :notes
+
+  .form-actions
+    = f.button :submit

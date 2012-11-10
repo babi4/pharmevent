@@ -1,0 +1,2 @@
+module DocumentBeznalSchetsHelper
+end

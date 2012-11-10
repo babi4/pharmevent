@@ -1,0 +1,31 @@
+%h1 Listing couriers_companies
+
+%table
+  %tr
+    %th Name
+    %th Zip code
+    %th City
+    %th Street
+    %th House
+    %th Stroenie
+    %th Office
+    %th
+    %th
+    %th
+
+  - @couriers_companies.each do |couriers_company|
+    %tr
+      %td= couriers_company.name
+      %td= couriers_company.zip_code
+      %td= couriers_company.city
+      %td= couriers_company.street
+      %td= couriers_company.house
+      %td= couriers_company.stroenie
+      %td= couriers_company.office
+      %td= link_to 'Show', couriers_company
+      %td= link_to 'Edit', edit_couriers_company_path(couriers_company)
+      %td= link_to 'Destroy', couriers_company, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Couriers company', new_couriers_company_path

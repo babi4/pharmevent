@@ -1,0 +1,78 @@
+%p#notice= notice
+
+%p
+  %b User:
+  = @documents_beznal_rashod.user_id
+%p
+  %b Type company:
+  = @documents_beznal_rashod.type_company
+%p
+  %b Company:
+  = @documents_beznal_rashod.company
+%p
+  %b Description:
+  = @documents_beznal_rashod.description
+%p
+  %b Name:
+  = @documents_beznal_rashod.name
+%p
+  %b Telephone:
+  = @documents_beznal_rashod.telephone
+%p
+  %b Num schet:
+  = @documents_beznal_rashod.num_schet
+%p
+  %b Date schet:
+  = @documents_beznal_rashod.date_schet
+%p
+  %b Summ:
+  = @documents_beznal_rashod.summ
+%p
+  %b Nds:
+  = @documents_beznal_rashod.nds
+%p
+  %b Dogovor num:
+  = @documents_beznal_rashod.dogovor_num
+%p
+  %b Dogovor date:
+  = @documents_beznal_rashod.dogovor_date
+%p
+  %b Lectors:
+  = @documents_beznal_rashod.lectors
+%p
+  %b Entire:
+  = @documents_beznal_rashod.entire
+%p
+  %b Info pp:
+  = @documents_beznal_rashod.info_pp
+%p
+  %b Info schet factura:
+  = @documents_beznal_rashod.info_schet_factura
+%p
+  %b Info act:
+  = @documents_beznal_rashod.info_act
+%p
+  %b Info date pay:
+  = @documents_beznal_rashod.info_date_pay
+%p
+  %b Info date schet:
+  = @documents_beznal_rashod.info_date_schet
+%p
+  %b Info date act:
+  = @documents_beznal_rashod.info_date_act
+%p
+  %b Info state act:
+  = @documents_beznal_rashod.info_state_act
+%p
+  %b Info return date:
+  = @documents_beznal_rashod.info_return_date
+%p
+  %b Info return act type:
+  = @documents_beznal_rashod.info_return_act_type
+%p
+  %b Info name sender:
+  = @documents_beznal_rashod.info_name_sender
+
+= link_to 'Edit', edit_documents_beznal_rashod_path(@documents_beznal_rashod)
+\|
+= link_to 'Back', documents_beznal_rashods_path
