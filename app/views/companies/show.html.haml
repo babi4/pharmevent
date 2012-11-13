@@ -2,7 +2,7 @@
 
 %p
   %b Events:
-  = @company.events_id
+  = @company.events.pluck(:name)
 %p
   %b Name:
   = @company.name
@@ -83,10 +83,10 @@
   = @company.osnovanie_ispolnitel
 %p
   %b Bakn account:
-  = @company.bakn_account
+  = @company.bank_account
 %p
   %b Bakn corr account:
-  = @company.bakn_corr_account
+  = @company.bank_corr_account
 %p
   %b Bank name:
   = @company.bank_name

@@ -2,7 +2,6 @@
 
 FactoryGirl.define do
   factory :company do
-    events_id 1
     name "MyString"
     company_type "MyString"
     short_name "MyString"
@@ -29,8 +28,8 @@ FactoryGirl.define do
     okved "MyString"
     ispolnitel "MyString"
     osnovanie_ispolnitel "MyString"
-    bakn_account "MyString"
-    bakn_corr_account "MyString"
+    bank_account "MyString"
+    bank_corr_account "MyString"
     bank_name "MyString"
     bank_zip "MyString"
     bank_city "MyString"

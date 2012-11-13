@@ -2,13 +2,13 @@
   = f.error_notification
 
   .form-inputs
-    = f.input :name
-    = f.input :user_id
-    = f.input :company_id
-    = f.input :date_start
-    = f.input :date_end
-    = f.input :city
-    = f.input :state
+    = f.input :name,       :label => 'Название'
+    = f.association :company, :label => 'Заказчик'
+    = f.input :date_start, :label => 'Дата начала'
+    = f.input :date_end,   :label => 'Дата окончания'
+    = f.input :city,       :label => 'Город'
+    = f.input :state,      :label => 'Область'
 
   .form-actions
     = f.button :submit
+

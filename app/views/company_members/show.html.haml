@@ -2,7 +2,7 @@
 
 %p
   %b Company:
-  = @company_member.company_id
+  = @company_member.company[:name]
 %p
   %b Name:
   = @company_member.name
@@ -16,6 +16,6 @@
   %b Email:
   = @company_member.email
 
-= link_to 'Edit', edit_company_member_path(@company_member)
+= link_to 'Edit', edit_company_company_member_path(@company, @company_member)
 \|
-= link_to 'Back', company_members_path
+= link_to 'Back', company_company_members_path(@company)

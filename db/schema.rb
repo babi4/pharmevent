@@ -28,7 +28,6 @@ ActiveRecord::Schema.define(:version => 20121110184146) do
   end
 
   create_table "companies", :force => true do |t|
-    t.integer  "events_id"
     t.string   "name"
     t.string   "company_type"
     t.string   "short_name"
@@ -55,8 +54,8 @@ ActiveRecord::Schema.define(:version => 20121110184146) do
     t.string   "okved"
     t.string   "ispolnitel"
     t.string   "osnovanie_ispolnitel"
-    t.string   "bakn_account"
-    t.string   "bakn_corr_account"
+    t.string   "bank_account"
+    t.string   "bank_corr_account"
     t.string   "bank_name"
     t.string   "bank_zip"
     t.string   "bank_city"
@@ -196,15 +195,10 @@ ActiveRecord::Schema.define(:version => 20121110184146) do
   end
 
   create_table "roles", :force => true do |t|
-    t.string   "name"
-    t.integer  "resource_id"
-    t.string   "resource_type"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.string "name"
   end
 
-  add_index "roles", ["name", "resource_type", "resource_id"], :name => "index_roles_on_name_and_resource_type_and_resource_id"
-  add_index "roles", ["name"], :name => "index_roles_on_name"
+  add_index "roles", ["name"], :name => "index_roles_names", :unique => true
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -230,6 +224,6 @@ ActiveRecord::Schema.define(:version => 20121110184146) do
     t.integer "role_id"
   end
 
-  add_index "users_roles", ["user_id", "role_id"], :name => "index_users_roles_on_user_id_and_role_id"
+  add_index "users_roles", ["user_id", "role_id"], :name => "index_users_roles_on_user_id_and_role_id", :unique => true
 
 end

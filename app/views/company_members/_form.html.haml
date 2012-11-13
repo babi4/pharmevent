@@ -1,8 +1,7 @@
-= simple_form_for(@company_member) do |f|
+= simple_form_for([@company, @company_member]) do |f|
   = f.error_notification
 
   .form-inputs
-    = f.input :company_id
     = f.input :name
     = f.input :telephone
     = f.input :position

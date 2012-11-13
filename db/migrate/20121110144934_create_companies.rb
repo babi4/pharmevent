@@ -1,7 +1,6 @@
 class CreateCompanies < ActiveRecord::Migration
   def change
     create_table :companies do |t|
-      t.integer :events_id
       t.string :name
       t.string :company_type
       t.string :short_name
@@ -28,8 +27,8 @@ class CreateCompanies < ActiveRecord::Migration
       t.string :okved
       t.string :ispolnitel
       t.string :osnovanie_ispolnitel
-      t.string :bakn_account
-      t.string :bakn_corr_account
+      t.string :bank_account
+      t.string :bank_corr_account
       t.string :bank_name
       t.string :bank_zip
       t.string :bank_city

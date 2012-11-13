@@ -16,8 +16,8 @@
   - @events.each do |event|
     %tr
       %td= event.name
-      %td= event.user_id
-      %td= event.company_id
+      %td= event.user[:name]
+      %td= event.company[:name]
       %td= event.date_start
       %td= event.date_end
       %td= event.city

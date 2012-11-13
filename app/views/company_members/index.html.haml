@@ -1,4 +1,4 @@
-%h1 Listing company_members
+%h1 Listing company_members in company: #{@company[:name]}
 
 %table
   %tr
@@ -13,15 +13,18 @@
 
   - @company_members.each do |company_member|
     %tr
-      %td= company_member.company_id
+      %td= company_member.company[:name]
       %td= company_member.name
       %td= company_member.telephone
       %td= company_member.position
       %td= company_member.email
-      %td= link_to 'Show', company_member
-      %td= link_to 'Edit', edit_company_member_path(company_member)
-      %td= link_to 'Destroy', company_member, method: :delete, data: { confirm: 'Are you sure?' }
+      %td= link_to 'Show', [@company, company_member]
+      %td= link_to 'Edit', edit_company_company_member_path(@company, company_member)
+      %td= link_to 'Destroy', [@company, company_member], method: :delete, data: { confirm: 'Are you sure?' }
 
 %br
 
-= link_to 'New Company member', new_company_member_path
+= link_to 'New Company member', new_company_company_member_path(@company)
+%br
+%br
+= link_to "Back to companies list", companies_path

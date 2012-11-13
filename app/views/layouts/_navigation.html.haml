@@ -9,7 +9,7 @@
   - if user_signed_in?
     %li
       = link_to 'Редактировать аккаунт', edit_user_registration_path
-    - if current_user.has_role? :admin
+    - if can? :manage, User
       %li
         = link_to 'Админ', users_path
   - else

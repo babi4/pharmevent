@@ -6,15 +6,15 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 puts 'CREATING ROLES'
-Role.create([
-  { :name => 'admin' }, 
-  { :name => 'user' }, 
-  { :name => 'VIP' }
-], :without_protection => true)
+%w(general_director admin administrative_director chief_accountant manager).each { |t| Role.create().update_attribute(:name, t) }
+
+
 puts 'SETTING UP DEFAULT USER LOGIN'
 user = User.create! :name => 'First User', :email => 'user@example.com', :password => 'please', :password_confirmation => 'please'
 puts 'New user created: ' << user.name
+
 user2 = User.create! :name => 'Second User', :email => 'user2@example.com', :password => 'please', :password_confirmation => 'please'
 puts 'New user created: ' << user2.name
-user.add_role :admin
-user2.add_role :VIP
+
+user.roles << Role.find_by_name(:admin)
+

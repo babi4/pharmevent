@@ -2,6 +2,7 @@
 
 %table
   %tr
+    %th Company members
     %th Events
     %th Name
     %th Company type
@@ -45,7 +46,8 @@
 
   - @companies.each do |company|
     %tr
-      %td= company.events_id
+      %td= link_to 'Company members', company_company_members_path(company)
+      %td= company.events.pluck(:name)
       %td= company.name
       %td= company.company_type
       %td= company.short_name
@@ -72,8 +74,8 @@
       %td= company.okved
       %td= company.ispolnitel
       %td= company.osnovanie_ispolnitel
-      %td= company.bakn_account
-      %td= company.bakn_corr_account
+      %td= company.bank_account
+      %td= company.bank_corr_account
       %td= company.bank_name
       %td= company.bank_zip
       %td= company.bank_city

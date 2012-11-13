@@ -1,8 +1,9 @@
 class CompanyMembersController < ApplicationController
-  # GET /company_members
-  # GET /company_members.json
+  authorize_resource
+  before_filter :detect_company
+
   def index
-    @company_members = CompanyMember.all
+    @company_members = @company.company_members
 
     respond_to do |format|
       format.html # index.html.erb
@@ -10,10 +11,8 @@ class CompanyMembersController < ApplicationController
     end
   end
 
-  # GET /company_members/1
-  # GET /company_members/1.json
   def show
-    @company_member = CompanyMember.find(params[:id])
+    @company_member = @company.company_members.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -21,10 +20,8 @@ class CompanyMembersController < ApplicationController
     end
   end
 
-  # GET /company_members/new
-  # GET /company_members/new.json
   def new
-    @company_member = CompanyMember.new
+    @company_member = @company.company_members.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -32,19 +29,16 @@ class CompanyMembersController < ApplicationController
     end
   end
 
-  # GET /company_members/1/edit
   def edit
-    @company_member = CompanyMember.find(params[:id])
+    @company_member = @company.company_members.find(params[:id])
   end
 
-  # POST /company_members
-  # POST /company_members.json
   def create
-    @company_member = CompanyMember.new(params[:company_member])
+    @company_member = @company.company_members.new(params[:company_member])
 
     respond_to do |format|
       if @company_member.save
-        format.html { redirect_to @company_member, notice: 'Company member was successfully created.' }
+        format.html { redirect_to [@company, @company_member], notice: 'Company member was successfully created.' }
         format.json { render json: @company_member, status: :created, location: @company_member }
       else
         format.html { render action: "new" }
@@ -53,14 +47,12 @@ class CompanyMembersController < ApplicationController
     end
   end
 
-  # PUT /company_members/1
-  # PUT /company_members/1.json
   def update
-    @company_member = CompanyMember.find(params[:id])
+    @company_member = @company.company_members.find(params[:id])
 
     respond_to do |format|
       if @company_member.update_attributes(params[:company_member])
-        format.html { redirect_to @company_member, notice: 'Company member was successfully updated.' }
+        format.html { redirect_to [@company, @company_member], notice: 'Company member was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -69,15 +61,20 @@ class CompanyMembersController < ApplicationController
     end
   end
 
-  # DELETE /company_members/1
-  # DELETE /company_members/1.json
   def destroy
-    @company_member = CompanyMember.find(params[:id])
+    @company_member = @company.company_members.find(params[:id])
     @company_member.destroy
 
     respond_to do |format|
-      format.html { redirect_to company_members_url }
+      format.html { redirect_to company_company_members_url(@company) }
       format.json { head :no_content }
     end
   end
+
+  private
+
+    def detect_company
+      @company = Company.find(params[:company_id]) if params[:company_id]
+    end
+
 end
