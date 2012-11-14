@@ -26,4 +26,6 @@ Rails3BootstrapDeviseCancan::Application.routes.draw do
   delete "/sign_out", :to => "auth#destroy", :as => 'destroy_user_session'
 
   devise_for :user, :skip => [:sessions, :passwords]
+  mount RailsAdmin::Engine => '/rails_admin', :as => 'rails_admin'
+
 end

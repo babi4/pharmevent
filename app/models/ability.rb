@@ -44,6 +44,8 @@ class Ability
     can :manage, Company         # Управление заказчиками
     can :manage, Event           # Управление событиями
     can :manage, User            # Управление учётными записями/правами
+
+    can :manage, Role
     #can :manage, :all
 
     can :access, :rails_admin   # grant access to rails_admin
