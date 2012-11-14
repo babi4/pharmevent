@@ -10,13 +10,19 @@
         %th
         %th
     %tbody
-      - @users.each do |user|
+      - @users.includes(:roles).each do |user|
         %tr
           %td= link_to user.name, user
           %td= user.email
           %td= user.created_at.to_date
-          %td= user.roles.first.name.titleize unless user.roles.first.nil?
+          %td= user_role = user.roles.first ; user_role.name.titleize unless user_role.nil?
           %td
             %a.btn.btn-mini{"data-toggle" => "modal", :href => "#role-options-#{user.id}", :type => "button"} Change role
+          %td
+            %a.btn.btn-mini{"data-toggle" => "modal", :href => "#password-options-#{user.id}", :type => "button"} Change password
             = render user
+
           %td= link_to("Delete user", user_path(user), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'btn btn-mini') unless user == current_user
+
+  = link_to 'New User', new_user_path
+

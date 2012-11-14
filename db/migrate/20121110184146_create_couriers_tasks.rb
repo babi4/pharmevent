@@ -8,8 +8,8 @@ class CreateCouriersTasks < ActiveRecord::Migration
       t.string :to_date
       t.string :status
       t.string :to_person
-      t.string :from_couriers_company_id
-      t.string :to_couriers_company_id
+      t.integer :from_couriers_company_id
+      t.integer :to_couriers_company_id
 
       t.timestamps
     end

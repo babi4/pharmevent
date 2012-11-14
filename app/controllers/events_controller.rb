@@ -40,6 +40,7 @@ class EventsController < ApplicationController
   end
 
   def update
+    params[:event][:user_id] = current_user[:id]
     respond_to do |format|
       if @event.update_attributes(params[:event])
         format.html { redirect_to @event, notice: 'Event was successfully updated.' }

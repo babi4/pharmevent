@@ -17,15 +17,15 @@
 
   - @couriers_tasks.each do |couriers_task|
     %tr
-      %td= couriers_task.user_id
+      %td= couriers_task.user[:name]
       %td= couriers_task.name
       %td= couriers_task.telephone
       %td= couriers_task.from_date
       %td= couriers_task.to_date
       %td= couriers_task.status
       %td= couriers_task.to_person
-      %td= couriers_task.from_couriers_company_id
-      %td= couriers_task.to_couriers_company_id
+      %td= couriers_task.from_couriers_company[:name]
+      %td= couriers_task.to_couriers_company[:name]
       %td= link_to 'Show', couriers_task
       %td= link_to 'Edit', edit_couriers_task_path(couriers_task)
       %td= link_to 'Destroy', couriers_task, method: :delete, data: { confirm: 'Are you sure?' }

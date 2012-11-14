@@ -9,6 +9,8 @@
     %th House
     %th Stroenie
     %th Office
+    %th Посылки в данное место
+    %th Посылки из данного места
     %th
     %th
     %th
@@ -22,6 +24,8 @@
       %td= couriers_company.house
       %td= couriers_company.stroenie
       %td= couriers_company.office
+      %td= couriers_company.to_couriers_tasks.pluck(:name)
+      %td= couriers_company.from_couriers_tasks.pluck(:name)
       %td= link_to 'Show', couriers_company
       %td= link_to 'Edit', edit_couriers_company_path(couriers_company)
       %td= link_to 'Destroy', couriers_company, method: :delete, data: { confirm: 'Are you sure?' }

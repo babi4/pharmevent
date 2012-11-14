@@ -1,3 +1,16 @@
+.modal{:id => "password-options-#{user.id}", :style => "display: none;"}
+  = simple_form_for user, :url => change_pass_user_path(user), :html => {:method => :put, :class => 'form-horizontal', :data => { :confirm => "Are you sure?" } } do |f|
+    .modal-header
+      %a.close{"data-dismiss" => "modal"} ×
+      %h3 Change Password of #{user[:name]}
+    .modal-body
+      = f.input :password
+      = f.input :password_confirmation
+    .modal-footer
+      = f.submit "Change Password", :class => "btn"
+      %a.btn{"data-dismiss" => "modal", :href => "#"} Close
+
+
 .modal{:id => "role-options-#{user.id}", :style => "display: none;"}
   = simple_form_for user, :url => user_path(user), :html => {:method => :put, :class => 'form-horizontal' } do |f|
     .modal-header
@@ -8,3 +21,4 @@
     .modal-footer
       = f.submit "Change Role", :class => "btn"
       %a.btn{"data-dismiss" => "modal", :href => "#"} Close
+

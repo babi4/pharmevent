@@ -2,15 +2,17 @@
   = f.error_notification
 
   .form-inputs
-    = f.input :user_id
     = f.input :name
     = f.input :telephone
     = f.input :from_date
     = f.input :to_date
     = f.input :status
     = f.input :to_person
-    = f.input :from_couriers_company_id
-    = f.input :to_couriers_company_id
+    = f.association :from_couriers_company
+    = f.association :to_couriers_company
+
+    = link_to 'Создать место приёма/доставки?', new_couriers_company_path
+
 
   .form-actions
     = f.button :submit

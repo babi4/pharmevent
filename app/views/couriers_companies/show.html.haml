@@ -21,7 +21,15 @@
 %p
   %b Office:
   = @couriers_company.office
+%p
+  %b Посылки в данное место:
+  = @couriers_company.to_couriers_tasks.pluck(:name)
+%p
+  %b Посылки из данного места:
+  = @couriers_company.from_couriers_tasks.pluck(:name)
 
 = link_to 'Edit', edit_couriers_company_path(@couriers_company)
 \|
 = link_to 'Back', couriers_companies_path
+\|
+= link_to 'Перейти к заказу курьера', new_couriers_task_path

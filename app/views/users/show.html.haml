@@ -3,3 +3,5 @@
   User: #{@user.name}
 %p
   Email: #{@user.email if @user.email}
+%p
+  Роль: #{user_role = @user.roles.first ; user_role.name.titleize unless user_role.nil?}

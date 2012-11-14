@@ -3,15 +3,9 @@
   - if user_signed_in?
     %li
       = link_to 'Выйти', destroy_user_session_path, :method=>'delete'
-  - else
-    %li
-      = link_to 'Войти', new_user_session_path
-  - if user_signed_in?
-    %li
-      = link_to 'Редактировать аккаунт', edit_user_registration_path
     - if can? :manage, User
       %li
         = link_to 'Админ', users_path
   - else
     %li
-      = link_to 'Зарегестрироваться', new_user_registration_path
+      = link_to 'Войти', new_user_session_path
