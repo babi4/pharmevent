@@ -45,11 +45,9 @@ Rails3BootstrapDeviseCancan::Application.configure do
   # Enable serving of images, stylesheets, and JavaScripts from an asset server
   # config.action_controller.asset_host = "http://assets.example.com"
 
-  # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
-  # config.assets.precompile += ['rails_admin/rails_admin.css', 'rails_admin/rails_admin.js']
 
-  # Prevent initializing the application before assets are precompiled (required for heroku)
-  # config.assets.initialize_on_precompile = false
+  # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
+  config.assets.precompile += ['rails_admin/rails_admin.css', 'rails_admin/rails_admin.js']
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
