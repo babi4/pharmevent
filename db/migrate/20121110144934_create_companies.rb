@@ -4,14 +4,14 @@ class CreateCompanies < ActiveRecord::Migration
       t.string :name
       t.string :company_type
       t.string :short_name
-      t.string :ur_zip_code
+      t.integer :ur_zip_code
       t.string :ur_city
       t.string :ur_street
       t.string :ur_hous
       t.string :ur_stroenie
       t.string :ur_office
       t.string :ur_post_equal
-      t.string :post_zip_code
+      t.integer :post_zip_code
       t.string :post_city
       t.string :post_street
       t.string :post_house
@@ -30,7 +30,7 @@ class CreateCompanies < ActiveRecord::Migration
       t.string :bank_account
       t.string :bank_corr_account
       t.string :bank_name
-      t.string :bank_zip
+      t.integer :bank_zip
       t.string :bank_city
       t.string :bank_street
       t.string :bank_house

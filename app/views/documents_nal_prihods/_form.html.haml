@@ -1,14 +1,13 @@
-= simple_form_for(@documents_nal_prihod) do |f|
+= simple_form_for([@event, @documents_nal_prihod]) do |f|
   = f.error_notification
 
   .form-inputs
-    = f.input :user_id
-    = f.input :company
-    = f.input :description
-    = f.input :name
-    = f.input :telephone
-    = f.input :summ
-    = f.input :date
+    = f.input :company,     :label => 'Плательщик'
+    = f.input :description, :label => 'Назначение платежа'
+    = f.input :name,        :label => 'ФИО плательщика'
+    = f.input :telephone,   :label => 'Моб. тел. плательщика'
+    = f.input :summ,        :label => 'Сумма'
+    = f.input :date,        :label => 'Дата оплаты'
 
   .form-actions
     = f.button :submit

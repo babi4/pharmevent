@@ -1,0 +1,8 @@
+%h1 Editing documents_beznal_schet
+%h3= "Событие: #{@event[:name]}"
+
+= render 'form'
+
+= link_to 'Show', [@event, @documents_beznal_schet]
+\|
+= link_to 'Back', event_documents_beznal_schets_path(@event)

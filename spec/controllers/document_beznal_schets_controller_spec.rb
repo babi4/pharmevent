@@ -18,10 +18,10 @@ require 'spec_helper'
 # Message expectations are only used when there is no simpler way to specify
 # that an instance is receiving a specific message.
 
-describe DocumentBeznalSchetsController do
+describe DocumentsBeznalSchetsController do
 
   # This should return the minimal set of attributes required to create a valid
-  # DocumentBeznalSchet. As you add validations to DocumentBeznalSchet, be sure to
+  # DocumentsBeznalSchet. As you add validations to DocumentsBeznalSchet, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
     {}
@@ -29,74 +29,74 @@ describe DocumentBeznalSchetsController do
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
-  # DocumentBeznalSchetsController. Be sure to keep this updated too.
+  # DocumentsBeznalSchetsController. Be sure to keep this updated too.
   def valid_session
     {}
   end
 
   describe "GET index" do
-    it "assigns all document_beznal_schets as @document_beznal_schets" do
-      document_beznal_schet = DocumentBeznalSchet.create! valid_attributes
+    it "assigns all documents_beznal_schets as @documents_beznal_schets" do
+      documents_beznal_schet = DocumentsBeznalSchet.create! valid_attributes
       get :index, {}, valid_session
-      assigns(:document_beznal_schets).should eq([document_beznal_schet])
+      assigns(:documents_beznal_schets).should eq([documents_beznal_schet])
     end
   end
 
   describe "GET show" do
-    it "assigns the requested document_beznal_schet as @document_beznal_schet" do
-      document_beznal_schet = DocumentBeznalSchet.create! valid_attributes
-      get :show, {:id => document_beznal_schet.to_param}, valid_session
-      assigns(:document_beznal_schet).should eq(document_beznal_schet)
+    it "assigns the requested documents_beznal_schet as @documents_beznal_schet" do
+      documents_beznal_schet = DocumentsBeznalSchet.create! valid_attributes
+      get :show, {:id => documents_beznal_schet.to_param}, valid_session
+      assigns(:documents_beznal_schet).should eq(documents_beznal_schet)
     end
   end
 
   describe "GET new" do
-    it "assigns a new document_beznal_schet as @document_beznal_schet" do
+    it "assigns a new documents_beznal_schet as @documents_beznal_schet" do
       get :new, {}, valid_session
-      assigns(:document_beznal_schet).should be_a_new(DocumentBeznalSchet)
+      assigns(:documents_beznal_schet).should be_a_new(DocumentsBeznalSchet)
     end
   end
 
   describe "GET edit" do
-    it "assigns the requested document_beznal_schet as @document_beznal_schet" do
-      document_beznal_schet = DocumentBeznalSchet.create! valid_attributes
-      get :edit, {:id => document_beznal_schet.to_param}, valid_session
-      assigns(:document_beznal_schet).should eq(document_beznal_schet)
+    it "assigns the requested documents_beznal_schet as @documents_beznal_schet" do
+      documents_beznal_schet = DocumentsBeznalSchet.create! valid_attributes
+      get :edit, {:id => documents_beznal_schet.to_param}, valid_session
+      assigns(:documents_beznal_schet).should eq(documents_beznal_schet)
     end
   end
 
   describe "POST create" do
     describe "with valid params" do
-      it "creates a new DocumentBeznalSchet" do
+      it "creates a new DocumentsBeznalSchet" do
         expect {
-          post :create, {:document_beznal_schet => valid_attributes}, valid_session
-        }.to change(DocumentBeznalSchet, :count).by(1)
+          post :create, {:documents_beznal_schet => valid_attributes}, valid_session
+        }.to change(DocumentsBeznalSchet, :count).by(1)
       end
 
-      it "assigns a newly created document_beznal_schet as @document_beznal_schet" do
-        post :create, {:document_beznal_schet => valid_attributes}, valid_session
-        assigns(:document_beznal_schet).should be_a(DocumentBeznalSchet)
-        assigns(:document_beznal_schet).should be_persisted
+      it "assigns a newly created documents_beznal_schet as @documents_beznal_schet" do
+        post :create, {:documents_beznal_schet => valid_attributes}, valid_session
+        assigns(:documents_beznal_schet).should be_a(DocumentsBeznalSchet)
+        assigns(:documents_beznal_schet).should be_persisted
       end
 
-      it "redirects to the created document_beznal_schet" do
-        post :create, {:document_beznal_schet => valid_attributes}, valid_session
-        response.should redirect_to(DocumentBeznalSchet.last)
+      it "redirects to the created documents_beznal_schet" do
+        post :create, {:documents_beznal_schet => valid_attributes}, valid_session
+        response.should redirect_to(DocumentsBeznalSchet.last)
       end
     end
 
     describe "with invalid params" do
-      it "assigns a newly created but unsaved document_beznal_schet as @document_beznal_schet" do
+      it "assigns a newly created but unsaved documents_beznal_schet as @documents_beznal_schet" do
         # Trigger the behavior that occurs when invalid params are submitted
-        DocumentBeznalSchet.any_instance.stub(:save).and_return(false)
-        post :create, {:document_beznal_schet => {}}, valid_session
-        assigns(:document_beznal_schet).should be_a_new(DocumentBeznalSchet)
+        DocumentsBeznalSchet.any_instance.stub(:save).and_return(false)
+        post :create, {:documents_beznal_schet => {}}, valid_session
+        assigns(:documents_beznal_schet).should be_a_new(DocumentsBeznalSchet)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
-        DocumentBeznalSchet.any_instance.stub(:save).and_return(false)
-        post :create, {:document_beznal_schet => {}}, valid_session
+        DocumentsBeznalSchet.any_instance.stub(:save).and_return(false)
+        post :create, {:documents_beznal_schet => {}}, valid_session
         response.should render_template("new")
       end
     end
@@ -104,60 +104,60 @@ describe DocumentBeznalSchetsController do
 
   describe "PUT update" do
     describe "with valid params" do
-      it "updates the requested document_beznal_schet" do
-        document_beznal_schet = DocumentBeznalSchet.create! valid_attributes
-        # Assuming there are no other document_beznal_schets in the database, this
-        # specifies that the DocumentBeznalSchet created on the previous line
+      it "updates the requested documents_beznal_schet" do
+        documents_beznal_schet = DocumentsBeznalSchet.create! valid_attributes
+        # Assuming there are no other documents_beznal_schets in the database, this
+        # specifies that the DocumentsBeznalSchet created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        DocumentBeznalSchet.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
-        put :update, {:id => document_beznal_schet.to_param, :document_beznal_schet => {'these' => 'params'}}, valid_session
+        DocumentsBeznalSchet.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
+        put :update, {:id => documents_beznal_schet.to_param, :documents_beznal_schet => {'these' => 'params'}}, valid_session
       end
 
-      it "assigns the requested document_beznal_schet as @document_beznal_schet" do
-        document_beznal_schet = DocumentBeznalSchet.create! valid_attributes
-        put :update, {:id => document_beznal_schet.to_param, :document_beznal_schet => valid_attributes}, valid_session
-        assigns(:document_beznal_schet).should eq(document_beznal_schet)
+      it "assigns the requested documents_beznal_schet as @documents_beznal_schet" do
+        documents_beznal_schet = DocumentsBeznalSchet.create! valid_attributes
+        put :update, {:id => documents_beznal_schet.to_param, :documents_beznal_schet => valid_attributes}, valid_session
+        assigns(:documents_beznal_schet).should eq(documents_beznal_schet)
       end
 
-      it "redirects to the document_beznal_schet" do
-        document_beznal_schet = DocumentBeznalSchet.create! valid_attributes
-        put :update, {:id => document_beznal_schet.to_param, :document_beznal_schet => valid_attributes}, valid_session
-        response.should redirect_to(document_beznal_schet)
+      it "redirects to the documents_beznal_schet" do
+        documents_beznal_schet = DocumentsBeznalSchet.create! valid_attributes
+        put :update, {:id => documents_beznal_schet.to_param, :documents_beznal_schet => valid_attributes}, valid_session
+        response.should redirect_to(documents_beznal_schet)
       end
     end
 
     describe "with invalid params" do
-      it "assigns the document_beznal_schet as @document_beznal_schet" do
-        document_beznal_schet = DocumentBeznalSchet.create! valid_attributes
+      it "assigns the documents_beznal_schet as @documents_beznal_schet" do
+        documents_beznal_schet = DocumentsBeznalSchet.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
-        DocumentBeznalSchet.any_instance.stub(:save).and_return(false)
-        put :update, {:id => document_beznal_schet.to_param, :document_beznal_schet => {}}, valid_session
-        assigns(:document_beznal_schet).should eq(document_beznal_schet)
+        DocumentsBeznalSchet.any_instance.stub(:save).and_return(false)
+        put :update, {:id => documents_beznal_schet.to_param, :documents_beznal_schet => {}}, valid_session
+        assigns(:documents_beznal_schet).should eq(documents_beznal_schet)
       end
 
       it "re-renders the 'edit' template" do
-        document_beznal_schet = DocumentBeznalSchet.create! valid_attributes
+        documents_beznal_schet = DocumentsBeznalSchet.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
-        DocumentBeznalSchet.any_instance.stub(:save).and_return(false)
-        put :update, {:id => document_beznal_schet.to_param, :document_beznal_schet => {}}, valid_session
+        DocumentsBeznalSchet.any_instance.stub(:save).and_return(false)
+        put :update, {:id => documents_beznal_schet.to_param, :documents_beznal_schet => {}}, valid_session
         response.should render_template("edit")
       end
     end
   end
 
   describe "DELETE destroy" do
-    it "destroys the requested document_beznal_schet" do
-      document_beznal_schet = DocumentBeznalSchet.create! valid_attributes
+    it "destroys the requested documents_beznal_schet" do
+      documents_beznal_schet = DocumentsBeznalSchet.create! valid_attributes
       expect {
-        delete :destroy, {:id => document_beznal_schet.to_param}, valid_session
-      }.to change(DocumentBeznalSchet, :count).by(-1)
+        delete :destroy, {:id => documents_beznal_schet.to_param}, valid_session
+      }.to change(DocumentsBeznalSchet, :count).by(-1)
     end
 
-    it "redirects to the document_beznal_schets list" do
-      document_beznal_schet = DocumentBeznalSchet.create! valid_attributes
-      delete :destroy, {:id => document_beznal_schet.to_param}, valid_session
-      response.should redirect_to(document_beznal_schets_url)
+    it "redirects to the documents_beznal_schets list" do
+      documents_beznal_schet = DocumentsBeznalSchet.create! valid_attributes
+      delete :destroy, {:id => documents_beznal_schet.to_param}, valid_session
+      response.should redirect_to(documents_beznal_schets_url)
     end
   end
 

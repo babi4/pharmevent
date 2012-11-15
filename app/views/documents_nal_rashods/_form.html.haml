@@ -1,16 +1,16 @@
-= simple_form_for(@documents_nal_rashod) do |f|
+= simple_form_for([@event, @documents_nal_rashod]) do |f|
   = f.error_notification
 
   .form-inputs
-    = f.input :user_id
-    = f.input :company
-    = f.input :description
-    = f.input :name
-    = f.input :telephone
-    = f.input :summ
-    = f.input :date
-    = f.input :lectors
-    = f.input :entire
+    = f.input :company,     :label => 'Получатель'
+    = f.input :description, :label => 'Назначение платежа'
+    = f.input :name,        :label => 'ФИО получателя'
+    = f.input :telephone,   :label => 'Моб. тел. получателя'
+    = f.input :summ,        :label => 'Сумма'
+    = f.input :date,        :label => 'Дата оплаты'
+    %h4 Данный расход является:
+    = f.input :lectors,     :label => 'Расходом по логистике лекторов (статус: физ.лицо)'
+    = f.input :entire,      :label => 'Расходом по мероприятию в целом (статус: фгент/юр.лицо)'
 
   .form-actions
     = f.button :submit

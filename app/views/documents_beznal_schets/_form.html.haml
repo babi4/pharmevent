@@ -1,0 +1,27 @@
+= simple_form_for([@event, @documents_beznal_schet]) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :company_id, :collection => Company.select([:name, :id]), :label => 'Заказчик'
+    = f.input :description, :label => 'Назначение платежа'
+    = f.input :name,        :label => 'ФИО заказчика'
+    = f.input :telephone,   :label => 'Моб. тел. заказчика'
+    = f.input :num_schet,   :label => 'Счет №',     :disabled => true
+    = f.input :date_schet,  :label => 'Дата счета', :disabled => true
+    = f.input :summ,        :label => 'Сумма'
+    = f.input :dogovor_num, :label => 'Договор №'
+    = f.input :dogovor_date,:label => 'Дата договора'
+    %h5 ________________________________
+
+    %h3 Информация по исходящим закрывающим документам
+    = f.input :info_schet_factura,:label => 'Счет фактура №'
+    = f.input :info_act,          :label => 'Акт №'
+    = f.input :info_date_schet,   :label => 'Дата сч. фактуры'
+    = f.input :info_date_act,     :label => 'Дата акта'
+    = f.input :info_state_act, :collection => %w(начало далее конец), :label => 'Статус отправления закрывающих документов'
+    = f.input :info_return_date,  :label => 'Дата отправления закрывающих документов'
+    = f.input :info_type_return_act, :collection => %w(почтой курьером самовывоз), :label => 'Способ отправления закрывающих документов'
+    = f.input :info_name_sender,   :label => 'ФИО отправителя закрывающих документов'
+
+  .form-actions
+    = f.button :submit

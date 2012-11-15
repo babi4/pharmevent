@@ -7,83 +7,17 @@
     %th Name
     %th Company type
     %th Short name
-    %th Ur zip code
-    %th Ur city
-    %th Ur street
-    %th Ur hous
-    %th Ur stroenie
-    %th Ur office
-    %th Ur post equal
-    %th Post zip code
-    %th Post city
-    %th Post street
-    %th Post house
-    %th Post stroenie
-    %th Post office
-    %th Telephone
-    %th Fax
-    %th Email
-    %th Inn
-    %th Kpp
-    %th Ogrn
-    %th Okpo
-    %th Okved
-    %th Ispolnitel
-    %th Osnovanie ispolnitel
-    %th Bakn account
-    %th Bakn corr account
-    %th Bank name
-    %th Bank zip
-    %th Bank city
-    %th Bank street
-    %th Bank house
-    %th Bank stroenie
-    %th Bank office
-    %th Bank bik
     %th
     %th
     %th
 
-  - @companies.each do |company|
+  - @companies.includes(:events).each do |company|
     %tr
       %td= link_to 'Company members', company_company_members_path(company)
       %td= company.events.pluck(:name)
       %td= company.name
       %td= company.company_type
       %td= company.short_name
-      %td= company.ur_zip_code
-      %td= company.ur_city
-      %td= company.ur_street
-      %td= company.ur_hous
-      %td= company.ur_stroenie
-      %td= company.ur_office
-      %td= company.ur_post_equal
-      %td= company.post_zip_code
-      %td= company.post_city
-      %td= company.post_street
-      %td= company.post_house
-      %td= company.post_stroenie
-      %td= company.post_office
-      %td= company.telephone
-      %td= company.fax
-      %td= company.email
-      %td= company.inn
-      %td= company.kpp
-      %td= company.ogrn
-      %td= company.okpo
-      %td= company.okved
-      %td= company.ispolnitel
-      %td= company.osnovanie_ispolnitel
-      %td= company.bank_account
-      %td= company.bank_corr_account
-      %td= company.bank_name
-      %td= company.bank_zip
-      %td= company.bank_city
-      %td= company.bank_street
-      %td= company.bank_house
-      %td= company.bank_stroenie
-      %td= company.bank_office
-      %td= company.bank_bik
       %td= link_to 'Show', company
       %td= link_to 'Edit', edit_company_path(company)
       %td= link_to 'Destroy', company, method: :delete, data: { confirm: 'Are you sure?' }

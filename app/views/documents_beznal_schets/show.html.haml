@@ -1,0 +1,67 @@
+%h1= "Событие: #{@event[:name]}"
+%h2= "Безнал, счет"
+
+%p#notice= notice
+
+%p
+  %b Создал документ:
+  = @documents_beznal_schet.user[:name]
+%p
+  %b Заказчик:
+  = link_to @documents_beznal_schet.company[:name], company_path(@documents_beznal_schet.company)
+%p
+  %b Назначение платежа:
+  = @documents_beznal_schet.description
+%p
+  %b ФИО заказчика:
+  = @documents_beznal_schet.name
+%p
+  %b Моб. тел. заказчика:
+  = @documents_beznal_schet.telephone
+%p
+  %b Счет №:
+  = @documents_beznal_schet.num_schet
+%p
+  %b Дата счета:
+  = @documents_beznal_schet.date_schet
+%p
+  %b Сумма:
+  = @documents_beznal_schet.summ
+%p
+  %b Договор №:
+  = @documents_beznal_schet.dogovor_num
+%p
+  %b Дата договора:
+  = @documents_beznal_schet.dogovor_date
+
+%h5 ________________________________
+%h3 Информация по исходящим закрывающим документам
+
+%p
+  %b Счет фактура №:
+  = @documents_beznal_schet.info_schet_factura
+%p
+  %b Акт №:
+  = @documents_beznal_schet.info_act
+%p
+  %b Дата сч. фактуры:
+  = @documents_beznal_schet.info_date_schet
+%p
+  %b Дата акта:
+  = @documents_beznal_schet.info_date_act
+%p
+  %b Статус отправления закрывающих документов:
+  = @documents_beznal_schet.info_state_act
+%p
+  %b Дата отправления закрывающих документов:
+  = @documents_beznal_schet.info_return_date
+%p
+  %b Способ отправления закрывающих документов:
+  = @documents_beznal_schet.info_type_return_act
+%p
+  %b ФИО отправителя закрывающих документов:
+  = @documents_beznal_schet.info_name_sender
+
+= link_to 'Edit', edit_event_documents_beznal_schet_path([@event, @documents_beznal_schet])
+\|
+= link_to 'Back', event_documents_beznal_schets_path(@event)

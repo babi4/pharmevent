@@ -36,13 +36,17 @@ class Ability
 
   def admin
 
+    can :manage, Event           # Управление событиями
+    can :manage, DocumentsBeznalRashod
+    can :manage, DocumentsBeznalSchet
+    can :manage, DocumentsNalRashod
+    can :manage, DocumentsNalPrihod
 
     can :manage, CouriersTask    # Заказ, управление курьерами
     can :manage, CouriersCompany # Управление местами доставки для курьеров
     can :manage, Client          # Управление клиентской базой
     can :manage, CompanyMember   # Управление предствителями заказчика
     can :manage, Company         # Управление заказчиками
-    can :manage, Event           # Управление событиями
     can :manage, User            # Управление учётными записями/правами
 
     can :manage, Role

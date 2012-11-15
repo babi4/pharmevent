@@ -6,4 +6,11 @@ class ApplicationController < ActionController::Base
     redirect_to main_app.root_path, :alert => exception.message
   end
 
+  private
+
+    def detect_event
+      @event = Event.find(params[:event_id]) if params[:event_id]
+    end
+
+
 end

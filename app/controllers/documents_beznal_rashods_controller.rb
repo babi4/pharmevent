@@ -1,8 +1,9 @@
 class DocumentsBeznalRashodsController < ApplicationController
-  # GET /documents_beznal_rashods
-  # GET /documents_beznal_rashods.json
+  authorize_resource
+  before_filter :detect_event
+
   def index
-    @documents_beznal_rashods = DocumentsBeznalRashod.all
+    @documents_beznal_rashods = @event.documents_beznal_rashods
 
     respond_to do |format|
       format.html # index.html.erb
@@ -10,10 +11,8 @@ class DocumentsBeznalRashodsController < ApplicationController
     end
   end
 
-  # GET /documents_beznal_rashods/1
-  # GET /documents_beznal_rashods/1.json
   def show
-    @documents_beznal_rashod = DocumentsBeznalRashod.find(params[:id])
+    @documents_beznal_rashod = @event.documents_beznal_rashods.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -21,8 +20,6 @@ class DocumentsBeznalRashodsController < ApplicationController
     end
   end
 
-  # GET /documents_beznal_rashods/new
-  # GET /documents_beznal_rashods/new.json
   def new
     @documents_beznal_rashod = DocumentsBeznalRashod.new
 
@@ -32,19 +29,17 @@ class DocumentsBeznalRashodsController < ApplicationController
     end
   end
 
-  # GET /documents_beznal_rashods/1/edit
   def edit
-    @documents_beznal_rashod = DocumentsBeznalRashod.find(params[:id])
+    @documents_beznal_rashod = @event.documents_beznal_rashods.find(params[:id])
   end
 
-  # POST /documents_beznal_rashods
-  # POST /documents_beznal_rashods.json
   def create
-    @documents_beznal_rashod = DocumentsBeznalRashod.new(params[:documents_beznal_rashod])
+    @documents_beznal_rashod = @event.documents_beznal_rashods.new(params[:documents_beznal_rashod])
+    @documents_beznal_rashod[:user_id] = current_user[:id]
 
     respond_to do |format|
       if @documents_beznal_rashod.save
-        format.html { redirect_to @documents_beznal_rashod, notice: 'Documents beznal rashod was successfully created.' }
+        format.html { redirect_to [@event, @documents_beznal_rashod], notice: 'Documents beznal rashod was successfully created.' }
         format.json { render json: @documents_beznal_rashod, status: :created, location: @documents_beznal_rashod }
       else
         format.html { render action: "new" }
@@ -53,14 +48,12 @@ class DocumentsBeznalRashodsController < ApplicationController
     end
   end
 
-  # PUT /documents_beznal_rashods/1
-  # PUT /documents_beznal_rashods/1.json
   def update
-    @documents_beznal_rashod = DocumentsBeznalRashod.find(params[:id])
+    @documents_beznal_rashod = @event.documents_beznal_rashods.find(params[:id])
 
     respond_to do |format|
       if @documents_beznal_rashod.update_attributes(params[:documents_beznal_rashod])
-        format.html { redirect_to @documents_beznal_rashod, notice: 'Documents beznal rashod was successfully updated.' }
+        format.html { redirect_to [@event, @documents_beznal_rashod], notice: 'Documents beznal rashod was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -69,14 +62,12 @@ class DocumentsBeznalRashodsController < ApplicationController
     end
   end
 
-  # DELETE /documents_beznal_rashods/1
-  # DELETE /documents_beznal_rashods/1.json
   def destroy
-    @documents_beznal_rashod = DocumentsBeznalRashod.find(params[:id])
+    @documents_beznal_rashod = @event.documents_beznal_rashods.find(params[:id])
     @documents_beznal_rashod.destroy
 
     respond_to do |format|
-      format.html { redirect_to documents_beznal_rashods_url }
+      format.html { redirect_to event_documents_beznal_rashods_url(@event) }
       format.json { head :no_content }
     end
   end

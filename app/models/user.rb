@@ -2,6 +2,10 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :roles, :join_table => :users_roles
   has_many :events
   has_many :couriers_tasks
+  has_many :documents_beznal_rashods
+  has_many :documents_beznal_schets
+  has_many :documents_nal_rashods
+  has_many :documents_nal_prihods
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable, :registerable

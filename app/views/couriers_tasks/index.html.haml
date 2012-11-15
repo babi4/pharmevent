@@ -15,7 +15,7 @@
     %th
     %th
 
-  - @couriers_tasks.each do |couriers_task|
+  - @couriers_tasks.includes([:user, :from_couriers_company, :to_couriers_company]).each do |couriers_task|
     %tr
       %td= couriers_task.user[:name]
       %td= couriers_task.name

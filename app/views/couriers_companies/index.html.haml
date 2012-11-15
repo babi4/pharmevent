@@ -15,7 +15,7 @@
     %th
     %th
 
-  - @couriers_companies.each do |couriers_company|
+  - @couriers_companies.includes([:to_couriers_tasks, :from_couriers_tasks]).each do |couriers_company|
     %tr
       %td= couriers_company.name
       %td= couriers_company.zip_code

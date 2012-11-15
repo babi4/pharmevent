@@ -1,33 +1,34 @@
+%h1= "Событие: #{@event[:name]}"
+%h2= "Наличные, расход"
+
 %p#notice= notice
 
 %p
-  %b User:
-  = @documents_nal_rashod.user_id
+  %b Документ создал:
+  = @documents_nal_rashod.user[:name]
 %p
-  %b Company:
+  %b Получатель:
   = @documents_nal_rashod.company
 %p
-  %b Description:
+  %b Назначение платежа:
   = @documents_nal_rashod.description
 %p
-  %b Name:
+  %b ФИО получателя:
   = @documents_nal_rashod.name
 %p
-  %b Telephone:
+  %b Моб. тел. получателя:
   = @documents_nal_rashod.telephone
 %p
-  %b Summ:
+  %b Сумма:
   = @documents_nal_rashod.summ
 %p
-  %b Date:
+  %b Дата оплаты:
   = @documents_nal_rashod.date
 %p
-  %b Lectors:
-  = @documents_nal_rashod.lectors
-%p
-  %b Entire:
-  = @documents_nal_rashod.entire
+  %b Данный расход является:
+  %b= 'Расходом по логистике лекторов (статус: физ.лицо)' if @documents_nal_rashod.lectors
+  %b= 'Расходом по мероприятию в целом (статус: фгент/юр.лицо)' if @documents_nal_rashod.entire
 
-= link_to 'Edit', edit_documents_nal_rashod_path(@documents_nal_rashod)
+= link_to 'Edit', edit_event_documents_nal_rashod_path(@event, @documents_nal_rashod)
 \|
-= link_to 'Back', documents_nal_rashods_path
+= link_to 'Back', event_documents_nal_rashods_path(@event)

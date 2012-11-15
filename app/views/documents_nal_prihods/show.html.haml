@@ -1,27 +1,30 @@
+%h1= "Событие: #{@event[:name]}"
+%h2= "Наличные, приход"
+
 %p#notice= notice
 
 %p
-  %b User:
-  = @documents_nal_prihod.user_id
+  %b Документ создал:
+  = @documents_nal_prihod.user[:name]
 %p
-  %b Company:
+  %b Плательщик:
   = @documents_nal_prihod.company
 %p
-  %b Description:
+  %b Назначение платежа:
   = @documents_nal_prihod.description
 %p
-  %b Name:
+  %b ФИО плательщика:
   = @documents_nal_prihod.name
 %p
-  %b Telephone:
+  %b Моб. тел. плательщика:
   = @documents_nal_prihod.telephone
 %p
-  %b Summ:
+  %b Сумма:
   = @documents_nal_prihod.summ
 %p
-  %b Date:
+  %b Дата оплаты:
   = @documents_nal_prihod.date
 
-= link_to 'Edit', edit_documents_nal_prihod_path(@documents_nal_prihod)
+= link_to 'Edit', edit_event_documents_nal_prihod_path(@event, @documents_nal_prihod)
 \|
-= link_to 'Back', documents_nal_prihods_path
+= link_to 'Back', event_documents_nal_prihods_path(@event)

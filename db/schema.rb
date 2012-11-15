@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(:version => 20121114192309) do
     t.string   "degree"
     t.string   "position"
     t.string   "work"
-    t.string   "notes"
+    t.text     "notes"
     t.datetime "created_at",                 :null => false
     t.datetime "updated_at",                 :null => false
   end
@@ -31,14 +31,14 @@ ActiveRecord::Schema.define(:version => 20121114192309) do
     t.string   "name"
     t.string   "company_type"
     t.string   "short_name"
-    t.string   "ur_zip_code"
+    t.integer  "ur_zip_code"
     t.string   "ur_city"
     t.string   "ur_street"
     t.string   "ur_hous"
     t.string   "ur_stroenie"
     t.string   "ur_office"
     t.string   "ur_post_equal"
-    t.string   "post_zip_code"
+    t.integer  "post_zip_code"
     t.string   "post_city"
     t.string   "post_street"
     t.string   "post_house"
@@ -57,7 +57,7 @@ ActiveRecord::Schema.define(:version => 20121114192309) do
     t.string   "bank_account"
     t.string   "bank_corr_account"
     t.string   "bank_name"
-    t.string   "bank_zip"
+    t.integer  "bank_zip"
     t.string   "bank_city"
     t.string   "bank_street"
     t.string   "bank_house"
@@ -94,8 +94,8 @@ ActiveRecord::Schema.define(:version => 20121114192309) do
     t.integer  "user_id"
     t.string   "name"
     t.string   "telephone"
-    t.string   "from_date"
-    t.string   "to_date"
+    t.date     "from_date"
+    t.date     "to_date"
     t.string   "status"
     t.string   "to_person"
     t.integer  "from_couriers_company_id"
@@ -104,53 +104,56 @@ ActiveRecord::Schema.define(:version => 20121114192309) do
     t.datetime "updated_at",               :null => false
   end
 
-  create_table "document_beznal_schets", :force => true do |t|
-    t.integer  "user_id"
-    t.string   "company"
-    t.string   "description"
-    t.string   "name"
-    t.string   "telephone"
-    t.string   "num_schet"
-    t.string   "date_schet"
-    t.string   "summ"
-    t.integer  "dogovor_num"
-    t.string   "dogovor_date"
-    t.string   "info_schet_factura"
-    t.string   "info_act"
-    t.datetime "info_date_schet"
-    t.datetime "info_date_act"
-    t.string   "info_state_act"
-    t.datetime "info_return_date"
-    t.datetime "info_return_act_type"
-    t.string   "info_name_sender"
-    t.datetime "created_at",           :null => false
-    t.datetime "updated_at",           :null => false
-  end
-
   create_table "documents_beznal_rashods", :force => true do |t|
     t.integer  "user_id"
+    t.integer  "event_id"
     t.string   "type_company"
     t.string   "company"
     t.string   "description"
     t.string   "name"
     t.string   "telephone"
-    t.string   "num_schet"
-    t.string   "date_schet"
-    t.string   "summ"
-    t.string   "nds"
-    t.string   "dogovor_num"
-    t.string   "dogovor_date"
-    t.string   "lectors"
-    t.string   "entire"
-    t.string   "info_pp"
+    t.integer  "num_schet"
+    t.date     "date_schet"
+    t.integer  "summ"
+    t.integer  "nds"
+    t.integer  "dogovor_num"
+    t.date     "dogovor_date"
+    t.boolean  "lectors",              :default => false, :null => false
+    t.boolean  "entire",               :default => false, :null => false
+    t.integer  "info_pp"
     t.string   "info_schet_factura"
     t.string   "info_act"
-    t.string   "info_date_pay"
-    t.string   "info_date_schet"
-    t.string   "info_date_act"
+    t.date     "info_date_pay"
+    t.date     "info_date_schet"
+    t.date     "info_date_act"
     t.string   "info_state_act"
-    t.datetime "info_return_date"
-    t.string   "info_return_act_type"
+    t.date     "info_return_date"
+    t.string   "info_type_return_act"
+    t.string   "info_name_sender"
+    t.datetime "created_at",                              :null => false
+    t.datetime "updated_at",                              :null => false
+  end
+
+  create_table "documents_beznal_schets", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "event_id"
+    t.integer  "company_id"
+    t.string   "description"
+    t.string   "name"
+    t.string   "telephone"
+    t.integer  "num_schet"
+    t.date     "date_schet"
+    t.integer  "summ"
+    t.integer  "dogovor_num"
+    t.date     "dogovor_date"
+    t.date     "payment_date"
+    t.string   "info_schet_factura"
+    t.string   "info_act"
+    t.date     "info_date_schet"
+    t.date     "info_date_act"
+    t.string   "info_state_act"
+    t.date     "info_return_date"
+    t.string   "info_type_return_act"
     t.string   "info_name_sender"
     t.datetime "created_at",           :null => false
     t.datetime "updated_at",           :null => false
@@ -158,28 +161,30 @@ ActiveRecord::Schema.define(:version => 20121114192309) do
 
   create_table "documents_nal_prihods", :force => true do |t|
     t.integer  "user_id"
+    t.integer  "event_id"
     t.string   "company"
     t.string   "description"
     t.string   "name"
     t.string   "telephone"
-    t.string   "summ"
-    t.string   "date"
+    t.integer  "summ"
+    t.date     "date"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end
 
   create_table "documents_nal_rashods", :force => true do |t|
     t.integer  "user_id"
+    t.integer  "event_id"
     t.string   "company"
     t.string   "description"
     t.string   "name"
     t.string   "telephone"
-    t.string   "summ"
-    t.datetime "date"
-    t.string   "lectors"
-    t.string   "entire"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.integer  "summ"
+    t.date     "date"
+    t.boolean  "lectors",     :default => false, :null => false
+    t.boolean  "entire",      :default => false, :null => false
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
   end
 
   create_table "events", :force => true do |t|

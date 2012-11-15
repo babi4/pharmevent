@@ -1,27 +1,46 @@
 %p#notice= notice
 
 %p
-  %b Name:
+  %b Название мероприятия:
   = @event.name
 %p
-  %b User:
-  = @event.user_id
+  %b Добавил мероприятие:
+  = @event.user[:name]
 %p
-  %b Company:
-  = @event.company_id
+  %b Компания:
+  = @event.company[:name]
 %p
-  %b Date start:
+  %b Начало:
   = @event.date_start
 %p
-  %b Date end:
+  %b Конец:
   = @event.date_end
 %p
-  %b City:
+  %b Город:
   = @event.city
 %p
-  %b State:
+  %b Область:
   = @event.state
 
 = link_to 'Edit', edit_event_path(@event)
 \|
 = link_to 'Back', events_path
+
+%br
+%br
+
+= link_to 'Просмотр безналичный расход', event_documents_beznal_rashods_path(@event)
+\|||
+= link_to 'Просмотр наличный расход',    event_documents_nal_rashods_path(@event)
+\|||
+= link_to 'Просмотр наличный приход',    event_documents_nal_prihods_path(@event)
+\|||
+= link_to 'Выставл. счета',              event_documents_beznal_schets_path(@event)
+%br
+= link_to 'Добавить безналичный расход', new_event_documents_beznal_rashod_path(@event)
+\|||
+= link_to 'Добавить наличный расход',    new_event_documents_nal_rashod_path(@event)
+\|||
+= link_to 'Добавить наличный приход',    new_event_documents_nal_prihod_path(@event)
+\|||
+= link_to 'Выставить счёт',              new_event_documents_beznal_schet_path(@event)

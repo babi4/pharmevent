@@ -9,7 +9,7 @@ class CreateClients < ActiveRecord::Migration
       t.string :degree
       t.string :position
       t.string :work
-      t.string :notes
+      t.text :notes
 
       t.timestamps
     end

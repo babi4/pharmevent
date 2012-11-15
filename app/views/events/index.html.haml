@@ -13,7 +13,7 @@
     %th
     %th
 
-  - @events.each do |event|
+  - @events.includes([:user, :company]).each do |event|
     %tr
       %td= event.name
       %td= event.user[:name]

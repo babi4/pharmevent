@@ -1,17 +1,20 @@
 Rails3BootstrapDeviseCancan::Application.routes.draw do
 
-  resources :events
+  resources :events do
+    resources :documents_beznal_rashods
+    resources :documents_nal_prihods
+    resources :documents_nal_rashods
+    resources :documents_beznal_schets
+  end
+
   resources :companies do
     resources :company_members
   end
+
   resources :clients
   resources :couriers_tasks
   resources :couriers_companies
 
-  resources :documents_nal_prihods
-  resources :documents_nal_rashods
-  resources :documents_beznal_rashods
-  resources :document_beznal_schets
   resources :users do
     put 'change_pass', :on => :member
   end

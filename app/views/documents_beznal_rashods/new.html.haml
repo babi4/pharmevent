@@ -1,5 +1,6 @@
 %h1 New documents_beznal_rashod
+%h3= "Событие: #{@event[:name]}"
 
 = render 'form'
 
-= link_to 'Back', documents_beznal_rashods_path
+= link_to 'Back', event_documents_beznal_rashods_path(@event)

@@ -1,7 +1,8 @@
 %h1 Editing documents_nal_rashod
+%h1= "Событие: #{@event[:name]}"
 
 = render 'form'
 
-= link_to 'Show', @documents_nal_rashod
+= link_to 'Show', [@event, @documents_nal_rashod]
 \|
-= link_to 'Back', documents_nal_rashods_path
+= link_to 'Back', event_documents_nal_rashods_path(@event)

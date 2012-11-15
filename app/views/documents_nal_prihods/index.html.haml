@@ -1,31 +1,34 @@
 %h1 Listing documents_nal_prihods
+%h1= "Событие: #{@event.name}"
 
 %table
   %tr
-    %th User
-    %th Company
-    %th Description
-    %th Name
-    %th Telephone
-    %th Summ
-    %th Date
+    %th Документ создал
+    %th Плательщик
+    %th Назначение платежа
+    %th ФИО плательщика
+    %th Моб. тел. плательщика
+    %th Сумма
+    %th Дата оплаты
     %th
     %th
     %th
 
-  - @documents_nal_prihods.each do |documents_nal_prihod|
+  - @documents_nal_prihods.includes(:user).each do |documents_nal_prihod|
     %tr
-      %td= documents_nal_prihod.user_id
+      %td= documents_nal_prihod.user[:name]
       %td= documents_nal_prihod.company
       %td= documents_nal_prihod.description
       %td= documents_nal_prihod.name
       %td= documents_nal_prihod.telephone
       %td= documents_nal_prihod.summ
       %td= documents_nal_prihod.date
-      %td= link_to 'Show', documents_nal_prihod
-      %td= link_to 'Edit', edit_documents_nal_prihod_path(documents_nal_prihod)
-      %td= link_to 'Destroy', documents_nal_prihod, method: :delete, data: { confirm: 'Are you sure?' }
+      %td= link_to 'Show', [@event, documents_nal_prihod]
+      %td= link_to 'Edit', edit_event_documents_nal_prihod_path(@event, documents_nal_prihod)
+      %td= link_to 'Destroy', [@event, documents_nal_prihod], method: :delete, data: { confirm: 'Are you sure?' }
 
 %br
-
-= link_to 'New Documents nal prihod', new_documents_nal_prihod_path
+%br
+= link_to 'Создать документ наличного расхода', new_event_documents_nal_prihod_path(@event)
+%br
+= link_to "Вернуться к событию: #{@event[:name]}", event_path(@event)

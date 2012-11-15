@@ -4,8 +4,8 @@ class CreateCouriersTasks < ActiveRecord::Migration
       t.integer :user_id
       t.string :name
       t.string :telephone
-      t.string :from_date
-      t.string :to_date
+      t.date :from_date
+      t.date :to_date
       t.string :status
       t.string :to_person
       t.integer :from_couriers_company_id

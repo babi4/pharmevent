@@ -1,31 +1,34 @@
-= simple_form_for(@documents_beznal_rashod) do |f|
+= simple_form_for([@event, @documents_beznal_rashod]) do |f|
   = f.error_notification
 
   .form-inputs
-    = f.input :user_id
-    = f.input :type_company
-    = f.input :company
-    = f.input :description
-    = f.input :name
-    = f.input :telephone
-    = f.input :num_schet
-    = f.input :date_schet
-    = f.input :summ
-    = f.input :nds
-    = f.input :dogovor_num
-    = f.input :dogovor_date
-    = f.input :lectors
-    = f.input :entire
-    = f.input :info_pp
-    = f.input :info_schet_factura
-    = f.input :info_act
-    = f.input :info_date_pay
-    = f.input :info_date_schet
-    = f.input :info_date_act
-    = f.input :info_state_act
-    = f.input :info_return_date
-    = f.input :info_return_act_type
-    = f.input :info_name_sender
+    = f.input :type_company, :collection => %w(ООО/ОАО/ЗАО ИП), :label => 'Получатель'
+    = f.input_field :company
+    = f.input :description, :label => 'Назначение платежа'
+    = f.input :name,        :label => 'ФИО получателя'
+    = f.input :telephone,   :label => 'Моб. тел. получателя'
+    = f.input :num_schet,   :label => 'Счет №'
+    = f.input :date_schet,  :label => 'Дата счета'
+    = f.input :summ,        :label => 'Сумма'
+    = f.input :nds,         :label => 'НДС'
+    = f.input :dogovor_num, :label => 'Договор №'
+    = f.input :dogovor_date,:label => 'Дата договора'
+    %h4 Данный расход является:
+    = f.input :lectors,     :label => 'Расходом по логистике лекторов (статус: физ.лицо)'
+    = f.input :entire,      :label => 'Расходом по мероприятию в целом (статус: фгент/юр.лицо)'
+    %h5 ________________________________
+
+    %h3 Информация по расходу
+    = f.input :info_pp,           :label => '№ п/п'
+    = f.input :info_schet_factura,:label => 'Счет фактура №'
+    = f.input :info_act,          :label => 'Акт №'
+    = f.input :info_date_pay,     :label => 'Дата оплаты'
+    = f.input :info_date_schet,   :label => 'Дата сч. фактуры'
+    = f.input :info_date_act,     :label => 'Дата акта'
+    = f.input :info_state_act, :collection => %w(начало далее конец), :label => 'Статус возврата акта'
+    = f.input :info_return_date,  :label => 'Дата возврата акта'
+    = f.input :info_type_return_act, :collection => %w(почтой курьером самовывоз), :label => 'Способ возврата акта'
+    = f.input :info_name_sender,   :label => 'ФИО отправителя'
 
   .form-actions
     = f.button :submit

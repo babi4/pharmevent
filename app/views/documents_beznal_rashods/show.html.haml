@@ -1,78 +1,80 @@
+%h1= "Событие: #{@event[:name]}"
+%h2= "Безнал, приход"
+
 %p#notice= notice
 
 %p
-  %b User:
-  = @documents_beznal_rashod.user_id
+  %b Создал документ:
+  = @documents_beznal_rashod.user[:name]
 %p
-  %b Type company:
+  %b Получатель:
   = @documents_beznal_rashod.type_company
-%p
-  %b Company:
   = @documents_beznal_rashod.company
 %p
-  %b Description:
+  %b Назначение платежа:
   = @documents_beznal_rashod.description
 %p
-  %b Name:
+  %b ФИО получателя:
   = @documents_beznal_rashod.name
 %p
-  %b Telephone:
+  %b Моб. тел. получателя:
   = @documents_beznal_rashod.telephone
 %p
-  %b Num schet:
+  %b Счет №:
   = @documents_beznal_rashod.num_schet
 %p
-  %b Date schet:
+  %b Дата счета:
   = @documents_beznal_rashod.date_schet
 %p
-  %b Summ:
+  %b Сумма:
   = @documents_beznal_rashod.summ
 %p
-  %b Nds:
+  %b НДС:
   = @documents_beznal_rashod.nds
 %p
-  %b Dogovor num:
+  %b Договор №:
   = @documents_beznal_rashod.dogovor_num
 %p
-  %b Dogovor date:
+  %b Дата договора:
   = @documents_beznal_rashod.dogovor_date
 %p
-  %b Lectors:
-  = @documents_beznal_rashod.lectors
+  %b Данный расход является:
+  %b= 'Расходом по логистике лекторов (статус: физ.лицо)' if @documents_beznal_rashod.lectors
+  %b= 'Расходом по мероприятию в целом (статус: фгент/юр.лицо)' if @documents_beznal_rashod.entire
+
+%h5 ________________________________
+%h3 Информация по расходу
 %p
-  %b Entire:
-  = @documents_beznal_rashod.entire
-%p
-  %b Info pp:
+  %b № п/п:
   = @documents_beznal_rashod.info_pp
 %p
-  %b Info schet factura:
+  %b Счет фактура №:
   = @documents_beznal_rashod.info_schet_factura
 %p
-  %b Info act:
+  %b Акт №:
   = @documents_beznal_rashod.info_act
 %p
-  %b Info date pay:
+  %b Дата оплаты:
   = @documents_beznal_rashod.info_date_pay
 %p
-  %b Info date schet:
+  %b Дата сч. фактуры:
   = @documents_beznal_rashod.info_date_schet
 %p
-  %b Info date act:
+  %b Дата акта:
   = @documents_beznal_rashod.info_date_act
 %p
-  %b Info state act:
+  %b Статус возврата акта:
   = @documents_beznal_rashod.info_state_act
 %p
-  %b Info return date:
+  %b Дата возврата акта:
   = @documents_beznal_rashod.info_return_date
 %p
-  %b Info return act type:
-  = @documents_beznal_rashod.info_return_act_type
+  %b Способ возврата акта:
+  = @documents_beznal_rashod.info_type_return_act
 %p
-  %b Info name sender:
+  %b ФИО отправителя:
   = @documents_beznal_rashod.info_name_sender
 
-= link_to 'Edit', edit_documents_beznal_rashod_path(@documents_beznal_rashod)
+= link_to 'Edit', edit_event_documents_beznal_rashod_path([@event, @documents_beznal_rashod])
 \|
-= link_to 'Back', documents_beznal_rashods_path
+= link_to 'Back', event_documents_beznal_rashods_path(@event)

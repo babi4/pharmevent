@@ -11,7 +11,7 @@
     %th
     %th
 
-  - @company_members.each do |company_member|
+  - @company_members.includes(:company).each do |company_member|
     %tr
       %td= company_member.company[:name]
       %td= company_member.name
