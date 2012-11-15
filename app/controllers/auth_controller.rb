@@ -8,9 +8,8 @@ class AuthController < ApplicationController
   end
 
   def create
-
-    user = User.find(params[:user][:user_id])
-    if user.valid_password?(params[:user][:password])
+    user = User.find_by_email(params[:user][:email])
+    if user && user.valid_password?(params[:user][:password])
       user.remember_me = true
       sign_in(User, user)
       redirect_to root_path
@@ -27,7 +26,7 @@ class AuthController < ApplicationController
   private
 
     def validate_params!
-      if (params[:user][:user_id].to_i == 0) || params[:user][:password].blank?
+      if params[:user][:email].blank? || params[:user][:password].blank?
         redirect_to new_user_session_path
       end
     end

@@ -1,7 +1,7 @@
 = simple_form_for("user", :url => user_session_path) do |f|
 
   .form-inputs
-    = f.input :user_id, :collection => User.select([:name, :id]), :prompt => "Choose a User"
+    = f.input :email, :placeholder => 'user@domain.com'
     = f.input :password, :label => 'Пароль'
 
   .form-actions
