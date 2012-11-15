@@ -2,6 +2,7 @@
 
 %table
   %tr
+    %th
     %th Name
     %th User
     %th Company
@@ -15,6 +16,7 @@
 
   - @events.includes([:user, :company]).each do |event|
     %tr
+      %td= link_to 'ПОДРОБНЕЕ', event
       %td= event.name
       %td= event.user[:name]
       %td= event.company[:name]
