@@ -11,6 +11,7 @@ class CreateDocumentsBeznalSchets < ActiveRecord::Migration
       t.integer :num_schet
       t.date :date_schet
       t.integer :summ
+      t.integer :nds
       t.integer :dogovor_num
       t.date :dogovor_date
       t.date :payment_date

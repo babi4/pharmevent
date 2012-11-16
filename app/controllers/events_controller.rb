@@ -9,7 +9,14 @@ class EventsController < ApplicationController
   end
 
   def show
-    respond_to do |format|
+    @prihod_summ =
+      @event.documents_nal_prihods.sum(:summ) +
+      @event.documents_beznal_schets.sum(:summ)
+    @rashod_summ =
+      @event.documents_nal_rashods.sum(:summ) +
+      @event.documents_beznal_rashods.sum(:summ)
+
+      respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @event }
     end
@@ -40,7 +47,6 @@ class EventsController < ApplicationController
   end
 
   def update
-    params[:event][:user_id] = current_user[:id]
     respond_to do |format|
       if @event.update_attributes(params[:event])
         format.html { redirect_to @event, notice: 'Event was successfully updated.' }

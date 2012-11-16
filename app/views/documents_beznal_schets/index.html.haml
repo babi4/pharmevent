@@ -11,6 +11,8 @@
     %th Номер счета
     %th Дата счета
     %th Сумма
+    %th НДС
+    %th Дата оплаты
     %th
     %th
     %th
@@ -25,6 +27,8 @@
       %td= documents_beznal_schet.num_schet
       %td= documents_beznal_schet.date_schet
       %td= documents_beznal_schet.summ
+      %td= documents_beznal_schet.nds
+      %td= documents_beznal_schet.payment_date
       %td= link_to 'Show', [@event, documents_beznal_schet]
       %td= link_to 'Edit', edit_event_documents_beznal_schet_path(@event, documents_beznal_schet)
       %td= link_to 'Destroy', [@event, documents_beznal_schet], method: :delete, data: { confirm: 'Are you sure?' }

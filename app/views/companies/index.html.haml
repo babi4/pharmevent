@@ -1,19 +1,19 @@
-%h1 Listing companies
+%h1 Список заказчиков
 
 %table
   %tr
-    %th Company members
-    %th Events
-    %th Name
-    %th Company type
-    %th Short name
+    %th Представители заказчика
+    %th События
+    %th Полное наименовние
+    %th Краткое наименование
+    %th
     %th
     %th
     %th
 
   - @companies.includes(:events).each do |company|
     %tr
-      %td= link_to 'Company members', company_company_members_path(company)
+      %td= link_to 'Представители заказчика', company_company_members_path(company)
       %td= company.events.pluck(:name)
       %td= company.name
       %td= company.company_type

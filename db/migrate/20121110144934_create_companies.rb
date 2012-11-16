@@ -10,7 +10,7 @@ class CreateCompanies < ActiveRecord::Migration
       t.string :ur_hous
       t.string :ur_stroenie
       t.string :ur_office
-      t.string :ur_post_equal
+      t.boolean :ur_post_equal
       t.integer :post_zip_code
       t.string :post_city
       t.string :post_street

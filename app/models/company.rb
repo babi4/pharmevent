@@ -4,7 +4,7 @@ class Company < ActiveRecord::Base
   has_many :company_members
   has_many :documents_beznal_schets
 
-  validates :name, :presence => true
+  validates :name, :ur_zip_code, :ur_city, :ur_street, :ur_hous, :presence => true
   validates :name, :uniqueness => true
 
 end

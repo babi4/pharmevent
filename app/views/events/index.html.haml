@@ -1,19 +1,21 @@
-%h1 Listing events
+%h1 Список мероприятий
 
-%table
-  %tr
-    %th
-    %th Name
-    %th User
-    %th Company
-    %th Date start
-    %th Date end
-    %th City
-    %th State
-    %th
-    %th
-    %th
+%table.table
+  %thead
+    %tr
+      %th
+      %th Название
+      %th Создал мероприятие
+      %th Заказчик
+      %th Дата начала
+      %th Дата окончания
+      %th Город
+      %th Область
+      %th
+      %th
+      %th
 
+  %tbody
   - @events.includes([:user, :company]).each do |event|
     %tr
       %td= link_to 'ПОДРОБНЕЕ', event

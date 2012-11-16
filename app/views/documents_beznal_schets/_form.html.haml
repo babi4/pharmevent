@@ -9,6 +9,7 @@
     = f.input :num_schet,   :label => 'Счет №',     :disabled => true
     = f.input :date_schet,  :label => 'Дата счета', :disabled => true
     = f.input :summ,        :label => 'Сумма'
+    = f.input :nds,         :label => 'НДС'
     = f.input :dogovor_num, :label => 'Договор №'
     = f.input :dogovor_date,:label => 'Дата договора'
     %h5 ________________________________
@@ -22,6 +23,9 @@
     = f.input :info_return_date,  :label => 'Дата отправления закрывающих документов'
     = f.input :info_type_return_act, :collection => %w(почтой курьером самовывоз), :label => 'Способ отправления закрывающих документов'
     = f.input :info_name_sender,   :label => 'ФИО отправителя закрывающих документов'
+
+    %h5 ________________________________
+    = f.input :payment_date,     :label => 'Дата оплаты'
 
   .form-actions
     = f.button :submit

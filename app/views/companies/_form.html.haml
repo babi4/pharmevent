@@ -2,35 +2,45 @@
   = f.error_notification
 
   .form-inputs
-    = f.input :name
-    = f.input :company_type
-    = f.input :short_name
+    = f.input :name,       :label => 'Полное название'
+    = f.input :company_type,:label => 'Краткое название'
+    = f.input_field :short_name
+    %br
+    Юридический адрес
     = f.input :ur_zip_code
     = f.input :ur_city
     = f.input :ur_street
     = f.input :ur_hous
     = f.input :ur_stroenie
     = f.input :ur_office
-    = f.input :ur_post_equal
+    Почтовый адрес(для отправки документов)
+    = f.input :ur_post_equal, :label => 'Тот же'
     = f.input :post_zip_code
     = f.input :post_city
     = f.input :post_street
     = f.input :post_house
     = f.input :post_stroenie
     = f.input :post_office
+    Контактная информация
     = f.input :telephone
     = f.input :fax
     = f.input :email
+    Реквизиты
     = f.input :inn
     = f.input :kpp
     = f.input :ogrn
     = f.input :okpo
     = f.input :okved
-    = f.input :ispolnitel
-    = f.input :osnovanie_ispolnitel
-    = f.input :bank_account
-    = f.input :bank_corr_account
-    = f.input :bank_name
+    ___________
+    = f.input :ispolnitel, :label => 'Исполнитель(ген. директор, директор и др.)'
+    = f.input :osnovanie_ispolnitel, :label => 'Действует на основании'
+    ___________
+    %br
+    Банковские реквизиты
+    = f.input :bank_account, :label => 'Расчетный счет'
+    = f.input :bank_corr_account, :label => 'Корр. счет'
+    = f.input :bank_name, :label => 'Наименование банка'
+    Адрес
     = f.input :bank_zip
     = f.input :bank_city
     = f.input :bank_street

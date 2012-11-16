@@ -44,3 +44,191 @@
 = link_to 'Добавить наличный приход',    new_event_documents_nal_prihod_path(@event)
 \|||
 = link_to 'Выставить счёт',              new_event_documents_beznal_schet_path(@event)
+
+
+%h5 __________________________________
+%h3 Оплата мероприятия: #{@prihod_summ}
+
+%h5 Приход безналичный:
+%table.table
+  %thead
+    %tr
+      %th №
+      %th Плательщик
+      %th Счет №
+      %th Дата счета
+      %th Дата оплаты
+      %th Сумма
+      %th Включая НДС
+      %th Действия
+
+  %tbody
+  - @event.documents_beznal_schets.includes(:company).each do |doc|
+    %tr
+      %td
+      %td= link_to doc.company[:name], doc.company
+      %td= doc.num_schet
+      %td= doc.date_schet
+      %td= doc.payment_date
+      %td= doc.summ
+      %td= doc.nds
+      %td= '??'
+  %tr
+    %td
+    %td
+    %td
+    %td
+    %td Итого:
+    %td= @event.documents_beznal_schets.sum(:summ)
+    %td= @event.documents_beznal_schets.sum(:nds)
+    %td
+%br
+%h5 Приход наличный:
+%table.table
+  %thead
+    %tr
+      %th №
+      %th Плательщик
+      %th Назначение платежа
+      %th Дата оплаты
+      %th Сумма
+      %th Действия
+
+  %tbody
+  - @event.documents_nal_prihods.each do |doc|
+    %tr
+      %td
+      %td= doc.company
+      %td= doc.description
+      %td= doc.date
+      %td= doc.summ
+      %td= '??'
+  %tr
+    %td
+    %td
+    %td
+    %td Итого:
+    %td= @event.documents_nal_prihods.sum(:summ)
+    %td
+
+%h3 Расход мероприятия: #{@rashod_summ}
+%h5 Расход безналичный:
+%table.table
+  %thead
+    %tr
+      %th №
+      %th Плательщик
+      %th Платежные документы
+      %th Статус
+      %th Сумма
+      %th Включая НДС
+      %th Действия
+
+  %tbody
+  - @event.documents_beznal_rashods.each do |doc|
+    %tr
+      %td
+      %td
+        %table
+          %tr
+            %td= doc.company
+          %tr
+            %td= doc.description
+      %td
+        %table
+          %tr
+            %td Счет №
+            %td= doc.num_schet
+          %tr
+            %td Дата счета
+            %td= doc.date_schet
+          %tr
+            %td Дата оплаты
+            %td ???
+          %tr
+            %td № п/п
+            %td= doc.info_pp
+          %tr
+            %td Счет фактура №
+            %td= doc.info_schet_factura
+          %tr
+            %td Дата сч. фактуры
+            %td= doc.info_date_schet
+          %tr
+            %td Акт №
+            %td= doc.info_act
+          %tr
+            %td Дата акта
+            %td= doc.info_date_act
+          %tr
+            %td Договор №
+            %td= doc.dogovor_num
+          %tr
+            %td Дата договора
+            %td= doc.dogovor_date
+      %td
+        %table
+          %tr
+            %td ??
+          %tr
+            %td= doc.lectors ? 'Физ. лицо' : 'Агент'
+      %td= doc.summ
+      %td= doc.nds
+      %td= '??'
+  %tr
+    %td
+    %td
+    %td
+    %td Итого:
+    %td= @event.documents_beznal_rashods.sum(:summ)
+    %td= @event.documents_beznal_rashods.sum(:nds)
+    %td
+
+%h5 Расход наличный:
+%table.table
+  %thead
+    %tr
+      %th №
+      %th Получатель
+      %th Назначение платежа
+      %th Статус
+      %th Дата оплаты
+      %th Сумма
+      %th Действия
+
+  %tbody
+  - @event.documents_nal_rashods.each do |doc|
+    %tr
+      %td
+      %td= doc.company
+      %td= doc.description
+      %td= doc.lectors ? 'Физ. лицо' : 'Агент'
+      %td= doc.date
+      %td= doc.summ
+      %td= '??'
+  %tr
+    %td
+    %td
+    %td
+    %td
+    %td Итого:
+    %td= @event.documents_nal_rashods.sum(:summ)
+    %td
+
+%h5 Прибыль и НДС:
+%table.table
+  %thead
+    %tr
+      %th Прибыль без учета НДС
+      %th НДС к уплате (с выставленных счетов)
+      %th НДС к зачету (с оплаченных счетов)
+      %th Остаток НДС к уплате
+      %th Прибыль с учетом НДС
+
+  %tbody
+    %tr
+      %td= @prihod_summ - @rashod_summ
+      %td= @nds_k_uplate = @event.documents_beznal_schets.sum(:nds)
+      %td= @nds_k_zachetu = @event.documents_beznal_rashods.sum(:nds)
+      %td= @nds_k_uplate - @nds_k_zachetu
+      %td= (@prihod_summ - @rashod_summ) - (@nds_k_uplate - @nds_k_zachetu)

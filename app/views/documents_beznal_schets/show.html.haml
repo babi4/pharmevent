@@ -28,6 +28,9 @@
   %b Сумма:
   = @documents_beznal_schet.summ
 %p
+  %b НДС:
+  = @documents_beznal_schet.nds
+%p
   %b Договор №:
   = @documents_beznal_schet.dogovor_num
 %p
@@ -62,6 +65,11 @@
   %b ФИО отправителя закрывающих документов:
   = @documents_beznal_schet.info_name_sender
 
-= link_to 'Edit', edit_event_documents_beznal_schet_path([@event, @documents_beznal_schet])
+%h5 ________________________________
+%p
+  %b Дата оплаты:
+  = @documents_beznal_schet.payment_date
+
+= link_to 'Edit', edit_event_documents_beznal_schet_path(@event, @documents_beznal_schet)
 \|
 = link_to 'Back', event_documents_beznal_schets_path(@event)
