@@ -1,35 +1,27 @@
-%h1 Список мероприятий
-
-%table.table
+%table.table.table-striped.table-condensed.table-events
   %thead
     %tr
-      %th
       %th Название
-      %th Создал мероприятие
       %th Заказчик
-      %th Дата начала
-      %th Дата окончания
+      %th Начало
+      %th Конец
       %th Город
-      %th Область
-      %th
-      %th
       %th
 
-  %tbody
-  - @events.includes([:user, :company]).each do |event|
+  - @events.includes([:company]).each do |event|
     %tr
-      %td= link_to 'ПОДРОБНЕЕ', event
       %td= event.name
-      %td= event.user[:name]
       %td= event.company[:name]
       %td= event.date_start
       %td= event.date_end
       %td= event.city
-      %td= event.state
-      %td= link_to 'Show', event
-      %td= link_to 'Edit', edit_event_path(event)
-      %td= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' }
-
-%br
-
-= link_to 'New Event', new_event_path
+      %td.event-actions
+        .btn-group
+          = link_to 'Войти', event, {:class => 'btn btn-small btn-success'}
+          %button.btn.btn-small.btn-success.dropdown-toggle{"data-toggle" => "dropdown"}
+            %span.caret
+          %ul.dropdown-menu
+            %li
+              %a{:href => "#"} В архив
+            %li
+              = link_to 'Удалить', event, method: :delete, data: { confirm: 'Удалить мероприятие?' }
