@@ -1,4 +1,7 @@
-.table-events {
+#table-events {
+  th {
+    cursor: pointer;
+  }
   td {
     vertical-align: middle;
   }

@@ -1,26 +1,28 @@
-%table.table.table-striped.table-condensed.table-events
+%table.table.table-striped.table-condensed#table-events
   %thead
     %tr
-      %th Название
-      %th Заказчик
-      %th Начало
-      %th Конец
-      %th Город
+      %th.type-string Название
+      %th.type-string Заказчик
+      %th.type-int Начало
+      %th.type-int Конец
+      %th.type-string Город
       %th
 
   - @events.includes([:company]).each do |event|
     %tr
       %td= event.name
       %td= event.company[:name]
-      %td= event.date_start
-      %td= event.date_end
+      %td{"data-order-by" => event.date_start.to_time.to_i}
+        = event.date_start.strftime("%d.%m.%y")
+      %td{"data-order-by" => event.date_end.to_time.to_i}
+        = event.date_end.strftime("%d.%m.%y")
       %td= event.city
       %td.event-actions
         .btn-group
           = link_to 'Войти', event, {:class => 'btn btn-small btn-success'}
           %button.btn.btn-small.btn-success.dropdown-toggle{"data-toggle" => "dropdown"}
             %span.caret
-          %ul.dropdown-menu
+          %ul.dropdown-menu.dropdown-menu-narrow
             %li
               %a{:href => "#"} В архив
             %li
