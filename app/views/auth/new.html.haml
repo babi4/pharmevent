@@ -1,8 +1,17 @@
-= simple_form_for("user", :url => user_session_path) do |f|
+!!!
+%html
+  %head
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}
+      %title= content_for?(:title) ? yield(:title) : "Pharm Event"
+      %meta{:content => content_for?(:description) ? yield(:description) : "Pharm Event", :name => "description"}
+        = stylesheet_link_tag "application", :media => "all"
+        = javascript_include_tag "application"
+        = csrf_meta_tags
 
-  .form-inputs
-    = f.input :email, :placeholder => 'user@domain.com'
-    = f.input :password, :label => 'Пароль'
-
-  .form-actions
-    = f.button :submit, 'Войти'
+  %body.auth
+    .container
+      = simple_form_for("user", :url => user_session_path, :html => { :class => 'form-signin' }) do |f|
+        %h2.form-signin-heading Вход в систему
+        = f.input :email, :label => false, :placeholder => 'Электронная почта', :class => 'input-block-level'
+        = f.input :password, :label => false, :placeholder => 'Пароль', :class => 'input-block-level'
+        = f.button :submit, 'Войти', :class => 'btn btn-large btn-primary'

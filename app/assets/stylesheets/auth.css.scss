@@ -1,0 +1,30 @@
+body.auth {
+  background-color: #f5f5f5;
+}
+
+.form-signin {
+  @include border-radius(5px);
+  @include box-shadow(0 1px 2px rgba(0,0,0,.05));
+
+  text-align: center;
+  max-width: 300px;
+  padding: 19px 29px 29px;
+  background-color: #fff;
+  border: 1px solid #e5e5e5;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  margin-left: -180px;
+  margin-top: -120px;
+
+  .form-signin-heading {
+    margin-bottom: 25px;
+  }
+  input[type="text"], input[type="password"], input[type="email"] {
+    width: 282px;
+    font-size: 16px;
+    height: auto;
+    margin-bottom: 15px;
+    padding: 7px 9px;
+  }
+}
