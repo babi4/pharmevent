@@ -13,5 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap
+//= require date
+//= require daterangepicker
 //= require stupidtable.min
 //= require_tree .

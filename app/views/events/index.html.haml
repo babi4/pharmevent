@@ -1,13 +1,23 @@
 %table.table.table-striped.table-condensed#table-events
   %thead
-    %tr
-      %th.type-string Название
-      %th.type-string Заказчик
-      %th.type-int Начало
-      %th.type-int Конец
-      %th.type-string Город
+    %tr.table-events-filters
       %th
-
+        .input-prepend
+          %span.add-on
+            %i.icon-search
+          %input.span6#events-filter{:placeholder => "Поиск", :type => "text"}
+      %th{:colspan => "5"}
+        .input-append.pull-right
+          %input#reportrange{:type => "text", :placeholder => 'За все время'}
+            %span.add-on
+              %i.icon-calendar
+    %tr
+      %th.events-title.type-string Название
+      %th.events-customer.type-string Заказчик
+      %th.events-date.type-int Начало
+      %th.events-date.type-int Конец
+      %th.events-city.type-string Город
+      %th
   - @events.includes([:company]).each do |event|
     %tr
       %td= event.name
