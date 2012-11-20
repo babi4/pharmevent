@@ -19,6 +19,7 @@
         this.maxDate = false;
         this.changed = false;
         this.ranges = {};
+        this.active = false
         this.opens = 'right';
         this.cb = function () { };
         this.format = 'MM/dd/yyyy';
@@ -309,8 +310,10 @@
                 this.updateView();
             } else {
                 var dates = this.ranges[label];
-                this.container.find('input[name=daterangepicker_start]').val(dates[0].toString(this.format));
-                this.container.find('input[name=daterangepicker_end]').val(dates[1].toString(this.format));
+                if (dates[0] != null && dates[1] != null) {
+                    this.container.find('input[name=daterangepicker_start]').val(dates[0].toString(this.format));
+                    this.container.find('input[name=daterangepicker_end]').val(dates[1].toString(this.format));
+                }
             }
         },
 
@@ -321,12 +324,17 @@
             } else {
                 var dates = this.ranges[label];
 
-                this.startDate = dates[0];
-                this.endDate = dates[1];
+                if (dates[0] != null && dates[1] != null) {
+                    this.active = true;
+                    this.startDate = dates[0];
+                    this.endDate = dates[1];
 
-                this.leftCalendar.month.set({ month: this.startDate.getMonth(), year: this.startDate.getFullYear() });
-                this.rightCalendar.month.set({ month: this.endDate.getMonth(), year: this.endDate.getFullYear() });
-                this.updateCalendars();
+                    this.leftCalendar.month.set({ month: this.startDate.getMonth(), year: this.startDate.getFullYear() });
+                    this.rightCalendar.month.set({ month: this.endDate.getMonth(), year: this.endDate.getFullYear() });
+                    this.updateCalendars();
+                } else {
+                    this.active = false;
+                }
 
                 this.changed = true;
 
