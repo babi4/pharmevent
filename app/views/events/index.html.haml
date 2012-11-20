@@ -1,16 +1,18 @@
 %table.table.table-striped.table-condensed#table-events
   %thead
     %tr.table-events-filters
-      %th
-        .input-prepend
+      %th{:colspan => "3"}
+        .input-prepend.pull-left
           %span.add-on
             %i.icon-search
-          %input.span6#events-filter{:placeholder => "Поиск", :type => "text"}
-      %th{:colspan => "5"}
-        .input-append.pull-right
+          %input.span4#events-filter{:placeholder => "Поиск", :type => "text"}
+        .input-append.pull-left
           %input#reportrange{:type => "text", :placeholder => 'За все время'}
             %span.add-on
               %i.icon-calendar
+      %th{:colspan => "3"}
+        %a.pull-right.btn.btn-margin{"data-toggle" => "modal", :href => "#newEventModal"} Создать мероприятие
+        
     %tr
       %th.events-title.type-string Название
       %th.events-customer.type-string Заказчик
@@ -37,3 +39,25 @@
               %a{:href => "#"} В архив
             %li
               = link_to 'Удалить', event, method: :delete, data: { confirm: 'Удалить мероприятие?' }
+
+#newEventModal.modal.hide.fade{:role => "dialog", :tabindex => "-1"}
+  = simple_form_for @new_event do |f|
+    .modal-header
+      %button.close{"data-dismiss" => "modal", :type => "button"} ×
+      %h3 Новое мероприятие
+    .modal-body
+      = f.error_notification
+
+      = f.input :name,       :label => 'Название', :required => false
+      = f.association :company, :label => 'Заказчик', :required => false
+      %label
+        Дата проведения
+      .input-prepend
+        %span.add-on
+          %i.icon-calendar
+        %input{:type => "text", :name => "event-dates", :class => 'datepicker-range'}
+      = f.input :city,       :label => 'Город', :required => false
+
+    .modal-footer
+      %button.btn{"data-dismiss" => "modal"} Закрыть
+      = f.button :submit, 'Добавить', :class => 'btn btn-primary'

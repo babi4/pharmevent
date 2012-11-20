@@ -9,6 +9,8 @@
   .table-events-filters {
     th {
       cursor: default;
+      font-weight: normal;
+      padding-bottom: 10px;
     }
   }
   .show {
@@ -17,11 +19,12 @@
 }
 
 #reportrange {
+  margin-left: 10px;
   width: 170px;
 }
 
 .events-title {
-  width: 40%;
+  width: 45%;
 }
 
 .events-date {
@@ -30,4 +33,10 @@
 
 .event-actions {
   width: 90px;
+}
+
+#newEventModal {
+  form {
+    margin: 0;
+  }
 }

@@ -37,20 +37,10 @@ $(document).ready ->
           else
             showEvent $event_row
 
-  # activate sorting
   $('#table-events').stupidtable()
 
   $("#reportrange").daterangepicker
     opens: 'left'
-    format: 'dd.MM.yyyy'
-    locale:
-      applyLabel: "Показать"
-      fromLabel: "От"
-      toLabel: "До"
-      customRangeLabel: "Выбрать интервал"
-      daysOfWeek: ["Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"]
-      monthNames: ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"]
-      firstDay: 1
     ranges:
       "Сегодня": ["today", "today"]
       "За неделю": [Date.today().add(days: -6), "today"]
@@ -77,3 +67,9 @@ $(document).ready ->
   $("#events-filter").on 'keyup', (event) ->
     events_filter = $(@).val().trim()
     filterEvents()
+
+  $('.datepicker-range').daterangepicker
+    locale:
+      applyLabel: "Сохранить"
+      fromLabel: "Начало"
+      toLabel: "Конец"

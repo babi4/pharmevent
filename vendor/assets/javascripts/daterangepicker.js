@@ -22,15 +22,15 @@
         this.active = false
         this.opens = 'right';
         this.cb = function () { };
-        this.format = 'MM/dd/yyyy';
+        this.format = 'dd.MM.yyyy';
         this.locale = {
-            applyLabel:"Apply",
-            fromLabel:"From",
-            toLabel:"To",
-            customRangeLabel:"Custom Range",
-            daysOfWeek:['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr','Sa'],
-            monthNames:['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-            firstDay:0
+            applyLabel:"Показать",
+            fromLabel:"От",
+            toLabel:"До",
+            customRangeLabel:"Выбрать интервао",
+            daysOfWeek:["Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"],
+            monthNames:["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"],
+            firstDay:1
         };
 
         localeObject = this.locale;

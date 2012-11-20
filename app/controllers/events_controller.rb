@@ -2,6 +2,7 @@ class EventsController < ApplicationController
   load_and_authorize_resource
 
   def index
+    @new_event = Event.new
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @events }
@@ -34,6 +35,7 @@ class EventsController < ApplicationController
 
   def create
     @event[:user_id] = current_user[:id]
+    puts @event.inspect
 
     respond_to do |format|
       if @event.save
