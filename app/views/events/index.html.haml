@@ -1,4 +1,4 @@
-%table.table.table-striped.table-condensed#table-events
+%table.table.table-striped.table-condensed.table-hover#table-events
   %thead
     %tr.table-events-filters
       %th{:colspan => "3"}
@@ -7,7 +7,7 @@
             %i.icon-search
           %input.span4#events-filter{:placeholder => "Поиск", :type => "text"}
         .input-append.pull-left
-          %input.input-daterange#reportrange{:type => "text", :placeholder => 'За все время'}
+          %input.input-daterange#reportrange{:type => "text", :placeholder => 'За все время', :readonly => "readonly"}
             %span.add-on
               %i.icon-calendar
       %th{:colspan => "3"}
@@ -21,7 +21,7 @@
       %th.events-city.type-string Город
       %th.events-actions
   - @events.includes([:company]).each do |event|
-    %tr
+    %tr{"data-link" => url_for(:action => 'show', :id => event.id)}
       %td= event.name
       %td= event.company[:name]
       %td.events-date.events-start{"data-order-by" => event.date_start.to_time.to_i}
@@ -31,8 +31,8 @@
       %td= event.city
       %td.event-actions
         .btn-group
-          = link_to 'Войти', event, {:class => 'btn btn-small btn-success'}
-          %button.btn.btn-small.btn-success.dropdown-toggle{"data-toggle" => "dropdown"}
+          = link_to 'Войти', event, {:class => 'btn btn-mini'}
+          %button.btn.btn-mini.dropdown-toggle{"data-toggle" => "dropdown"}
             %span.caret
           %ul.dropdown-menu.dropdown-menu-narrow
             %li
@@ -48,8 +48,6 @@
       %button.close{"data-dismiss" => "modal", :type => "button"} ×
       %h3 Новое мероприятие
     .modal-body
-      = f.error_notification
-
       %label Название
       %input.input-modal-full{:type => "text", :name => "event[name]"}
       = f.association :company, :label => 'Заказчик', :required => false, :input_html => { :class => 'input-modal-full' }
@@ -62,7 +60,7 @@
           .input-prepend
             %span.add-on
               %i.icon-calendar
-            %input{:type => "text", :class => 'input-daterange', :id => 'new-event-daterange', :value => "#{DateTime.now.tomorrow.strftime("%d.%m.%Y")} - #{(DateTime.now + 8).strftime("%d.%m.%Y")}"}
+            %input{:type => "text", :readonly => "readonly", :class => 'input-daterange', :id => 'new-event-daterange', :value => "#{DateTime.now.tomorrow.strftime("%d.%m.%Y")} - #{(DateTime.now + 8).strftime("%d.%m.%Y")}"}
 
     .modal-footer
-      = f.button :submit, 'Добавить', :class => 'btn btn-primary'
+      = f.button :submit, 'Добавить', :class => 'btn btn-primary', :id => 'event-add'

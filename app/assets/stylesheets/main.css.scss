@@ -10,6 +10,15 @@
   box-shadow: 0 1px 2px rgba(0,0,0,.15);
 }
 
+input[readonly] {
+  cursor: pointer;
+  background-color: transparent;
+}
+
+.btn-mini .caret {
+  margin-top: 8px;
+}
+
 .daterangepicker.dropdown-menu {
   z-index: 2000;
 }

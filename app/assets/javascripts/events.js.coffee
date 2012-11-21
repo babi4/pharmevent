@@ -38,6 +38,8 @@ $(document).ready ->
             showEvent $event_row
 
   $('#table-events').stupidtable()
+  $('#table-events').on 'click', 'tbody tr', (e) ->
+    window.location = $(@).data 'link'
 
   $("#reportrange").daterangepicker
     opens: 'left'
