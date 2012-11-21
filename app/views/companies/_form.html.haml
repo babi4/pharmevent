@@ -1,53 +1,92 @@
 = simple_form_for(@company) do |f|
   = f.error_notification
 
-  .form-inputs
-    = f.input :name,       :label => 'Полное название'
-    = f.input :company_type,:label => 'Краткое название'
-    = f.input_field :short_name
-    %br
-    Юридический адрес
-    = f.input :ur_zip_code
-    = f.input :ur_city
-    = f.input :ur_street
-    = f.input :ur_hous
-    = f.input :ur_stroenie
-    = f.input :ur_office
-    Почтовый адрес(для отправки документов)
-    = f.input :ur_post_equal, :label => 'Тот же'
-    = f.input :post_zip_code
-    = f.input :post_city
-    = f.input :post_street
-    = f.input :post_house
-    = f.input :post_stroenie
-    = f.input :post_office
-    Контактная информация
-    = f.input :telephone
-    = f.input :fax
-    = f.input :email
-    Реквизиты
-    = f.input :inn
-    = f.input :kpp
-    = f.input :ogrn
-    = f.input :okpo
-    = f.input :okved
-    ___________
-    = f.input :ispolnitel, :label => 'Исполнитель(ген. директор, директор и др.)'
-    = f.input :osnovanie_ispolnitel, :label => 'Действует на основании'
-    ___________
-    %br
-    Банковские реквизиты
-    = f.input :bank_account, :label => 'Расчетный счет'
-    = f.input :bank_corr_account, :label => 'Корр. счет'
-    = f.input :bank_name, :label => 'Наименование банка'
-    Адрес
-    = f.input :bank_zip
-    = f.input :bank_city
-    = f.input :bank_street
-    = f.input :bank_house
-    = f.input :bank_stroenie
-    = f.input :bank_office
-    = f.input :bank_bik
+  = f.label :name, "Полное наименование"
+  = f.text_field :name, :class => 'span8'
 
-  .form-actions
-    = f.button :submit
+  = f.label :short_name, "Краткое наименование"
+  = f.select :company_type, [['ООО', 'ООО'], ['ОАО', 'ОАО'], ['ЗАО', 'ЗАО']], {}, { :class => 'span1' }
+  = f.text_field :short_name, :class => 'span4'
+  
+  %legend Юридический адрес
+
+  .row
+    .span2
+      = f.label :ur_zip_code, "Индекс"
+      = f.text_field :ur_zip_code, :class => 'span2'
+    .span3
+      = f.label :ur_city, "Город"
+      = f.text_field :ur_city, :class => 'span3'
+    .span3
+      = f.label :ur_street, "Улица"
+      = f.text_field :ur_street, :class => 'span3'
+
+  .row
+    .span1
+      = f.label :ur_hous, "Дом"
+      = f.text_field :ur_hous, :class => 'span1'
+    .span1
+      = f.label :ur_stroenie, "Строение"
+      = f.text_field :ur_stroenie, :class => 'span1'
+    .span1
+      = f.label :ur_office, "Офис"
+      = f.text_field :ur_office, :class => 'span1'
+
+  %legend 
+    Почтовый адрес(для отправки документов)
+    %label.checkbox.pull-right
+      = f.check_box :ur_post_equal
+      Тот же
+
+  .row
+    .span2
+      = f.label :post_zip_code, "Индекс"
+      = f.text_field :post_zip_code, :class => 'span2'
+    .span3
+      = f.label :post_city, "Город"
+      = f.text_field :post_city, :class => 'span3'
+    .span3
+      = f.label :post_street, "Улица"
+      = f.text_field :post_street, :class => 'span3'
+
+  .row
+    .span1
+      = f.label :post_house, "Дом"
+      = f.text_field :post_house, :class => 'span1'
+    .span1
+      = f.label :post_stroenie, "Строение"
+      = f.text_field :post_stroenie, :class => 'span1'
+    .span1
+      = f.label :post_office, "Офис"
+      = f.text_field :post_office, :class => 'span1'
+
+  %legend Контактная информация
+  = f.input :telephone
+  = f.input :fax
+  = f.input :email
+  
+  %legend Реквизиты
+  = f.input :inn
+  = f.input :kpp
+  = f.input :ogrn
+  = f.input :okpo
+  = f.input :okved
+  ___________
+  = f.input :ispolnitel, :label => 'Исполнитель(ген. директор, директор и др.)'
+  = f.input :osnovanie_ispolnitel, :label => 'Действует на основании'
+  ___________
+  %br
+  Банковские реквизиты
+  = f.input :bank_account, :label => 'Расчетный счет'
+  = f.input :bank_corr_account, :label => 'Корр. счет'
+  = f.input :bank_name, :label => 'Наименование банка'
+  Адрес
+  = f.input :bank_zip
+  = f.input :bank_city
+  = f.input :bank_street
+  = f.input :bank_house
+  = f.input :bank_stroenie
+  = f.input :bank_office
+  = f.input :bank_bik
+
+  = f.button :submit

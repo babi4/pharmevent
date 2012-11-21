@@ -1,27 +1,23 @@
-%h1 Список заказчиков
+%h3 
+  Заказчики 
+  = link_to 'Добавить заказчика', new_company_path, :class => 'btn pull-right'
 
-%table
-  %tr
-    %th Представители заказчика
-    %th События
-    %th Полное наименовние
-    %th Краткое наименование
-    %th
-    %th
-    %th
-    %th
+%table.table.table-striped.table-condensed.table-hover#table-events
+  %thead
+    %tr
+      %th Название
+      %th События
+      %th
+      %th
+      %th
+      %th
+      %th
 
   - @companies.includes(:events).each do |company|
     %tr
-      %td= link_to 'Представители заказчика', company_company_members_path(company)
-      %td= company.events.pluck(:name)
       %td= company.name
-      %td= company.company_type
-      %td= company.short_name
+      %td= company.events.pluck(:name)
+      %td= link_to 'Представители', company_company_members_path(company)
       %td= link_to 'Show', company
       %td= link_to 'Edit', edit_company_path(company)
       %td= link_to 'Destroy', company, method: :delete, data: { confirm: 'Are you sure?' }
-
-%br
-
-= link_to 'New Company', new_company_path
