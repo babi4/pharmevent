@@ -7,7 +7,7 @@
             %i.icon-search
           %input.span4#events-filter{:placeholder => "Поиск", :type => "text"}
         .input-append.pull-left
-          %input#reportrange{:type => "text", :placeholder => 'За все время'}
+          %input.input-daterange#reportrange{:type => "text", :placeholder => 'За все время'}
             %span.add-on
               %i.icon-calendar
       %th{:colspan => "3"}
@@ -42,22 +42,27 @@
 
 #newEventModal.modal.hide.fade{:role => "dialog", :tabindex => "-1"}
   = simple_form_for @new_event do |f|
+    %input{:type => "hidden", :name => "event[date_start]", :id => "new-event-start", :value => DateTime.now.tomorrow.strftime("%Y-%m-%d")}
+    %input{:type => "hidden", :name => "event[date_end]", :id => "new-event-end", :value => (DateTime.now + 8).strftime("%Y-%m-%d")}
     .modal-header
       %button.close{"data-dismiss" => "modal", :type => "button"} ×
       %h3 Новое мероприятие
     .modal-body
       = f.error_notification
 
-      = f.input :name,       :label => 'Название', :required => false
-      = f.association :company, :label => 'Заказчик', :required => false
-      %label
-        Дата проведения
-      .input-prepend
-        %span.add-on
-          %i.icon-calendar
-        %input{:type => "text", :name => "event-dates", :class => 'datepicker-range'}
-      = f.input :city,       :label => 'Город', :required => false
+      %label Название
+      %input.input-modal-full{:type => "text", :name => "event[name]"}
+      = f.association :company, :label => 'Заказчик', :required => false, :input_html => { :class => 'input-modal-full' }
+      .row
+        .span3
+          %label Город
+          %input{:type => "text", :name => "event[city]", :class => 'input-xlarge'}
+        .span-datepange.pull-right
+          %label Дата проведения
+          .input-prepend
+            %span.add-on
+              %i.icon-calendar
+            %input{:type => "text", :class => 'input-daterange', :id => 'new-event-daterange', :value => "#{DateTime.now.tomorrow.strftime("%d.%m.%Y")} - #{(DateTime.now + 8).strftime("%d.%m.%Y")}"}
 
     .modal-footer
-      %button.btn{"data-dismiss" => "modal"} Закрыть
       = f.button :submit, 'Добавить', :class => 'btn btn-primary'

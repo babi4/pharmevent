@@ -68,8 +68,14 @@ $(document).ready ->
     events_filter = $(@).val().trim()
     filterEvents()
 
-  $('.datepicker-range').daterangepicker
+  $('#new-event-daterange').daterangepicker
+    opens: 'left'
     locale:
       applyLabel: "Сохранить"
       fromLabel: "Начало"
       toLabel: "Конец"
+    startDate: Date.today().add(days: 1)
+    endDate: Date.today().add(days: 8)
+  , (start, end) ->
+    $('#new-event-start').val start.toString 'yyyy-MM-dd'
+    $('#new-event-end').val end.toString 'yyyy-MM-dd'

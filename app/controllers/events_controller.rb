@@ -35,7 +35,6 @@ class EventsController < ApplicationController
 
   def create
     @event[:user_id] = current_user[:id]
-    puts @event.inspect
 
     respond_to do |format|
       if @event.save
