@@ -19,14 +19,14 @@
       %th.events-date.type-int Начало
       %th.events-date.type-int Конец
       %th.events-city.type-string Город
-      %th
+      %th.events-actions
   - @events.includes([:company]).each do |event|
     %tr
       %td= event.name
       %td= event.company[:name]
-      %td.events-start{"data-order-by" => event.date_start.to_time.to_i}
+      %td.events-date.events-start{"data-order-by" => event.date_start.to_time.to_i}
         = event.date_start.strftime("%d.%m.%y")
-      %td.events-end{"data-order-by" => event.date_end.to_time.to_i}
+      %td.events-date.events-end{"data-order-by" => event.date_end.to_time.to_i}
         = event.date_end.strftime("%d.%m.%y")
       %td= event.city
       %td.event-actions
