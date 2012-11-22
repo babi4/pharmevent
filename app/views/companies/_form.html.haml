@@ -1,4 +1,4 @@
-= simple_form_for(@company) do |f|
+= simple_form_for(@company, :html => {:class => 'form-company' }) do |f|
   = f.error_notification
 
   = f.label :name, "Полное наименование"
@@ -33,7 +33,7 @@
       = f.text_field :ur_office, :class => 'span1'
 
   %legend 
-    Почтовый адрес(для отправки документов)
+    Почтовый адрес (для отправки документов)
     %label.checkbox.pull-right
       = f.check_box :ur_post_equal
       Тот же
@@ -61,32 +61,87 @@
       = f.text_field :post_office, :class => 'span1'
 
   %legend Контактная информация
-  = f.input :telephone
-  = f.input :fax
-  = f.input :email
+  .row
+    .span2
+      = f.label :telephone, "Телефон"
+      = f.text_field :telephone, :class => 'span2'
+    .span3
+      = f.label :fax, "Факс"
+      = f.text_field :fax, :class => 'span3'
+    .span3
+      = f.label :email, "E-mail"
+      = f.text_field :email, :class => 'span3'
   
   %legend Реквизиты
-  = f.input :inn
-  = f.input :kpp
-  = f.input :ogrn
-  = f.input :okpo
-  = f.input :okved
-  ___________
-  = f.input :ispolnitel, :label => 'Исполнитель(ген. директор, директор и др.)'
-  = f.input :osnovanie_ispolnitel, :label => 'Действует на основании'
-  ___________
-  %br
-  Банковские реквизиты
-  = f.input :bank_account, :label => 'Расчетный счет'
-  = f.input :bank_corr_account, :label => 'Корр. счет'
-  = f.input :bank_name, :label => 'Наименование банка'
-  Адрес
-  = f.input :bank_zip
-  = f.input :bank_city
-  = f.input :bank_street
-  = f.input :bank_house
-  = f.input :bank_stroenie
-  = f.input :bank_office
-  = f.input :bank_bik
+  .row
+    .span2
+      = f.label :inn, "ИНН"
+      = f.text_field :inn, :class => 'span2'
+    .span2
+      = f.label :kpp, "КПП"
+      = f.text_field :kpp, :class => 'span2'
+    .span2
+      = f.label :ogrn, "ОГРН"
+      = f.text_field :ogrn, :class => 'span2'
+  .row
+    .span2
+      = f.label :okpo, "ОКПО"
+      = f.text_field :okpo, :class => 'span2'
+    .span2
+      = f.label :okved, "ОКВЭД"
+      = f.text_field :okved, :class => 'span2'
+  %hr
+  .row.form-horizontal.form-event-executor
+    .control-group
+      = f.label :ispolnitel, "Исполнитель (ген. директор, директор и др.)", :class => 'control-label'
+      .controls
+        = f.text_field :ispolnitel, :class => 'span5'
+    .control-group
+      = f.label :osnovanie_ispolnitel, "Действует на основании", :class => 'control-label'
+      .controls
+        = f.text_field :osnovanie_ispolnitel, :class => 'span5'
+  %hr.no-topmargin
 
-  = f.button :submit
+  %legend Банковские реквизиты
+  .row
+    .span4
+      = f.label :bank_account, "Расчетный счет"
+      = f.text_field :bank_account, :class => 'span4'
+    .span4
+      = f.label :bank_corr_account, "Корр. счет"
+      = f.text_field :bank_corr_account, :class => 'span4'
+  .row
+    .span8
+      = f.label :bank_name, "Наименование банка"
+      = f.text_field :bank_name, :class => 'span8'
+  
+  %legend Адрес
+  .row
+    .span2
+      = f.label :bank_zip, "Индекс"
+      = f.text_field :bank_zip, :class => 'span2'
+    .span3
+      = f.label :bank_city, "Город"
+      = f.text_field :bank_city, :class => 'span3'
+    .span3
+      = f.label :bank_street, "Улица"
+      = f.text_field :bank_street, :class => 'span3'
+
+  .row
+    .span1
+      = f.label :bank_house, "Дом"
+      = f.text_field :bank_house, :class => 'span1'
+    .span1
+      = f.label :bank_stroenie, "Строение"
+      = f.text_field :bank_stroenie, :class => 'span1'
+    .span1
+      = f.label :bank_office, "Офис"
+      = f.text_field :bank_office, :class => 'span1'
+
+  .row
+    .span1
+      = f.label :bank_house, "БИК"
+      = f.text_field :bank_bik, :class => 'span1'
+
+  .row.pagination-centered
+    = f.button :submit, 'Сохранить'
