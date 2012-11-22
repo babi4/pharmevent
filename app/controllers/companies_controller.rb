@@ -11,7 +11,7 @@ class CompaniesController < ApplicationController
   def show
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @company }
+      format.json { render json: @company.with(:company_members) }
     end
   end
 

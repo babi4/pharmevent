@@ -4,114 +4,145 @@
   = @company.name
   = link_to 'Редактировать', edit_company_path(@company), :class => 'btn pull-right'
 
-%p
-  %b Events:
-  = @company.events.pluck(:name)
-%p
-  %b Name:
-  = @company.name
-%p
-  %b Company type:
-  = @company.company_type
-%p
-  %b Short name:
-  = @company.short_name
-%p
-  %b Ur zip code:
-  = @company.ur_zip_code
-%p
-  %b Ur city:
-  = @company.ur_city
-%p
-  %b Ur street:
-  = @company.ur_street
-%p
-  %b Ur hous:
-  = @company.ur_hous
-%p
-  %b Ur stroenie:
-  = @company.ur_stroenie
-%p
-  %b Ur office:
-  = @company.ur_office
-%p
-  %b Ur post equal:
-  = @company.ur_post_equal
-%p
-  %b Post zip code:
-  = @company.post_zip_code
-%p
-  %b Post city:
-  = @company.post_city
-%p
-  %b Post street:
-  = @company.post_street
-%p
-  %b Post house:
-  = @company.post_house
-%p
-  %b Post stroenie:
-  = @company.post_stroenie
-%p
-  %b Post office:
-  = @company.post_office
-%p
-  %b Telephone:
-  = @company.telephone
-%p
-  %b Fax:
-  = @company.fax
-%p
-  %b Email:
-  = @company.email
-%p
-  %b Inn:
-  = @company.inn
-%p
-  %b Kpp:
-  = @company.kpp
-%p
-  %b Ogrn:
-  = @company.ogrn
-%p
-  %b Okpo:
-  = @company.okpo
-%p
-  %b Okved:
-  = @company.okved
-%p
-  %b Ispolnitel:
-  = @company.ispolnitel
-%p
-  %b Osnovanie ispolnitel:
-  = @company.osnovanie_ispolnitel
-%p
-  %b Bakn account:
-  = @company.bank_account
-%p
-  %b Bakn corr account:
-  = @company.bank_corr_account
-%p
-  %b Bank name:
-  = @company.bank_name
-%p
-  %b Bank zip:
-  = @company.bank_zip
-%p
-  %b Bank city:
-  = @company.bank_city
-%p
-  %b Bank street:
-  = @company.bank_street
-%p
-  %b Bank house:
-  = @company.bank_house
-%p
-  %b Bank stroenie:
-  = @company.bank_stroenie
-%p
-  %b Bank office:
-  = @company.bank_office
-%p
-  %b Bank bik:
-  = @company.bank_bik
+.row
+  .span8
+    %p
+      %b Events:
+      = @company.events.pluck(:name)
+    %p
+      %b Name:
+      = @company.name
+    %p
+      %b Company type:
+      = @company.company_type
+    %p
+      %b Short name:
+      = @company.short_name
+    %p
+      %b Ur zip code:
+      = @company.ur_zip_code
+    %p
+      %b Ur city:
+      = @company.ur_city
+    %p
+      %b Ur street:
+      = @company.ur_street
+    %p
+      %b Ur hous:
+      = @company.ur_hous
+    %p
+      %b Ur stroenie:
+      = @company.ur_stroenie
+    %p
+      %b Ur office:
+      = @company.ur_office
+    %p
+      %b Ur post equal:
+      = @company.ur_post_equal
+    %p
+      %b Post zip code:
+      = @company.post_zip_code
+    %p
+      %b Post city:
+      = @company.post_city
+    %p
+      %b Post street:
+      = @company.post_street
+    %p
+      %b Post house:
+      = @company.post_house
+    %p
+      %b Post stroenie:
+      = @company.post_stroenie
+    %p
+      %b Post office:
+      = @company.post_office
+    %p
+      %b Telephone:
+      = @company.telephone
+    %p
+      %b Fax:
+      = @company.fax
+    %p
+      %b Email:
+      = @company.email
+    %p
+      %b Inn:
+      = @company.inn
+    %p
+      %b Kpp:
+      = @company.kpp
+    %p
+      %b Ogrn:
+      = @company.ogrn
+    %p
+      %b Okpo:
+      = @company.okpo
+    %p
+      %b Okved:
+      = @company.okved
+    %p
+      %b Ispolnitel:
+      = @company.ispolnitel
+    %p
+      %b Osnovanie ispolnitel:
+      = @company.osnovanie_ispolnitel
+    %p
+      %b Bakn account:
+      = @company.bank_account
+    %p
+      %b Bakn corr account:
+      = @company.bank_corr_account
+    %p
+      %b Bank name:
+      = @company.bank_name
+    %p
+      %b Bank zip:
+      = @company.bank_zip
+    %p
+      %b Bank city:
+      = @company.bank_city
+    %p
+      %b Bank street:
+      = @company.bank_street
+    %p
+      %b Bank house:
+      = @company.bank_house
+    %p
+      %b Bank stroenie:
+      = @company.bank_stroenie
+    %p
+      %b Bank office:
+      = @company.bank_office
+    %p
+      %b Bank bik:
+      = @company.bank_bik
+
+  .span4
+    %h4 
+      Представители
+      %a{:href => '#', :class => 'btn btn-mini', "data-toggle" => "modal", :href => "#companyMemberModal"} добавить
+    - if @company.company_members.length > 0
+      %ul.unstyled.company-members
+        - @company.company_members.each do |member|
+          %li
+            %b>= member.name
+            - unless member.position.empty?
+              = ", #{member.position}"
+            - if !member.telephone.empty? && !member.email.empty?
+              %br
+              = "#{member.telephone}, " 
+              = mail_to member.email
+            - elsif !member.telephone.empty? || !member.email.empty?
+              %br
+              = member.telephone unless member.telephone.empty?
+              = mail_to member.email unless member.email.empty?
+
+#companyMemberModal.modal.hide.fade{:role => "dialog", :tabindex => "-1"}
+  .modal-header
+    %button.close{"data-dismiss" => "modal", :type => "button"} ×
+    %h3 Представитель
+  .modal-body
+
+  .modal-footer
+    = button_tag 'Добавить', :class => 'btn btn-primary', :id => 'event-add'
