@@ -27,6 +27,10 @@ input[readonly] {
   background-color: transparent;
 }
 
+.table-links tbody tr {
+  cursor: pointer;
+}
+
 legend label {
   margin-top: 14px;
 }
@@ -61,4 +65,8 @@ select.input-modal-full {
 
 .span-daterange {
   width: 215px;
+}
+
+input.input-required {
+  border-color: #B94A48;
 }

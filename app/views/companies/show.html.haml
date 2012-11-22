@@ -1,4 +1,8 @@
-%p#notice= notice
+/%p#notice= notice
+
+%h3.company-name
+  = @company.name
+  = link_to 'Редактировать', edit_company_path(@company), :class => 'btn pull-right'
 
 %p
   %b Events:
@@ -111,7 +115,3 @@
 %p
   %b Bank bik:
   = @company.bank_bik
-
-= link_to 'Edit', edit_company_path(@company)
-\|
-= link_to 'Back', companies_path

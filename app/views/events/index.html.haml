@@ -1,4 +1,4 @@
-%table.table.table-striped.table-condensed.table-hover#table-events
+%table.table.table-striped.table-condensed.table-hover.table-links#table-events
   %thead
     %tr.table-events-filters
       %th{:colspan => "3"}
@@ -21,7 +21,7 @@
       %th.events-city.type-string Город
       %th.events-actions
   - @events.includes([:company]).each do |event|
-    %tr{"data-link" => url_for(:action => 'show', :id => event.id)}
+    %tr{"data-link" => url_for(:action => 'edit', :id => event.id)}
       %td= event.name
       %td= event.company[:name]
       %td.events-date.events-start{"data-order-by" => event.date_start.to_time.to_i}

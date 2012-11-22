@@ -1,6 +1,10 @@
-.form-company {
+.company-nav, h3.company-name, .form-company {
   width: 800px;
-  margin: 0 auto 30px;
+  margin: 0 auto;
+}
+
+.form-company {
+  margin-bottom: 30px;
 
   legend {
     margin: 20px 0 10px;
@@ -12,4 +16,8 @@
     width: 330px;
     padding: 5px 10px 0 0;
   }
+}
+
+.company-nav {
+  margin: 10px auto 20px;
 }
