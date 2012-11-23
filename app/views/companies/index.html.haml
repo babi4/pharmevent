@@ -5,13 +5,11 @@
     %tr
       %th Заказчики
       %th Мероприятия
-      %th
 
   - @companies.includes(:events).each do |company|
     %tr{"data-link" => url_for(:action => 'show', :id => company.id)}
       %td= company.name
       %td= company.events.pluck(:name)
-      %td= link_to 'Представители', company_company_members_path(company)
       / %td= link_to 'Show', company
       / %td= link_to 'Edit', edit_company_path(company)
       / %td= link_to 'Destroy', company, method: :delete, data: { confirm: 'Are you sure?' }

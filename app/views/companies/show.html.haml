@@ -1,127 +1,212 @@
 /%p#notice= notice
 
-%h3.company-name
+%h3
   = @company.name
   = link_to 'Редактировать', edit_company_path(@company), :class => 'btn pull-right'
 
 %hr
 
 .row
-  .span8
-    %p
-      %b Events:
-      = @company.events.pluck(:name)
-    %p
-      %b Name:
-      = @company.name
-    %p
-      %b Company type:
-      = @company.company_type
-    %p
-      %b Short name:
-      = @company.short_name
-    %p
-      %b Ur zip code:
-      = @company.ur_zip_code
-    %p
-      %b Ur city:
-      = @company.ur_city
-    %p
-      %b Ur street:
-      = @company.ur_street
-    %p
-      %b Ur hous:
-      = @company.ur_hous
-    %p
-      %b Ur stroenie:
-      = @company.ur_stroenie
-    %p
-      %b Ur office:
-      = @company.ur_office
-    %p
-      %b Ur post equal:
-      = @company.ur_post_equal
-    %p
-      %b Post zip code:
-      = @company.post_zip_code
-    %p
-      %b Post city:
-      = @company.post_city
-    %p
-      %b Post street:
-      = @company.post_street
-    %p
-      %b Post house:
-      = @company.post_house
-    %p
-      %b Post stroenie:
-      = @company.post_stroenie
-    %p
-      %b Post office:
-      = @company.post_office
-    %p
-      %b Telephone:
-      = @company.telephone
-    %p
-      %b Fax:
-      = @company.fax
-    %p
-      %b Email:
-      = @company.email
-    %p
-      %b Inn:
-      = @company.inn
-    %p
-      %b Kpp:
-      = @company.kpp
-    %p
-      %b Ogrn:
-      = @company.ogrn
-    %p
-      %b Okpo:
-      = @company.okpo
-    %p
-      %b Okved:
-      = @company.okved
-    %p
-      %b Ispolnitel:
-      = @company.ispolnitel
-    %p
-      %b Osnovanie ispolnitel:
-      = @company.osnovanie_ispolnitel
-    %p
-      %b Bakn account:
-      = @company.bank_account
-    %p
-      %b Bakn corr account:
-      = @company.bank_corr_account
-    %p
-      %b Bank name:
-      = @company.bank_name
-    %p
-      %b Bank zip:
-      = @company.bank_zip
-    %p
-      %b Bank city:
-      = @company.bank_city
-    %p
-      %b Bank street:
-      = @company.bank_street
-    %p
-      %b Bank house:
-      = @company.bank_house
-    %p
-      %b Bank stroenie:
-      = @company.bank_stroenie
-    %p
-      %b Bank office:
-      = @company.bank_office
-    %p
-      %b Bank bik:
-      = @company.bank_bik
-
-  .span4
+  .span9.company-info
+    - unless @company.short_name.blank?
+      %p
+        %b Короткое название
+        %br
+        = "#{@company.company_type} #{@company.short_name}"
+    - if @company.events.length > 0
+      %p
+        %b Мероприятия
+        %br
+        = @company.events.pluck(:name)
     %h4 
+      Юридический адрес
+      - if @company.ur_post_equal
+        (почтовый адрес тот же)
+    .row
+      .span3
+        %b Индекс
+        %br
+        = @company.ur_zip_code
+      .span3
+        %b Город
+        %br
+        = @company.ur_city
+      .span3
+        %b Улица
+        %br
+        = @company.ur_street
+    .row
+      .span3
+        %b Дом
+        %br
+        = @company.ur_hous
+      - unless @company.ur_stroenie.blank?
+        .span3
+          %b Строение
+          %br
+          = @company.ur_stroenie
+      - unless @company.ur_office.blank?
+        .span3
+          %b Офис
+          %br
+          = @company.ur_office
+    - unless @company.ur_post_equal
+      - if !@company.post_zip_code.blank? or !@company.post_city.blank? or !@company.post_street.blank? or !@company.post_house.blank? or !@company.post_stroenie.blank? or !@company.post_office.blank?
+        %h4 Почтовый адрес
+        .row
+          - unless @company.post_zip_code.blank?
+            .span3
+              %b Индекс
+              %br
+              = @company.post_zip_code
+          - unless @company.post_city.blank?
+            .span3
+              %b Город
+              %br
+              = @company.post_city
+          - unless @company.post_street.blank?
+            .span3
+              %b Улица
+              %br
+              = @company.post_street
+        .row
+          - unless @company.post_house.blank?
+            .span3
+              %b Дом
+              %br
+              = @company.post_house
+          - unless @company.post_stroenie.blank?
+            .span3
+              %b Строение
+              %br
+              = @company.post_stroenie
+          - unless @company.post_office.blank?
+            .span3
+              %b Офис
+              %br
+              = @company.post_office
+    %h4 Контактная информация
+    .row
+      - unless @company.telephone.blank?
+        .span3
+          %b Телефон
+          %br
+          = @company.telephone
+      - unless @company.fax.blank?
+        .span3
+          %b Факс
+          %br
+          = @company.fax
+      - unless @company.email.blank?
+        .span3
+          %b Электронная почта
+          %br
+          = @company.email
+    %h4 Реквизиты
+    .row
+      - unless @company.inn.blank?
+        .span3
+          %b ИНН
+          %br
+          = @company.inn
+      - unless @company.kpp.blank?
+        .span3
+          %b КПП
+          %br
+          = @company.kpp
+      - unless @company.ogrn.blank?
+        .span3
+          %b ОГРН
+          %br
+          = @company.ogrn
+    .row
+      - unless @company.okpo.blank?
+        .span3
+          %b ОКПО
+          %br
+          = @company.okpo
+      - unless @company.okved.blank?
+        .span3
+          %b ОКВЕД
+          %br
+          = @company.okved
+      - unless @company.okato.blank?
+        .span3
+          %b ОКАТО
+          %br
+          = @company.okato
+    - unless @company.ispolnitel.blank? and @company.osnovanie_ispolnitel.blank?
+      .row
+        - unless @company.ispolnitel.blank?
+          .span3
+            %b Исполнитель
+            %br
+            = @company.ispolnitel
+        - unless @company.osnovanie_ispolnitel.blank?
+          .span6
+            %b Действует на основании
+            %br
+            = @company.osnovanie_ispolnitel
+    %h4 Банковские реквизиты
+    - unless @company.bank_name.blank?
+      .row
+        .span9
+          %b Банк
+          %br
+          = @company.bank_name
+    .row
+      - unless @company.bank_account.blank?
+        .span4
+          %b Расчетный счет
+          %br
+          = @company.bank_account
+      - unless @company.bank_corr_account.blank?
+        .span4
+          %b Корр.счет
+          %br
+          = @company.bank_corr_account
+    %h4 Адрес банка
+    .row
+      - unless @company.bank_zip.blank?
+        .span3
+          %b Индекс
+          %br
+          = @company.bank_zip
+      - unless @company.bank_city.blank?
+        .span3
+          %b Город
+          %br
+          = @company.bank_city
+      - unless @company.bank_street.blank?
+        .span3
+          %b Улица
+          %br
+          = @company.bank_street
+    .row
+      - unless @company.bank_house.blank?
+        .span3
+          %b Дом
+          %br
+          = @company.bank_house
+      - unless @company.bank_stroenie.blank?
+        .span3
+          %b Строение
+          %br
+          = @company.bank_stroenie
+      - unless @company.bank_office.blank?
+        .span3
+          %b Офис
+          %br
+          = @company.bank_office
+    .row
+      - unless @company.bank_bik.blank?
+        .span9
+          %b БИК
+          %br
+          = @company.bank_bik
+
+  .span3
+    %h4.no-margin
       Представители
       %a{:href => '#', :class => 'btn btn-mini', "data-toggle" => "modal", :href => "#companyMemberModal", :id => "newCompanyMember"} добавить
     - if @company.company_members.length > 0
@@ -167,5 +252,5 @@
     = button_tag 'Удалить', :class => 'btn', :id => 'delete-member'
     = button_tag 'Добавить', :class => 'btn btn-primary', :id => 'save-member'
 
-  :javascript
-    window.companyMembers = #{@company.company_members.to_json}
+:javascript
+  window.companyMembers = #{@company.company_members.to_json}

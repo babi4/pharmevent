@@ -146,5 +146,11 @@
       = f.label :bank_house, "БИК"
       = f.text_field :bank_bik, :class => 'span1'
 
+  %hr
+
   .row.pagination-centered
-    = f.button :submit, 'Сохранить'
+    .span8
+      = link_to 'К списку заказчиков', companies_path, :class => 'btn pull-left'
+      = f.button :submit, 'Сохранить', :class => 'btn-primary'
+      - unless @company.id.blank?
+        = link_to 'Удалить заказчика', @company, method: :delete, data: { confirm: 'Вы уверены?' }, :class => 'btn btn-danger pull-right'
