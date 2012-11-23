@@ -1,6 +1,6 @@
 class CompanyMembersController < ApplicationController
   authorize_resource
-  before_filter :detect_company
+  #before_filter :detect_company
 
   def index
     @company_members = @company.company_members
@@ -48,27 +48,27 @@ class CompanyMembersController < ApplicationController
   end
 
   def update
-    @company_member = @company.company_members.find(params[:id])
+    company = Company.find(params[:company_member][:company_id])
 
-    respond_to do |format|
-      if @company_member.update_attributes(params[:company_member])
-        format.html { redirect_to [@company, @company_member], notice: 'Company member was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @company_member.errors, status: :unprocessable_entity }
-      end
+    if params[:company_member][:id].to_i > 0
+      company_member = company.company_members.find(params[:company_member][:id])
+      company_member.attributes = params[:company_member]
+      member_action = 'edit'
+    else
+      company_member = company.company_members.new(params[:company_member].except(:id))
+      member_action = 'new'
     end
+
+    company_member.save
+
+    render :json => {:company_member => company_member, :member_action => member_action}
   end
 
   def destroy
-    @company_member = @company.company_members.find(params[:id])
-    @company_member.destroy
+    company_member = Company.find(params[:company_id]).company_members.find(params[:id])
+    company_member.destroy
 
-    respond_to do |format|
-      format.html { redirect_to company_company_members_url(@company) }
-      format.json { head :no_content }
-    end
+    render :json => params[:id]
   end
 
   private

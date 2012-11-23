@@ -29,3 +29,17 @@
     padding-bottom: 12px;
   }
 }
+
+#companyMemberModal {
+  .modal-body {
+    .control-label {
+      width: 90px;
+    }
+    .controls {
+      margin-left: 110px;
+    }
+    input {
+      width: 395px;
+    }
+  }
+}

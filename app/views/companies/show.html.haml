@@ -4,6 +4,8 @@
   = @company.name
   = link_to 'Редактировать', edit_company_path(@company), :class => 'btn pull-right'
 
+%hr
+
 .row
   .span8
     %p
@@ -121,12 +123,12 @@
   .span4
     %h4 
       Представители
-      %a{:href => '#', :class => 'btn btn-mini', "data-toggle" => "modal", :href => "#companyMemberModal"} добавить
+      %a{:href => '#', :class => 'btn btn-mini', "data-toggle" => "modal", :href => "#companyMemberModal", :id => "newCompanyMember"} добавить
     - if @company.company_members.length > 0
       %ul.unstyled.company-members
         - @company.company_members.each do |member|
-          %li
-            %b>= member.name
+          %li{'data-member-id' => member.id}
+            %a{"data-toggle" => "modal", :href => "#companyMemberModal", :class => 'company-member-edit'}>= member.name
             - unless member.position.empty?
               = ", #{member.position}"
             - if !member.telephone.empty? && !member.email.empty?
@@ -138,11 +140,32 @@
               = member.telephone unless member.telephone.empty?
               = mail_to member.email unless member.email.empty?
 
-#companyMemberModal.modal.hide.fade{:role => "dialog", :tabindex => "-1"}
+#companyMemberModal.form-validate.modal.hide.fade{:role => "dialog", :tabindex => "-1"}
   .modal-header
     %button.close{"data-dismiss" => "modal", :type => "button"} ×
-    %h3 Представитель
-  .modal-body
-
+    %h3 Новый представитель
+  .modal-body.form-horizontal
+    %input{:type => 'hidden', :id => "memberId"}
+    %input{:type => 'hidden', :id => "companyId", :value => @company.id}
+    .control-group
+      %label.control-label{:for => "memberName"} ФИО
+      .controls
+        %input#memberName{:type => "text", "data-required" => 'true'}
+    .control-group
+      %label.control-label{:for => "memberPhone"} Телефон
+      .controls
+        %input#memberPhone{:type => "text"}
+    .control-group
+      %label.control-label{:for => "memberPosition"} Должность
+      .controls
+        %input#memberPosition{:type => "text"}
+    .control-group
+      %label.control-label{:for => "memberEmail"} E-mail
+      .controls
+        %input#memberEmail{:type => "email"}
   .modal-footer
-    = button_tag 'Добавить', :class => 'btn btn-primary', :id => 'event-add'
+    = button_tag 'Удалить', :class => 'btn', :id => 'delete-member'
+    = button_tag 'Добавить', :class => 'btn btn-primary', :id => 'save-member'
+
+  :javascript
+    window.companyMembers = #{@company.company_members.to_json}

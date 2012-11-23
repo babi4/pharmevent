@@ -31,4 +31,7 @@ Rails3BootstrapDeviseCancan::Application.routes.draw do
   devise_for :user, :skip => [:sessions, :passwords]
   mount RailsAdmin::Engine => '/rails_admin', :as => 'rails_admin'
 
+  match 'company_members/update' => 'company_members#update'
+  match 'company_members/destroy' => 'company_members#destroy'
+
 end
