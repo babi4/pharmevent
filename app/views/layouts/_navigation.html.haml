@@ -30,4 +30,5 @@
       = link_to 'Rails Админ', rails_admin_path
 
 %p.navbar-text.pull-right
-  = link_to 'Выйти', destroy_user_session_path, :method=>'delete', :class => 'navbar-link'
+  %b= "#{current_user.name}"
+  = link_to 'выйти', destroy_user_session_path, :method=>'delete', :class => 'navbar-link logout-link'
