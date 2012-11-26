@@ -26,6 +26,10 @@ h3 .btn, h4 .btn-mini {
   font-weight: normal;
 }
 
+h3.page-title {
+  margin: 0 0 20px;
+}
+
 input[readonly] {
   cursor: pointer;
   background-color: transparent;
@@ -86,7 +90,7 @@ select.input-modal-full {
   width: 215px;
 }
 
-input.input-required {
+input.input-required, select.input-required {
   border-color: #B94A48;
 }
 

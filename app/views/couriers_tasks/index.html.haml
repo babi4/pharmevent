@@ -1,40 +1,29 @@
+%h3.page-title Курьеры
+
+%h4 Новый курьер
 = render 'form'
 
-%h3 Курьеры
-
-%table
+%h4 Список курьеров
+%table.table.table-striped.table-condensed.table-hover.table-couriers-tasks
   %tr
-    %th User
-    %th Name
-    %th Telephone
-    %th From date
-    %th To date
-    %th Status
-    %th To person
-    %th From couriers company
-    %th To couriers company
-    %th
-    %th
+    %th Откуда
+    %th Куда
+    %th Когда
     %th
 
   - @couriers_tasks.includes([:user, :from_couriers_company, :to_couriers_company]).each do |couriers_task|
     %tr
-      %td= couriers_task.user[:name]
-      %td= couriers_task.name
-      %td= couriers_task.telephone
-      %td= couriers_task.from_date
-      %td= couriers_task.to_date
-      %td= couriers_task.status
-      %td= couriers_task.to_person
       %td= couriers_task.from_couriers_company[:name]
       %td= couriers_task.to_couriers_company[:name]
-      %td= link_to 'Show', couriers_task
-      %td= link_to 'Edit', edit_couriers_task_path(couriers_task)
-      %td= link_to 'Destroy', couriers_task, method: :delete, data: { confirm: 'Are you sure?' }
-
-%br
-
-= link_to 'New Couriers task', new_couriers_task_path
+      %td= couriers_task.due_time.strftime("%d.%m.%y в %H:%M") 
+      %td.event-actions
+        .btn-group
+          = link_to 'Редактировать', edit_couriers_task_path(couriers_task), {:class => 'btn btn-mini'}
+          %button.btn.btn-mini.dropdown-toggle{"data-toggle" => "dropdown"}
+            %span.caret
+          %ul.dropdown-menu.dropdown-menu-narrow
+            %li
+              = link_to 'Удалить', couriers_task, method: :delete, data: { confirm: 'Удалить задание?' }
 
 #newAddressModal.modal.hide.fade{:role => "dialog", :tabindex => "-1"}
   = simple_form_for(@couriers_company, :html => {:class => 'form-validate' }) do |f|

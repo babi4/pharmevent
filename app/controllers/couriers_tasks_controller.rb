@@ -1,9 +1,13 @@
+# encoding: utf-8
+
 class CouriersTasksController < ApplicationController
   load_and_authorize_resource
 
   def index
     @couriers_task = CouriersTask.new
     @couriers_company = CouriersCompany.new
+    @date = DateTime.now.tomorrow.strftime("%d.%m.%Y")
+    @time = '12:00' 
 
     respond_to do |format|
       format.html # index.html.erb
@@ -26,16 +30,22 @@ class CouriersTasksController < ApplicationController
   end
 
   def edit
+    @date = @couriers_task[:due_time].strftime("%d.%m.%Y") 
+    @time = @couriers_task[:due_time].strftime("%H:%M") 
   end
 
   def create
     @couriers_task[:user_id] = current_user[:id]
-    @couriers_task[:name] = current_user[:name]
+    @couriers_task[:name] = Time.now.to_i
+    date = params[:date].split '.'
+    time = params[:time].split ':'
+    @couriers_task[:due_time] = DateTime.new(date[2].to_i, date[1].to_i, date[0].to_i, time[0].to_i, time[1].to_i)
     respond_to do |format|
       if @couriers_task.save
-        format.html { redirect_to @couriers_task, notice: 'Couriers task was successfully created.' }
+        format.html { redirect_to couriers_tasks_path, notice: 'Задание курьеру создано.' }
         format.json { render json: @couriers_task, status: :created, location: @couriers_task }
       else
+        puts @couriers_task.errors.inspect
         format.html { render action: "new" }
         format.json { render json: @couriers_task.errors, status: :unprocessable_entity }
       end
@@ -43,10 +53,13 @@ class CouriersTasksController < ApplicationController
   end
 
   def update
-    params[:couriers_task][:user_id] = current_user[:id]
+    #params[:couriers_task][:user_id] = current_user[:id]
+    date = params[:date].split '.'
+    time = params[:time].split ':'
+    @couriers_task[:due_time] = DateTime.new(date[2].to_i, date[1].to_i, date[0].to_i, time[0].to_i, time[1].to_i)
     respond_to do |format|
       if @couriers_task.update_attributes(params[:couriers_task])
-        format.html { redirect_to @couriers_task, notice: 'Couriers task was successfully updated.' }
+        format.html { redirect_to couriers_tasks_path, notice: 'Задание курьеру изменено.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

@@ -1,6 +1,6 @@
 $ ->
   window.validateForm = (form) ->
-    errors = form.find('input').filter(->
+    errors = form.find('input, select').filter(->
       $(@).data("required") and $(@).val().trim() is ""
     ).addClass 'input-required'
     return false  if errors.length
@@ -20,6 +20,5 @@ $ ->
     $(@).find('.input-date').val new_date
 
   $('.timepicker').timepicker
-    defaultValue: 'value'
+    defaultTime: 'value'
     showMeridian: false
-    disableFocus: true
