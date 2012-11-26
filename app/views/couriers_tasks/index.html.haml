@@ -1,27 +1,40 @@
 %h4 Новый курьер
 = render 'form'
 
-%h4 Список курьеров
-%table.table.table-striped.table-condensed.table-hover.table-couriers-tasks
-  %tr
-    %th Откуда
-    %th Куда
-    %th Когда
-    %th
+.row
+  .span8
+    %h4 Список курьеров
+    %table.table.table-striped.table-condensed.table-hover
+      %tr
+        %th Откуда
+        %th Куда
+        %th Когда
+        %th
 
-  - @couriers_tasks.includes([:user, :from_couriers_company, :to_couriers_company]).each do |couriers_task|
-    %tr
-      %td= couriers_task.from_couriers_company[:name]
-      %td= couriers_task.to_couriers_company[:name]
-      %td= couriers_task.due_time.strftime("%d.%m.%y в %H:%M") 
-      %td.event-actions
-        .btn-group
-          = link_to 'Редактировать', edit_couriers_task_path(couriers_task), {:class => 'btn btn-mini'}
-          %button.btn.btn-mini.dropdown-toggle{"data-toggle" => "dropdown"}
-            %span.caret
-          %ul.dropdown-menu.dropdown-menu-narrow
-            %li
-              = link_to 'Удалить', couriers_task, method: :delete, data: { confirm: 'Удалить задание?' }
+      - @couriers_tasks.includes([:user, :from_couriers_company, :to_couriers_company]).each do |couriers_task|
+        %tr
+          %td= couriers_task.from_couriers_company[:name]
+          %td= couriers_task.to_couriers_company[:name]
+          %td= couriers_task.due_time.strftime("%d.%m.%y в %H:%M") 
+          %td.event-actions
+            .btn-group
+              = link_to 'Редактировать', edit_couriers_task_path(couriers_task), {:class => 'btn btn-mini'}
+              %button.btn.btn-mini.dropdown-toggle{"data-toggle" => "dropdown"}
+                %span.caret
+              %ul.dropdown-menu.dropdown-menu-narrow
+                %li
+                  = link_to 'Удалить', couriers_task, method: :delete, data: { confirm: 'Удалить задание?' }
+
+  .span4
+    %h4 
+      Список мест
+      %a.btn.btn-mini.btn-courier-place{"data-toggle" => "modal", :href => "#newAddressModal"} добавить
+    %table.table.table-striped.table-condensed.table-hover.table-borderless
+      - @couriers_companies_all.each do |company|
+        %tr
+          %td= company.name
+          %td= link_to 'изменить', edit_couriers_company_path(company), :class => 'btn btn-mini pull-right'
+
 
 #newAddressModal.modal.hide.fade{:role => "dialog", :tabindex => "-1"}
   = simple_form_for(@couriers_company, :html => {:class => 'form-validate' }) do |f|

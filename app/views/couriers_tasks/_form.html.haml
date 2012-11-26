@@ -4,15 +4,11 @@
   .row
     .span4
       %label Откуда
-      = f.association :from_couriers_company, :label => false, :input_html => { :class => "span3", "data-required" => true }
-      %a.pull-left.btn.btn-small.btn-courier-place{"data-toggle" => "modal", :href => "#newAddressModal"}
-        %i.icon-plus
+      = f.association :from_couriers_company, :label => false, :input_html => { :class => "span4", "data-required" => true }
 
     .span4
       %label Куда
-      = f.association :to_couriers_company, :label => false, :input_html => { :class => "span3", "data-required" => true }
-      %a.pull-left.btn.btn-small.btn-courier-place{"data-toggle" => "modal", :href => "#newAddressModal"}
-        %i.icon-plus
+      = f.association :to_couriers_company, :label => false, :input_html => { :class => "span4", "data-required" => true }
 
     .span4
       %label.no-margin Когда

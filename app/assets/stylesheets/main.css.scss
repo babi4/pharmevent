@@ -34,8 +34,16 @@ hr {
   margin: 0;
 }
 
-h3 .btn, h4 .btn-mini {
-  font-weight: normal;
+h3, h4 {
+  .btn {
+    font-weight: normal;
+  }
+}
+
+h4 {
+  .btn-mini {
+    margin-top: 0;
+  }
 }
 
 h3.page-title {
@@ -118,4 +126,10 @@ input.input-required, select.input-required {
 
 .logout-link {
   margin-left: 10px;
+}
+
+.table.table-borderless {
+  td, th {
+    border-top: 0;
+  }
 }

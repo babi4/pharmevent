@@ -6,6 +6,7 @@ class CouriersTasksController < ApplicationController
   def index
     @couriers_task = CouriersTask.new
     @couriers_company = CouriersCompany.new
+    @couriers_companies_all = CouriersCompany.all
     @date = DateTime.now.tomorrow.strftime("%d.%m.%Y")
     @time = '12:00' 
 
