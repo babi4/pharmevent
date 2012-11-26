@@ -1,18 +1,27 @@
-= simple_form_for(@couriers_task) do |f|
+= simple_form_for(@couriers_task, :html => {:class => 'form-courier-task' }) do |f|
   = f.error_notification
 
-  .form-inputs
-    = f.input :name
-    = f.input :telephone
-    = f.input :from_date
-    = f.input :to_date
-    = f.input :status
-    = f.input :to_person
-    = f.association :from_couriers_company
-    = f.association :to_couriers_company
+  .row
+    .span4
+      %label Откуда
+      = f.association :from_couriers_company, :label => false, :input_html => { :class => "span3" }
+      %a.pull-left.btn.btn-small.btn-courier-place{"data-toggle" => "modal", :href => "#newAddressModal"}
+        %i.icon-plus
 
-    = link_to 'Создать место приёма/доставки?', new_couriers_company_path
+    .span4
+      %label Куда
+      = f.association :to_couriers_company, :label => false, :input_html => { :class => "span3" }
+      %a.pull-left.btn.btn-small.btn-courier-place{"data-toggle" => "modal", :href => "#newAddressModal"}
+        %i.icon-plus
 
+    .span4
+      %label.no-margin Когда
+      .input-prepend.date-picker.inline-block{"data-date" => "#{DateTime.now.tomorrow.strftime("%d.%m.%Y")}"}
+        %span.add-on
+          %i.icon-calendar
+        %input.input-date{:type => "text", :name => 'date', :value => "#{DateTime.now.tomorrow.strftime("%d.%m.%Y")}"}
+      %input.timepicker.inline-block{:type => "text", :name => 'time', :value => '12:00'}
+      %i.icon-time.timepicker-icon
 
-  .form-actions
-    = f.button :submit
+      = button_tag type: 'submit', class: "btn btn-success btn-courier-go" do
+        %i.icon-circle-arrow-right.icon-white

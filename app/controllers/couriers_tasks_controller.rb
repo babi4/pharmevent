@@ -2,6 +2,9 @@ class CouriersTasksController < ApplicationController
   load_and_authorize_resource
 
   def index
+    @couriers_task = CouriersTask.new
+    @couriers_company = CouriersCompany.new
+
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @couriers_tasks }
@@ -27,6 +30,7 @@ class CouriersTasksController < ApplicationController
 
   def create
     @couriers_task[:user_id] = current_user[:id]
+    @couriers_task[:name] = current_user[:name]
     respond_to do |format|
       if @couriers_task.save
         format.html { redirect_to @couriers_task, notice: 'Couriers task was successfully created.' }

@@ -1,4 +1,6 @@
-%h1 Listing couriers_tasks
+= render 'form'
+
+%h3 Курьеры
 
 %table
   %tr
@@ -33,3 +35,36 @@
 %br
 
 = link_to 'New Couriers task', new_couriers_task_path
+
+#newAddressModal.modal.hide.fade{:role => "dialog", :tabindex => "-1"}
+  = simple_form_for(@couriers_company, :html => {:class => 'form-validate' }) do |f|
+    .modal-header
+      %button.close{"data-dismiss" => "modal", :type => "button"} ×
+      %h3 Новый адрес
+    .modal-body
+      = f.label :name, "Название"
+      = f.text_field :name, :class => 'input-modal-full', "data-required" => 'true'
+      .row
+        .span1
+          = f.label :zip_code, "Индекс"
+          = f.text_field :zip_code, :class => 'span1', "data-required" => 'true'
+        .span2
+          = f.label :city, "Город"
+          = f.text_field :city, :class => 'span2', "data-required" => 'true'
+        .span2
+          = f.label :street, "Улица"
+          = f.text_field :street, :class => 'span2', "data-required" => 'true'
+
+      .row
+        .span1
+          = f.label :house, "Дом"
+          = f.text_field :house, :class => 'span1', "data-required" => 'true'
+        .span1
+          = f.label :stroenie, "Строение"
+          = f.text_field :stroenie, :class => 'span1'
+        .span1
+          = f.label :office, "Офис"
+          = f.text_field :office, :class => 'span1'
+
+    .modal-footer
+      = f.button :submit, 'Добавить', :class => 'btn btn-primary', :id => 'courier-company-add'

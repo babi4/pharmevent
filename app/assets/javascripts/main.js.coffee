@@ -11,3 +11,15 @@ $ ->
 
   $('.form-validate').on 'blur', '.input-required', ->
     $(@).removeClass('input-required') unless $(@).val().trim() is ""
+
+  $('.date-picker').datepicker(
+    format: 'dd.mm.yyyy'
+    weekStart: 1
+  ).on "changeDate", (ev) ->
+    new_date = ev.date.toString 'dd.MM.yyyy'
+    $(@).find('.input-date').val new_date
+
+  $('.timepicker').timepicker
+    defaultValue: 'value'
+    showMeridian: false
+    disableFocus: true

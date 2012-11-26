@@ -31,6 +31,10 @@ input[readonly] {
   background-color: transparent;
 }
 
+.input-date {
+  width: 82px;
+}
+
 .table-links tbody tr {
   cursor: pointer;
 }
@@ -45,6 +49,17 @@ legend label {
 
 .daterangepicker.dropdown-menu {
   z-index: 2000;
+}
+
+input.timepicker {
+  width: 55px;
+  margin-bottom: -17px;
+}
+
+.timepicker-icon {
+  position: relative;
+  left: -22px;
+  top: 10px;
 }
 
 .dropdown-menu-narrow {
@@ -73,4 +88,14 @@ select.input-modal-full {
 
 input.input-required {
   border-color: #B94A48;
+}
+
+.modal {
+  form {
+    margin-bottom: 0;
+  }
+}
+
+.inline-block {
+  display: inline-block;
 }

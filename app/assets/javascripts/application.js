@@ -15,6 +15,8 @@
 //= require underscore.min
 //= require bootstrap
 //= require date
+//= require bootstrap-datepicker
+//= require bootstrap-timepicker
 //= require daterangepicker
 //= require stupidtable.min
 //= require_tree .

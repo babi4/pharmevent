@@ -1,3 +1,20 @@
-// Place all the styles related to the couriers_tasks controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.form-courier-task {
+  .control-group.select {
+    float: left;
+    display: inline-block;
+  }
+  label {
+    margin-bottom: 8px;
+
+    &.no-margin {
+      margin-bottom: 0;
+    }
+  }
+}
+.btn-courier-place {
+  margin: 2px 0 0 12px;
+}
+.btn-courier-go {
+  position: relative;
+  top: 8px;
+}
