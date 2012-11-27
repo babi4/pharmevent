@@ -33,8 +33,14 @@
       - @couriers_companies_all.each do |company|
         %tr
           %td= company.name
-          %td= link_to 'изменить', edit_couriers_company_path(company), :class => 'btn btn-mini pull-right'
-
+          %td.event-actions
+            .btn-group
+              = link_to 'Изменить', edit_couriers_company_path(company), {:class => 'btn btn-mini'}
+              %button.btn.btn-mini.dropdown-toggle{"data-toggle" => "dropdown"}
+                %span.caret
+              %ul.dropdown-menu.dropdown-menu-narrow
+                %li
+                  = link_to 'Удалить', company, method: :delete, data: { confirm: 'Удалить место?' }
 
 #newAddressModal.modal.hide.fade{:role => "dialog", :tabindex => "-1"}
   = simple_form_for(@couriers_company, :html => {:class => 'form-validate' }) do |f|

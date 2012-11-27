@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class CouriersCompaniesController < ApplicationController
   load_and_authorize_resource
 
@@ -28,7 +30,7 @@ class CouriersCompaniesController < ApplicationController
   def create
     respond_to do |format|
       if @couriers_company.save
-        format.html { redirect_to @couriers_company, notice: 'Couriers company was successfully created.' }
+        format.html { redirect_to couriers_tasks_path, notice: 'Место добавлено.'  }
         format.json { render json: @couriers_company, status: :created, location: @couriers_company }
       else
         format.html { render action: "new" }
@@ -40,7 +42,7 @@ class CouriersCompaniesController < ApplicationController
   def update
     respond_to do |format|
       if @couriers_company.update_attributes(params[:couriers_company])
-        format.html { redirect_to @couriers_company, notice: 'Couriers company was successfully updated.' }
+        format.html { redirect_to couriers_tasks_path, notice: 'Место сохранено.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -52,7 +54,7 @@ class CouriersCompaniesController < ApplicationController
   def destroy
     @couriers_company.destroy
     respond_to do |format|
-      format.html { redirect_to couriers_companies_url }
+      format.html { redirect_to couriers_tasks_path }
       format.json { head :no_content }
     end
   end

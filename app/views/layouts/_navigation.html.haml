@@ -1,6 +1,6 @@
 = link_to "Pharm Event", root_path, :class => 'brand'
 %ul.nav
-  %li{:class => ("active" if current_page?(:controller => 'events', :action => 'index'))}
+  %li{:class => ("active" if current_page?(url_for(:controller => 'events', :action => 'index')) or current_page? root_path)}
     = link_to 'Мероприятия', events_path
   %li{:class => ("active" if current_page?(:controller => 'couriers_tasks', :action => 'index'))}
     = link_to 'Курьеры', couriers_tasks_path
