@@ -6,11 +6,9 @@
       %label Откуда
       = f.association :from_couriers_company, :label => false, :input_html => { :class => "span4", "data-required" => true }
 
-    .span4
       %label Куда
       = f.association :to_couriers_company, :label => false, :input_html => { :class => "span4", "data-required" => true }
 
-    .span4
       %label.no-margin Когда
       .input-prepend.date-picker.inline-block{"data-date" => @date}
         %span.add-on
@@ -19,5 +17,6 @@
       %input.timepicker.inline-block{:type => "text", :name => 'time', :value => @time}
       %i.icon-time.timepicker-icon
 
-      = button_tag type: 'submit', class: "btn btn-success btn-courier-go" do
-        %i.icon-circle-arrow-right.icon-white
+      %br
+
+      = f.button :submit, 'Сохранить', :class => 'btn btn-primary btn-primary-submit'

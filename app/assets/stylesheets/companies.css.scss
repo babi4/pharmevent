@@ -49,12 +49,16 @@
 
   h4 {
     margin: 25px 0 10px;
+
+    &.no-margin {
+      margin-top: 0;
+    }
   }
   .row {
     margin-bottom: 10px;
   }
 }
 
-.company-actions {
-  
+p.company-shortname {
+  margin-bottom: 25px; 
 }

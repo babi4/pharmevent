@@ -236,3 +236,6 @@
       %td= @nds_k_zachetu = @event.documents_beznal_rashods.sum(:nds)
       %td= @nds_k_uplate - @nds_k_zachetu
       %td= (@prihod_summ - @rashod_summ) - (@nds_k_uplate - @nds_k_zachetu)
+
+- content_for :title do
+  Мероприятия / #{@event.name}

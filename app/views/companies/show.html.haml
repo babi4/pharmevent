@@ -1,24 +1,26 @@
 /%p#notice= notice
 
-%h3
-  = @company.name
-  = link_to 'Редактировать', edit_company_path(@company), :class => 'btn pull-right'
+%ul.breadcrumb
+  %li
+    = link_to 'Заказчики', companies_path
+    %span.divider /
+  %li.active 
+    = @company.name
+    %span.divider
+      |
+  %li
+    = link_to 'редактирование', edit_company_path(@company)
 
-%hr
+%h3= @company.name
 
 .row
   .span9.company-info
     - unless @company.short_name.blank?
-      %p
+      %p.company-shortname
         %b Короткое название
         %br
         = "#{@company.company_type} #{@company.short_name}"
-    - if @company.events.length > 0
-      %p
-        %b Мероприятия
-        %br
-        = @company.events.pluck(:name)
-    %h4 
+    %h4.no-margin
       Юридический адрес
       - if @company.ur_post_equal
         (почтовый адрес тот же)
@@ -254,3 +256,6 @@
 
 :javascript
   window.companyMembers = #{@company.company_members.to_json}
+
+- content_for :title do
+  = "Заказчики / #{@company.name}"

@@ -1,4 +1,14 @@
-%h3.company-name
-  = @company.name
+%ul.breadcrumb
+  %li
+    = link_to 'Заказчики', companies_path
+    %span.divider /
+  %li.active 
+    = link_to @company.name, @company
+    %span.divider
+      |
+  %li.active редактирование
 
 = render 'form'
+
+- content_for :title do
+  = "Заказчики / #{@company.name} / Редактирование"

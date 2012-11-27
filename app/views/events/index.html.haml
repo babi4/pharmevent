@@ -1,18 +1,18 @@
+.row.row-top-actions
+  .span8
+    .input-prepend.pull-left
+      %span.add-on
+        %i.icon-search
+      %input.span4#events-filter{:placeholder => "Поиск", :type => "text"}
+    .input-append.pull-left
+      %input.input-daterange#reportrange{:type => "text", :placeholder => 'За все время', :readonly => "readonly"}
+        %span.add-on
+          %i.icon-calendar
+  .span4
+    %a.pull-right.btn.btn-margin{"data-toggle" => "modal", :href => "#newEventModal"} Добавить мероприятие  
+
 %table.table.table-striped.table-condensed.table-hover.table-links#table-events
   %thead
-    %tr.table-events-filters
-      %th{:colspan => "3"}
-        .input-prepend.pull-left
-          %span.add-on
-            %i.icon-search
-          %input.span4#events-filter{:placeholder => "Поиск", :type => "text"}
-        .input-append.pull-left
-          %input.input-daterange#reportrange{:type => "text", :placeholder => 'За все время', :readonly => "readonly"}
-            %span.add-on
-              %i.icon-calendar
-      %th{:colspan => "3"}
-        %a.pull-right.btn.btn-margin{"data-toggle" => "modal", :href => "#newEventModal"} Добавить мероприятие
-        
     %tr
       %th.events-title.type-string Название
       %th.events-customer.type-string Заказчик
@@ -66,3 +66,6 @@
 
     .modal-footer
       = f.button :submit, 'Добавить', :class => 'btn btn-primary', :id => 'event-add'
+
+- content_for :title do
+  Мероприятия

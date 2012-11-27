@@ -1,13 +1,12 @@
-%h4 Новый курьер
-= render 'form'
-
 .row
   .span8
-    %h4 Список курьеров
+    %h4 
+      Курьеры
+      %a.btn.btn-mini.btn-courier-place{"data-toggle" => "modal", :href => "#newCourierModal"} добавить
     %table.table.table-striped.table-condensed.table-hover
       %tr
-        %th Откуда
-        %th Куда
+        %th.span3 Откуда
+        %th.span3 Куда
         %th Когда
         %th
 
@@ -27,9 +26,9 @@
 
   .span4
     %h4 
-      Список мест
+      Места
       %a.btn.btn-mini.btn-courier-place{"data-toggle" => "modal", :href => "#newAddressModal"} добавить
-    %table.table.table-striped.table-condensed.table-hover.table-borderless
+    %table.table.table-striped.table-condensed.table-hover
       - @couriers_companies_all.each do |company|
         %tr
           %td= company.name
@@ -74,3 +73,29 @@
 
     .modal-footer
       = f.button :submit, 'Добавить', :class => 'btn btn-primary', :id => 'courier-company-add'
+
+#newCourierModal.modal.hide.fade{:role => "dialog", :tabindex => "-1"}
+  = simple_form_for(@couriers_task, :html => {:class => 'form-validate form-courier-task' }) do |f|
+    .modal-header
+      %button.close{"data-dismiss" => "modal", :type => "button"} ×
+      %h3 Новый курьер
+    .modal-body
+      %label Откуда
+      = f.association :from_couriers_company, :label => false, :input_html => { :class => "input-modal-full", "data-required" => true }
+
+      %label Куда
+      = f.association :to_couriers_company, :label => false, :input_html => { :class => "input-modal-full", "data-required" => true }
+
+      %label.no-margin Когда
+      .input-prepend.date-picker.inline-block{"data-date" => @date}
+        %span.add-on
+          %i.icon-calendar
+        %input.input-date{:type => "text", :name => 'date', :value => @date}
+      %input.timepicker.inline-block{:type => "text", :name => 'time', :value => @time}
+      %i.icon-time.timepicker-icon
+
+    .modal-footer
+      = f.button :submit, 'Добавить', :class => 'btn btn-primary', :id => 'courier-company-add'
+
+- content_for :title do
+  Курьеры

@@ -8,3 +8,6 @@
   %li.active редактирование
 
 = render 'form'
+
+- content_for :title do
+  Мероприятия / #{@event.name} / редактирование

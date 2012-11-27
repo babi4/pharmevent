@@ -1,3 +1,10 @@
-%h3.pagination-centered Новый заказчик
+%ul.breadcrumb
+  %li
+    = link_to 'Заказчики', companies_path
+    %span.divider /
+  %li.active Новый заказчик
 
 = render 'form'
+
+- content_for :title do
+  = "Новый заказчик"

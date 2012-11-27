@@ -150,7 +150,6 @@
 
   .row.pagination-centered
     .span8
-      = link_to 'К списку заказчиков', companies_path, :class => 'btn pull-left'
       = f.button :submit, 'Сохранить', :class => 'btn-primary'
       - unless @company.id.blank?
         = link_to 'Удалить заказчика', @company, method: :delete, data: { confirm: 'Вы уверены?' }, :class => 'btn btn-danger pull-right'

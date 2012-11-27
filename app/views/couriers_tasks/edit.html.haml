@@ -1,5 +1,10 @@
-%h3.page-title Редактирование задания курьера
+%ul.breadcrumb
+  %li
+    = link_to 'Курьеры', couriers_tasks_path
+    %span.divider /
+  %li.active редактирование задания
 
 = render 'form'
 
-= link_to 'К списку курьеров', couriers_tasks_path
+- content_for :title do
+  Курьеры / Редактирование

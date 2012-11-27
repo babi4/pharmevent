@@ -1,3 +1,11 @@
-%h3.page-title= @couriers_company.name
+%ul.breadcrumb
+  %li
+    = link_to 'Курьеры', couriers_tasks_path
+    %span.divider /
+  %li.active
+    = "#{@couriers_company.name} - редактирование места"
 
 = render 'form'
+
+- content_for :title do
+  = "Курьеры / #{@couriers_company.name} - редактирование места"

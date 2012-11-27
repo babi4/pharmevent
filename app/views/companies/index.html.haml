@@ -1,15 +1,24 @@
-= link_to 'Добавить заказчика', new_company_path, :class => 'btn pull-right'
+.row.row-top-actions
+  .span12
+    = link_to 'Добавить заказчика', new_company_path, :class => 'btn pull-right'
 
 %table.table.table-striped.table-condensed.table-hover.table-links#table-events
-  %thead
-    %tr
-      %th Заказчики
-      %th Мероприятия
-
-  - @companies.includes(:events).each do |company|
+  - @companies.each do |company|
     %tr{"data-link" => url_for(:action => 'show', :id => company.id)}
       %td= company.name
-      %td= company.events.pluck(:name)
-      / %td= link_to 'Show', company
-      / %td= link_to 'Edit', edit_company_path(company)
-      / %td= link_to 'Destroy', company, method: :delete, data: { confirm: 'Are you sure?' }
+      %td
+        - if company_member = company.company_members.first
+          = [company_member.name, company_member.position, company_member.telephone, company_member.email].compact.join(', ')
+      %td.event-actions
+        .btn-group.pull-right
+          = link_to 'Показать', company, {:class => 'btn btn-mini'}
+          %button.btn.btn-mini.dropdown-toggle{"data-toggle" => "dropdown"}
+            %span.caret
+          %ul.dropdown-menu.dropdown-menu-narrow.dropdown-menu-left
+            %li
+              = link_to 'Редактировать', edit_company_path(company)
+            %li
+              = link_to 'Удалить', company, method: :delete, data: { confirm: 'Удалить заказчика?' }
+
+- content_for :title do
+  Заказчики
