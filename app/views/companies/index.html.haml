@@ -8,7 +8,7 @@
       %td= company.name
       %td
         - if company_member = company.company_members.first
-          = [company_member.name, company_member.position, company_member.telephone, company_member.email].compact.join(', ')
+          = [company_member.name, company_member.position, company_member.telephone, company_member.email].reject(&:empty?).join(', ')
       %td.event-actions
         .btn-group.pull-right
           = link_to 'Показать', company, {:class => 'btn btn-mini'}
