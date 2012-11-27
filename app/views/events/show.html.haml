@@ -1,3 +1,10 @@
+%ul.breadcrumb
+  %li
+    = link_to 'Мероприятия', events_path
+    %span.divider /
+  %li.active
+    = @event.name
+
 %p#notice= notice
 
 %p

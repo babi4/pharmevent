@@ -1,3 +1,10 @@
-%h3.page-title= @event.name
+%ul.breadcrumb
+  %li
+    = link_to 'Мероприятия', events_path
+    %span.divider /
+  %li
+    = link_to @event.name, @event
+    %span.divider /
+  %li.active редактирование
 
 = render 'form'
