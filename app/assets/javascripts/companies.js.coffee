@@ -60,3 +60,18 @@ $ ->
           index = window.companyMembers.indexOf member
           window.companyMembers.splice index, 1
           $('#companyMemberModal').modal 'hide'
+
+  filterCompanies = (filter) =>
+    $companies_list = $('#table-companies').find('tbody tr')
+    if filter is ''
+      $companies_list.removeClass('hide').addClass('show')
+    else
+      $companies_list.each ->
+        $company_row = $(@)
+        if ($company_row.text().search(new RegExp(filter, "i")) < 0)
+          $company_row.removeClass('show').addClass('hide')
+        else
+          $company_row.removeClass('hide').addClass('show')
+
+  $("#companies-filter").on 'keyup', (event) ->
+    filterCompanies $(@).val().trim()

@@ -1,12 +1,17 @@
 .row.row-top-actions
-  .span12
+  .span8
+    .input-prepend.pull-left
+      %span.add-on
+        %i.icon-search
+      %input.span4#companies-filter{:placeholder => "Поиск", :type => "text"}
+  .span4
     = link_to 'Добавить заказчика', new_company_path, :class => 'btn pull-right'
 
-%table.table.table-striped.table-condensed.table-hover.table-links#table-events
+%table.table.table-striped.table-condensed.table-hover.table-links#table-companies
   - @companies.each do |company|
     %tr{"data-link" => url_for(:action => 'show', :id => company.id)}
-      %td= company.name
-      %td
+      %td.company-name= company.name
+      %td.company-members
         - if company_member = company.company_members.first
           = [company_member.name, company_member.position, company_member.telephone, company_member.email].reject(&:empty?).join(', ')
       %td.event-actions

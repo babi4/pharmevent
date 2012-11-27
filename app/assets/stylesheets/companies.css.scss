@@ -1,4 +1,4 @@
-.company-nav, h3.company-name, .form-company {
+.company-nav, .form-company {
   width: 800px;
   margin: 0 auto;
 }
@@ -61,4 +61,17 @@
 
 p.company-shortname {
   margin-bottom: 25px; 
+}
+
+#table-companies {
+  .company-name {
+    width: 30%;
+  }
+
+  .company-members {
+    width: 60%;
+  }
+  .show {
+    display: table-row;
+  }
 }
