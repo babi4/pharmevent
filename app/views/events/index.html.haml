@@ -21,7 +21,7 @@
       %th.events-city.type-string Город
       %th.events-actions
   - @events.includes([:company]).each do |event|
-    %tr{"data-link" => url_for(:action => 'edit', :id => event.id)}
+    %tr{"data-link" => url_for(:action => 'show', :id => event.id)}
       %td= event.name
       %td= event.company[:name]
       %td.events-date.events-start{"data-order-by" => event.date_start.to_time.to_i}
@@ -34,33 +34,35 @@
           = link_to 'Войти', event, {:class => 'btn btn-mini'}
           %button.btn.btn-mini.dropdown-toggle{"data-toggle" => "dropdown"}
             %span.caret
-          %ul.dropdown-menu.dropdown-menu-narrow
+          %ul.dropdown-menu.dropdown-menu-narrow.dropdown-menu-left
+            %li
+              = link_to 'Редактировать', edit_event_path(event)
             %li
               %a{:href => "#"} В архив
             %li
               = link_to 'Удалить', event, method: :delete, data: { confirm: 'Удалить мероприятие?' }
 
 #newEventModal.modal.hide.fade{:role => "dialog", :tabindex => "-1"}
-  = simple_form_for @new_event do |f|
-    %input{:type => "hidden", :name => "event[date_start]", :id => "new-event-start", :value => DateTime.now.tomorrow.strftime("%Y-%m-%d")}
-    %input{:type => "hidden", :name => "event[date_end]", :id => "new-event-end", :value => (DateTime.now + 8).strftime("%Y-%m-%d")}
+  = simple_form_for(@new_event, :html => {:class => 'form-validate' }) do |f|
+    %input{:type => "hidden", :name => "event[date_start]", :id => "event-start", :value => DateTime.now.tomorrow.strftime("%Y-%m-%d")}
+    %input{:type => "hidden", :name => "event[date_end]", :id => "event-end", :value => (DateTime.now + 8).strftime("%Y-%m-%d")}
     .modal-header
       %button.close{"data-dismiss" => "modal", :type => "button"} ×
       %h3 Новое мероприятие
     .modal-body
-      %label Название
-      %input.input-modal-full{:type => "text", :name => "event[name]"}
-      = f.association :company, :label => 'Заказчик', :required => false, :input_html => { :class => 'input-modal-full' }
+      = f.label :name, "Название"
+      = f.text_field :name, :class => 'input-modal-full', "data-required" => 'true'
+      = f.association :company, :label => 'Заказчик', :required => false, :input_html => { :class => 'input-modal-full', 'data-required' => true }
       .row
         .span3
-          %label Город
-          %input{:type => "text", :name => "event[city]", :class => 'input-xlarge'}
-        .span-datepange.pull-right
+          = f.label :city, "Город"
+          = f.text_field :city, :class => 'input-xlarge', "data-required" => 'true'
+        .pull-right
           %label Дата проведения
           .input-prepend
             %span.add-on
               %i.icon-calendar
-            %input{:type => "text", :readonly => "readonly", :class => 'input-daterange', :id => 'new-event-daterange', :value => "#{DateTime.now.tomorrow.strftime("%d.%m.%Y")} - #{(DateTime.now + 8).strftime("%d.%m.%Y")}"}
+            %input{:type => "text", :readonly => "readonly", :class => 'input-daterange', :id => 'event-daterange', :value => "#{DateTime.now.tomorrow.strftime("%d.%m.%Y")} - #{(DateTime.now + 8).strftime("%d.%m.%Y")}", "data-opens" => 'left', 'data-datestart' => DateTime.now.tomorrow.strftime("%m.%d.%Y"), 'data-dateend' => (DateTime.now + 8).strftime("%m.%d.%Y")}}
 
     .modal-footer
       = f.button :submit, 'Добавить', :class => 'btn btn-primary', :id => 'event-add'

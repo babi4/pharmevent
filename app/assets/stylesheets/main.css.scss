@@ -90,8 +90,17 @@ input.timepicker {
   min-width: 80px;
 }
 
+.dropdown-menu-left {
+  left: auto;
+  right: 0;
+}
+
 .btn-margin {
   margin-bottom: 5px;
+}
+
+.label-daterange {
+  width: 211px;
 }
 
 .input-daterange {
@@ -104,6 +113,15 @@ input.input-modal-full {
 
 select.input-modal-full {
   width: 525px;
+}
+
+.row-modal-full {
+  width: 554px;
+}
+
+.span-modal-full {
+  margin-left: 30px;
+  width: 524px;
 }
 
 .span-daterange {
