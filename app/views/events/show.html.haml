@@ -4,34 +4,15 @@
     %span.divider /
   %li.active
     = @event.name
+    %span.divider
+      |
+  %li
+    = link_to 'редактирование', edit_event_path(@event)
 
 %p#notice= notice
 
-%p
-  %b Название мероприятия:
-  = @event.name
-%p
-  %b Добавил мероприятие:
-  = @event.user[:name]
-%p
-  %b Компания:
-  = @event.company[:name]
-%p
-  %b Начало:
-  = @event.date_start
-%p
-  %b Конец:
-  = @event.date_end
-%p
-  %b Город:
-  = @event.city
-
-= link_to 'Edit', edit_event_path(@event)
-\|
-= link_to 'Back', events_path
-
-%br
-%br
+%h3.no-margin.pagination-centered= "#{@event.city}, #{@event.name}"
+%h4.pagination-centered.event-subtitle= "#{@event.date_start.strftime("%d.%m.%Y")} - #{@event.date_end.strftime("%d.%m.%Y")}"
 
 = link_to 'Просмотр безналичный расход', event_documents_beznal_rashods_path(@event)
 \|||

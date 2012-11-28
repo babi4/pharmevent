@@ -1,16 +1,38 @@
-= simple_form_for([@event, @documents_nal_rashod]) do |f|
+= simple_form_for([@event, @documents_nal_rashod], :html => {:class => 'form-validate' }) do |f|
   = f.error_notification
 
-  .form-inputs
-    = f.input :company,     :label => 'Получатель'
-    = f.input :description, :label => 'Назначение платежа'
-    = f.input :name,        :label => 'ФИО получателя'
-    = f.input :telephone,   :label => 'Моб. тел. получателя'
-    = f.input :summ,        :label => 'Сумма'
-    = f.input :date,        :label => 'Дата оплаты'
-    %h4 Данный расход является:
-    = f.input :lectors,     :label => 'Расходом по логистике лекторов (статус: физ.лицо)'
-    = f.input :entire,      :label => 'Расходом по мероприятию в целом (статус: агент/юр.лицо)'
+  = f.label :company, "Получатель*"
+  = f.text_field :company, :class => 'span7', "data-required" => 'true'
 
-  .form-actions
-    = f.button :submit
+  = f.label :description, "Назначение платежа*"
+  = f.text_field :description, :class => 'span7', "data-required" => 'true'
+
+  .row
+    .span4
+      = f.label :name, "ФИО получателя"
+      = f.text_field :name, :class => 'span4'
+    .span3
+      = f.label :telephone, "Мобильный телефон получателя"
+      = f.text_field :telephone, :class => 'span3'
+
+  .row
+    .span2
+      = f.label :summ, "Сумма*"
+      = f.text_field :summ, :class => 'span2', "data-required" => 'true'
+    .span2
+      = f.label :date, "Дата*", :class => 'no-margin pull-right date-label'
+      %br
+      .input-prepend.input-prepend-margin.date-picker.pull-right{"data-date" => @documents_nal_rashod.date.strftime("%d.%m.%Y") }
+        %span.add-on
+          %i.icon-calendar
+        = f.text_field :date, :class => 'input-date', "data-required" => 'true', :value => @documents_nal_rashod.date.strftime("%d.%m.%Y")
+
+  %b.before-checkbox Данный расход является:
+  %label.checkbox
+    = f.check_box :lectors
+    расходом по логистике лекторов (статус: физ.лицо)
+  %label.checkbox
+    = f.check_box :entire
+    расходом по мероприятию в целом (статус: агент/юр.лицо)
+
+  = f.button :submit, 'Сохранить', :class => 'btn btn-primary btn-primary-submit'

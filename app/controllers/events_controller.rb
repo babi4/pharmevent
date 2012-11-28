@@ -52,7 +52,7 @@ class EventsController < ApplicationController
   def update
     respond_to do |format|
       if @event.update_attributes(params[:event])
-        format.html { redirect_to events_url, notice: 'Мероприятие отредактировано.' }
+        format.html { redirect_to @event, notice: 'Мероприятие отредактировано.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

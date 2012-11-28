@@ -172,3 +172,20 @@ input.input-required, select.input-required {
 .input-prepend-margin {
   margin: 3px 0 10px;
 }
+
+.span2 {
+  .date-label {
+    padding-right: 85px;
+  }
+}
+
+.before-checkbox {
+  display: inline-block;
+  padding: 5px 0;
+}
+
+@media (max-width: 1270px) {
+  .navbar-username {
+    display: none;
+  }
+}

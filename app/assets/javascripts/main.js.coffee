@@ -22,3 +22,6 @@ $ ->
   $('.timepicker').timepicker
     defaultTime: 'value'
     showMeridian: false
+
+  $('.table-links').on 'click', 'tbody tr', (e) ->
+    window.location = $(@).data 'link' if e.target.tagName is 'TD'
