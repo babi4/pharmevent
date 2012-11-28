@@ -1,6 +1,13 @@
-%h1 New documents_nal_prihod
-%h1= "Событие: #{@event[:name]}"
+%ul.breadcrumb
+  %li
+    = link_to 'Мероприятия', events_path
+    %span.divider /
+  %li
+    = link_to @event.name, @event
+    %span.divider /
+  %li.active Новый наличный приход
 
 = render 'form'
 
-= link_to 'Back', event_documents_nal_prihods_path(@event)
+- content_for :title do
+  #{@event.name} - новый наличный приход

@@ -22,6 +22,7 @@ class DocumentsNalPrihodsController < ApplicationController
 
   def new
     @documents_nal_prihod = DocumentsNalPrihod.new
+    @documents_nal_prihod[:date] = DateTime.now.tomorrow.strftime("%d.%m.%Y")
 
     respond_to do |format|
       format.html # new.html.erb
