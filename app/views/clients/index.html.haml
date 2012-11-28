@@ -1,35 +1,52 @@
-%h1 Listing clients
+.row.row-top-actions
+  .span8
+    .input-prepend.pull-left
+      %span.add-on
+        %i.icon-search
+      %input.span4#clients-filter{:placeholder => "Поиск", :type => "text"}
+  .span4
+    = link_to 'Добавить клиента', new_client_path, :class => 'btn pull-right'
 
-%table
-  %tr
-    %th Name
-    %th Birthday
-    %th Passport number
-    %th Zagran passport number
-    %th Zagran passport use before
-    %th Degree
-    %th Position
-    %th Work
-    %th Notes
-    %th
-    %th
-    %th
+%table.table.table-striped.table-condensed.table-hover#table-clients
+  %thead
+    %tr
+      %th.clients-name ФИО
+      %th.clients-passport Паспортные данные
+      %th.clients-degree Ученая степень
+      %th.clients-work Работа
+      %th.clients-notes Примечания
+      %th
 
   - @clients.each do |client|
     %tr
       %td= client.name
-      %td= client.birthday
-      %td= client.passport_number
-      %td= client.zagran_passport_number
-      %td= client.zagran_passport_use_before
+      %td
+        %span.client-table-label дата рождения
+        = client.birthday.strftime("%d.%m.%Y")
+        %br
+        %span.client-table-label № паспорта РФ
+        = client.passport_number
+        %br
+        %span.client-table-label № загран.п.
+        = client.zagran_passport_number
+        %br
+        %span.client-table-label срок действия
+        = client.zagran_passport_use_before.strftime("%d.%m.%Y")
       %td= client.degree
-      %td= client.position
-      %td= client.work
+      %td
+        = "#{client.position},"
+        %br
+        = "#{client.work}"
       %td= client.notes
-      %td= link_to 'Show', client
-      %td= link_to 'Edit', edit_client_path(client)
-      %td= link_to 'Destroy', client, method: :delete, data: { confirm: 'Are you sure?' }
+      %td.event-actions
+        .btn-group.pull-right
+          = link_to 'Редактировать', edit_client_path(client), {:class => 'btn btn-mini'}
+          %button.btn.btn-mini.dropdown-toggle{"data-toggle" => "dropdown"}
+            %span.caret
+          %ul.dropdown-menu.dropdown-menu-narrow.dropdown-menu-left
+            %li
+              = link_to 'Удалить', client, method: :delete, data: { confirm: 'Удалить клиента?' }
 
-%br
 
-= link_to 'New Client', new_client_path
+- content_for :title do
+  Клиенты

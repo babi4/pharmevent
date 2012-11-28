@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class ClientsController < ApplicationController
   load_and_authorize_resource
 
@@ -16,6 +18,9 @@ class ClientsController < ApplicationController
   end
 
   def new
+    @client[:birthday] = "01.01.1970"
+    @client[:zagran_passport_use_before] = DateTime.now.tomorrow.strftime("%d.%m.%Y")
+
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @client }
@@ -28,7 +33,7 @@ class ClientsController < ApplicationController
   def create
     respond_to do |format|
       if @client.save
-        format.html { redirect_to @client, notice: 'Client was successfully created.' }
+        format.html { redirect_to clients_path, notice: 'Клиент добавлен.' }
         format.json { render json: @client, status: :created, location: @client }
       else
         format.html { render action: "new" }
@@ -40,7 +45,7 @@ class ClientsController < ApplicationController
   def update
     respond_to do |format|
       if @client.update_attributes(params[:client])
-        format.html { redirect_to @client, notice: 'Client was successfully updated.' }
+        format.html { redirect_to clients_path, notice: 'Клиент сохранен.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

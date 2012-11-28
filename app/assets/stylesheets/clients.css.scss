@@ -1,3 +1,38 @@
-// Place all the styles related to the clients controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.client-table-label {
+  display: inline-block;
+  width: 100px;
+  text-align: center;
+  font-size: 11px;
+}
+
+#table-clients {
+  .show {
+    display: table-row;
+  }
+  .clients-name {
+    width: 25%;
+  }
+  .clients-passport {
+    width: 20%;
+  }
+  .clients-degree {
+    width: 15%;
+  }
+  .clients-work {
+    width: 15%;
+  }
+  .clients-notes {
+    width: 15%;
+  }
+}
+
+@media (max-width: 1200px) {
+  #table-clients {
+    .clients-name {
+      width: 20%;
+    }
+    .clients-passport {
+      width: 25%;
+    }
+  }
+}

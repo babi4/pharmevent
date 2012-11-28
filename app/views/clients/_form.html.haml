@@ -1,16 +1,43 @@
-= simple_form_for(@client) do |f|
+= simple_form_for(@client, :html => {:class => 'form-validate' }) do |f|
   = f.error_notification
 
-  .form-inputs
-    = f.input :name
-    = f.input :birthday
-    = f.input :passport_number
-    = f.input :zagran_passport_number
-    = f.input :zagran_passport_use_before
-    = f.input :degree
-    = f.input :position
-    = f.input :work
-    = f.input :notes
+  .row
+    .span4
+      = f.label :name, "ФИО*"
+      = f.text_field :name, :class => 'span4', "data-required" => 'true'
+    .span4
+      = f.label :birthday, "Дата рождения*", :class => 'no-margin'
+      .input-prepend.input-prepend-margin.date-picker{"data-date" => @client.birthday.strftime("%d.%m.%Y") }
+        %span.add-on
+          %i.icon-calendar
+        = f.text_field :birthday, :class => 'input-date', "data-required" => 'true', :value => @client.birthday.strftime("%d.%m.%Y") 
 
-  .form-actions
-    = f.button :submit
+  = f.label :passport_number, "№ паспорта*"
+  = f.text_field :passport_number, :class => 'span4', "data-required" => 'true'
+
+  .row
+    .span4
+      = f.label :zagran_passport_number, "№ загранпаспорта"
+      = f.text_field :zagran_passport_number, :class => 'span4'
+    .span4
+      = f.label :zagran_passport_use_before, "Дата окончания", :class => 'no-margin'
+      .input-prepend.date-picker.inline-block{"data-date" => @client.zagran_passport_use_before.strftime("%d.%m.%Y") }
+        %span.add-on
+          %i.icon-calendar
+        = f.text_field :zagran_passport_use_before, :class => 'input-date', :value => @client.zagran_passport_use_before.strftime("%d.%m.%Y") 
+
+  = f.label :degree, "Ученая степень*"
+  = f.select :degree, [['нет', 'нет'], ['доцент', 'доцент'], ['к.м.н.', 'д.м.н.'], ['член корр. РАН', 'член корр. РАН'], ['член корр. РАМН', 'член корр. РАМН'], ['член корр. РАН и РАМН', 'член корр. РАН и РАМН'], ['академик РАН', 'академик РАН'], ['академик РАМН', 'академик РАМН'], ['академик РАН и РАМН', 'академик РАН и РАМН']], {}, { :class => 'span4' }
+
+  = f.label :position, "Должность*"
+  = f.text_field :position, :class => 'span4', "data-required" => 'true'
+
+  = f.label :work, "Место работы*"
+  = f.text_field :work, :class => 'span4', "data-required" => 'true'
+
+  = f.label :notes, "Примечания"
+  = f.text_area :notes, :rows => 3, :class => 'span4'
+
+  %br
+
+  = f.submit 'Сохранить', :class => 'btn btn-primary btn-primary-submit'
