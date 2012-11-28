@@ -22,6 +22,12 @@ class DocumentsBeznalRashodsController < ApplicationController
 
   def new
     @documents_beznal_rashod = DocumentsBeznalRashod.new
+    @documents_beznal_rashod[:date_schet] = DateTime.now.strftime("%d.%m.%Y")
+    @documents_beznal_rashod[:dogovor_date] = @documents_beznal_rashod[:date_schet]
+    @documents_beznal_rashod[:info_date_pay] = @documents_beznal_rashod[:date_schet]
+    @documents_beznal_rashod[:info_date_schet] = @documents_beznal_rashod[:date_schet]
+    @documents_beznal_rashod[:info_date_act] = @documents_beznal_rashod[:date_schet]
+    @documents_beznal_rashod[:info_return_date] = @documents_beznal_rashod[:date_schet]
 
     respond_to do |format|
       format.html # new.html.erb

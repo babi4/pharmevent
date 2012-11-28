@@ -177,6 +177,20 @@ input.input-required, select.input-required {
   .date-label {
     padding-right: 85px;
   }
+  .date-label-big {
+    padding-right: 45px;
+  }
+  .date-label-large {
+    padding-right: 19px;
+  }
+}
+
+.span-date {
+  width: 123px;
+
+  label.no-margin {
+    margin-bottom: 2px;
+  }
 }
 
 .before-checkbox {
