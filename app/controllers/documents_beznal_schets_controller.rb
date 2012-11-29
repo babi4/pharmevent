@@ -55,6 +55,7 @@ class DocumentsBeznalSchetsController < ApplicationController
         format.html { redirect_to @event, notice: 'Безналичный счет создан.' }
         format.json { render json: @documents_beznal_schet, status: :created, location: @documents_beznal_schet }
       else
+        puts @documents_beznal_schet.errors.inspect
         format.html { render action: "new" }
         format.json { render json: @documents_beznal_schet.errors, status: :unprocessable_entity }
       end

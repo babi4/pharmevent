@@ -15,6 +15,7 @@ $ ->
   $('.date-picker').datepicker(
     format: 'dd.mm.yyyy'
     weekStart: 1
+    autoclose: true
   ).on "changeDate", (ev) ->
     new_date = ev.date.toString 'dd.MM.yyyy'
     $(@).find('.input-date').val new_date

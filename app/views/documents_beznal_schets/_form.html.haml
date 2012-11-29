@@ -18,20 +18,20 @@
   .row
     .span2
       = f.label :num_schet, "Счет №*"
-      = f.text_field :num_schet, :class => 'span2', :disabled => true, "data-required" => 'true'
+      = f.text_field :num_schet, :class => 'span2', :readonly => true, "data-required" => 'true'
     .span2
       .span-date.pull-right
         = f.label :date_schet, "Дата счета*", :class => 'no-margin'
         .input-prepend.input-prepend-margin.date-picker.pull-right{"data-date" => (@documents_beznal_schet.date_schet.strftime("%d.%m.%Y") unless @documents_beznal_schet.date_schet.blank?) }
           %span.add-on
             %i.icon-calendar
-          = f.text_field :date_schet, :class => 'input-date', :disabled => true, "data-required" => 'true', :value => (@documents_beznal_schet.date_schet.strftime("%d.%m.%Y") unless @documents_beznal_schet.date_schet.blank?)
+          = f.text_field :date_schet, :class => 'input-date', :readonly => true, "data-required" => 'true', :value => (@documents_beznal_schet.date_schet.strftime("%d.%m.%Y") unless @documents_beznal_schet.date_schet.blank?)
     .span2
       = f.label :summ, "Сумма"
       = f.text_field :summ, :class => 'span2', "data-required" => 'true'
     .span1
       = f.label :nds, "НДС"
-      = f.text_field :nds, :class => 'span1'
+      = f.text_field :nds, :class => 'span1', "data-required" => 'true'
 
   .row
     .span2
