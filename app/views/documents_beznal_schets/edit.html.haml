@@ -1,8 +1,13 @@
-%h1 Editing documents_beznal_schet
-%h3= "Событие: #{@event[:name]}"
+%ul.breadcrumb
+  %li
+    = link_to 'Мероприятия', events_path
+    %span.divider /
+  %li
+    = link_to @event.name, @event
+    %span.divider /
+  %li.active Редактирование безналичного счета
 
 = render 'form'
 
-= link_to 'Show', [@event, @documents_beznal_schet]
-\|
-= link_to 'Back', event_documents_beznal_schets_path(@event)
+- content_for :title do
+  #{@event.name} - редактирование безналичного счета

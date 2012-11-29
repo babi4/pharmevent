@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class DocumentsBeznalRashodsController < ApplicationController
   authorize_resource
   before_filter :detect_event
@@ -45,7 +47,7 @@ class DocumentsBeznalRashodsController < ApplicationController
 
     respond_to do |format|
       if @documents_beznal_rashod.save
-        format.html { redirect_to [@event, @documents_beznal_rashod], notice: 'Documents beznal rashod was successfully created.' }
+        format.html { redirect_to @event, notice: 'Безналичный расход создан.' }
         format.json { render json: @documents_beznal_rashod, status: :created, location: @documents_beznal_rashod }
       else
         format.html { render action: "new" }
@@ -59,7 +61,7 @@ class DocumentsBeznalRashodsController < ApplicationController
 
     respond_to do |format|
       if @documents_beznal_rashod.update_attributes(params[:documents_beznal_rashod])
-        format.html { redirect_to [@event, @documents_beznal_rashod], notice: 'Documents beznal rashod was successfully updated.' }
+        format.html { redirect_to @event, notice: 'Безналичный расход изменен.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -73,7 +75,7 @@ class DocumentsBeznalRashodsController < ApplicationController
     @documents_beznal_rashod.destroy
 
     respond_to do |format|
-      format.html { redirect_to event_documents_beznal_rashods_url(@event) }
+      format.html { redirect_to @event }
       format.json { head :no_content }
     end
   end

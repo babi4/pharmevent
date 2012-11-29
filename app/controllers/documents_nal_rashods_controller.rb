@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class DocumentsNalRashodsController < ApplicationController
   authorize_resource
   before_filter :detect_event
@@ -40,7 +42,7 @@ class DocumentsNalRashodsController < ApplicationController
 
     respond_to do |format|
       if @documents_nal_rashod.save
-        format.html { redirect_to [@event, @documents_nal_rashod], notice: 'Documents nal rashod was successfully created.' }
+        format.html { redirect_to @event, notice: 'Наличный расход создан.' }
         format.json { render json: @documents_nal_rashod, status: :created, location: @documents_nal_rashod }
       else
         format.html { render action: "new" }
@@ -54,7 +56,7 @@ class DocumentsNalRashodsController < ApplicationController
 
     respond_to do |format|
       if @documents_nal_rashod.update_attributes(params[:documents_nal_rashod])
-        format.html { redirect_to [@event, @documents_nal_rashod], notice: 'Documents nal rashod was successfully updated.' }
+        format.html { redirect_to @event, notice: 'Наличный расход изменен.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -68,7 +70,7 @@ class DocumentsNalRashodsController < ApplicationController
     @documents_nal_rashod.destroy
 
     respond_to do |format|
-      format.html { redirect_to event_documents_nal_rashods_url(@event) }
+      format.html { redirect_to @event }
       format.json { head :no_content }
     end
   end

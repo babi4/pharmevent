@@ -1,8 +1,13 @@
-%h1 Editing documents_nal_rashod
-%h1= "Событие: #{@event[:name]}"
+%ul.breadcrumb
+  %li
+    = link_to 'Мероприятия', events_path
+    %span.divider /
+  %li
+    = link_to @event.name, @event
+    %span.divider /
+  %li.active Редактирование наличного расхода
 
 = render 'form'
 
-= link_to 'Show', [@event, @documents_nal_rashod]
-\|
-= link_to 'Back', event_documents_nal_rashods_path(@event)
+- content_for :title do
+  #{@event.name} - редактирование наличного расхода

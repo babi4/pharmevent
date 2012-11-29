@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class DocumentsBeznalSchetsController < ApplicationController
   authorize_resource
   before_filter :detect_event
@@ -50,7 +52,7 @@ class DocumentsBeznalSchetsController < ApplicationController
 
     respond_to do |format|
       if @documents_beznal_schet.save
-        format.html { redirect_to [@event, @documents_beznal_schet], notice: 'Documents beznal schet was successfully created.' }
+        format.html { redirect_to @event, notice: 'Безналичный счет создан.' }
         format.json { render json: @documents_beznal_schet, status: :created, location: @documents_beznal_schet }
       else
         format.html { render action: "new" }
@@ -64,7 +66,7 @@ class DocumentsBeznalSchetsController < ApplicationController
 
     respond_to do |format|
       if @documents_beznal_schet.update_attributes(params[:documents_beznal_schet])
-        format.html { redirect_to [@event, @documents_beznal_schet], notice: 'Documents beznal schet was successfully updated.' }
+        format.html { redirect_to @event, notice: 'Безналичный счет изменен.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -78,7 +80,7 @@ class DocumentsBeznalSchetsController < ApplicationController
     @documents_beznal_schet.destroy
 
     respond_to do |format|
-      format.html { redirect_to event_documents_beznal_schets_url(@event) }
+      format.html { redirect_to @event }
       format.json { head :no_content }
     end
   end

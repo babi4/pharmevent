@@ -31,9 +31,8 @@
 %hr
 
 %h3.pagination-centered Оплата мероприятия: #{@prihod_summ} руб.
-%br
 %h4.pagination-centered Приход безналичный
-%table.table.table-striped.table-condensed.table-hover.table-links.table-center
+%table.table.table-striped.table-condensed.table-bordered.table-center
   %thead.thead-small
     %tr
       %th.td-5 №
@@ -55,16 +54,21 @@
       %td #{doc.summ}р.
       %td #{doc.nds}р.
       %td
-        = link_to 'редактировать', edit_event_documents_beznal_schet_path(@event, doc), class: 'btn btn-mini'
+        .btn-group
+          = link_to 'изменить', edit_event_documents_beznal_schet_path(@event, doc), class: 'btn btn-mini'
+          %button.btn.btn-mini.dropdown-toggle{"data-toggle" => "dropdown"}
+            %span.caret
+          %ul.dropdown-menu.dropdown-menu-narrow.dropdown-menu-left
+            %li
+              = link_to 'Удалить', [@event, doc], method: :delete, data: { confirm: 'Удалить документ?' }
   %tr
     %td{colspan: 5}
       %span.pull-right Итого:
     %td #{@event.documents_beznal_schets.sum(:summ)}р.
     %td #{@event.documents_beznal_schets.sum(:nds)}р.
     %td
-%br
 %h4.pagination-centered Приход наличный
-%table.table.table-striped.table-condensed.table-hover.table-links.table-center
+%table.table.table-striped.table-condensed.table-bordered.table-center
   %thead.thead-small
     %tr
       %th.td-5 №
@@ -83,7 +87,7 @@
       %td #{doc.summ}р.
       %td
         .btn-group
-          = link_to 'редактировать', edit_event_documents_nal_prihod_path(@event, doc), class: 'btn btn-mini'
+          = link_to 'изменить', edit_event_documents_nal_prihod_path(@event, doc), class: 'btn btn-mini'
           %button.btn.btn-mini.dropdown-toggle{"data-toggle" => "dropdown"}
             %span.caret
           %ul.dropdown-menu.dropdown-menu-narrow.dropdown-menu-left
@@ -97,16 +101,16 @@
 
 %h3.pagination-centered Расход мероприятия: #{@rashod_summ} руб.
 %h4.pagination-centered Расход безналичный
-%table.table.table-bordered.table-condensed.table-center
-  %thead
+%table.table.table-bordered.table-condensed.table-bordered.table-center
+  %thead.thead-small
     %tr
-      %th №
+      %th.td-5 №
       %th Получатель
-      %th{colspan: 2} Платежные документы
-      %th Статус
-      %th Сумма
-      %th Включая НДС
-      %th Действия
+      %th.td-25{colspan: 2} Платежные документы
+      %th.td-10 Статус
+      %th.td-10 Сумма
+      %th.td-10 Включая НДС
+      %th.td-10 Действия
 
   - @event.documents_beznal_rashods.each do |doc|
     %tr
@@ -114,16 +118,23 @@
       %td{rowspan: 5}= doc.company
       %td Счет №
       %td= doc.num_schet
-      %td{rowspan: 5} ??
-      %td{rowspan: 10}= doc.summ
-      %td{rowspan: 10}= doc.nds
-      %td{rowspan: 10}= '??'
+      %td{rowspan: 5}= doc.info_state_act
+      %td{rowspan: 10} #{doc.summ}р.
+      %td{rowspan: 10} #{doc.nds}р.
+      %td{rowspan: 10}
+        .btn-group
+          = link_to 'изменить', edit_event_documents_beznal_rashod_path(@event, doc), class: 'btn btn-mini'
+          %button.btn.btn-mini.dropdown-toggle{"data-toggle" => "dropdown"}
+            %span.caret
+          %ul.dropdown-menu.dropdown-menu-narrow.dropdown-menu-left
+            %li
+              = link_to 'Удалить', [@event, doc], method: :delete, data: { confirm: 'Удалить документ?' }
     %tr
       %td Дата счета
       %td= doc.date_schet.strftime("%d.%m.%y") unless doc.date_schet.blank?
     %tr
       %td Дата оплаты
-      %td ???
+      %td= doc.info_date_pay
     %tr
       %td № п/п
       %td= doc.info_pp
@@ -150,21 +161,21 @@
   %tr
     %td{colspan:5} 
       %span.pull-right Итого:
-    %td= @event.documents_beznal_rashods.sum(:summ)
-    %td= @event.documents_beznal_rashods.sum(:nds)
+    %td #{@event.documents_beznal_rashods.sum(:summ)}р.
+    %td #{@event.documents_beznal_rashods.sum(:nds)}р.
     %td
 
 %h4.pagination-centered Расход наличный
-%table.table
-  %thead
+%table.table.table-striped.table-condensed.table-bordered.table-center
+  %thead.thead-small
     %tr
-      %th №
+      %th.td-5 №
       %th Получатель
-      %th Назначение платежа
-      %th Статус
-      %th Дата оплаты
-      %th Сумма
-      %th Действия
+      %th.td-25 Назначение платежа
+      %th.td-10 Статус
+      %th.td-10 Дата оплаты
+      %th.td-10 Сумма
+      %th.td-10 Действия
 
   - @event.documents_nal_rashods.each do |doc|
     %tr
@@ -173,20 +184,24 @@
       %td= doc.description
       %td= doc.lectors ? 'Физ. лицо' : 'Агент'
       %td= doc.date.strftime("%d.%m.%Y") unless doc.date.blank?
-      %td= doc.summ
-      %td= '??'
+      %td #{doc.summ}р.
+      %td
+        .btn-group
+          = link_to 'изменить', edit_event_documents_nal_rashod_path(@event, doc), class: 'btn btn-mini'
+          %button.btn.btn-mini.dropdown-toggle{"data-toggle" => "dropdown"}
+            %span.caret
+          %ul.dropdown-menu.dropdown-menu-narrow.dropdown-menu-left
+            %li
+              = link_to 'Удалить', [@event, doc], method: :delete, data: { confirm: 'Удалить документ?' }
   %tr
-    %td
-    %td
-    %td
-    %td
-    %td Итого:
-    %td= @event.documents_nal_rashods.sum(:summ)
+    %td{colspan: 5} 
+      %span.pull-right Итого:
+    %td #{@event.documents_nal_rashods.sum(:summ)}р.
     %td
 
 %h4.pagination-centered Прибыль и НДС
-%table.table
-  %thead
+%table.table.table-striped.table-condensed.table-bordered.table-center
+  %thead.thead-small
     %tr
       %th Прибыль без учета НДС
       %th НДС к уплате (с выставленных счетов)
@@ -196,11 +211,11 @@
 
   %tbody
     %tr
-      %td= @prihod_summ - @rashod_summ
-      %td= @nds_k_uplate = @event.documents_beznal_schets.sum(:nds)
-      %td= @nds_k_zachetu = @event.documents_beznal_rashods.sum(:nds)
-      %td= @nds_k_uplate - @nds_k_zachetu
-      %td= (@prihod_summ - @rashod_summ) - (@nds_k_uplate - @nds_k_zachetu)
+      %td #{@prihod_summ - @rashod_summ}р.
+      %td #{@nds_k_uplate = @event.documents_beznal_schets.sum(:nds)}р.
+      %td #{@nds_k_zachetu = @event.documents_beznal_rashods.sum(:nds)}р.
+      %td #{@nds_k_uplate - @nds_k_zachetu}р.
+      %td #{(@prihod_summ - @rashod_summ) - (@nds_k_uplate - @nds_k_zachetu)}р.
 
 - content_for :title do
   Мероприятия / #{@event.name}
