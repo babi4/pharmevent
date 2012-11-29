@@ -26,10 +26,10 @@
     .span2
       .span-date.pull-right
         = f.label :date_schet, "Дата счета*", :class => 'no-margin'
-        .input-prepend.input-prepend-margin.date-picker.pull-right{"data-date" => @documents_beznal_rashod.date_schet.strftime("%d.%m.%Y") }
+        .input-prepend.input-prepend-margin.date-picker.pull-right{"data-date" => (@documents_beznal_rashod.date_schet.strftime("%d.%m.%Y") unless @documents_beznal_rashod.date_schet.blank?) }
           %span.add-on
             %i.icon-calendar
-          = f.text_field :date_schet, :class => 'input-date', "data-required" => 'true', :value => @documents_beznal_rashod.date_schet.strftime("%d.%m.%Y")
+          = f.text_field :date_schet, :class => 'input-date', "data-required" => 'true', :value => (@documents_beznal_rashod.date_schet.strftime("%d.%m.%Y") unless @documents_beznal_rashod.date_schet.blank?)
     .span2
       = f.label :summ, "Сумма"
       = f.text_field :summ, :class => 'span2', "data-required" => 'true'
@@ -44,10 +44,10 @@
     .span2
       .span-date.pull-right
         = f.label :date_schet, "Дата договора*", :class => 'no-margin'
-        .input-prepend.input-prepend-margin.date-picker.pull-right{"data-date" => @documents_beznal_rashod.dogovor_date.strftime("%d.%m.%Y") }
+        .input-prepend.input-prepend-margin.date-picker.pull-right{"data-date" => (@documents_beznal_rashod.dogovor_date.strftime("%d.%m.%Y") unless @documents_beznal_rashod.dogovor_date.blank?) }
           %span.add-on
             %i.icon-calendar
-          = f.text_field :dogovor_date, :class => 'input-date', "data-required" => 'true', :value => @documents_beznal_rashod.dogovor_date.strftime("%d.%m.%Y")
+          = f.text_field :dogovor_date, :class => 'input-date', "data-required" => 'true', :value => (@documents_beznal_rashod.dogovor_date.strftime("%d.%m.%Y") unless @documents_beznal_rashod.dogovor_date.blank?)
 
   %b.before-checkbox Данный расход является:
   %label.checkbox
@@ -68,10 +68,10 @@
     .span2
       .span-date.pull-right
         = f.label :info_date_pay, "Дата оплаты", :class => 'no-margin'
-        .input-prepend.input-prepend-margin.date-picker.pull-right{"data-date" => @documents_beznal_rashod.info_date_pay.strftime("%d.%m.%Y") }
+        .input-prepend.input-prepend-margin.date-picker.pull-right{"data-date" => (@documents_beznal_rashod.info_date_pay.strftime("%d.%m.%Y") unless @documents_beznal_rashod.info_date_pay.blank?) }
           %span.add-on
             %i.icon-calendar
-          = f.text_field :info_date_pay, :class => 'input-date', :value => @documents_beznal_rashod.info_date_pay.strftime("%d.%m.%Y")
+          = f.text_field :info_date_pay, :class => 'input-date', :value => (@documents_beznal_rashod.info_date_pay.strftime("%d.%m.%Y") unless @documents_beznal_rashod.info_date_pay.blank?)
 
   .row
     .span2
@@ -80,10 +80,10 @@
     .span2
       .span-date.pull-right
         = f.label :info_date_schet, "Дата сч.фактуры", :class => 'no-margin'
-        .input-prepend.input-prepend-margin.date-picker.pull-right{"data-date" => @documents_beznal_rashod.info_date_schet.strftime("%d.%m.%Y") }
+        .input-prepend.input-prepend-margin.date-picker.pull-right{"data-date" => (@documents_beznal_rashod.info_date_schet.strftime("%d.%m.%Y") unless @documents_beznal_rashod.info_date_schet.blank?) }
           %span.add-on
             %i.icon-calendar
-          = f.text_field :info_date_schet, :class => 'input-date', :value => @documents_beznal_rashod.info_date_schet.strftime("%d.%m.%Y")
+          = f.text_field :info_date_schet, :class => 'input-date', :value => (@documents_beznal_rashod.info_date_schet.strftime("%d.%m.%Y") unless @documents_beznal_rashod.info_date_schet.blank?)
 
   .row
     .span2
@@ -92,10 +92,10 @@
     .span2
       .span-date.pull-right
         = f.label :info_date_act, "Дата акта", :class => 'no-margin'
-        .input-prepend.input-prepend-margin.date-picker.pull-right{"data-date" => @documents_beznal_rashod.info_date_act.strftime("%d.%m.%Y") }
+        .input-prepend.input-prepend-margin.date-picker.pull-right{"data-date" => (@documents_beznal_rashod.info_date_act.strftime("%d.%m.%Y") unless @documents_beznal_rashod.info_date_act.blank?) }
           %span.add-on
             %i.icon-calendar
-          = f.text_field :info_date_act, :class => 'input-date', :value => @documents_beznal_rashod.info_date_act.strftime("%d.%m.%Y")
+          = f.text_field :info_date_act, :class => 'input-date', :value => (@documents_beznal_rashod.info_date_act.strftime("%d.%m.%Y") unless @documents_beznal_rashod.info_date_act.blank?)
 
   .row
     .span2
@@ -104,10 +104,10 @@
     .span2
       .span-date.pull-right
         = f.label :info_info_return_date, "Дата возврата", :class => 'no-margin'
-        .input-prepend.input-prepend-margin.date-picker.pull-right{"data-date" => @documents_beznal_rashod.info_return_date.strftime("%d.%m.%Y") }
+        .input-prepend.input-prepend-margin.date-picker.pull-right{"data-date" => (@documents_beznal_rashod.info_return_date.strftime("%d.%m.%Y") unless @documents_beznal_rashod.info_return_date.blank?) }
           %span.add-on
             %i.icon-calendar
-          = f.text_field :info_info_return_date, :class => 'input-date', :value => @documents_beznal_rashod.info_return_date.strftime("%d.%m.%Y")
+          = f.text_field :info_info_return_date, :class => 'input-date', :value => (@documents_beznal_rashod.info_return_date.strftime("%d.%m.%Y") unless @documents_beznal_rashod.info_return_date.blank?)
 
   = f.label :info_type_return_act, "Способ возврата акта"
   = f.select :info_type_return_act, [['почтой', 'почтой'], ['курьером', 'курьером'], ['самовывоз', 'самовывоз']], {}, { :class => 'span2' }

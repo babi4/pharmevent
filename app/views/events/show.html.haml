@@ -43,23 +43,24 @@
       %th.td-10 Дата оплаты
       %th.td-10 Сумма
       %th.td-10 Включая НДС
-      %th.td-10 Действия
+      %th.td-10
 
   - @event.documents_beznal_schets.includes(:company).each do |doc|
     %tr
       %td
       %td.text-left= link_to doc.company[:name], doc.company
       %td= doc.num_schet
-      %td= doc.date_schet.strftime("%d.%m.%y")
-      %td= doc.payment_date
-      %td= doc.summ
-      %td= doc.nds
-      %td= '??'
+      %td= doc.date_schet.strftime("%d.%m.%y") unless doc.date_schet.blank?
+      %td= doc.payment_date.strftime("%d.%m.%y") unless doc.payment_date.blank?
+      %td #{doc.summ}р.
+      %td #{doc.nds}р.
+      %td
+        = link_to 'редактировать', edit_event_documents_beznal_schet_path(@event, doc), class: 'btn btn-mini'
   %tr
     %td{colspan: 5}
       %span.pull-right Итого:
-    %td= @event.documents_beznal_schets.sum(:summ)
-    %td= @event.documents_beznal_schets.sum(:nds)
+    %td #{@event.documents_beznal_schets.sum(:summ)}р.
+    %td #{@event.documents_beznal_schets.sum(:nds)}р.
     %td
 %br
 %h4.pagination-centered Приход наличный
@@ -71,30 +72,37 @@
       %th.text-left.td-30 Назначение платежа
       %th.td-10 Дата оплаты
       %th.td-10 Сумма
-      %th.td-10 Действия
+      %th.td-10
 
   - @event.documents_nal_prihods.each do |doc|
     %tr
       %td
       %td.text-left= doc.company
       %td.text-left= doc.description
-      %td= doc.date.strftime("%d.%m.%Y")
-      %td= doc.summ
-      %td= '??'
+      %td= doc.date.strftime("%d.%m.%Y") unless doc.date.blank?
+      %td #{doc.summ}р.
+      %td
+        .btn-group
+          = link_to 'редактировать', edit_event_documents_nal_prihod_path(@event, doc), class: 'btn btn-mini'
+          %button.btn.btn-mini.dropdown-toggle{"data-toggle" => "dropdown"}
+            %span.caret
+          %ul.dropdown-menu.dropdown-menu-narrow.dropdown-menu-left
+            %li
+              = link_to 'Удалить', [@event, doc], method: :delete, data: { confirm: 'Удалить документ?' }
   %tr
     %td{colspan: 4}
       %span.pull-right Итого:
-    %td= @event.documents_nal_prihods.sum(:summ)
+    %td #{@event.documents_nal_prihods.sum(:summ)}р.
     %td
 
 %h3.pagination-centered Расход мероприятия: #{@rashod_summ} руб.
 %h4.pagination-centered Расход безналичный
-%table.table
+%table.table.table-bordered.table-condensed.table-center
   %thead
     %tr
       %th №
-      %th Плательщик
-      %th Платежные документы
+      %th Получатель
+      %th{colspan: 2} Платежные документы
       %th Статус
       %th Сумма
       %th Включая НДС
@@ -102,59 +110,46 @@
 
   - @event.documents_beznal_rashods.each do |doc|
     %tr
-      %td
-      %td
-        %table
-          %tr
-            %td= doc.company
-          %tr
-            %td= doc.description
-      %td
-        %table
-          %tr
-            %td Счет №
-            %td= doc.num_schet
-          %tr
-            %td Дата счета
-            %td= doc.date_schet
-          %tr
-            %td Дата оплаты
-            %td ???
-          %tr
-            %td № п/п
-            %td= doc.info_pp
-          %tr
-            %td Счет фактура №
-            %td= doc.info_schet_factura
-          %tr
-            %td Дата сч. фактуры
-            %td= doc.info_date_schet
-          %tr
-            %td Акт №
-            %td= doc.info_act
-          %tr
-            %td Дата акта
-            %td= doc.info_date_act
-          %tr
-            %td Договор №
-            %td= doc.dogovor_num
-          %tr
-            %td Дата договора
-            %td= doc.dogovor_date
-      %td
-        %table
-          %tr
-            %td ??
-          %tr
-            %td= doc.lectors ? 'Физ. лицо' : 'Агент'
-      %td= doc.summ
-      %td= doc.nds
-      %td= '??'
+      %td{rowspan: 10}
+      %td{rowspan: 5}= doc.company
+      %td Счет №
+      %td= doc.num_schet
+      %td{rowspan: 5} ??
+      %td{rowspan: 10}= doc.summ
+      %td{rowspan: 10}= doc.nds
+      %td{rowspan: 10}= '??'
+    %tr
+      %td Дата счета
+      %td= doc.date_schet.strftime("%d.%m.%y") unless doc.date_schet.blank?
+    %tr
+      %td Дата оплаты
+      %td ???
+    %tr
+      %td № п/п
+      %td= doc.info_pp
+    %tr
+      %td Счет фактура №
+      %td= doc.info_schet_factura
+    %tr
+      %td{rowspan: 5}= doc.description
+      %td Дата сч. фактуры
+      %td= doc.info_date_schet.strftime("%d.%m.%Y") unless doc.info_date_schet.blank?
+      %td{rowspan: 5}= doc.lectors ? 'Физ. лицо' : 'Агент'
+    %tr
+      %td Акт №
+      %td= doc.info_act
+    %tr
+      %td Дата акта
+      %td= doc.info_date_act.strftime("%d.%m.%Y") unless doc.info_date_act.blank?
+    %tr
+      %td Договор №
+      %td= doc.dogovor_num
+    %tr
+      %td Дата договора
+      %td= doc.dogovor_date.strftime("%d.%m.%Y") unless doc.dogovor_date.blank?
   %tr
-    %td
-    %td
-    %td
-    %td Итого:
+    %td{colspan:5} 
+      %span.pull-right Итого:
     %td= @event.documents_beznal_rashods.sum(:summ)
     %td= @event.documents_beznal_rashods.sum(:nds)
     %td
@@ -177,7 +172,7 @@
       %td= doc.company
       %td= doc.description
       %td= doc.lectors ? 'Физ. лицо' : 'Агент'
-      %td= doc.date
+      %td= doc.date.strftime("%d.%m.%Y") unless doc.date.blank?
       %td= doc.summ
       %td= '??'
   %tr

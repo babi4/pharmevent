@@ -22,9 +22,9 @@
     .span2
       = f.label :date, "Дата*", :class => 'no-margin pull-right date-label'
       %br
-      .input-prepend.input-prepend-margin.date-picker.pull-right{"data-date" => @documents_nal_prihod.date.strftime("%d.%m.%Y") }
+      .input-prepend.input-prepend-margin.date-picker.pull-right{"data-date" => (@documents_nal_prihod.date.strftime("%d.%m.%Y") unless @documents_nal_prihod.date.blank?) }
         %span.add-on
           %i.icon-calendar
-        = f.text_field :date, :class => 'input-date', "data-required" => 'true', :value => @documents_nal_prihod.date.strftime("%d.%m.%Y")
+        = f.text_field :date, :class => 'input-date', "data-required" => 'true', :value => (@documents_nal_prihod.date.strftime("%d.%m.%Y") unless @documents_nal_prihod.date.blank?)
 
   = f.button :submit, 'Сохранить', :class => 'btn btn-primary btn-primary-submit'
