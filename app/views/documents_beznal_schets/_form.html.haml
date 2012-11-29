@@ -1,31 +1,102 @@
-= simple_form_for([@event, @documents_beznal_schet]) do |f|
+= simple_form_for([@event, @documents_beznal_schet], :html => {:class => 'form-validate'}) do |f|
   = f.error_notification
 
-  .form-inputs
-    = f.input :company_id, :collection => Company.select([:name, :id]), :label => 'Заказчик'
-    = f.input :description, :label => 'Назначение платежа'
-    = f.input :name,        :label => 'ФИО заказчика'
-    = f.input :telephone,   :label => 'Моб. тел. заказчика'
-    = f.input :num_schet,   :label => 'Счет №',     :disabled => true
-    = f.input :date_schet,  :label => 'Дата счета', :disabled => true
-    = f.input :summ,        :label => 'Сумма'
-    = f.input :nds,         :label => 'НДС'
-    = f.input :dogovor_num, :label => 'Договор №'
-    = f.input :dogovor_date,:label => 'Дата договора'
-    %h5 ________________________________
+  = f.label :company_id, "Заказчик*"
+  = f.collection_select(:company_id, Company.all, :id, :name)
 
-    %h3 Информация по исходящим закрывающим документам
-    = f.input :info_schet_factura,:label => 'Счет фактура №'
-    = f.input :info_act,          :label => 'Акт №'
-    = f.input :info_date_schet,   :label => 'Дата сч. фактуры'
-    = f.input :info_date_act,     :label => 'Дата акта'
-    = f.input :info_state_act, :collection => %w(начало далее конец), :label => 'Статус отправления закрывающих документов'
-    = f.input :info_return_date,  :label => 'Дата отправления закрывающих документов'
-    = f.input :info_type_return_act, :collection => %w(почтой курьером самовывоз), :label => 'Способ отправления закрывающих документов'
-    = f.input :info_name_sender,   :label => 'ФИО отправителя закрывающих документов'
+  = f.label :description, "Назначение платежа*"
+  = f.text_field :description, :class => 'span7', "data-required" => 'true'
 
-    %h5 ________________________________
-    = f.input :payment_date,     :label => 'Дата оплаты'
+  .row
+    .span4
+      = f.label :name, "ФИО заказчика"
+      = f.text_field :name, :class => 'span4'
+    .span3
+      = f.label :telephone, "Мобильный телефон заказчика"
+      = f.text_field :telephone, :class => 'span3'
 
-  .form-actions
-    = f.button :submit
+  .row
+    .span2
+      = f.label :num_schet, "Счет №*"
+      = f.text_field :num_schet, :class => 'span2', :disabled => true, "data-required" => 'true'
+    .span2
+      .span-date.pull-right
+        = f.label :date_schet, "Дата счета*", :class => 'no-margin'
+        .input-prepend.input-prepend-margin.date-picker.pull-right{"data-date" => @documents_beznal_schet.date_schet.strftime("%d.%m.%Y") }
+          %span.add-on
+            %i.icon-calendar
+          = f.text_field :date_schet, :class => 'input-date', :disabled => true, "data-required" => 'true', :value => @documents_beznal_schet.date_schet.strftime("%d.%m.%Y")
+    .span2
+      = f.label :summ, "Сумма"
+      = f.text_field :summ, :class => 'span2', "data-required" => 'true'
+    .span1
+      = f.label :nds, "НДС"
+      = f.text_field :nds, :class => 'span1'
+
+  .row
+    .span2
+      = f.label :dogovor_num, "Договор №*"
+      = f.text_field :dogovor_num, :class => 'span2', "data-required" => 'true'
+    .span2
+      .span-date.pull-right
+        = f.label :date_schet, "Дата договора*", :class => 'no-margin'
+        .input-prepend.input-prepend-margin.date-picker.pull-right{"data-date" => @documents_beznal_schet.dogovor_date.strftime("%d.%m.%Y") }
+          %span.add-on
+            %i.icon-calendar
+          = f.text_field :dogovor_date, :class => 'input-date', "data-required" => 'true', :value => @documents_beznal_schet.dogovor_date.strftime("%d.%m.%Y")
+
+  = f.label :payment_date, "Дата оплаты", :class => 'no-margin'
+  .input-prepend.input-prepend-margin.date-picker{"data-date" => @documents_beznal_schet.info_date_act.strftime("%d.%m.%Y") }
+    %span.add-on
+      %i.icon-calendar
+    = f.text_field :payment_date, :class => 'input-date', :value => @documents_beznal_schet.payment_date.strftime("%d.%m.%Y")
+
+  %hr
+  
+  %h4 Информация по исходящим закрывающим документам
+
+  .row
+    .span2
+      = f.label :info_schet_factura, "Счет-фактура №"
+      = f.text_field :info_schet_factura, :class => 'span2'
+    .span2
+      .span-date.pull-right
+        = f.label :info_date_schet, "Дата сч.фактуры", :class => 'no-margin'
+        .input-prepend.input-prepend-margin.date-picker.pull-right{"data-date" => @documents_beznal_schet.info_date_schet.strftime("%d.%m.%Y") }
+          %span.add-on
+            %i.icon-calendar
+          = f.text_field :info_date_schet, :class => 'input-date', :value => @documents_beznal_schet.info_date_schet.strftime("%d.%m.%Y")
+
+  .row
+    .span2
+      = f.label :info_act, "Акт №"
+      = f.text_field :info_act, :class => 'span2'
+    .span2
+      .span-date.pull-right
+        = f.label :info_date_act, "Дата акта", :class => 'no-margin'
+        .input-prepend.input-prepend-margin.date-picker.pull-right{"data-date" => @documents_beznal_schet.info_date_act.strftime("%d.%m.%Y") }
+          %span.add-on
+            %i.icon-calendar
+          = f.text_field :info_date_act, :class => 'input-date', :value => @documents_beznal_schet.info_date_act.strftime("%d.%m.%Y")
+
+  = f.label :info_state_act, 'Статус отправления закрывающих документов'
+  = f.select :info_state_act, [['начало', 'начало'], ['далее', 'далее'], ['конец', 'конец']], {}, { :class => 'span2' }
+
+  .row
+    .span2
+      = f.label :info_type_return_act, "Способ отправки"
+      = f.select :info_type_return_act, [['почтой', 'почтой'], ['курьером', 'курьером'], ['самовывоз', 'самовывоз']], {}, { :class => 'span2' }
+    .span2
+      .span-date.pull-right
+        = f.label :info_return_date, "Дата отправки", :class => 'no-margin'
+        .input-prepend.input-prepend-margin.date-picker.pull-right{"data-date" => @documents_beznal_schet.info_return_date.strftime("%d.%m.%Y") }
+          %span.add-on
+            %i.icon-calendar
+          = f.text_field :info_return_date, :class => 'input-date', :value => @documents_beznal_schet.info_return_date.strftime("%d.%m.%Y")
+
+  = f.label :info_name_sender, "ФИО отправителя закрывающих документов"
+  = f.text_field :info_name_sender, :class => 'span4'
+
+  %br
+
+  = f.button :submit, 'Сохранить', :class => 'btn btn-primary btn-primary-submit'

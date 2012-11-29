@@ -198,8 +198,43 @@ input.input-required, select.input-required {
   padding: 5px 0;
 }
 
+table {
+  &.table-center {
+    td, th {
+      text-align: center;
+      
+      &.text-left {
+        text-align: left;
+      }
+    }
+  }
+
+  .td-5 {
+    width: 5%;
+  }
+  .td-10 {
+    width: 10%;
+  }
+  .td-15 {
+    width: 15%;
+  }
+  .td-30 {
+    width: 30%;
+  }
+}
+
+.thead-small {
+  font-size: 12px;
+}
+
 @media (max-width: 1270px) {
   .navbar-username {
+    display: none;
+  }
+}
+
+@media (max-width: 1150px) {
+  .navbar .brand {
     display: none;
   }
 }

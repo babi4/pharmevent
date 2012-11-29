@@ -14,90 +14,81 @@
 %h3.no-margin.pagination-centered= "#{@event.city}, #{@event.name}"
 %h4.pagination-centered.event-subtitle= "#{@event.date_start.strftime("%d.%m.%Y")} - #{@event.date_end.strftime("%d.%m.%Y")}"
 
-= link_to 'Просмотр безналичный расход', event_documents_beznal_rashods_path(@event)
-\|||
-= link_to 'Просмотр наличный расход',    event_documents_nal_rashods_path(@event)
-\|||
-= link_to 'Просмотр наличный приход',    event_documents_nal_prihods_path(@event)
-\|||
-= link_to 'Выставл. счета',              event_documents_beznal_schets_path(@event)
+.pagination-centered
+  = link_to 'Добавить безналичный расход', new_event_documents_beznal_rashod_path(@event), :class => 'btn'
+  = link_to 'Добавить наличный расход',    new_event_documents_nal_rashod_path(@event), :class => 'btn'
+  = link_to 'Добавить наличный приход',    new_event_documents_nal_prihod_path(@event), :class => 'btn'
+  = link_to 'Выставить счёт',              new_event_documents_beznal_schet_path(@event), :class => 'btn'
+
+/ = link_to 'Просмотр безналичный расход', event_documents_beznal_rashods_path(@event)
+/ \|||
+/ = link_to 'Просмотр наличный расход',    event_documents_nal_rashods_path(@event)
+/ \|||
+/ = link_to 'Просмотр наличный приход',    event_documents_nal_prihods_path(@event)
+/ \|||
+/ = link_to 'Выставл. счета',              event_documents_beznal_schets_path(@event)
+
+%hr
+
+%h3.pagination-centered Оплата мероприятия: #{@prihod_summ} руб.
 %br
-= link_to 'Добавить безналичный расход', new_event_documents_beznal_rashod_path(@event)
-\|||
-= link_to 'Добавить наличный расход',    new_event_documents_nal_rashod_path(@event)
-\|||
-= link_to 'Добавить наличный приход',    new_event_documents_nal_prihod_path(@event)
-\|||
-= link_to 'Выставить счёт',              new_event_documents_beznal_schet_path(@event)
-
-
-%h5 __________________________________
-%h3 Оплата мероприятия: #{@prihod_summ}
-
-%h5 Приход безналичный:
-%table.table
-  %thead
+%h4.pagination-centered Приход безналичный
+%table.table.table-striped.table-condensed.table-hover.table-links.table-center
+  %thead.thead-small
     %tr
-      %th №
-      %th Плательщик
-      %th Счет №
-      %th Дата счета
-      %th Дата оплаты
-      %th Сумма
-      %th Включая НДС
-      %th Действия
+      %th.td-5 №
+      %th.text-left Плательщик
+      %th.td-10 Счет №
+      %th.td-10 Дата счета
+      %th.td-10 Дата оплаты
+      %th.td-10 Сумма
+      %th.td-10 Включая НДС
+      %th.td-10 Действия
 
-  %tbody
   - @event.documents_beznal_schets.includes(:company).each do |doc|
     %tr
       %td
-      %td= link_to doc.company[:name], doc.company
+      %td.text-left= link_to doc.company[:name], doc.company
       %td= doc.num_schet
-      %td= doc.date_schet
+      %td= doc.date_schet.strftime("%d.%m.%y")
       %td= doc.payment_date
       %td= doc.summ
       %td= doc.nds
       %td= '??'
   %tr
-    %td
-    %td
-    %td
-    %td
-    %td Итого:
+    %td{colspan: 5}
+      %span.pull-right Итого:
     %td= @event.documents_beznal_schets.sum(:summ)
     %td= @event.documents_beznal_schets.sum(:nds)
     %td
 %br
-%h5 Приход наличный:
-%table.table
-  %thead
+%h4.pagination-centered Приход наличный
+%table.table.table-striped.table-condensed.table-hover.table-links.table-center
+  %thead.thead-small
     %tr
-      %th №
-      %th Плательщик
-      %th Назначение платежа
-      %th Дата оплаты
-      %th Сумма
-      %th Действия
+      %th.td-5 №
+      %th.text-left Плательщик
+      %th.text-left.td-30 Назначение платежа
+      %th.td-10 Дата оплаты
+      %th.td-10 Сумма
+      %th.td-10 Действия
 
-  %tbody
   - @event.documents_nal_prihods.each do |doc|
     %tr
       %td
-      %td= doc.company
-      %td= doc.description
-      %td= doc.date
+      %td.text-left= doc.company
+      %td.text-left= doc.description
+      %td= doc.date.strftime("%d.%m.%Y")
       %td= doc.summ
       %td= '??'
   %tr
-    %td
-    %td
-    %td
-    %td Итого:
+    %td{colspan: 4}
+      %span.pull-right Итого:
     %td= @event.documents_nal_prihods.sum(:summ)
     %td
 
-%h3 Расход мероприятия: #{@rashod_summ}
-%h5 Расход безналичный:
+%h3.pagination-centered Расход мероприятия: #{@rashod_summ} руб.
+%h4.pagination-centered Расход безналичный
 %table.table
   %thead
     %tr
@@ -109,7 +100,6 @@
       %th Включая НДС
       %th Действия
 
-  %tbody
   - @event.documents_beznal_rashods.each do |doc|
     %tr
       %td
@@ -169,7 +159,7 @@
     %td= @event.documents_beznal_rashods.sum(:nds)
     %td
 
-%h5 Расход наличный:
+%h4.pagination-centered Расход наличный
 %table.table
   %thead
     %tr
@@ -181,7 +171,6 @@
       %th Сумма
       %th Действия
 
-  %tbody
   - @event.documents_nal_rashods.each do |doc|
     %tr
       %td
@@ -200,7 +189,7 @@
     %td= @event.documents_nal_rashods.sum(:summ)
     %td
 
-%h5 Прибыль и НДС:
+%h4.pagination-centered Прибыль и НДС
 %table.table
   %thead
     %tr
