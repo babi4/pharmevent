@@ -1,8 +1,13 @@
-= simple_form_for([@event, @documents_beznal_schet], :html => {:class => 'form-validate'}) do |f|
-  = f.error_notification
+= form_for([@event, @documents_beznal_schet], :html => {:class => 'form-validate'}) do |f|
+
+  %h4 Счет №#{@documents_beznal_schet.num_schet} от #{@documents_beznal_schet.date_schet.strftime("%d.%m.%Y")}
+
+  = f.hidden_field :num_schet
+  = f.hidden_field :date_schet
 
   = f.label :company_id, "Заказчик*"
-  = f.collection_select(:company_id, Company.all, :id, :name)
+  - @companies = Company.all
+  = f.collection_select(:company_id, @companies, :id, :name)
 
   = f.label :description, "Назначение платежа*"
   = f.text_field :description, :class => 'span7', "data-required" => 'true'
@@ -17,24 +22,6 @@
 
   .row
     .span2
-      = f.label :num_schet, "Счет №*"
-      = f.text_field :num_schet, :class => 'span2', :readonly => true, "data-required" => 'true'
-    .span2
-      .span-date.pull-right
-        = f.label :date_schet, "Дата счета*", :class => 'no-margin'
-        .input-prepend.input-prepend-margin.pull-right{"data-date" => (@documents_beznal_schet.date_schet.strftime("%d.%m.%Y") unless @documents_beznal_schet.date_schet.blank?) }
-          %span.add-on
-            %i.icon-calendar
-          = f.text_field :date_schet, :class => 'input-date', :readonly => true, "data-required" => 'true', :value => (@documents_beznal_schet.date_schet.strftime("%d.%m.%Y") unless @documents_beznal_schet.date_schet.blank?)
-    .span2
-      = f.label :summ, "Сумма"
-      = f.text_field :summ, :class => 'span2', "data-required" => 'true'
-    .span1
-      = f.label :nds, "НДС"
-      = f.text_field :nds, :class => 'span1', "data-required" => 'true'
-
-  .row
-    .span2
       = f.label :dogovor_num, "Договор №*"
       = f.text_field :dogovor_num, :class => 'span2', "data-required" => 'true'
     .span2
@@ -44,6 +31,12 @@
           %span.add-on
             %i.icon-calendar
           = f.text_field :dogovor_date, :class => 'input-date', "data-required" => 'true', :value => (@documents_beznal_schet.dogovor_date.strftime("%d.%m.%Y") unless @documents_beznal_schet.dogovor_date.blank?)
+    .span2
+      = f.label :summ, "Сумма*"
+      = f.text_field :summ, :class => 'span2', "data-required" => 'true'
+    .span1
+      = f.label :nds, "НДС*"
+      = f.text_field :nds, :class => 'span1', "data-required" => 'true'
 
   = f.label :payment_date, "Дата оплаты", :class => 'no-margin'
   .input-prepend.input-prepend-margin.date-picker{"data-date" => (@documents_beznal_schet.info_date_act.strftime("%d.%m.%Y")unless @documents_beznal_schet.info_date_act.blank?) }
@@ -79,6 +72,10 @@
             %i.icon-calendar
           = f.text_field :info_date_act, :class => 'input-date', :value => (@documents_beznal_schet.info_date_act.strftime("%d.%m.%Y") unless @documents_beznal_schet.info_date_act.blank?)
 
+  %p 
+    Адрес отправления:
+    %span#address-company
+
   = f.label :info_state_act, 'Статус отправления закрывающих документов'
   = f.select :info_state_act, [['начало', 'начало'], ['далее', 'далее'], ['конец', 'конец']], {}, { :class => 'span2' }
 
@@ -99,4 +96,7 @@
 
   %br
 
-  = f.button :submit, 'Сохранить', :class => 'btn btn-primary btn-primary-submit'
+  = f.submit 'Сохранить', :class => 'btn btn-primary btn-primary-submit'
+
+:javascript
+  window.companies = #{@companies.to_json}
