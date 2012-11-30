@@ -1,3 +1,8 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
+$ ->
+  $('#documents_beznal_rashod_type_company').on 'change', ->
+    if $(@).val() is 'ИП'
+      $('#documents_beznal_rashod_nds').attr 'disabled', 'disabled'
+    else
+      $('#documents_beznal_rashod_nds').removeAttr 'disabled'
+
+  $('#documents_beznal_rashod_type_company').trigger 'change'

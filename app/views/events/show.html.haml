@@ -9,8 +9,6 @@
   %li
     = link_to 'редактирование', edit_event_path(@event)
 
-%p#notice= notice
-
 %h3.no-margin.pagination-centered= "#{@event.city}, #{@event.name}"
 %h4.pagination-centered.event-subtitle= "#{@event.date_start.strftime("%d.%m.%Y")} - #{@event.date_end.strftime("%d.%m.%Y")}"
 
