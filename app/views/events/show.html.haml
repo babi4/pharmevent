@@ -18,14 +18,6 @@
   = link_to 'Добавить наличный приход',    new_event_documents_nal_prihod_path(@event), :class => 'btn'
   = link_to 'Выставить счёт',              new_event_documents_beznal_schet_path(@event), :class => 'btn'
 
-/ = link_to 'Просмотр безналичный расход', event_documents_beznal_rashods_path(@event)
-/ \|||
-/ = link_to 'Просмотр наличный расход',    event_documents_nal_rashods_path(@event)
-/ \|||
-/ = link_to 'Просмотр наличный приход',    event_documents_nal_prihods_path(@event)
-/ \|||
-/ = link_to 'Выставл. счета',              event_documents_beznal_schets_path(@event)
-
 %hr
 
 %h3.pagination-centered Оплата мероприятия: #{@prihod_summ} руб.
@@ -52,13 +44,14 @@
       %td #{doc.summ}р.
       %td #{doc.nds}р.
       %td
-        .btn-group
-          = link_to 'изменить', edit_event_documents_beznal_schet_path(@event, doc), class: 'btn btn-mini'
-          %button.btn.btn-mini.dropdown-toggle{"data-toggle" => "dropdown"}
-            %span.caret
-          %ul.dropdown-menu.dropdown-menu-narrow.dropdown-menu-left
-            %li
-              = link_to 'Удалить', [@event, doc], method: :delete, data: { confirm: 'Удалить документ?' }
+        - if doc.payment_date.blank?
+          .btn-group
+            = link_to 'изменить', edit_event_documents_beznal_schet_path(@event, doc), class: 'btn btn-mini'
+            %button.btn.btn-mini.dropdown-toggle{"data-toggle" => "dropdown"}
+              %span.caret
+            %ul.dropdown-menu.dropdown-menu-narrow.dropdown-menu-left
+              %li
+                = link_to 'Удалить', [@event, doc], method: :delete, data: { confirm: 'Удалить документ?' }
   %tr
     %td{colspan: 5}
       %span.pull-right Итого:
@@ -84,13 +77,14 @@
       %td= doc.date.strftime("%d.%m.%Y") unless doc.date.blank?
       %td #{doc.summ}р.
       %td
-        .btn-group
-          = link_to 'изменить', edit_event_documents_nal_prihod_path(@event, doc), class: 'btn btn-mini'
-          %button.btn.btn-mini.dropdown-toggle{"data-toggle" => "dropdown"}
-            %span.caret
-          %ul.dropdown-menu.dropdown-menu-narrow.dropdown-menu-left
-            %li
-              = link_to 'Удалить', [@event, doc], method: :delete, data: { confirm: 'Удалить документ?' }
+        - if doc.date.blank?
+          .btn-group
+            = link_to 'изменить', edit_event_documents_nal_prihod_path(@event, doc), class: 'btn btn-mini'
+            %button.btn.btn-mini.dropdown-toggle{"data-toggle" => "dropdown"}
+              %span.caret
+            %ul.dropdown-menu.dropdown-menu-narrow.dropdown-menu-left
+              %li
+                = link_to 'Удалить', [@event, doc], method: :delete, data: { confirm: 'Удалить документ?' }
   %tr
     %td{colspan: 4}
       %span.pull-right Итого:
@@ -120,19 +114,20 @@
       %td{rowspan: 10} #{doc.summ}р.
       %td{rowspan: 10} #{doc.nds}р.
       %td{rowspan: 10}
-        .btn-group
-          = link_to 'изменить', edit_event_documents_beznal_rashod_path(@event, doc), class: 'btn btn-mini'
-          %button.btn.btn-mini.dropdown-toggle{"data-toggle" => "dropdown"}
-            %span.caret
-          %ul.dropdown-menu.dropdown-menu-narrow.dropdown-menu-left
-            %li
-              = link_to 'Удалить', [@event, doc], method: :delete, data: { confirm: 'Удалить документ?' }
+        - if doc.info_date_pay.blank?
+          .btn-group
+            = link_to 'изменить', edit_event_documents_beznal_rashod_path(@event, doc), class: 'btn btn-mini'
+            %button.btn.btn-mini.dropdown-toggle{"data-toggle" => "dropdown"}
+              %span.caret
+            %ul.dropdown-menu.dropdown-menu-narrow.dropdown-menu-left
+              %li
+                = link_to 'Удалить', [@event, doc], method: :delete, data: { confirm: 'Удалить документ?' }
     %tr
       %td Дата счета
       %td= doc.date_schet.strftime("%d.%m.%y") unless doc.date_schet.blank?
     %tr
       %td Дата оплаты
-      %td= doc.info_date_pay
+      %td= doc.info_date_pay.strftime("%d.%m.%y") unless doc.info_date_pay.blank?
     %tr
       %td № п/п
       %td= doc.info_pp
@@ -184,13 +179,14 @@
       %td= doc.date.strftime("%d.%m.%Y") unless doc.date.blank?
       %td #{doc.summ}р.
       %td
-        .btn-group
-          = link_to 'изменить', edit_event_documents_nal_rashod_path(@event, doc), class: 'btn btn-mini'
-          %button.btn.btn-mini.dropdown-toggle{"data-toggle" => "dropdown"}
-            %span.caret
-          %ul.dropdown-menu.dropdown-menu-narrow.dropdown-menu-left
-            %li
-              = link_to 'Удалить', [@event, doc], method: :delete, data: { confirm: 'Удалить документ?' }
+        - if doc.date.blank?
+          .btn-group
+            = link_to 'изменить', edit_event_documents_nal_rashod_path(@event, doc), class: 'btn btn-mini'
+            %button.btn.btn-mini.dropdown-toggle{"data-toggle" => "dropdown"}
+              %span.caret
+            %ul.dropdown-menu.dropdown-menu-narrow.dropdown-menu-left
+              %li
+                = link_to 'Удалить', [@event, doc], method: :delete, data: { confirm: 'Удалить документ?' }
   %tr
     %td{colspan: 5} 
       %span.pull-right Итого:
