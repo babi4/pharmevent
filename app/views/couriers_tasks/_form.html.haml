@@ -6,15 +6,21 @@
       %label 
         Откуда
         %a{'data-toggle' => 'modal', href: '#newAddressModal', class: 'btn btn-mini'} новое место
-      = f.collection_select(:from_couriers_company_id, CouriersCompany.all, :id, :name, {}, class: 'span3', "data-required" => true)
+      = f.collection_select(:from_couriers_company_id, @couriers_companies, :id, :name, {}, class: 'span3', "data-required" => true)
+      %span.couriers-company-address
 
     .span3
       %label 
         Куда
         %a{'data-toggle' => 'modal', href: '#newAddressModal', class: 'btn btn-mini'} новое место
-      = f.collection_select(:to_couriers_company_id, CouriersCompany.all, :id, :name, {}, class: 'span3', "data-required" => true)
+      = f.collection_select(:to_couriers_company_id, @couriers_companies, :id, :name, {}, class: 'span3', "data-required" => true)
+      %span.couriers-company-address
 
-    .span5
+    .span2
+      = f.label :to_person, "Кому"
+      = f.text_field :to_person, :class => 'span2', "data-required" => 'true'
+
+    .span4
       %label.no-margin Когда
       .input-prepend.date-picker.inline-block{"data-date" => @couriers_task.due_time.strftime("%d.%m.%Y")}
         %span.add-on
@@ -57,3 +63,6 @@
 
     .modal-footer
       = f.button :submit, 'Добавить', :class => 'btn btn-primary', :id => 'courier-company-add'
+
+:javascript
+  window.companies = #{@couriers_companies.to_json}

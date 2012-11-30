@@ -20,6 +20,13 @@ class CouriersTasksController < ApplicationController
   def new
     tomorrow = DateTime.tomorrow
     @couriers_task[:due_time] = DateTime.new(tomorrow.year, tomorrow.month, tomorrow.day, 12, 0, 0, 0)
+    @couriers_companies = CouriersCompany.all
+    @couriers_companies.each do |company|
+      address = "#{company.zip_code}, г.#{company.city}, ул.#{company.street}, дом #{company.house}"
+      address += ", строение #{company.stroenie}" unless company.stroenie.blank?
+      address += ", офис #{company.office}" unless company.office.blank?
+      company[:full_address] = address
+    end
 
     respond_to do |format|
       format.html # new.html.erb
@@ -28,6 +35,14 @@ class CouriersTasksController < ApplicationController
   end
 
   def edit
+    @couriers_companies = CouriersCompany.all
+    @couriers_companies.each do |company|
+      address = "#{company.zip_code}, г.#{company.city}, ул.#{company.street}, дом #{company.house}"
+      address += ", строение #{company.stroenie}" unless company.stroenie.blank?
+      address += ", офис #{company.office}" unless company.office.blank?
+      company[:full_address] = address
+    end
+    
     @date = @couriers_task[:due_time].strftime("%d.%m.%Y") 
     @time = @couriers_task[:due_time].strftime("%H:%M") 
   end

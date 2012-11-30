@@ -4,13 +4,12 @@
     display: inline-block;
   }
   label {
-    margin-bottom: 8px;
-
-    &.no-margin {
-      margin-bottom: 6px;
-    }
+    line-height: 22px;
   }
   .btn-primary-submit {
     margin: 0 0 -15px;
   }
+}
+.couriers-company-address {
+  font-size: 12px;
 }

@@ -14,15 +14,17 @@
 %table.table.table-striped.table-condensed.table-hover#table-filter
   %thead
     %tr
-      %th.span4 Откуда
-      %th.span4 Куда
-      %th.span3 Когда
-      %th
+      %th.td-25 Откуда
+      %th.td-25 Куда
+      %th.td-25 Кому
+      %th.td-15 Когда
+      %th.td-10
 
   - @couriers_tasks.includes([:user, :from_couriers_company, :to_couriers_company]).each do |couriers_task|
     %tr
       %td= couriers_task.from_couriers_company[:name]
       %td= couriers_task.to_couriers_company[:name]
+      %td= couriers_task.to_person
       %td.filter-date{"data-order-by" => couriers_task.due_time.to_i}
         = couriers_task.due_time.strftime("%d.%m.%y в %H:%M") 
       %td.event-actions
