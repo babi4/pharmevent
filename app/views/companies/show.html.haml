@@ -11,201 +11,124 @@
   %li
     = link_to 'редактирование', edit_company_path(@company)
 
-%h3= @company.name
+%h3.no-margin= @company.name
+- unless @company.short_name.blank?
+  %p.no-margin "#{@company.company_type} #{@company.short_name}"
 
-.row
+.row.row-company-info
   .span9.company-info
-    - unless @company.short_name.blank?
-      %p.company-shortname
-        %b Короткое название
-        %br
-        = "#{@company.company_type} #{@company.short_name}"
-    %h4.no-margin
+    %span6
+    %h4.no-margin Контактная информация
+    %h5.no-margin
       Юридический адрес
       - if @company.ur_post_equal
         (почтовый адрес тот же)
-    .row
-      .span3
-        %b Индекс
-        %br
-        = @company.ur_zip_code
-      .span3
-        %b Город
-        %br
-        = @company.ur_city
-      .span3
-        %b Улица
-        %br
-        = @company.ur_street
-    .row
-      .span3
-        %b Дом
-        %br
-        = @company.ur_hous
+    %p
+      %span>= "#{@company.ur_zip_code}, г.#{@company.ur_city}, ул.#{@company.ur_street}, дом #{@company.ur_hous}"
       - unless @company.ur_stroenie.blank?
-        .span3
-          %b Строение
-          %br
-          = @company.ur_stroenie
+        %span>= ", строение #{@company.ur_stroenie}"
       - unless @company.ur_office.blank?
-        .span3
-          %b Офис
-          %br
-          = @company.ur_office
+        = ", офис #{@company.ur_office}"
     - unless @company.ur_post_equal
       - if !@company.post_zip_code.blank? or !@company.post_city.blank? or !@company.post_street.blank? or !@company.post_house.blank? or !@company.post_stroenie.blank? or !@company.post_office.blank?
-        %h4 Почтовый адрес
-        .row
-          - unless @company.post_zip_code.blank?
-            .span3
-              %b Индекс
-              %br
-              = @company.post_zip_code
-          - unless @company.post_city.blank?
-            .span3
-              %b Город
-              %br
-              = @company.post_city
-          - unless @company.post_street.blank?
-            .span3
-              %b Улица
-              %br
-              = @company.post_street
-        .row
-          - unless @company.post_house.blank?
-            .span3
-              %b Дом
-              %br
-              = @company.post_house
+        %h5.no-margin Почтовый адрес
+        %p
+          %span>= "#{@company.post_zip_code}, г.#{@company.post_city}, ул.#{@company.post_street}, дом #{@company.post_house}"
           - unless @company.post_stroenie.blank?
-            .span3
-              %b Строение
-              %br
-              = @company.post_stroenie
+            %span>= ", строение #{@company.post_stroenie}"
           - unless @company.post_office.blank?
-            .span3
-              %b Офис
-              %br
-              = @company.post_office
-    %h4 Контактная информация
-    .row
-      - unless @company.telephone.blank?
-        .span3
-          %b Телефон
-          %br
-          = @company.telephone
-      - unless @company.fax.blank?
-        .span3
-          %b Факс
-          %br
-          = @company.fax
-      - unless @company.email.blank?
-        .span3
-          %b Электронная почта
-          %br
-          = @company.email
-    %h4 Реквизиты
-    .row
-      - unless @company.inn.blank?
-        .span3
-          %b ИНН
-          %br
-          = @company.inn
-      - unless @company.kpp.blank?
-        .span3
-          %b КПП
-          %br
-          = @company.kpp
-      - unless @company.ogrn.blank?
-        .span3
-          %b ОГРН
-          %br
-          = @company.ogrn
-    .row
-      - unless @company.okpo.blank?
-        .span3
-          %b ОКПО
-          %br
-          = @company.okpo
-      - unless @company.okved.blank?
-        .span3
-          %b ОКВЕД
-          %br
-          = @company.okved
-      - unless @company.okato.blank?
-        .span3
-          %b ОКАТО
-          %br
-          = @company.okato
-    - unless @company.ispolnitel.blank? and @company.osnovanie_ispolnitel.blank?
-      .row
-        - unless @company.ispolnitel.blank?
-          .span3
-            %b Исполнитель
+            = ", офис #{@company.post_office}"
+
+    - unless @company.telephone.blank?
+      %p
+        %b Телефон
+        %br
+        = @company.telephone
+    - unless @company.fax.blank?
+      %p
+        %b Факс
+        %br
+        = @company.fax
+    - unless @company.email.blank?
+      %p
+        %b Электронная почта
+        %br
+        = @company.email
+    %hr
+    %h4.no-margin Реквизиты
+    %table.table.table-bordered.table-condensed
+      %tr
+        %td
+          - unless @company.inn.blank?
+            %b ИНН
             %br
-            = @company.ispolnitel
-        - unless @company.osnovanie_ispolnitel.blank?
-          .span6
-            %b Действует на основании
+            = @company.inn
+        %td
+          - unless @company.kpp.blank?
+            %b КПП
             %br
-            = @company.osnovanie_ispolnitel
+            = @company.kpp
+        %td
+          - unless @company.ogrn.blank?
+            %b ОГРН
+            %br
+            = @company.ogrn
+      %tr
+        %td
+          - unless @company.okpo.blank?
+            %b ОКПО
+            %br
+            = @company.okpo
+        %td
+          - unless @company.okved.blank?
+            %b ОКВЕД
+            %br
+            = @company.okved
+        %td
+          - unless @company.okato.blank?
+            %b ОКАТО
+            %br
+            = @company.okato
+    - unless @company.ispolnitel.blank?
+      %p
+        %b Исполнитель
+        %br
+        = @company.ispolnitel
+    - unless @company.osnovanie_ispolnitel.blank?
+      %p
+        %b Действует на основании
+        %br
+        = @company.osnovanie_ispolnitel
+    %hr
     %h4 Банковские реквизиты
     - unless @company.bank_name.blank?
-      .row
-        .span9
-          %b Банк
-          %br
-          = @company.bank_name
-    .row
-      - unless @company.bank_account.blank?
-        .span4
-          %b Расчетный счет
-          %br
-          = @company.bank_account
-      - unless @company.bank_corr_account.blank?
-        .span4
-          %b Корр.счет
-          %br
-          = @company.bank_corr_account
-    %h4 Адрес банка
-    .row
-      - unless @company.bank_zip.blank?
-        .span3
-          %b Индекс
-          %br
-          = @company.bank_zip
-      - unless @company.bank_city.blank?
-        .span3
-          %b Город
-          %br
-          = @company.bank_city
-      - unless @company.bank_street.blank?
-        .span3
-          %b Улица
-          %br
-          = @company.bank_street
-    .row
-      - unless @company.bank_house.blank?
-        .span3
-          %b Дом
-          %br
-          = @company.bank_house
+      %p
+        %b Название банка
+        %br
+        = @company.bank_name
+    - unless @company.bank_account.blank?
+      %p
+        %b Расчетный счет
+        %br
+        = @company.bank_account
+    - unless @company.bank_corr_account.blank?
+      %p
+        %b Корр.счет
+        %br
+        = @company.bank_corr_account
+    %p
+      %b Адрес банка
+      %br
+      %span>= "#{@company.bank_zip}, г.#{@company.bank_city}, ул.#{@company.bank_street}, дом #{@company.bank_house}"
       - unless @company.bank_stroenie.blank?
-        .span3
-          %b Строение
-          %br
-          = @company.bank_stroenie
+        %span>= ", строение #{@company.bank_stroenie}"
       - unless @company.bank_office.blank?
-        .span3
-          %b Офис
-          %br
-          = @company.bank_office
-    .row
-      - unless @company.bank_bik.blank?
-        .span9
-          %b БИК
-          %br
-          = @company.bank_bik
+        = ", офис #{@company.bank_office}"
+    - unless @company.bank_bik.blank?
+      %p
+        %b БИК
+        %br
+        = @company.bank_bik
 
   .span3
     %h4.no-margin
