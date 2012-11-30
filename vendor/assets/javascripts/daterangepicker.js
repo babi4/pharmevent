@@ -408,6 +408,7 @@
         },
 
         clickApply: function (e) {
+            this.active = true;
             this.hide();
         },
 

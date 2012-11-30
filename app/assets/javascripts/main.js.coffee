@@ -26,3 +26,73 @@ $ ->
 
   $('.table-links').on 'click', 'tbody tr', (e) ->
     window.location = $(@).data 'link' if e.target.tagName is 'TD'
+
+  filter = ''
+  filter_start = false
+  filter_end = false
+
+  hideItem = ($el) ->
+    $el.removeClass('show').addClass('hide')
+
+  showItem = ($el) ->
+    $el.removeClass('hide').addClass('show')
+
+  betweenDates = (date) ->
+    item_date = date * 1000
+    item_date >= filter_start and item_date <= filter_end
+
+  filterItems = =>
+    $items_list = $('#table-filter').find('tbody tr')
+    if filter is '' and !filter_start and !filter_end
+      $items_list.removeClass('hide').addClass('show')
+    else
+      if filter_start and filter_end
+        $items_list.each ->
+          $item_row = $(@)
+          date_check = false
+          $item_row.find('.filter-date').each ->
+            if betweenDates $(@).data('order-by')
+              date_check = true
+              false
+          if date_check and (filter is '' or $(@).text().search(new RegExp(filter, "i")) > -1)
+            showItem $item_row
+          else
+            hideItem $item_row
+      else
+        $items_list.each ->
+          $item_row = $(@)
+          if ($item_row.text().search(new RegExp(filter, "i")) < 0)
+            hideItem $item_row
+          else
+            showItem $item_row
+
+  $('.table-sort').stupidtable()
+
+  $("#reportrange").daterangepicker
+    opens: 'left'
+    ranges:
+      "Сегодня": ["today", "today"]
+      "За неделю": [Date.today().add(days: -6), "today"]
+      "За текущий месяц": [Date.today().moveToFirstDayOfMonth(), Date.today().moveToLastDayOfMonth()]
+      "За прошлый месяц": [Date.today().moveToFirstDayOfMonth().add(months: -1), Date.today().moveToFirstDayOfMonth().add(days: -1)]
+      "За все время": ['', '']
+  , (start, end) ->
+    if @.active
+      start_date = start.toString 'dd.MM.yyyy'
+      end_date = end.toString 'dd.MM.yyyy'
+      filter_start = start.getTime()
+      filter_end = end.getTime()
+      if start_date is end_date
+        date_range = start_date
+      else
+        date_range = "#{start_date} - #{end_date}"
+    else
+      filter_start = false
+      filter_end = false
+      date_range = ''
+    filterItems()
+    $("#reportrange").val date_range
+
+  $("#input-filter").on 'keyup', (event) ->
+    filter = $(@).val().trim()
+    filterItems()

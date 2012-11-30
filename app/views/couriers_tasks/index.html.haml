@@ -1,8 +1,17 @@
 .row.row-top-actions
-  .span12
+  .span8
+    .input-prepend.pull-left
+      %span.add-on
+        %i.icon-search
+      %input.span4#input-filter{:placeholder => "Поиск", :type => "text"}
+    .input-append.pull-left
+      %input.input-daterange#reportrange{:type => "text", :placeholder => 'За все время', :readonly => "readonly"}
+        %span.add-on
+          %i.icon-calendar
+  .span4
     = link_to 'Добавить курьера', new_couriers_task_path, :class => 'btn pull-right'
 
-%table.table.table-striped.table-condensed.table-hover
+%table.table.table-striped.table-condensed.table-hover#table-filter
   %thead
     %tr
       %th.span4 Откуда
@@ -14,7 +23,8 @@
     %tr
       %td= couriers_task.from_couriers_company[:name]
       %td= couriers_task.to_couriers_company[:name]
-      %td= couriers_task.due_time.strftime("%d.%m.%y в %H:%M") 
+      %td.filter-date{"data-order-by" => couriers_task.due_time.to_i}
+        = couriers_task.due_time.strftime("%d.%m.%y в %H:%M") 
       %td.event-actions
         .btn-group
           = link_to 'Редактировать', edit_couriers_task_path(couriers_task), {:class => 'btn btn-mini'}

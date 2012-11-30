@@ -240,6 +240,12 @@ input.input-required, select.input-required {
   margin: 0 0 18px 0;
 }
 
+#table-filter {
+  tr.show {
+    display: table-row;
+  }
+}
+
 @media (max-width: 1270px) {
   .navbar-username {
     display: none;
