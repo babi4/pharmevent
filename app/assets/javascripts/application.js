@@ -19,4 +19,5 @@
 //= require bootstrap-timepicker
 //= require daterangepicker
 //= require stupidtable.min
+//= require select2.min
 //= require_tree .

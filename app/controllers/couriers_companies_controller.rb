@@ -30,7 +30,7 @@ class CouriersCompaniesController < ApplicationController
   def create
     respond_to do |format|
       if @couriers_company.save
-        format.html { redirect_to couriers_tasks_path, notice: 'Место добавлено.'  }
+        format.html { redirect_to request.referer, notice: 'Место добавлено.'  }
         format.json { render json: @couriers_company, status: :created, location: @couriers_company }
       else
         format.html { render action: "new" }

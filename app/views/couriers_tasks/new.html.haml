@@ -1,5 +1,10 @@
-%h3 Заказ курьера
+%ul.breadcrumb
+  %li
+    = link_to 'Курьеры', couriers_tasks_path
+    %span.divider /
+  %li.active Новое задание курьеру
 
 = render 'form'
 
-= link_to 'К списку курьеров', couriers_tasks_path
+- content_for :title do
+  Новое задание курьеру

@@ -4,12 +4,6 @@ class CouriersTasksController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @couriers_task = CouriersTask.new
-    @couriers_company = CouriersCompany.new
-    @couriers_companies_all = CouriersCompany.all
-    @date = DateTime.now.tomorrow.strftime("%d.%m.%Y")
-    @time = '12:00' 
-
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @couriers_tasks }
@@ -24,6 +18,9 @@ class CouriersTasksController < ApplicationController
   end
 
   def new
+    tomorrow = DateTime.tomorrow
+    @couriers_task[:due_time] = DateTime.new(tomorrow.year, tomorrow.month, tomorrow.day, 12, 0, 0, 0)
+
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @couriers_task }
@@ -46,7 +43,6 @@ class CouriersTasksController < ApplicationController
         format.html { redirect_to couriers_tasks_path, notice: 'Задание курьеру создано.' }
         format.json { render json: @couriers_task, status: :created, location: @couriers_task }
       else
-        puts @couriers_task.errors.inspect
         format.html { render action: "new" }
         format.json { render json: @couriers_task.errors, status: :unprocessable_entity }
       end

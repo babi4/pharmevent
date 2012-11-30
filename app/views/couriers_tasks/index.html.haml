@@ -1,101 +1,28 @@
-.row
-  .span8
-    %h4 
-      Курьеры
-      %a.btn.btn-mini.btn-courier-place{"data-toggle" => "modal", :href => "#newCourierModal"} добавить
-    %table.table.table-striped.table-condensed.table-hover
-      %tr
-        %th.span3 Откуда
-        %th.span3 Куда
-        %th Когда
-        %th
+.row.row-top-actions
+  .span12
+    = link_to 'Добавить курьера', new_couriers_task_path, :class => 'btn pull-right'
 
-      - @couriers_tasks.includes([:user, :from_couriers_company, :to_couriers_company]).each do |couriers_task|
-        %tr
-          %td= couriers_task.from_couriers_company[:name]
-          %td= couriers_task.to_couriers_company[:name]
-          %td= couriers_task.due_time.strftime("%d.%m.%y в %H:%M") 
-          %td.event-actions
-            .btn-group
-              = link_to 'Редактировать', edit_couriers_task_path(couriers_task), {:class => 'btn btn-mini'}
-              %button.btn.btn-mini.dropdown-toggle{"data-toggle" => "dropdown"}
-                %span.caret
-              %ul.dropdown-menu.dropdown-menu-narrow
-                %li
-                  = link_to 'Удалить', couriers_task, method: :delete, data: { confirm: 'Удалить задание?' }
+%table.table.table-striped.table-condensed.table-hover
+  %thead
+    %tr
+      %th.span4 Откуда
+      %th.span4 Куда
+      %th.span3 Когда
+      %th
 
-  .span4
-    %h4 
-      Места
-      %a.btn.btn-mini.btn-courier-place{"data-toggle" => "modal", :href => "#newAddressModal"} добавить
-    %table.table.table-striped.table-condensed.table-hover
-      - @couriers_companies_all.each do |company|
-        %tr
-          %td= company.name
-          %td.event-actions
-            .btn-group
-              = link_to 'Изменить', edit_couriers_company_path(company), {:class => 'btn btn-mini'}
-              %button.btn.btn-mini.dropdown-toggle{"data-toggle" => "dropdown"}
-                %span.caret
-              %ul.dropdown-menu.dropdown-menu-narrow
-                %li
-                  = link_to 'Удалить', company, method: :delete, data: { confirm: 'Удалить место?' }
-
-#newAddressModal.modal.hide.fade{:role => "dialog", :tabindex => "-1"}
-  = simple_form_for(@couriers_company, :html => {:class => 'form-validate' }) do |f|
-    .modal-header
-      %button.close{"data-dismiss" => "modal", :type => "button"} ×
-      %h3 Новый адрес
-    .modal-body
-      = f.label :name, "Название"
-      = f.text_field :name, :class => 'input-modal-full', "data-required" => 'true'
-      .row
-        .span1
-          = f.label :zip_code, "Индекс"
-          = f.text_field :zip_code, :class => 'span1', "data-required" => 'true'
-        .span2
-          = f.label :city, "Город"
-          = f.text_field :city, :class => 'span2', "data-required" => 'true'
-        .span2
-          = f.label :street, "Улица"
-          = f.text_field :street, :class => 'span2', "data-required" => 'true'
-
-      .row
-        .span1
-          = f.label :house, "Дом"
-          = f.text_field :house, :class => 'span1', "data-required" => 'true'
-        .span1
-          = f.label :stroenie, "Строение"
-          = f.text_field :stroenie, :class => 'span1'
-        .span1
-          = f.label :office, "Офис"
-          = f.text_field :office, :class => 'span1'
-
-    .modal-footer
-      = f.button :submit, 'Добавить', :class => 'btn btn-primary', :id => 'courier-company-add'
-
-#newCourierModal.modal.hide.fade{:role => "dialog", :tabindex => "-1"}
-  = simple_form_for(@couriers_task, :html => {:class => 'form-validate form-courier-task' }) do |f|
-    .modal-header
-      %button.close{"data-dismiss" => "modal", :type => "button"} ×
-      %h3 Новый курьер
-    .modal-body
-      %label Откуда
-      = f.association :from_couriers_company, :label => false, :input_html => { :class => "input-modal-full", "data-required" => true }
-
-      %label Куда
-      = f.association :to_couriers_company, :label => false, :input_html => { :class => "input-modal-full", "data-required" => true }
-
-      %label.no-margin Когда
-      .input-prepend.date-picker.inline-block{"data-date" => @date}
-        %span.add-on
-          %i.icon-calendar
-        %input.input-date{:type => "text", :name => 'date', :value => @date}
-      %input.timepicker.inline-block{:type => "text", :name => 'time', :value => @time}
-      %i.icon-time.timepicker-icon
-
-    .modal-footer
-      = f.button :submit, 'Добавить', :class => 'btn btn-primary', :id => 'courier-company-add'
+  - @couriers_tasks.includes([:user, :from_couriers_company, :to_couriers_company]).each do |couriers_task|
+    %tr
+      %td= couriers_task.from_couriers_company[:name]
+      %td= couriers_task.to_couriers_company[:name]
+      %td= couriers_task.due_time.strftime("%d.%m.%y в %H:%M") 
+      %td.event-actions
+        .btn-group
+          = link_to 'Редактировать', edit_couriers_task_path(couriers_task), {:class => 'btn btn-mini'}
+          %button.btn.btn-mini.dropdown-toggle{"data-toggle" => "dropdown"}
+            %span.caret
+          %ul.dropdown-menu.dropdown-menu-narrow
+            %li
+              = link_to 'Удалить', couriers_task, method: :delete, data: { confirm: 'Удалить задание?' }
 
 - content_for :title do
   Курьеры

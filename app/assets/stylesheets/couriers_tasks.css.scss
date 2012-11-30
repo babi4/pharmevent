@@ -7,14 +7,10 @@
     margin-bottom: 8px;
 
     &.no-margin {
-      margin-bottom: 0;
+      margin-bottom: 6px;
     }
   }
-}
-.btn-courier-place {
-  margin: 2px 0 0 12px;
-}
-.btn-courier-go {
-  position: relative;
-  top: 8px;
+  .btn-primary-submit {
+    margin: 0 0 -15px;
+  }
 }

@@ -2,21 +2,58 @@
   = f.error_notification
 
   .row
-    .span4
-      %label Откуда
-      = f.association :from_couriers_company, :label => false, :input_html => { :class => "span4", "data-required" => true }
+    .span3
+      %label 
+        Откуда
+        %a{'data-toggle' => 'modal', href: '#newAddressModal', class: 'btn btn-mini'} новое место
+      = f.collection_select(:from_couriers_company_id, CouriersCompany.all, :id, :name, {}, class: 'span3', "data-required" => true)
 
-      %label Куда
-      = f.association :to_couriers_company, :label => false, :input_html => { :class => "span4", "data-required" => true }
+    .span3
+      %label 
+        Куда
+        %a{'data-toggle' => 'modal', href: '#newAddressModal', class: 'btn btn-mini'} новое место
+      = f.collection_select(:to_couriers_company_id, CouriersCompany.all, :id, :name, {}, class: 'span3', "data-required" => true)
 
+    .span5
       %label.no-margin Когда
-      .input-prepend.date-picker.inline-block{"data-date" => @date}
+      .input-prepend.date-picker.inline-block{"data-date" => @couriers_task.due_time.strftime("%d.%m.%Y")}
         %span.add-on
           %i.icon-calendar
-        %input.input-date{:type => "text", :name => 'date', :value => @date}
-      %input.timepicker.inline-block{:type => "text", :name => 'time', :value => @time}
+        %input.input-date{:type => "text", :name => 'date', :value => @couriers_task.due_time.strftime("%d.%m.%Y")}
+      %input.timepicker.inline-block{:type => "text", :name => 'time', :value => @couriers_task.due_time.strftime("%H:%M")}
       %i.icon-time.timepicker-icon
 
-      %br
-
       = f.button :submit, 'Сохранить', :class => 'btn btn-primary btn-primary-submit'
+
+#newAddressModal.modal.hide.fade{:role => "dialog", :tabindex => "-1"}
+  = simple_form_for(CouriersCompany.new, :html => {:class => 'form-validate' }) do |f|
+    .modal-header
+      %button.close{"data-dismiss" => "modal", :type => "button"} ×
+      %h3 Новый адрес
+    .modal-body
+      = f.label :name, "Название"
+      = f.text_field :name, :class => 'input-modal-full', "data-required" => 'true'
+      .row
+        .span1
+          = f.label :zip_code, "Индекс"
+          = f.text_field :zip_code, :class => 'span1', "data-required" => 'true'
+        .span2
+          = f.label :city, "Город"
+          = f.text_field :city, :class => 'span2', "data-required" => 'true'
+        .span2
+          = f.label :street, "Улица"
+          = f.text_field :street, :class => 'span2', "data-required" => 'true'
+
+      .row
+        .span1
+          = f.label :house, "Дом"
+          = f.text_field :house, :class => 'span1', "data-required" => 'true'
+        .span1
+          = f.label :stroenie, "Строение"
+          = f.text_field :stroenie, :class => 'span1'
+        .span1
+          = f.label :office, "Офис"
+          = f.text_field :office, :class => 'span1'
+
+    .modal-footer
+      = f.button :submit, 'Добавить', :class => 'btn btn-primary', :id => 'courier-company-add'
