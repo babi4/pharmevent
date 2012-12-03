@@ -4,10 +4,25 @@ class EventsController < ApplicationController
   load_and_authorize_resource
 
   def index
+    @events = Event.active.nearest
     @new_event = Event.new
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @events }
+    end
+  end
+
+  def archive
+    @events = Event.archive.latest
+    render 'events/index'
+  end
+
+  def switch_archive
+    @event.archived = !@event.archived
+    if @event.save
+      render json: {succ: true}
+    else
+      render json: {succ: false}
     end
   end
 

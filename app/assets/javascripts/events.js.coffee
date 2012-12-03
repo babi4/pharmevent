@@ -11,3 +11,9 @@ $(document).ready ->
   , (start, end) ->
     $('#event-start').val start.toString 'yyyy-MM-dd'
     $('#event-end').val end.toString 'yyyy-MM-dd'
+
+  $('.event-to-archive').on 'click', ->
+    event_id = $(@).data 'event-id'
+    $.post "/events/#{event_id}/switch_archive", (data) =>
+      $(@).closest('tr').fadeOut(250) if data.succ
+    false

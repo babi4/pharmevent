@@ -5,6 +5,9 @@ Rails3BootstrapDeviseCancan::Application.routes.draw do
     resources :documents_nal_prihods
     resources :documents_nal_rashods
     resources :documents_beznal_schets
+
+    get 'archive', :on => :collection
+    post 'switch_archive', :on => :member
   end
 
   resources :companies do

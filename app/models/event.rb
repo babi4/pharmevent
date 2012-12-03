@@ -13,4 +13,9 @@ class Event < ActiveRecord::Base
   validates :name, :uniqueness => { :scope => :company_id,
     :message => "событие с таким именем для этой компании уже создано" }
 
+  scope :active, lambda { where(archived: false).where('date_end >= ?', DateTime.now.to_date) }
+  scope :archive, lambda { where('archived = true or date_end < ?', DateTime.now.to_date) }
+  scope :latest, order('date_start DESC')
+  scope :nearest, order('date_start')
+
 end

@@ -14,8 +14,6 @@
     %a{:href => "#"} Документы
   %li
     %a{:href => "#"} Отчеты
-  %li
-    %a{:href => "#"} Архив
   - if can? :manage, User
     %li
       = link_to 'Пользователи', users_path

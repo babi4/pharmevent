@@ -69,7 +69,7 @@ $ ->
   $('.table-sort').stupidtable()
 
   $("#reportrange").daterangepicker
-    opens: 'left'
+    opens: 'right'
     ranges:
       "Сегодня": ["today", "today"]
       "За неделю": [Date.today().add(days: -6), "today"]
