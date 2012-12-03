@@ -15,22 +15,22 @@
     - else
       = link_to 'К активным мероприятиям', events_path, class: 'btn'
 
-%table.table.table-striped.table-condensed.table-hover.table-links.table-events#table-filter
+%table.table.table-striped.table-condensed.table-hover.table-links.table-events.table-sort#table-filter
   %thead
     %tr
-      %th.events-title.type-string Название
-      %th.events-customer.type-string Заказчик
-      %th.events-date.type-int Начало
-      %th.events-date.type-int Конец
-      %th.events-city.type-string Город
+      %th.events-title{'data-sort' => 'string'} Название
+      %th.events-customer{'data-sort' => 'string'} Заказчик
+      %th.events-date{'data-sort' => 'int'} Начало
+      %th.events-date{'data-sort' => 'int'} Конец
+      %th.events-city{'data-sort' => 'string'}  Город
       %th.events-actions
   - @events.includes([:company]).each do |event|
     %tr{"data-link" => url_for(:action => 'show', :id => event.id)}
       %td= event.name
       %td= event.company[:name]
-      %td.events-date.filter-date{"data-order-by" => event.date_start.to_time.to_i}
+      %td.events-date.filter-date{"data-sort-value" => event.date_start.to_time.to_i}
         = event.date_start.strftime("%d.%m.%y")
-      %td.events-date.filter-date{"data-order-by" => event.date_end.to_time.to_i}
+      %td.events-date.filter-date{"data-sort-value" => event.date_end.to_time.to_i}
         = event.date_end.strftime("%d.%m.%y")
       %td= event.city
       %td.event-actions

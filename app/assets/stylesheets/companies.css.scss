@@ -63,17 +63,12 @@ p.company-shortname {
   margin-bottom: 25px; 
 }
 
-#table-companies {
-  .company-name {
-    width: 30%;
-  }
+.company-name {
+  width: 30%;
+}
 
-  .company-members {
-    width: 60%;
-  }
-  .show {
-    display: table-row;
-  }
+.company-members {
+  width: 60%;
 }
 
 .row-company-info {

@@ -14,10 +14,10 @@
 %table.table.table-striped.table-condensed.table-hover.table-links#table-filter
   %thead
     %tr
-      %th.td-25 Откуда
-      %th.td-25 Куда
-      %th.td-25 Кому
-      %th.td-15 Когда
+      %th.td-25{'data-sort' => 'string'} Откуда
+      %th.td-25{'data-sort' => 'string'} Куда
+      %th.td-25{'data-sort' => 'string'} Кому
+      %th.td-15{'data-sort' => 'int'} Когда
       %th.td-10
 
   - @couriers_tasks.includes([:user, :from_couriers_company, :to_couriers_company]).each do |couriers_task|
@@ -25,7 +25,7 @@
       %td= couriers_task.from_couriers_company[:name]
       %td= couriers_task.to_couriers_company[:name]
       %td= couriers_task.to_person
-      %td.filter-date{"data-order-by" => couriers_task.due_time.to_i}
+      %td.filter-date{"data-sort-value" => couriers_task.due_time.to_i}
         = couriers_task.due_time.strftime("%d.%m.%y в %H:%M") 
       %td.event-actions
         .btn-group

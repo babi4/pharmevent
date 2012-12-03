@@ -5,34 +5,27 @@
   font-size: 11px;
 }
 
-#table-clients {
-  .show {
-    display: table-row;
-  }
-  .clients-name {
-    width: 25%;
-  }
-  .clients-passport {
-    width: 20%;
-  }
-  .clients-degree {
-    width: 15%;
-  }
-  .clients-work {
-    width: 15%;
-  }
-  .clients-notes {
-    width: 15%;
-  }
+.clients-name {
+  width: 25%;
+}
+.clients-passport {
+  width: 20%;
+}
+.clients-degree {
+  width: 15%;
+}
+.clients-work {
+  width: 15%;
+}
+.clients-notes {
+  width: 15%;
 }
 
 @media (max-width: 1200px) {
-  #table-clients {
-    .clients-name {
-      width: 20%;
-    }
-    .clients-passport {
-      width: 25%;
-    }
+  .clients-name {
+    width: 20%;
+  }
+  .clients-passport {
+    width: 25%;
   }
 }

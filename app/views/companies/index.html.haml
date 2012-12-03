@@ -3,15 +3,15 @@
     .input-prepend.pull-left
       %span.add-on
         %i.icon-search
-      %input.span4#companies-filter{:placeholder => "Поиск", :type => "text"}
+      %input.span4#input-filter{:placeholder => "Поиск", :type => "text"}
   .span4
     = link_to 'Добавить заказчика', new_company_path, :class => 'btn pull-right'
 
-%table.table.table-striped.table-condensed.table-hover.table-links#table-companies
+%table.table.table-striped.table-condensed.table-hover.table-links#table-filter
   %thead
     %tr
-      %th Заказчик
-      %th Представитель
+      %th{'data-sort' => 'string'} Заказчик
+      %th{'data-sort' => 'string'} Представитель
       %th
 
   - @companies.each do |company|

@@ -3,17 +3,17 @@
     .input-prepend.pull-left
       %span.add-on
         %i.icon-search
-      %input.span4#clients-filter{:placeholder => "Поиск", :type => "text"}
+      %input.span4#input-filter{:placeholder => "Поиск", :type => "text"}
   .span4
     = link_to 'Добавить клиента', new_client_path, :class => 'btn pull-right'
 
-%table.table.table-striped.table-condensed.table-hover.table-links#table-clients
+%table.table.table-striped.table-condensed.table-hover.table-links#table-filter
   %thead
     %tr
-      %th.clients-name ФИО
+      %th.clients-name{'data-sort' => 'string'} ФИО
       %th.clients-passport Паспортные данные
-      %th.clients-degree Ученая степень
-      %th.clients-work Работа
+      %th.clients-degree{'data-sort' => 'string'} Ученая степень
+      %th.clients-work{'data-sort' => 'string'} Работа
       %th.clients-notes Примечания
       %th
 

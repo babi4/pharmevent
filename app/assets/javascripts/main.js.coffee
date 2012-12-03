@@ -66,7 +66,7 @@ $ ->
           else
             showItem $item_row
 
-  $('.table-sort').stupidtable()
+  $('#table-filter').stupidtable()
 
   $("#reportrange").daterangepicker
     opens: 'right'

@@ -241,6 +241,9 @@ input.input-required, select.input-required {
 }
 
 #table-filter {
+  th {
+    cursor: pointer;
+  }
   tr.show {
     display: table-row;
   }
