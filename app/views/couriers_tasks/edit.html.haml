@@ -2,9 +2,13 @@
   %li
     = link_to 'Курьеры', couriers_tasks_path
     %span.divider /
-  %li.active редактирование задания
+  %li
+    = link_to 'Задание курьеру', @couriers_task
+    %span.divider
+      |
+  %li.active редактирование
 
 = render 'form'
 
 - content_for :title do
-  Курьеры / Редактирование
+  Курьеры / Редактирование задания

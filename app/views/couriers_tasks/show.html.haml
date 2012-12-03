@@ -1,35 +1,20 @@
-%p#notice= notice
+%ul.breadcrumb
+  %li
+    = link_to 'Курьеры', couriers_tasks_path
+    %span.divider /
+  %li.active
+    Задание курьеру
+    %span.divider
+      |
+  %li
+    = link_to 'редактирование', edit_couriers_task_path(@couriers_task)
 
+%h3
+  #{@couriers_task.from_couriers_company[:name]} → #{@couriers_task.to_couriers_company[:name]}
 %p
-  %b User:
-  = @couriers_task.user[:name]
-%p
-  %b Name:
-  = @couriers_task.name
-%p
-  %b Telephone:
-  = @couriers_task.telephone
-%p
-  %b From date:
-  = @couriers_task.from_date
-%p
-  %b To date:
-  = @couriers_task.to_date
-%p
-  %b Status:
-  = @couriers_task.status
-%p
-  %b To person:
+  = @couriers_task.due_time.strftime("%d.%m.%y в %H:%M")
+  %br
   = @couriers_task.to_person
-%p
-  %b From couriers company:
-  = link_to @couriers_task.from_couriers_company[:name], couriers_company_path(@couriers_task.from_couriers_company)
 
-%p
-  %b To couriers company:
-  = link_to @couriers_task.to_couriers_company[:name], couriers_company_path(@couriers_task.to_couriers_company)
-
-
-= link_to 'Edit', edit_couriers_task_path(@couriers_task)
-\|
-= link_to 'Back', couriers_tasks_path
+- content_for :title do
+  Курьеры / Просмотр задания

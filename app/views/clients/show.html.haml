@@ -1,33 +1,50 @@
-%p#notice= notice
+%ul.breadcrumb
+  %li
+    = link_to 'Клиенты', clients_path
+    %span.divider /
+  %li.active
+    = @client.name
+    %span.divider
+      |
+  %li
+    = link_to 'редактирование', edit_client_path(@client)
 
+%h4= @client.name
 %p
-  %b Name:
-  = @client.name
+  %b Дата рождения
+  %br
+  = @client.birthday.strftime("%d.%m.%Y")
 %p
-  %b Birthday:
-  = @client.birthday
-%p
-  %b Passport number:
+  %b Номер паспорта
+  %br
   = @client.passport_number
+- unless @client.zagran_passport_number.blank?
+  %p
+    %b Номер загранпаспорта
+    %br
+    = @client.zagran_passport_number
+- unless @client.zagran_passport_use_before.blank?
+  %p
+    %b Срок действия загранпаспорта
+    %br
+    = @client.zagran_passport_use_before.strftime("%d.%m.%Y")
 %p
-  %b Zagran passport number:
-  = @client.zagran_passport_number
-%p
-  %b Zagran passport use before:
-  = @client.zagran_passport_use_before
-%p
-  %b Degree:
+  %b Ученая степень
+  %br
   = @client.degree
 %p
-  %b Position:
+  %b Должность
+  %br
   = @client.position
 %p
-  %b Work:
+  %b Место работы
+  %br
   = @client.work
-%p
-  %b Notes:
-  = @client.notes
+- unless @client.notes.blank?
+  %p
+    %b Примечания
+    %br
+    = @client.notes
 
-= link_to 'Edit', edit_client_path(@client)
-\|
-= link_to 'Back', clients_path
+- content_for :title do
+  Клиенты / #{@client.name}

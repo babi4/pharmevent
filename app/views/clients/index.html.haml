@@ -7,7 +7,7 @@
   .span4
     = link_to 'Добавить клиента', new_client_path, :class => 'btn pull-right'
 
-%table.table.table-striped.table-condensed.table-hover#table-clients
+%table.table.table-striped.table-condensed.table-hover.table-links#table-clients
   %thead
     %tr
       %th.clients-name ФИО
@@ -18,7 +18,7 @@
       %th
 
   - @clients.each do |client|
-    %tr
+    %tr{"data-link" => url_for(:action => 'show', :id => client.id)}
       %td= client.name
       %td
         %span.client-table-label дата рождения
