@@ -18,7 +18,11 @@ $ ->
     autoclose: true
   ).on "changeDate", (ev) ->
     new_date = ev.date.toString 'dd.MM.yyyy'
-    $(@).find('.input-date').val new_date
+    if @nodeName is 'SPAN'
+      $($(@).data('field')).val new_date
+      $(@).text new_date
+    else
+      $(@).find('.input-date').val new_date
 
   $('.timepicker').timepicker
     defaultTime: 'value'

@@ -1,6 +1,8 @@
 = form_for([@event, @documents_beznal_schet], :html => {:class => 'form-validate'}) do |f|
 
-  %h4 Счет №#{@documents_beznal_schet.num_schet} от #{@documents_beznal_schet.date_schet.strftime("%d.%m.%Y")}
+  %h4 
+    Счет №#{@documents_beznal_schet.num_schet} от
+    %span.date-picker{"data-field" => '#documents_beznal_schet_date_schet'} #{@documents_beznal_schet.date_schet.strftime("%d.%m.%Y")}
 
   = f.hidden_field :num_schet
   = f.hidden_field :date_schet
