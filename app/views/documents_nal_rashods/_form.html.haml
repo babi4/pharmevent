@@ -20,7 +20,7 @@
       = f.label :summ, "Сумма*"
       = f.text_field :summ, :class => 'span2', "data-required" => 'true'
     .span2
-      = f.label :date, "Дата*", :class => 'no-margin pull-right date-label'
+      = f.label :date, "Дата оплаты*", :class => 'no-margin pull-right date-label-width'
       %br
       .input-prepend.input-prepend-margin.date-picker.pull-right{"data-date" => (@documents_nal_rashod.date.strftime("%d.%m.%Y") unless @documents_nal_rashod.date.blank?) }
         %span.add-on
@@ -28,11 +28,11 @@
         = f.text_field :date, :class => 'input-date', "data-required" => 'true', :value => (@documents_nal_rashod.date.strftime("%d.%m.%Y") unless @documents_nal_rashod.date.blank?)
 
   %b.before-checkbox Данный расход является:
-  %label.checkbox
-    = f.check_box :lectors
+  %label.radio
+    = f.radio_button :lectors, true
     расходом по логистике лекторов (статус: физ.лицо)
-  %label.checkbox
-    = f.check_box :entire
+  %label.radio
+    = f.radio_button :lectors, false
     расходом по мероприятию в целом (статус: агент/юр.лицо)
 
   = f.button :submit, 'Сохранить', :class => 'btn btn-primary btn-primary-submit'
