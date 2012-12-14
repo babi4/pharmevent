@@ -114,14 +114,13 @@
       %td{rowspan: 10} #{doc.summ}р.
       %td{rowspan: 10} #{doc.nds}р.
       %td{rowspan: 10}
-        - if doc.info_date_pay.blank?
-          .btn-group
-            = link_to 'изменить', edit_event_documents_beznal_rashod_path(@event, doc), class: 'btn btn-mini'
-            %button.btn.btn-mini.dropdown-toggle{"data-toggle" => "dropdown"}
-              %span.caret
-            %ul.dropdown-menu.dropdown-menu-narrow.dropdown-menu-left
-              %li
-                = link_to 'Удалить', [@event, doc], method: :delete, data: { confirm: 'Удалить документ?' }
+        .btn-group
+          = link_to 'изменить', edit_event_documents_beznal_rashod_path(@event, doc), class: 'btn btn-mini'
+          %button.btn.btn-mini.dropdown-toggle{"data-toggle" => "dropdown"}
+            %span.caret
+          %ul.dropdown-menu.dropdown-menu-narrow.dropdown-menu-left
+            %li
+              = link_to 'Удалить', [@event, doc], method: :delete, data: { confirm: 'Удалить документ?' }
     %tr
       %td Дата счета
       %td= doc.date_schet.strftime("%d.%m.%y") unless doc.date_schet.blank?
@@ -179,14 +178,13 @@
       %td= doc.date.strftime("%d.%m.%Y") unless doc.date.blank?
       %td #{doc.summ}р.
       %td
-        - if doc.date.blank?
-          .btn-group
-            = link_to 'изменить', edit_event_documents_nal_rashod_path(@event, doc), class: 'btn btn-mini'
-            %button.btn.btn-mini.dropdown-toggle{"data-toggle" => "dropdown"}
-              %span.caret
-            %ul.dropdown-menu.dropdown-menu-narrow.dropdown-menu-left
-              %li
-                = link_to 'Удалить', [@event, doc], method: :delete, data: { confirm: 'Удалить документ?' }
+        .btn-group
+          = link_to 'изменить', edit_event_documents_nal_rashod_path(@event, doc), class: 'btn btn-mini'
+          %button.btn.btn-mini.dropdown-toggle{"data-toggle" => "dropdown"}
+            %span.caret
+          %ul.dropdown-menu.dropdown-menu-narrow.dropdown-menu-left
+            %li
+              = link_to 'Удалить', [@event, doc], method: :delete, data: { confirm: 'Удалить документ?' }
   %tr
     %td{colspan: 5} 
       %span.pull-right Итого:

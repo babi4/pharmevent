@@ -10,7 +10,7 @@
   .row
     .span4
       = f.label :name, "ФИО плательщика"
-      = f.select :name, User.all.collect {|u| [ u.name, u.name ] }
+      = f.select :name, User.all.collect {|u| [ u.name, u.name ] }, {}, :class => 'span4'
     .span3
       = f.label :telephone, "Мобильный телефон плательщика"
       = f.text_field :telephone, :class => 'span3'

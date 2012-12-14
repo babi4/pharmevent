@@ -4,7 +4,7 @@
   = f.label :short_name, "Получатель*"
   .row
     .span2
-      = f.select :type_company, [['ООО/ОАО/ЗАО', 'ООО/ОАО/ЗАО'], ['ИП', 'ИП']], {}, { :class => 'span2' }
+      = f.select :type_company, [['ООО', 'ООО'], ['ОАО', 'ОАО'], ['ЗАО', 'ЗАО'], ['ИП', 'ИП']], {}, { :class => 'span2' }
     .span5
       = f.text_field :company, :class => 'span5', "data-required" => 'true'
 
@@ -113,7 +113,7 @@
   = f.select :info_type_return_act, [['почтой', 'почтой'], ['курьером', 'курьером'], ['самовывоз', 'самовывоз']], {}, { :class => 'span2' }
 
   = f.label :info_name_sender, "ФИО отправителя"
-  = f.text_field :info_name_sender, :class => 'span4'
+  = f.select :info_name_sender, User.all.collect {|u| [ u.name, u.name ] }, {}, :class => 'span4'
 
   %br
 
