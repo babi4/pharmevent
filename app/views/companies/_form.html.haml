@@ -5,7 +5,7 @@
   = f.text_field :name, :class => 'span8', "data-required" => 'true'
 
   = f.label :short_name, "Краткое наименование"
-  = f.select :company_type, [['ООО', 'ООО'], ['ОАО', 'ОАО'], ['ЗАО', 'ЗАО']], {}, { :class => 'span1' }
+  = f.select :company_type, [['ООО', 'ООО'], ['ОАО', 'ОАО'], ['ЗАО', 'ЗАО'], ['МОО', 'МОО'], ['НОА', 'НОА'], ['ИП', 'ИП']], {}, { :class => 'span1' }
   = f.text_field :short_name, :class => 'span4'
   
   %legend Юридический адрес
