@@ -10,7 +10,7 @@
   .row
     .span4
       = f.label :name, "ФИО плательщика"
-      = f.text_field :name, :class => 'span4'
+      = f.select :name, User.all.collect {|u| [ u.name, u.name ] }
     .span3
       = f.label :telephone, "Мобильный телефон плательщика"
       = f.text_field :telephone, :class => 'span3'
@@ -20,7 +20,7 @@
       = f.label :summ, "Сумма*"
       = f.text_field :summ, :class => 'span2', "data-required" => 'true'
     .span2
-      = f.label :date, "Дата*", :class => 'no-margin pull-right date-label'
+      = f.label :date, "Дата оплаты*", :class => 'no-margin pull-right date-label-width'
       %br
       .input-prepend.input-prepend-margin.date-picker.pull-right{"data-date" => (@documents_nal_prihod.date.strftime("%d.%m.%Y") unless @documents_nal_prihod.date.blank?) }
         %span.add-on
