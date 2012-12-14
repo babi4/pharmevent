@@ -5,11 +5,11 @@
         %i.icon-search
       %input.span4#input-filter{:placeholder => "Поиск", :type => "text"}
     .input-append.pull-left
-      %input.input-daterange#reportrange{:type => "text", :placeholder => 'За все время', :readonly => "readonly"}
+      %input.input-daterange#reportrange{:type => "text", :placeholder => 'За все время', :value => "#{(DateTime.now - 30.days).strftime("%d.%m.%Y")} - #{DateTime.now.strftime("%d.%m.%Y")}", :readonly => "readonly", "data-start-date" => 't - 30 d', "data-end-date" => 'today'}
         %span.add-on
           %i.icon-calendar
   .span4
-    = link_to 'Добавить курьера', new_couriers_task_path, :class => 'btn pull-right'
+    = link_to 'Заказать курьера', new_couriers_task_path, :class => 'btn pull-right'
 
 %table.table.table-striped.table-condensed.table-hover.table-links#table-filter
   %thead

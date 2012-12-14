@@ -51,7 +51,7 @@ $ ->
           $item_row = $(@)
           date_check = false
           $item_row.find('.filter-date').each ->
-            if betweenDates $(@).data('order-by')
+            if betweenDates $(@).data('sort-value')
               date_check = true
               false
           if date_check and (filter is '' or $(@).text().search(new RegExp(filter, "i")) > -1)
@@ -68,11 +68,19 @@ $ ->
 
   $('#table-filter').stupidtable()
 
-  $("#reportrange").daterangepicker
+  $reportrange_field = $("#reportrange")
+
+  date_range_start = Date.parse($reportrange_field.data('start-date')) || Date.today()
+  date_range_end   = Date.parse($reportrange_field.data('end-date')) || Date.today()
+
+  $reportrange_field.daterangepicker
     opens: 'right'
+    startDate: date_range_start
+    endDate: date_range_end
     ranges:
       "Сегодня": ["today", "today"]
       "За неделю": [Date.today().add(days: -6), "today"]
+      "За 30 дней": [Date.today().add(days: -30), "today"]
       "За текущий месяц": [Date.today().moveToFirstDayOfMonth(), Date.today().moveToLastDayOfMonth()]
       "За прошлый месяц": [Date.today().moveToFirstDayOfMonth().add(months: -1), Date.today().moveToFirstDayOfMonth().add(days: -1)]
       "За все время": ['', '']
@@ -92,6 +100,11 @@ $ ->
       date_range = ''
     filterItems()
     $("#reportrange").val date_range
+
+  if $reportrange_field.data('start-date') && $reportrange_field.data('end-date')
+    filter_start = date_range_start.getTime()
+    filter_end   = date_range_end.getTime()
+    filterItems()
 
   $("#input-filter").on 'keyup', (event) ->
     filter = $(@).val().trim()
