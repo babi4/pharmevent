@@ -1,8 +1,7 @@
 class CouriersCompany < ActiveRecord::Base
   attr_accessible :city, :house, :name, :office, :street, :stroenie, :zip_code
 
-  validates :name, :presence => true
-  validates :name, :uniqueness => true
+  validates :name, :presence => true, :uniqueness => true
 
   has_many :to_couriers_tasks, :class_name => "CouriersTask",
            :foreign_key => "to_couriers_company_id"

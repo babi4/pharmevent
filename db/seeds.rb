@@ -4,7 +4,7 @@ puts 'CREATING ROLES'
 %w(general_director admin administrative_director chief_accountant manager).each { |t| Role.create().update_attribute(:name, t) }
 
 puts 'SETTING UP DEFAULT USER LOGIN'
-user = User.create! :name => 'First User', :email => 'user@example.com', :password => 'please', :password_confirmation => 'please'
+user = User.create! :first_name => 'First', :last_name => 'User', :email => 'user@example.com', :password => 'please', :password_confirmation => 'please'
 puts 'New user created: ' << user.name
 user.roles << Role.find_by_name(:admin)
 

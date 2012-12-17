@@ -36,3 +36,9 @@ gem "hub", ">= 1.10.2", :require => nil, :group => [:development]
 
 gem 'rails_admin', "~> 0.2.0"
 gem 'awesome_print'
+
+gem "squeel", "~> 1.0.14"
+
+group :development do
+  gem "better_errors", "~> 0.3.2"
+end

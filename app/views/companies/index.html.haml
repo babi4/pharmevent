@@ -12,6 +12,8 @@
     %tr
       %th{'data-sort' => 'string'} Заказчик
       %th{'data-sort' => 'string'} Представитель
+      %th{'data-sort' => 'string'} Количество мероприятий
+      %th{'data-sort' => 'string'} Перечисленные средства
       %th
 
   - @companies.each do |company|
@@ -20,6 +22,8 @@
       %td.company-members
         - if company_member = company.company_members.first
           = [company_member.name, company_member.position, company_member.telephone, company_member.email].reject(&:empty?).join(', ')
+      %td.company-events= company.events.count
+      %td.company-events= company.transferred_funds
       %td.event-actions
         .btn-group.pull-right
           = link_to 'Показать', company, {:class => 'btn btn-mini'}

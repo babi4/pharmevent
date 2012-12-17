@@ -15,9 +15,13 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :role_ids, :as => :admin
-  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :role_ids
+  attr_accessible :first_name, :last_name, :middle_name ,:salary ,:percent, :email, :password, :password_confirmation, :remember_me, :role_ids
 
-  validates :name, :presence => true
-  validates :name, :uniqueness => true
+  validates :first_name, :last_name, :presence => true
+
+  def name
+    middle_name_str = middle_name ? "#{middle_name} " : ''
+    "#{first_name} #{middle_name_str}#{last_name}"
+  end
 
 end
