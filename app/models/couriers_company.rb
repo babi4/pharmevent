@@ -1,5 +1,6 @@
 class CouriersCompany < ActiveRecord::Base
   attr_accessible :city, :house, :name, :office, :street, :stroenie, :zip_code
+  has_many :couriers_company_members
 
   validates :name, :presence => true, :uniqueness => true
 

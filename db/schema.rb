@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121217202505) do
+ActiveRecord::Schema.define(:version => 20121220165548) do
 
   create_table "clients", :force => true do |t|
     t.string   "name"
@@ -91,19 +91,25 @@ ActiveRecord::Schema.define(:version => 20121217202505) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "couriers_company_members", :force => true do |t|
+    t.string  "name"
+    t.integer "couriers_companies_id"
+    t.string  "telephone"
+  end
+
   create_table "couriers_tasks", :force => true do |t|
     t.integer  "user_id"
     t.string   "name"
-    t.string   "telephone"
     t.date     "from_date"
     t.date     "to_date"
     t.string   "status"
-    t.string   "to_person"
     t.integer  "from_couriers_company_id"
     t.integer  "to_couriers_company_id"
-    t.datetime "created_at",               :null => false
-    t.datetime "updated_at",               :null => false
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
     t.datetime "due_time"
+    t.integer  "to_couriers_company_member_id"
+    t.integer  "from_couriers_company_member_id"
   end
 
   create_table "documents_beznal_rashods", :force => true do |t|

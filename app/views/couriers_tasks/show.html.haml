@@ -13,8 +13,6 @@
   #{@couriers_task.from_couriers_company[:name]} → #{@couriers_task.to_couriers_company[:name]}
 %p
   = @couriers_task.due_time.strftime("%d.%m.%y в %H:%M")
-  %br
-  = @couriers_task.to_person
 
 - content_for :title do
   Курьеры / Просмотр задания

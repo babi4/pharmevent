@@ -16,9 +16,6 @@
       = f.collection_select(:to_couriers_company_id, @couriers_companies, :id, :name, {}, class: 'span3', "data-required" => true)
       %span.couriers-company-address
 
-    .span2
-      = f.label :to_person, "Кому"
-      = f.text_field :to_person, :class => 'span2', "data-required" => 'true'
 
     .span4
       %label.no-margin Когда
@@ -28,8 +25,21 @@
         %input.input-date{:type => "text", :name => 'date', :value => @couriers_task.due_time.strftime("%d.%m.%Y")}
       %input.timepicker.inline-block{:type => "text", :name => 'time', :value => @couriers_task.due_time.strftime("%H:%M")}
       %i.icon-time.timepicker-icon
-
       = f.button :submit, 'Сохранить', :class => 'btn btn-primary btn-primary-submit'
+
+  .row
+    .span3
+      %label
+        От кого
+        %a{'data-toggle' => 'modal', href: '#newMemberModal', class: 'btn btn-mini'} новое контактное лицо
+      = f.collection_select(:from_couriers_company_member_id, @couriers_company_members, :id, :name, {}, class: 'span3', "data-required" => true)
+
+    .span3
+      %label
+        Кому
+        %a{'data-toggle' => 'modal', href: '#newMemberModal', class: 'btn btn-mini'} новое контактное лицо
+      = f.collection_select(:to_couriers_company_member_id, @couriers_company_members, :id, :name, {}, class: 'span3', "data-required" => true)
+
 
 #newAddressModal.modal.hide.fade{:role => "dialog", :tabindex => "-1"}
   = simple_form_for(CouriersCompany.new, :html => {:class => 'form-validate' }) do |f|
@@ -63,6 +73,20 @@
 
     .modal-footer
       = f.button :submit, 'Добавить', :class => 'btn btn-primary', :id => 'courier-company-add'
+
+#newMemberModal.modal.hide.fade{:role => "dialog", :tabindex => "-1"}
+  = simple_form_for(CouriersCompanyMember.new, :html => {:class => 'form-validate' }) do |f|
+    .modal-header
+      %button.close{"data-dismiss" => "modal", :type => "button"} ×
+      %h3 Новое контактное лицо
+    .modal-body
+      = f.label :name, "Имя"
+      = f.text_field :name, :class => 'input-modal-full', "data-required" => 'true'
+      = f.label :telephone, "Телефон"
+      = f.text_field :telephone, :class => 'input-modal-full', "data-required" => 'true'
+
+    .modal-footer
+      = f.button :submit, 'Добавить', :class => 'btn btn-primary', :id => 'courier-company-member-add'
 
 :javascript
   window.companies = #{@couriers_companies.to_json}
