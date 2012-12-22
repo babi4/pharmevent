@@ -1,5 +1,8 @@
 class DocumentsBeznalSchet < ActiveRecord::Base
-  attr_accessible :nds, :payment_date, :company_id, :date_schet, :description, :dogovor_date, :dogovor_num, :info_act, :info_date_act, :info_date_schet, :info_name_sender, :info_type_return_act, :info_return_date, :info_schet_factura, :info_state_act, :name, :num_schet, :summ, :telephone, :user_id, :event_id
+  extend DocumentStatesModule
+  DocumentStatesModule.included(self)
+
+  attr_accessible :state, :nds, :payment_date, :company_id, :date_schet, :description, :dogovor_date, :dogovor_num, :info_act, :info_date_act, :info_date_schet, :info_name_sender, :info_type_return_act, :info_return_date, :info_schet_factura, :info_state_act, :name, :num_schet, :summ, :telephone, :user_id, :event_id
 
   belongs_to :user
   belongs_to :event

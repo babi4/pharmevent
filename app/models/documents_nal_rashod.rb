@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 
 class DocumentsNalRashod < ActiveRecord::Base
-  attr_accessible :company, :date, :description, :entire, :lectors, :name, :summ, :telephone, :user_id, :event_id
+  extend DocumentStatesModule
+  DocumentStatesModule.included(self)
+
+  attr_accessible :state, :company, :date, :description, :entire, :lectors, :name, :summ, :telephone, :user_id, :event_id
 
   belongs_to :user
   belongs_to :event
