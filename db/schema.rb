@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121220165548) do
+ActiveRecord::Schema.define(:version => 20121221133559) do
 
   create_table "clients", :force => true do |t|
     t.string   "name"
@@ -140,6 +140,7 @@ ActiveRecord::Schema.define(:version => 20121220165548) do
     t.string   "info_name_sender"
     t.datetime "created_at",                              :null => false
     t.datetime "updated_at",                              :null => false
+    t.string   "state"
   end
 
   create_table "documents_beznal_schets", :force => true do |t|
@@ -166,6 +167,7 @@ ActiveRecord::Schema.define(:version => 20121220165548) do
     t.string   "info_name_sender"
     t.datetime "created_at",           :null => false
     t.datetime "updated_at",           :null => false
+    t.string   "state"
   end
 
   create_table "documents_nal_prihods", :force => true do |t|
@@ -179,6 +181,7 @@ ActiveRecord::Schema.define(:version => 20121220165548) do
     t.date     "date"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.string   "state"
   end
 
   create_table "documents_nal_rashods", :force => true do |t|
@@ -194,6 +197,7 @@ ActiveRecord::Schema.define(:version => 20121220165548) do
     t.boolean  "entire",      :default => false, :null => false
     t.datetime "created_at",                     :null => false
     t.datetime "updated_at",                     :null => false
+    t.string   "state"
   end
 
   create_table "events", :force => true do |t|

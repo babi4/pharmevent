@@ -3,6 +3,7 @@
 
 %table
   %tr
+    %th СТАТУС
     %th Документ создал
     %th Получатель
     %th Назначение платежа
@@ -15,6 +16,7 @@
 
   - @documents_nal_rashods.includes(:user).each do |documents_nal_rashod|
     %tr
+      %td= documents_nal_rashod.human_state_name.capitalize
       %td= documents_nal_rashod.user[:name]
       %td= documents_nal_rashod.company
       %td= documents_nal_rashod.description
@@ -23,13 +25,11 @@
       %td
         %b= 'логистика лекторов' if documents_nal_rashod.lectors
         %b= 'мероприятие в целом' if documents_nal_rashod.entire
-
-      %td= link_to 'Show', [@event, documents_nal_rashod]
-      %td= link_to 'Edit', edit_event_documents_nal_rashod_path(@event, documents_nal_rashod)
-      %td= link_to 'Destroy', [@event, documents_nal_rashod], method: :delete, data: { confirm: 'Are you sure?' }
+      - links_collection(@event, documents_nal_rashod)
 
 %br
 %br
-= link_to 'Создать документ наличного расхода', new_event_documents_nal_rashod_path(@event)
+-if can? :create, DocumentsBeznalRashod.new
+  = link_to 'Создать документ наличного расхода', new_event_documents_nal_rashod_path(@event)
 %br
 = link_to "Вернуться к событию: #{@event[:name]}", event_path(@event)

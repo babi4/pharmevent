@@ -3,6 +3,7 @@
 
 %table
   %tr
+    %th СТАТУС
     %th Документ создал
     %th Компания
     %th Назначение платежа
@@ -19,6 +20,7 @@
 
   - @documents_beznal_schets.includes([:user, :company]).each do |documents_beznal_schet|
     %tr
+      %td= documents_beznal_schet.human_state_name.capitalize
       %td= documents_beznal_schet.user[:name]
       %td= link_to documents_beznal_schet.company[:name], company_path(documents_beznal_schet.company)
       %td= documents_beznal_schet.description
@@ -29,11 +31,10 @@
       %td= documents_beznal_schet.summ
       %td= documents_beznal_schet.nds
       %td= documents_beznal_schet.payment_date
-      %td= link_to 'Show', [@event, documents_beznal_schet]
-      %td= link_to 'Edit', edit_event_documents_beznal_schet_path(@event, documents_beznal_schet)
-      %td= link_to 'Destroy', [@event, documents_beznal_schet], method: :delete, data: { confirm: 'Are you sure?' }
+      - links_collection(@event, documents_beznal_schet)
 
 %br
-= link_to 'Создать документ безналичного расхода', new_event_documents_beznal_schet_path(@event)
+-if can? :create, DocumentsBeznalRashod.new
+  = link_to 'Создать документ безналичного расхода', new_event_documents_beznal_schet_path(@event)
 %br
 = link_to "Вернуться к событию: #{@event[:name]}", event_path(@event)

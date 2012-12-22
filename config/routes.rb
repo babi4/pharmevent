@@ -1,10 +1,12 @@
 Rails3BootstrapDeviseCancan::Application.routes.draw do
 
   resources :events do
-    resources :documents_beznal_rashods
-    resources :documents_nal_prihods
-    resources :documents_nal_rashods
-    resources :documents_beznal_schets
+    resources :documents_beznal_rashods,
+              :documents_nal_prihods,
+              :documents_nal_rashods,
+              :documents_beznal_schets do
+      member { put 'update_state' }
+    end
 
     get 'archive', :on => :collection
     post 'switch_archive', :on => :member

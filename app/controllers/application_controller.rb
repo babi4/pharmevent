@@ -8,9 +8,12 @@ class ApplicationController < ActionController::Base
 
   private
 
-    def detect_event
-      @event = Event.find(params[:event_id]) if params[:event_id]
-    end
+    def update_document_state(document, transaction)
+      transactions_collection = %w(send_to_sign sign send_for_revision pay block_payment remove)
 
+      if transactions_collection.include?( transaction ) && can?( transaction.to_sym, document )
+        document.send transaction
+      end
+    end
 
 end

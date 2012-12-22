@@ -3,6 +3,7 @@
 
 %table
   %tr
+    %th СТАТУС
     %th Документ создал
     %th Компания
     %th Назначение платежа
@@ -18,6 +19,7 @@
 
   - @documents_beznal_rashods.includes(:user).each do |documents_beznal_rashod|
     %tr
+      %td= documents_beznal_rashod.human_state_name.capitalize
       %td= documents_beznal_rashod.user[:name]
       %td= documents_beznal_rashod.type_company + " " + documents_beznal_rashod.company
       %td= documents_beznal_rashod.description
@@ -28,11 +30,10 @@
       %td
         %b= 'логистика лекторов' if documents_beznal_rashod.lectors
         %b= 'мероприятие в целом' if documents_beznal_rashod.entire
-      %td= link_to 'Show', [@event, documents_beznal_rashod]
-      %td= link_to 'Edit', edit_event_documents_beznal_rashod_path(@event, documents_beznal_rashod)
-      %td= link_to 'Destroy', [@event, documents_beznal_rashod], method: :delete, data: { confirm: 'Are you sure?' }
+      - links_collection(@event, documents_beznal_rashod)
 
 %br
-= link_to 'Создать документ безналичного расхода', new_event_documents_beznal_rashod_path(@event)
+-if can? :create, DocumentsBeznalRashod.new
+  = link_to 'Создать документ безналичного расхода', new_event_documents_beznal_rashod_path(@event)
 %br
 = link_to "Вернуться к событию: #{@event[:name]}", event_path(@event)

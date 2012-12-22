@@ -100,7 +100,7 @@
   .row
     .span2
       = f.label :info_state_act, "Статус возврата акта"
-      = f.select :info_state_act, [['начало', 'начало'], ['далее', 'далее'], ['конец', 'конец']], {}, { :class => 'span2' }
+      = f.select :info_state_act, %w(отправлен неотправлен).map { |t| [t]*2 }, {}, { :class => 'span2' }
     .span2
       .span-date.pull-right
         = f.label :info_return_date, "Дата возврата", :class => 'no-margin'
@@ -110,7 +110,7 @@
           = f.text_field :info_return_date, :class => 'input-date', :value => (@documents_beznal_rashod.info_return_date.strftime("%d.%m.%Y") unless @documents_beznal_rashod.info_return_date.blank?)
 
   = f.label :info_type_return_act, "Способ возврата акта"
-  = f.select :info_type_return_act, [['почтой', 'почтой'], ['курьером', 'курьером'], ['самовывоз', 'самовывоз']], {}, { :class => 'span2' }
+  = f.select :info_type_return_act,  %w(почтой курьером службой\ доставки).map { |t| [t]*2 }, {}, { :class => 'span2' }
 
   = f.label :info_name_sender, "ФИО отправителя"
   = f.select :info_name_sender, User.all.collect {|u| [ u.name, u.name ] }, {}, :class => 'span4'

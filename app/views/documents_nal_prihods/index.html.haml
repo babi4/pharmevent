@@ -3,6 +3,7 @@
 
 %table
   %tr
+    %th СТАТУС
     %th Документ создал
     %th Плательщик
     %th Назначение платежа
@@ -16,6 +17,7 @@
 
   - @documents_nal_prihods.includes(:user).each do |documents_nal_prihod|
     %tr
+      %td= documents_nal_prihod.human_state_name.capitalize
       %td= documents_nal_prihod.user[:name]
       %td= documents_nal_prihod.company
       %td= documents_nal_prihod.description
@@ -23,12 +25,11 @@
       %td= documents_nal_prihod.telephone
       %td= documents_nal_prihod.summ
       %td= documents_nal_prihod.date
-      %td= link_to 'Show', [@event, documents_nal_prihod]
-      %td= link_to 'Edit', edit_event_documents_nal_prihod_path(@event, documents_nal_prihod)
-      %td= link_to 'Destroy', [@event, documents_nal_prihod], method: :delete, data: { confirm: 'Are you sure?' }
+      - links_collection(@event, documents_nal_prihod)
 
 %br
 %br
-= link_to 'Создать документ наличного расхода', new_event_documents_nal_prihod_path(@event)
+-if can? :create, DocumentsBeznalRashod.new
+  = link_to 'Создать документ наличного расхода', new_event_documents_nal_prihod_path(@event)
 %br
 = link_to "Вернуться к событию: #{@event[:name]}", event_path(@event)
