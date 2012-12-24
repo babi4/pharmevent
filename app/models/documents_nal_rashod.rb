@@ -6,7 +6,7 @@ class DocumentsNalRashod < ActiveRecord::Base
 
   default_scope where { state != 'deleted' }
 
-  attr_accessible :state, :company, :date, :description, :entire, :lectors, :name, :summ, :telephone, :user_id, :event_id
+  attr_accessible :state_note, :state, :company, :date, :description, :entire, :lectors, :name, :summ, :telephone, :user_id, :event_id
 
   belongs_to :user
   belongs_to :event

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121224140945) do
+ActiveRecord::Schema.define(:version => 20121224204255) do
 
   create_table "clients", :force => true do |t|
     t.string   "name"
@@ -141,6 +141,7 @@ ActiveRecord::Schema.define(:version => 20121224140945) do
     t.datetime "created_at",                              :null => false
     t.datetime "updated_at",                              :null => false
     t.string   "state"
+    t.text     "state_note"
   end
 
   create_table "documents_beznal_schets", :force => true do |t|
@@ -168,6 +169,7 @@ ActiveRecord::Schema.define(:version => 20121224140945) do
     t.datetime "created_at",           :null => false
     t.datetime "updated_at",           :null => false
     t.string   "state"
+    t.text     "state_note"
   end
 
   create_table "documents_nal_prihods", :force => true do |t|
@@ -182,6 +184,7 @@ ActiveRecord::Schema.define(:version => 20121224140945) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
     t.string   "state"
+    t.text     "state_note"
   end
 
   create_table "documents_nal_rashods", :force => true do |t|
@@ -198,6 +201,7 @@ ActiveRecord::Schema.define(:version => 20121224140945) do
     t.datetime "created_at",                     :null => false
     t.datetime "updated_at",                     :null => false
     t.string   "state"
+    t.text     "state_note"
   end
 
   create_table "events", :force => true do |t|

@@ -5,7 +5,7 @@ class DocumentsNalPrihodsController < ApplicationController
   load_and_authorize_resource :documents_nal_prihod, :through => :event
 
   def update_state
-    update_document_state(@documents_nal_prihod, params[:transaction])
+    update_document_state(@documents_nal_prihod, params[:transaction], params[:state_note])
 
     respond_to do |format|
       format.html { redirect_to event_documents_nal_prihods_path(@event) }

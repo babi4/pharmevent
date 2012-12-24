@@ -5,7 +5,7 @@ class DocumentsBeznalSchetsController < ApplicationController
   load_and_authorize_resource :documents_beznal_schet, :through => :event
 
   def update_state
-    update_document_state(@documents_beznal_schet, params[:transaction])
+    update_document_state(@documents_beznal_schet, params[:transaction], params[:state_note])
 
     respond_to do |format|
       format.html { redirect_to event_documents_beznal_schets_path(@event) }

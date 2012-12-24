@@ -8,12 +8,15 @@ class ApplicationController < ActionController::Base
 
   private
 
-    def update_document_state(document, transaction)
+    def update_document_state(document, transaction, state_note)
       transactions_collection = %w(send_to_sign sign send_for_revision pay block_payment remove)
 
       if transactions_collection.include?( transaction ) && can?( transaction.to_sym, document )
         document.send transaction
       end
+
+      document.update_attributes(state_note: state_note)
+
     end
 
 end

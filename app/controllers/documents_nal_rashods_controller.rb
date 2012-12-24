@@ -5,7 +5,7 @@ class DocumentsNalRashodsController < ApplicationController
   load_and_authorize_resource :documents_nal_rashod, :through => :event
 
   def update_state
-    update_document_state(@documents_nal_rashod, params[:transaction])
+    update_document_state(@documents_nal_rashod, params[:transaction], params[:state_note])
 
     respond_to do |format|
       format.html { redirect_to event_documents_beznal_rashods_path(@event) }
