@@ -19,7 +19,7 @@ class CouriersTasksController < ApplicationController
 
   def new
     tomorrow = DateTime.tomorrow
-    @couriers_company_members = CouriersCompanyMember.all #TODO member should be related with company
+    @couriers_company_members = CouriersCompany.first.couriers_company_members #TODO member should be related with company
 
     @couriers_task[:due_time] = DateTime.new(tomorrow.year, tomorrow.month, tomorrow.day, 12, 0, 0, 0)
     @couriers_companies = CouriersCompany.all
@@ -37,7 +37,7 @@ class CouriersTasksController < ApplicationController
   end
 
   def edit
-    @couriers_company_members = CouriersCompanyMember.all #TODO member should be related with company
+    @couriers_company_members = CouriersCompany.first.couriers_company_members #TODO member should be related with company
 
     @couriers_companies = CouriersCompany.all
     @couriers_companies.each do |company|

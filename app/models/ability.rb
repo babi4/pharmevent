@@ -75,15 +75,22 @@ class Ability
 
     #manager
     #chief_accountant
-    general_director
+    #general_director
 
-    #[DocumentsBeznalRashod, DocumentsBeznalSchet, DocumentsNalRashod, DocumentsNalPrihod].each do |document|
-    #  can :manage, document #Все права
-    #  can :sign, document
-    #  can :block_payment, document
-    #  can :pay, document
-    #  can :update_state, document
-    #end
+    [DocumentsBeznalRashod, DocumentsBeznalSchet, DocumentsNalRashod, DocumentsNalPrihod].each do |document|
+      can :read, document
+      can :create, document
+      can :update, document
+      can :remove, document
+
+
+      can :sign, document, :state => %w(added for_revision)
+      can :send_for_revision, document, :state => %w(added)
+      can :send_to_sign, document, :state => 'new'
+      can :block_payment, document, :state => %w(added signed for_revision)
+      can :pay, document, :state => 'signed'
+      can :update_state, document
+    end
 
     can :manage, CouriersTask    # Заказ, управление курьерами
     can :manage, CouriersCompany # Управление местами доставки для курьеров
