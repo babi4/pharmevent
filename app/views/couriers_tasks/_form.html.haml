@@ -75,7 +75,7 @@
       = f.button :submit, 'Добавить', :class => 'btn btn-primary', :id => 'courier-company-add'
 
 #newMemberModal.modal.hide.fade{:role => "dialog", :tabindex => "-1"}
-  = simple_form_for(CouriersCompanyMember.new, :html => {:class => 'form-validate' }) do |f|
+  = simple_form_for([CouriersCompany.first, CouriersCompany.first.couriers_company_members.new], :html => {:class => 'form-validate' }) do |f|
     .modal-header
       %button.close{"data-dismiss" => "modal", :type => "button"} ×
       %h3 Новое контактное лицо

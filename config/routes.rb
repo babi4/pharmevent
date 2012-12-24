@@ -19,8 +19,9 @@ Rails3BootstrapDeviseCancan::Application.routes.draw do
 
   resources :clients
   resources :couriers_tasks
-  resources :couriers_companies
-  resources :couriers_company_members, :only => [:create]
+  resources :couriers_companies do
+    resources :couriers_company_members, :only => [:index, :create]
+  end
 
   resources :users do
     put 'change_pass', :on => :member
