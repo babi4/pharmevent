@@ -27,6 +27,19 @@
 %p
   %b Посылки из данного места:
   = @couriers_company.from_couriers_tasks.pluck(:name)
+%p
+  %b Контактные лица:
+%table
+  %thead
+    %tr
+      %th Имя
+      %th Телефон
+      %th
+  - @couriers_company.couriers_company_members.each do |member|
+    %tr
+      %td= member.name
+      %td= member.telephone
+      %td= link_to 'Удалить', [@couriers_company, member], method: :delete, data: { confirm: 'Удалить контактное лицо?' }
 
 = link_to 'Edit', edit_couriers_company_path(@couriers_company)
 \|
