@@ -38,7 +38,7 @@ class DocumentsBeznalSchetsController < ApplicationController
         info_date_schet: date_now,
         info_date_act: date_now,
         info_return_date: date_now,
-        num_schet: DocumentsBeznalSchet.maximum(:num_schet) + 1
+        num_schet: DocumentsBeznalSchet.next_num_schet
       }
 
     respond_to do |format|
