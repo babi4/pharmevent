@@ -1,6 +1,8 @@
+# encoding: utf-8
+
 class CompanyMembersController < ApplicationController
   authorize_resource
-  #before_filter :detect_company
+  before_filter :detect_company
 
   def index
     @company_members = @company.company_members
@@ -38,7 +40,7 @@ class CompanyMembersController < ApplicationController
 
     respond_to do |format|
       if @company_member.save
-        format.html { redirect_to [@company, @company_member], notice: 'Company member was successfully created.' }
+        format.html { redirect_to [@company], notice: 'Представитель добавлен.' }
         format.json { render json: @company_member, status: :created, location: @company_member }
       else
         format.html { render action: "new" }
@@ -48,27 +50,27 @@ class CompanyMembersController < ApplicationController
   end
 
   def update
-    company = Company.find(params[:company_member][:company_id])
+    @company_member = @company.company_members.find(params[:id])
 
-    if params[:company_member][:id].to_i > 0
-      company_member = company.company_members.find(params[:company_member][:id])
-      company_member.attributes = params[:company_member]
-      member_action = 'edit'
-    else
-      company_member = company.company_members.new(params[:company_member].except(:id))
-      member_action = 'new'
+    respond_to do |format|
+      if @company_member.update_attributes(params[:company_member])
+        format.html { redirect_to [@company], notice: 'Представитель сохранен.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @company_member.errors, status: :unprocessable_entity }
+      end
     end
-
-    company_member.save
-
-    render :json => {:company_member => company_member, :member_action => member_action}
   end
 
   def destroy
     company_member = Company.find(params[:company_id]).company_members.find(params[:id])
     company_member.destroy
 
-    render :json => params[:id]
+    respond_to do |format|
+      format.html { redirect_to @company }
+      format.json { head :no_content }
+    end
   end
 
   private

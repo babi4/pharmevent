@@ -1,7 +1,11 @@
-%h1 Editing company_member
+%ul.breadcrumb
+  %li
+    = link_to 'Заказчики', companies_path
+    %span.divider /
+  %li
+    = link_to @company.name, @company
+    %span.divider /
+  %li.active
+    = @company_member.name
 
 = render 'form'
-
-= link_to 'Show', [@company, @company_member]
-\|
-= link_to 'Back', company_company_members_path

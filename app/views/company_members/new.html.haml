@@ -1,5 +1,10 @@
-%h1 New company_member
+%ul.breadcrumb
+  %li
+    = link_to 'Заказчики', companies_path
+    %span.divider /
+  %li
+    = link_to @company.name, @company
+    %span.divider /
+  %li.active Новый представитель
 
 = render 'form'
-
-= link_to 'Back', company_company_members_path(@company)

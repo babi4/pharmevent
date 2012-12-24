@@ -15,7 +15,6 @@
 
 .row.row-company-info
   .span9.company-info
-    %span6
     %h4.no-margin Контактная информация
     %h5.no-margin
       Юридический адрес
@@ -128,52 +127,43 @@
         %br
         = @company.bank_bik
 
-  .span3
-    %h4.no-margin
-      Представители
-      %a{:href => '#', :class => 'btn btn-mini', "data-toggle" => "modal", :href => "#companyMemberModal", :id => "newCompanyMember"} добавить
-    - if @company.company_members.length > 0
-      %ul.unstyled.company-members
-        - @company.company_members.each do |member|
-          %li{'data-member-id' => member.id}
-            %a{"data-toggle" => "modal", :href => "#companyMemberModal", :class => 'company-member-edit'}>= member.name
-            - unless member.position.empty?
-              = ", #{member.position}"
-            - if !member.telephone.empty? && !member.email.empty?
-              %br
-              = "#{member.telephone}, " 
-              = mail_to member.email
-            - elsif !member.telephone.empty? || !member.email.empty?
-              %br
-              = member.telephone unless member.telephone.empty?
-              = mail_to member.email unless member.email.empty?
+%hr
 
-#companyMemberModal.form-validate.modal.hide.fade{:role => "dialog", :tabindex => "-1"}
-  .modal-header
-    %button.close{"data-dismiss" => "modal", :type => "button"} ×
-    %h3 Новый представитель
-  .modal-body.form-horizontal
-    %input{:type => 'hidden', :id => "memberId"}
-    %input{:type => 'hidden', :id => "companyId", :value => @company.id}
-    .control-group
-      %label.control-label{:for => "memberName"} ФИО
-      .controls
-        %input#memberName{:type => "text", "data-required" => 'true'}
-    .control-group
-      %label.control-label{:for => "memberPhone"} Телефон
-      .controls
-        %input#memberPhone{:type => "text"}
-    .control-group
-      %label.control-label{:for => "memberPosition"} Должность
-      .controls
-        %input#memberPosition{:type => "text"}
-    .control-group
-      %label.control-label{:for => "memberEmail"} E-mail
-      .controls
-        %input#memberEmail{:type => "email"}
-  .modal-footer
-    = button_tag 'Удалить', :class => 'btn', :id => 'delete-member'
-    = button_tag 'Добавить', :class => 'btn btn-primary', :id => 'save-member'
+.row.row-top-actions
+  .span8
+    .input-prepend.pull-left
+      %span.add-on
+        %i.icon-search
+      %input.span4#input-filter{:placeholder => "Поиск представителей", :type => "text"}
+  .span4
+    = link_to 'Добавить представителя', new_company_company_member_path(@company), :class => 'btn pull-right'
+
+.row
+  .span12
+    - if @company.company_members.length > 0
+      %table.table.table-striped.table-condensed.table-hover#table-filter
+        %thead
+          %tr
+            %th.td-30{'data-sort' => 'string'} ФИО
+            %th.td-20{'data-sort' => 'string'} Должность
+            %th.td-15{'data-sort' => 'string'} Телефон
+            %th.td-25{'data-sort' => 'string'} E-mail
+            %th.td-10
+
+        - @company.company_members.each do |member|
+          %tr
+            %td= member.name
+            %td= member.position
+            %td= member.telephone
+            %td= member.email
+            %td
+              .btn-group.pull-right
+                = link_to 'Редактировать', edit_company_company_member_path(@company, member), {:class => 'btn btn-mini'}
+                %button.btn.btn-mini.dropdown-toggle{"data-toggle" => "dropdown"}
+                  %span.caret
+                %ul.dropdown-menu.dropdown-menu-narrow.dropdown-menu-left
+                  %li
+                    = link_to 'Удалить', [@company, member], method: :delete, data: { confirm: 'Удалить представителя?' }
 
 :javascript
   window.companyMembers = #{@company.company_members.to_json}
