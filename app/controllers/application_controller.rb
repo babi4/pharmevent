@@ -13,10 +13,7 @@ class ApplicationController < ActionController::Base
 
       if transactions_collection.include?( transaction ) && can?( transaction.to_sym, document )
         document.send transaction
+        document.update_attributes(state_note: state_note)
       end
-
-      document.update_attributes(state_note: state_note)
-
     end
-
 end
