@@ -15,7 +15,7 @@
       %th.clients-degree{'data-sort' => 'string'} Ученая степень
       %th.clients-work{'data-sort' => 'string'} Работа
       %th.clients-notes Примечания
-      %th
+      %th.td-10
 
   - @clients.each do |client|
     %tr{"data-link" => url_for(:action => 'show', :id => client.id)}
@@ -38,12 +38,14 @@
         %br
         = "#{client.work}"
       %td= client.notes
-      %td.event-actions
+      %td
         .btn-group.pull-right
-          = link_to 'Редактировать', edit_client_path(client), {:class => 'btn btn-mini'}
+          = link_to 'Войти', client, {:class => 'btn btn-mini'}
           %button.btn.btn-mini.dropdown-toggle{"data-toggle" => "dropdown"}
             %span.caret
           %ul.dropdown-menu.dropdown-menu-narrow.dropdown-menu-left
+            %li
+              = link_to 'Редактировать', edit_client_path(client)
             %li
               = link_to 'Удалить', client, method: :delete, data: { confirm: 'Удалить клиента?' }
 

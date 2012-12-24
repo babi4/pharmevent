@@ -33,12 +33,14 @@
 
       %td.filter-date{"data-sort-value" => couriers_task.due_time.to_i}
         = couriers_task.due_time.strftime("%d.%m.%y в %H:%M") 
-      %td.event-actions
+      %td
         .btn-group
-          = link_to 'Редактировать', edit_couriers_task_path(couriers_task), {:class => 'btn btn-mini'}
+          = link_to 'Войти', couriers_task, {:class => 'btn btn-mini'}
           %button.btn.btn-mini.dropdown-toggle{"data-toggle" => "dropdown"}
             %span.caret
-          %ul.dropdown-menu.dropdown-menu-narrow
+          %ul.dropdown-menu.dropdown-menu-narrow.dropdown-menu-left
+            %li
+              = link_to 'Редактировать', edit_couriers_task_path(couriers_task)
             %li
               = link_to 'Удалить', couriers_task, method: :delete, data: { confirm: 'Удалить задание?' }
 

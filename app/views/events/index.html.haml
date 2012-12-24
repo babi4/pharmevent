@@ -23,7 +23,7 @@
       %th.events-date{'data-sort' => 'int'} Начало
       %th.events-date{'data-sort' => 'int'} Конец
       %th.events-city{'data-sort' => 'string'}  Город
-      %th.events-actions
+      %th.td-10
   - @events.includes([:company]).each do |event|
     %tr{"data-link" => url_for(:action => 'show', :id => event.id)}
       %td= event.name
@@ -33,7 +33,7 @@
       %td.events-date.filter-date{"data-sort-value" => event.date_end.to_time.to_i}
         = event.date_end.strftime("%d.%m.%y")
       %td= event.city
-      %td.event-actions
+      %td
         .btn-group
           = link_to 'Войти', event, {:class => 'btn btn-mini'}
           %button.btn.btn-mini.dropdown-toggle{"data-toggle" => "dropdown"}

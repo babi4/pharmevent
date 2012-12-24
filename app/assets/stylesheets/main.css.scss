@@ -204,6 +204,10 @@ input.input-required, select.input-required {
 .table {
   td, th {
     vertical-align: middle;
+
+    &.pagination-centered {
+      text-align: center;
+    }
   }
   &.table-center {
     td, th {

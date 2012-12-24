@@ -10,23 +10,24 @@
 %table.table.table-striped.table-condensed.table-hover.table-links#table-filter
   %thead
     %tr
-      %th{'data-sort' => 'string'} Заказчик
-      %th{'data-sort' => 'string'} Представитель
-      %th{'data-sort' => 'string'} Количество мероприятий
-      %th{'data-sort' => 'string'} Перечисленные средства
-      %th
+      %th.td-25{'data-sort' => 'string'} Заказчик
+      %th.td-15{'data-sort' => 'string'} Телефон
+      %th.td-25{'data-sort' => 'string'} Почта
+      %th.td-10.pagination-centered{'data-sort' => 'string'} Мероприятий
+      %th.td-15{'data-sort' => 'string'} Перечислено
+      %th.td-10
 
   - @companies.each do |company|
     %tr{"data-link" => url_for(:action => 'show', :id => company.id)}
-      %td.company-name= company.name
-      %td.company-members
-        - if company_member = company.company_members.first
-          = [company_member.name, company_member.position, company_member.telephone, company_member.email].reject(&:empty?).join(', ')
-      %td.company-events= company.events.count
-      %td.company-events= company.transferred_funds
-      %td.event-actions
+      %td= company.name
+      %td= company.telephone
+      %td= company.email
+      %td.pagination-centered= company.events.count
+      %td
+        #{company.transferred_funds} руб.
+      %td
         .btn-group.pull-right
-          = link_to 'Показать', company, {:class => 'btn btn-mini'}
+          = link_to 'Войти', company, {:class => 'btn btn-mini'}
           %button.btn.btn-mini.dropdown-toggle{"data-toggle" => "dropdown"}
             %span.caret
           %ul.dropdown-menu.dropdown-menu-narrow.dropdown-menu-left
