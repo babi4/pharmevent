@@ -60,3 +60,8 @@ $ ->
           index = window.companyMembers.indexOf member
           window.companyMembers.splice index, 1
           $('#companyMemberModal').modal 'hide'
+
+  $('#company_ur_post_equal').on 'change', ->
+    $('#company-post-address').animate 
+        'height': 'toggle'
+      , 333

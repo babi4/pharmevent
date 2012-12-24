@@ -38,27 +38,28 @@
       = f.check_box :ur_post_equal
       Тот же
 
-  .row
-    .span2
-      = f.label :post_zip_code, "Индекс"
-      = f.text_field :post_zip_code, :class => 'span2'
-    .span3
-      = f.label :post_city, "Город"
-      = f.text_field :post_city, :class => 'span3'
-    .span3
-      = f.label :post_street, "Улица"
-      = f.text_field :post_street, :class => 'span3'
+  #company-post-address{:class => ("hide" if @company.ur_post_equal?)}
+    .row
+      .span2
+        = f.label :post_zip_code, "Индекс"
+        = f.text_field :post_zip_code, :class => 'span2'
+      .span3
+        = f.label :post_city, "Город"
+        = f.text_field :post_city, :class => 'span3'
+      .span3
+        = f.label :post_street, "Улица"
+        = f.text_field :post_street, :class => 'span3'
 
-  .row
-    .span1
-      = f.label :post_house, "Дом"
-      = f.text_field :post_house, :class => 'span1'
-    .span1
-      = f.label :post_stroenie, "Строение"
-      = f.text_field :post_stroenie, :class => 'span1'
-    .span1
-      = f.label :post_office, "Офис"
-      = f.text_field :post_office, :class => 'span1'
+    .row
+      .span1
+        = f.label :post_house, "Дом"
+        = f.text_field :post_house, :class => 'span1'
+      .span1
+        = f.label :post_stroenie, "Строение"
+        = f.text_field :post_stroenie, :class => 'span1'
+      .span1
+        = f.label :post_office, "Офис"
+        = f.text_field :post_office, :class => 'span1'
 
   %legend Контактная информация
   .row
