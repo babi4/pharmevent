@@ -1,3 +1,9 @@
+%ul.breadcrumb
+  %li
+    = link_to 'Пользователи', users_path
+    %span.divider /
+    = link_to @user.name, @user
+
 = simple_form_for(@user) do |f|
   = f.error_notification
 
@@ -6,8 +12,6 @@
     = f.input :last_name
     = f.input :middle_name
     = f.input :email
-    = f.input :password
-    = f.association :roles, :as => :radio_buttons
     = f.input :salary
     = f.input :percent
 

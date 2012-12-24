@@ -26,6 +26,7 @@
             %a.btn.btn-mini{"data-toggle" => "modal", :href => "#password-options-#{user.id}", :type => "button"} Change password
             = render user
 
+          %td= link_to("Edit user", edit_user_path(user), :method => :get, :class => 'btn btn-mini')
           %td= link_to("Delete user", user_path(user), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'btn btn-mini') unless user == current_user
 
   = link_to 'New User', new_user_path

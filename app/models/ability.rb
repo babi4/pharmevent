@@ -15,6 +15,9 @@ class Ability
     # Генеральный директор: видит все проекты всех менеджеров.
     # Финансовые показатели мероприятия: рентабильность, прибыль.
 
+    can :manage, User            # Управление учётными записями/правами
+    can :manage, :user_passwords # Изменение паролей пользователей
+
     [DocumentsBeznalRashod, DocumentsBeznalSchet, DocumentsNalRashod, DocumentsNalPrihod].each do |document|
       can :read, document, :state => %w(added signed for_revision paid not_for_payment)
       can :update, document, :state => %w(added signed for_revision paid)
@@ -98,14 +101,15 @@ class Ability
     can :manage, Client          # Управление клиентской базой
     can :manage, CompanyMember   # Управление предствителями заказчика
     can :manage, Company         # Управление заказчиками
+
     can :manage, User            # Управление учётными записями/правами
+    can :manage, :user_passwords # Изменение паролей пользователей
 
     can :manage, Role
     #can :manage, :all
 
     can :access, :rails_admin   # grant access to rails_admin
     can :dashboard              # grant access to the dashboard
-    can :manage, :user_passwords # Изменение паролей пользователей
   end
 
 end
