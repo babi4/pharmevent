@@ -18,8 +18,8 @@
           %td= user.email
           %td= user.created_at.to_date
           %td= user_role = user.roles.first ; user_role.name.titleize unless user_role.nil?
-          %td= user.salary/100.0
-          %td= "#{user.percent}% (#{user.salary*user.percent/10.0**4})"
+          %td= user.salary/100.0 if user.salary
+          %td= "#{user.percent}% (#{user.salary*user.percent/10.0**4})" if user.salary && user.percent
           %td
             %a.btn.btn-mini{"data-toggle" => "modal", :href => "#role-options-#{user.id}", :type => "button"} Change role
           %td
