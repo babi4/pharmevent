@@ -25,7 +25,7 @@
         %input.input-date{:type => "text", :name => 'date', :value => @couriers_task.due_time.strftime("%d.%m.%Y")}
       %input.timepicker.inline-block{:type => "text", :name => 'time', :value => @couriers_task.due_time.strftime("%H:%M")}
       %i.icon-time.timepicker-icon
-      = f.button :submit, 'Сохранить', :class => 'btn btn-primary btn-primary-submit'
+      = f.button :submit, 'Сохранить', :class => 'btn btn-primary btn-primary-submit', :id => "btn-courier-task-save"
 
   .row
     .span3

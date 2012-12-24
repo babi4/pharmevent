@@ -8,3 +8,6 @@
   %li.active Новый представитель
 
 = render 'form'
+
+- content_for :title do
+  = "Заказчики / #{@company.name} / Новый представитель"

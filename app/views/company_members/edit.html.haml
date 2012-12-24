@@ -9,3 +9,6 @@
     = @company_member.name
 
 = render 'form'
+
+- content_for :title do
+  = "Заказчики / #{@company.name} / #{@company_member.name}"

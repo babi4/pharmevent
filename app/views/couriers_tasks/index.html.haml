@@ -26,10 +26,10 @@
   - @couriers_tasks.includes([:user, :from_couriers_company, :to_couriers_company]).each do |couriers_task|
     %tr{"data-link" => url_for(:action => 'show', :id => couriers_task.id)}
       %td= couriers_task.from_couriers_company[:name]
-      %td= couriers_task.from_couriers_company_member[:name]
+      %td= couriers_task.from_couriers_company_member[:name] if couriers_task.from_couriers_company_member
 
       %td= couriers_task.to_couriers_company[:name]
-      %td= couriers_task.to_couriers_company_member[:name]
+      %td= couriers_task.to_couriers_company_member[:name] if couriers_task.to_couriers_company_member
 
       %td.filter-date{"data-sort-value" => couriers_task.due_time.to_i}
         = couriers_task.due_time.strftime("%d.%m.%y в %H:%M") 
