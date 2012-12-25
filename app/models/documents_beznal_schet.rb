@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 class DocumentsBeznalSchet < ActiveRecord::Base
   extend DocumentStatesModule
   DocumentStatesModule.included(self)
@@ -11,6 +13,7 @@ class DocumentsBeznalSchet < ActiveRecord::Base
   belongs_to :company
 
   validates :event_id, :user_id, :company_id, :summ, :nds, :presence => true
+  validate :state_act_typo
 
   before_create do
     self.num_schet = DocumentsBeznalSchet.next_num_schet
@@ -20,5 +23,16 @@ class DocumentsBeznalSchet < ActiveRecord::Base
   def self.next_num_schet
     DocumentsBeznalSchet.unscoped.where { date_schet > DateTime.now.beginning_of_year } .count + 1
   end
+
+  private
+
+    def state_act_typo
+      unless info_state_act.nil? || %w(отправлен неотправлен).include?(info_state_act)
+        errors.add(:info_state_act, "Недопустимое значение. (отправлен неотправлен)")
+      end
+      unless info_type_return_act.nil? || %w(почтой курьером службой\ доставки).include?(info_type_return_act)
+        errors.add(:info_state_act, "Недопустимое значение. (почтой курьером службой_доставки)")
+      end
+    end
 
 end

@@ -13,10 +13,20 @@ class DocumentsBeznalRashod < ActiveRecord::Base
 
   validates :event_id, :user_id, :company, :type_company, :summ, :presence => true
   #validate :lectors_and_entire_fields
+  validate :state_act_typo
 
 
 
   private
+
+    def state_act_typo
+      unless info_state_act.nil? || %w(отправлен неотправлен).include?(info_state_act)
+        errors.add(:info_state_act, "Недопустимое значение. (отправлен неотправлен)")
+      end
+      unless info_type_return_act.nil? || %w(почтой курьером службой\ доставки).include?(info_type_return_act)
+        errors.add(:info_state_act, "Недопустимое значение. (почтой курьером службой_доставки)")
+      end
+    end
 
     def lectors_and_entire_fields
       unless lectors ^ entire
