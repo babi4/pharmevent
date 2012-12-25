@@ -8,7 +8,7 @@
   .row
     .span4
       %h4 Откуда
-      %input.company-select#from-company{'data-type' => 'from'}
+      %input.company-select.no-margin#from-company{'data-type' => 'from', type: 'text'}
       %a.btn.btn-small.new-company.hide#new-from-company{'data-toggle' => 'modal', 'data-type' => 'from', href: '#newAddressModal'} добавить
       %br
       %span.couriers-company-address#couriers-from-company-address
@@ -17,13 +17,13 @@
       .couriers-member-b.hide#couriers-from-member
         Отправитель
         %br
-        %input.people-select#from-people{'data-type' => 'from'}
+        %input.people-select#from-people{'data-type' => 'from', type: 'text'}
         %a.btn.btn-small.new-company-member.hide#new-from-company-member{'data-toggle' => 'modal', 'data-type' => 'from',  href: '#newMemberModal', class: 'btn btn-mini'} добавить
 
 
     .span4
       %h4 Куда
-      %input.company-select#to-company{'data-type' => 'to'}
+      %input.company-select#to-company{'data-type' => 'to', type: 'text'}
       %a.btn.btn-small.new-company.hide#new-to-company{'data-toggle' => 'modal', 'data-type' => 'to', href: '#newAddressModal'} добавить
       %br
       %span.couriers-company-address#couriers-to-company-address
@@ -32,7 +32,7 @@
       .couriers-member-b.hide#couriers-to-member
         Получатель
         %br
-        %input.people-select#to-people{'data-type' => 'to'}
+        %input.people-select#to-people{'data-type' => 'to', type: 'text'}
         %a.btn.btn-small.new-company-member.hide#new-to-company-member{'data-toggle' => 'modal', 'data-type' => 'to', href: '#newMemberModal', class: 'btn btn-mini'} добавить
 
     .span4

@@ -1,4 +1,5 @@
 $ ->
+  currentModalType = false
   
   $('#btn-courier-task-save').on 'click', (e) ->
     e.preventDefault()
@@ -50,10 +51,12 @@ $ ->
 
   $('.new-company').on 'click', ->
     type = $(@).data 'type'
+    currentModalType = type
     $('#couriers_company_name').val $("##{type}-company").val()
 
   $('.new-company-member').on 'click', ->
     type = $(@).data 'type'
+    currentModalType = type
     $('#couriers_member_name').val $("##{type}-people").val()
 
   $('#courier-company-member-add').on 'click', ->
@@ -66,4 +69,8 @@ $ ->
         company_id: company_id
         (data) ->
           initMembersSelect company_id
+          $("#couriers_task_#{currentModalType}_couriers_company_member_id").val data.id
+          $("#{currentModalType}-people").val data.name
+          $("#new-#{currentModalType}-company-member").hide()
           $('#newMemberModal').modal 'hide'
+          $('#couriers_member_telephone').val ''
