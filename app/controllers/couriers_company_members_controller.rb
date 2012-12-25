@@ -1,8 +1,8 @@
 # encoding: utf-8
 
 class CouriersCompanyMembersController < ApplicationController
-  load_and_authorize_resource :couriers_company
-  load_and_authorize_resource :couriers_company_member, :through => :couriers_company
+  load_and_authorize_resource :couriers_company, :only => :index
+  load_and_authorize_resource :couriers_company_member, :through => :couriers_company, :only => :index
 
   def index
     respond_to do |format|
@@ -11,13 +11,16 @@ class CouriersCompanyMembersController < ApplicationController
   end
 
   def create
+    company = CouriersCompany.find params[:company_id]
+    company_member = company.couriers_company_members.create params[:company_member]
+
     respond_to do |format|
-      if @couriers_company_member.save
-        format.html { redirect_to request.referer, notice: 'Контактное лицо добавлено.'  }
-        #format.json { render json: @couriers_company_member, status: :created, location: @couriers_company }
+      if company_member.save
+        #format.html { redirect_to request.referer, notice: 'Контактное лицо добавлено.'  }
+        format.json { render json: company_member, status: :created }
       else
-        format.html { redirect_to request.referer, alert: 'Произошла ошибка.'  }
-        #format.json { render json: @couriers_company_member.errors, status: :unprocessable_entity }
+        #format.html { redirect_to request.referer, alert: 'Произошла ошибка.'  }
+        format.json { render json: company_member.errors, status: :unprocessable_entity }
       end
     end
   end

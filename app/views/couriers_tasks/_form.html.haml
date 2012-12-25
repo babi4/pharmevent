@@ -1,52 +1,48 @@
 = simple_form_for(@couriers_task, :html => {:class => 'form-validate form-courier-task' }) do |f|
   = f.error_notification
+  = f.hidden_field :from_couriers_company_id
+  = f.hidden_field :from_couriers_company_member_id
+  = f.hidden_field :to_couriers_company_id
+  = f.hidden_field :to_couriers_company_member_id
 
   .row
     .span4
-      %label 
-        Откуда
-        %a{'data-toggle' => 'modal', href: '#newAddressModal', class: 'btn btn-mini'} новое место
-      = f.collection_select(:from_couriers_company_id, @couriers_companies, :id, :name, {}, class: 'span4', "data-required" => true)
-      %span.couriers-company-address
-
-    .span4
-      %label
+      %h4 Откуда
+      %input.company-select#from-company{'data-type' => 'from'}
+      %a.btn.btn-small.new-company.hide#new-from-company{'data-toggle' => 'modal', 'data-type' => 'from', href: '#newAddressModal'} добавить
+      %br
+      %span.couriers-company-address#couriers-from-company-address
+      %br
+      %br
+      .couriers-member-b.hide#couriers-from-member
         Отправитель
-        %a{'data-toggle' => 'modal', href: '#newMemberModal', class: 'btn btn-mini'} новое контактное лицо
-      = f.collection_select(:from_couriers_company_member_id, @couriers_company_members, :id, :name, {}, class: 'span4', "data-required" => true)
+        %br
+        %input.people-select#from-people{'data-type' => 'from'}
+        %a.btn.btn-small.new-company-member.hide#new-from-company-member{'data-toggle' => 'modal', 'data-type' => 'from',  href: '#newMemberModal', class: 'btn btn-mini'} добавить
 
-  %br
-
-  .row
-    .span4
-      %label 
-        Куда
-        %a{'data-toggle' => 'modal', href: '#newAddressModal', class: 'btn btn-mini'} новое место
-      = f.collection_select(:to_couriers_company_id, @couriers_companies, :id, :name, {}, class: 'span4', "data-required" => true)
-      %span.couriers-company-address
 
     .span4
-      %label
+      %h4 Куда
+      %input.company-select#to-company{'data-type' => 'to'}
+      %a.btn.btn-small.new-company.hide#new-to-company{'data-toggle' => 'modal', 'data-type' => 'to', href: '#newAddressModal'} добавить
+      %br
+      %span.couriers-company-address#couriers-to-company-address
+      %br
+      %br
+      .couriers-member-b.hide#couriers-to-member
         Получатель
-        %a{'data-toggle' => 'modal', href: '#newMemberModal', class: 'btn btn-mini'} новое контактное лицо
-      = f.collection_select(:to_couriers_company_member_id, @couriers_company_members, :id, :name, {}, class: 'span4', "data-required" => true)
+        %br
+        %input.people-select#to-people{'data-type' => 'to'}
+        %a.btn.btn-small.new-company-member.hide#new-to-company-member{'data-toggle' => 'modal', 'data-type' => 'to', href: '#newMemberModal', class: 'btn btn-mini'} добавить
 
-  %br
-
-  .row
     .span4
-      %label.no-margin Когда
+      %h4.couriers-date Когда
       .input-prepend.date-picker.inline-block{"data-date" => @couriers_task.due_time.strftime("%d.%m.%Y")}
         %span.add-on
           %i.icon-calendar
         %input.input-date{:type => "text", :name => 'date', :value => @couriers_task.due_time.strftime("%d.%m.%Y")}
       %input.timepicker.inline-block{:type => "text", :name => 'time', :value => @couriers_task.due_time.strftime("%H:%M")}
       %i.icon-time.timepicker-icon
-
-  %br
-  
-  .row
-    .span4
       = f.button :submit, 'Сохранить', :class => 'btn btn-primary btn-primary-submit', :id => "btn-courier-task-save"
 
 
@@ -84,18 +80,19 @@
       = f.button :submit, 'Добавить', :class => 'btn btn-primary', :id => 'courier-company-add'
 
 #newMemberModal.modal.hide.fade{:role => "dialog", :tabindex => "-1"}
-  = simple_form_for([CouriersCompany.first, CouriersCompany.first.couriers_company_members.new], :html => {:class => 'form-validate' }) do |f|
+  = form_tag("#", :class => 'form-validate', :id => 'form-company-member') do
+    = hidden_field_tag :couriers_member_company, ""
     .modal-header
       %button.close{"data-dismiss" => "modal", :type => "button"} ×
       %h3 Новое контактное лицо
     .modal-body
-      = f.label :name, "Имя"
-      = f.text_field :name, :class => 'input-modal-full', "data-required" => 'true'
-      = f.label :telephone, "Телефон"
-      = f.text_field :telephone, :class => 'input-modal-full', "data-required" => 'true'
+      = label_tag :couriers_member_name, "Имя"
+      = text_field_tag :couriers_member_name, '', :class => 'input-modal-full', "data-required" => 'true'
+      = label_tag :couriers_member_telephone, "Телефон"
+      = text_field_tag :couriers_member_telephone, '', :class => 'input-modal-full', "data-required" => 'true'
 
     .modal-footer
-      = f.button :submit, 'Добавить', :class => 'btn btn-primary', :id => 'courier-company-member-add'
+      = button_tag 'Добавить', :type => 'button', :class => 'btn btn-primary', :id => 'courier-company-member-add'
 
 :javascript
-  window.companies = #{@couriers_companies.to_json}
+  window.couriers_companies = #{@couriers_companies.to_json}

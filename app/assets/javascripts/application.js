@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery-ui-1.9.2.custom.min
 //= require underscore.min
 //= require bootstrap
 //= require date
