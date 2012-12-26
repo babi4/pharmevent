@@ -9,17 +9,21 @@
   %li
     = link_to 'редактирование', edit_couriers_task_path(@couriers_task)
 
-%h3= @couriers_task.due_time.strftime("%d.%m.%y в %H:%M")
+.row
+  .span10
+    %h3.no-margin
+      = @couriers_task.due_time.strftime("%d.%m.%y в %H:%M")
+      %button.btn.btn-print.pull-right#courier-print Распечатать
 
 .row
-  .span4
+  .span5
     %h4 Отправка
     %p
       = @couriers_task.from_couriers_company[:name]
       %br
       = courier_company_address @couriers_task.from_couriers_company
 
-  .span4
+  .span5
     %h4 Получение
     %p
       = @couriers_task.to_couriers_company[:name]
@@ -27,17 +31,21 @@
       = courier_company_address @couriers_task.to_couriers_company
 
 .row
-  .span4
+  .span5
     = @couriers_task.from_couriers_company_member.name unless @couriers_task.from_couriers_company_member_id.nil?
     %br
     = @couriers_task.from_couriers_company_member.telephone unless @couriers_task.from_couriers_company_member_id.nil?
-  .span4
+  .span5
     = @couriers_task.to_couriers_company_member.name unless @couriers_task.to_couriers_company_member_id.nil?
     %br
     = @couriers_task.to_couriers_company_member.telephone unless @couriers_task.to_couriers_company_member_id.nil?
 
+.row.hide.couriers-map-static
+  .span10
+    %img#couriers-map-static-img{alt:"", locale: "ru"}
+
 .row
-  .span8
+  .span10
     #couriers-map
 
 :javascript

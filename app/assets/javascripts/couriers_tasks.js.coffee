@@ -1,7 +1,21 @@
 $ ->
 
+  ymapsGeocode =  ->
+    ymaps.geocode(window.from_address,
+      results: 1
+    ).then (res) ->
+      fromGeoObject = res.geoObjects.get(0).geometry.getCoordinates()
+      ymaps.geocode(window.to_address,
+        results: 1
+      ).then (res) ->
+        toGeoObject = res.geoObjects.get(0).geometry.getCoordinates()
+        $('#couriers-map-static-img').attr 'src', "http://static-maps.yandex.ru/1.x/?l=map&pt=#{fromGeoObject[1]},#{fromGeoObject[0]},pm2am~#{toGeoObject[1]},#{toGeoObject[0]},pm2bm"
+
   if ymaps? and window.from_address and window.to_address
     ymaps.ready ->
+
+      ymapsGeocode()
+
       couriersMap = new ymaps.Map("couriers-map",
         center: [55.76, 37.64]
         zoom: 7
@@ -18,6 +32,9 @@ $ ->
         couriersMap.geoObjects.add route
       ), (error) ->
         alert "Возникла ошибка: " + error.message
+
+  $('#courier-print').on 'click', ->
+    window.print()
 
   currentModalType = false
   
