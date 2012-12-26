@@ -40,13 +40,13 @@
     %br
     = @couriers_task.to_couriers_company_member.telephone unless @couriers_task.to_couriers_company_member_id.nil?
 
-.row.hide.couriers-map-static
-  .span10
-    %img#couriers-map-static-img{alt:"", locale: "ru"}
-
 .row
   .span10
     #couriers-map
+
+.row.hide.couriers-map-static
+  .span10
+    %img#couriers-map-static-img{alt:"", locale: "ru"}
 
 :javascript
   window.from_address = "#{courier_map_address @couriers_task.from_couriers_company}"

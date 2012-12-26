@@ -1,6 +1,6 @@
 $ ->
 
-  ymapsGeocode =  ->
+  ymapsGeocode = (routeString) ->
     ymaps.geocode(window.from_address,
       results: 1
     ).then (res) ->
@@ -9,12 +9,10 @@ $ ->
         results: 1
       ).then (res) ->
         toGeoObject = res.geoObjects.get(0).geometry.getCoordinates()
-        $('#couriers-map-static-img').attr 'src', "http://static-maps.yandex.ru/1.x/?l=map&pt=#{fromGeoObject[1]},#{fromGeoObject[0]},pm2am~#{toGeoObject[1]},#{toGeoObject[0]},pm2bm"
+        $('#couriers-map-static-img').attr 'src', "http://static-maps.yandex.ru/1.x/?l=map&pl=c:8822DDC0,w:5,#{routeString}&pt=#{fromGeoObject[1]},#{fromGeoObject[0]},pm2am~#{toGeoObject[1]},#{toGeoObject[0]},pm2bm"
 
   if ymaps? and window.from_address and window.to_address
     ymaps.ready ->
-
-      ymapsGeocode()
 
       couriersMap = new ymaps.Map("couriers-map",
         center: [55.76, 37.64]
@@ -30,6 +28,8 @@ $ ->
         mapStateAutoApply: true
       ).then ((route) ->
         couriersMap.geoObjects.add route
+        routeString = ("#{item[1]},#{item[0]}" for item in route.getPaths().get(0).geometry.getCoordinates())
+        ymapsGeocode routeString.slice(0, -1)
       ), (error) ->
         alert "Возникла ошибка: " + error.message
 
