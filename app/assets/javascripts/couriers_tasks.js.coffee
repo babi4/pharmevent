@@ -1,4 +1,24 @@
 $ ->
+
+  if ymaps? and window.from_address and window.to_address
+    ymaps.ready ->
+      couriersMap = new ymaps.Map("couriers-map",
+        center: [55.76, 37.64]
+        zoom: 7
+      )
+
+      couriersMap.controls
+        .add 'smallZoomControl',
+          right: 5
+          top: 5
+
+      ymaps.route([window.from_address, window.to_address],
+        mapStateAutoApply: true
+      ).then ((route) ->
+        couriersMap.geoObjects.add route
+      ), (error) ->
+        alert "Возникла ошибка: " + error.message
+
   currentModalType = false
   
   $('#btn-courier-task-save').on 'click', (e) ->

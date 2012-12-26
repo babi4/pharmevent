@@ -9,10 +9,43 @@
   %li
     = link_to 'редактирование', edit_couriers_task_path(@couriers_task)
 
-%h3
-  #{@couriers_task.from_couriers_company[:name]} → #{@couriers_task.to_couriers_company[:name]}
-%p
-  = @couriers_task.due_time.strftime("%d.%m.%y в %H:%M")
+%h3= @couriers_task.due_time.strftime("%d.%m.%y в %H:%M")
+
+.row
+  .span4
+    %h4 Отправка
+    %p
+      = @couriers_task.from_couriers_company[:name]
+      %br
+      = courier_company_address @couriers_task.from_couriers_company
+
+  .span4
+    %h4 Получение
+    %p
+      = @couriers_task.to_couriers_company[:name]
+      %br
+      = courier_company_address @couriers_task.to_couriers_company
+
+.row
+  .span4
+    = @couriers_task.from_couriers_company_member.name unless @couriers_task.from_couriers_company_member_id.nil?
+    %br
+    = @couriers_task.from_couriers_company_member.telephone unless @couriers_task.from_couriers_company_member_id.nil?
+  .span4
+    = @couriers_task.to_couriers_company_member.name unless @couriers_task.to_couriers_company_member_id.nil?
+    %br
+    = @couriers_task.to_couriers_company_member.telephone unless @couriers_task.to_couriers_company_member_id.nil?
+
+.row
+  .span8
+    #couriers-map
+
+:javascript
+  window.from_address = "#{courier_map_address @couriers_task.from_couriers_company}"
+  window.to_address = "#{courier_map_address @couriers_task.to_couriers_company}"
 
 - content_for :title do
   Курьеры / Просмотр задания
+
+- content_for :prehead do
+  = javascript_include_tag "http://api-maps.yandex.ru/2.0-stable/?load=package.standard,package.route&lang=ru-RU"
