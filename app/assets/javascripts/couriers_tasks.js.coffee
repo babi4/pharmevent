@@ -45,6 +45,10 @@ $ ->
     else
       $('.form-courier-task').submit()
 
+  setAutocomplete = (el, val) ->
+    el.on "autocompletecreate", (event, ui) ->
+      $(@).focus().val(val).autocomplete "close"
+
   initMembersSelect = (company, type) ->
     $("#couriers_member_company, #couriers_task_#{type}_couriers_company_id").val company
     company_data = _.find window.couriers_companies, (item) -> item.id is parseInt(company)
@@ -62,7 +66,6 @@ $ ->
         select: (event, ui) ->
           type = $(@).data 'type'
           $("#couriers_task_#{type}_couriers_company_member_id").val ui.item.id
-
 
   if window.couriers_companies
     $(".company-select").autocomplete
@@ -85,6 +88,12 @@ $ ->
         type = $(@).data 'type'
         initMembersSelect ui.item.id, type
         $("#couriers-#{type}-member").slideDown(200)
+
+  if window.from_couriers_company
+    setAutocomplete $('#from-company'), window.from_couriers_company
+    setAutocomplete $('#to-company'), window.to_couriers_company
+    setAutocomplete $('#from-people'), window.from_couriers_company_member
+    setAutocomplete $('#to-people'), window.to_couriers_company_member
 
   $('.new-company').on 'click', ->
     type = $(@).data 'type'
