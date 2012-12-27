@@ -45,14 +45,14 @@ $ ->
     else
       $('.form-courier-task').submit()
 
-  setAutocomplete = (el, val) ->
-    el.on "autocompletecreate", (event, ui) ->
-      $(@).focus().val(val).autocomplete "close"
+  setAutocomplete = (type, val, people_val) ->
+    $("##{type}-people").on "autocompletecreate", (event, ui) ->
+      $(@).val people_val
+    $("##{type}-company").on "autocompletecreate", (event, ui) ->
+      $(@).val val
+      initMembersSelect $("#couriers_task_#{type}_couriers_company_id").val(), type
 
   initMembersSelect = (company, type) ->
-    $("#couriers_member_company, #couriers_task_#{type}_couriers_company_id").val company
-    company_data = _.find window.couriers_companies, (item) -> item.id is parseInt(company)
-    $("#couriers-#{type}-company-address").text company_data.full_address
     $.getJSON "/couriers_companies/#{company}/couriers_company_members.json", (data) ->
       $("##{type}-people").autocomplete
         autoFocus: true
@@ -66,6 +66,10 @@ $ ->
         select: (event, ui) ->
           type = $(@).data 'type'
           $("#couriers_task_#{type}_couriers_company_member_id").val ui.item.id
+
+  if window.from_couriers_company
+    setAutocomplete 'from', window.from_couriers_company, window.from_couriers_company_member
+    setAutocomplete 'to', window.to_couriers_company, window.to_couriers_company_member
 
   if window.couriers_companies
     $(".company-select").autocomplete
@@ -86,14 +90,11 @@ $ ->
           $("#couriers-#{type}-member").slideUp(200)
       select: (event, ui) ->
         type = $(@).data 'type'
+        $("#couriers_member_company, #couriers_task_#{type}_couriers_company_id").val ui.item.id
+        company_data = _.find window.couriers_companies, (item) -> item.id is parseInt(ui.item.id)
+        $("#couriers-#{type}-company-address").text company_data.full_address
         initMembersSelect ui.item.id, type
         $("#couriers-#{type}-member").slideDown(200)
-
-  if window.from_couriers_company
-    setAutocomplete $('#from-company'), window.from_couriers_company
-    setAutocomplete $('#to-company'), window.to_couriers_company
-    setAutocomplete $('#from-people'), window.from_couriers_company_member
-    setAutocomplete $('#to-people'), window.to_couriers_company_member
 
   $('.new-company').on 'click', ->
     type = $(@).data 'type'

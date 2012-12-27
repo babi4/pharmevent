@@ -15,7 +15,7 @@
 
     .span4
       %h4 Куда
-      %input.company-select#to-company{'data-type' => 'to', type: 'text', value: (@couriers_task.to_couriers_company.name if @couriers_task.to_couriers_company)}
+      %input.company-select#to-company{'data-type' => 'to', type: 'text'}
       %a.btn.btn-small.new-company.hide#new-to-company{'data-toggle' => 'modal', 'data-type' => 'to', href: '#newAddressModal'} добавить
       %br
       %span.couriers-company-address#couriers-to-company-address
@@ -35,14 +35,14 @@
       .couriers-member-b#couriers-from-member{:class => ("hide" unless @couriers_task.from_couriers_company_member)}
         Отправитель
         %br
-        %input.people-select.no-margin#from-people{'data-type' => 'from', type: 'text', value: (@couriers_task.from_couriers_company_member.name if @couriers_task.from_couriers_company_member)}
+        %input.people-select.no-margin#from-people{'data-type' => 'from', type: 'text'}
         %a.btn.btn-small.new-company-member.hide#new-from-company-member{'data-toggle' => 'modal', 'data-type' => 'from',  href: '#newMemberModal'} добавить
 
     .span4
       .couriers-member-b#couriers-to-member{:class => ("hide" unless @couriers_task.to_couriers_company_member)}
         Получатель
         %br
-        %input.people-select.no-margin#to-people{'data-type' => 'to', type: 'text', value: (@couriers_task.to_couriers_company_member.name if @couriers_task.to_couriers_company_member)}
+        %input.people-select.no-margin#to-people{'data-type' => 'to', type: 'text'}
         %a.btn.btn-small.new-company-member.hide#new-to-company-member{'data-toggle' => 'modal', 'data-type' => 'to', href: '#newMemberModal'} добавить
 
 
