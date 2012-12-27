@@ -121,3 +121,21 @@ $ ->
           $("#new-#{currentModalType}-company-member").hide()
           $('#newMemberModal').modal 'hide'
           $('#couriers_member_telephone').val ''
+
+  $('.btn-courier-member-edit').on 'click', ->
+    member_id = parseInt $(@).data('id')
+    member_data = _.find window.couriersCompanyMembers, (item) -> item.id is member_id
+    $('#form-company-member')
+      .attr('action', "/couriers_companies/#{window.couriersCompanyId}/couriers_company_members/#{member_id}")
+      .find('input[name=_method]').val 'put'
+    $('#company_member_id').val member_data.id
+    $('#company_member_name').val member_data.name
+    $('#couriers-company-member-name').text member_data.name
+    $('#company_member_telephone').val member_data.telephone
+
+  $('#btn-courier-member-add').on 'click', ->
+    $('#form-company-member')
+    .attr('action', "/couriers_companies/#{window.couriersCompanyId}/couriers_company_members/create")
+    .find('input[name=_method]').val 'post'
+    $('#company_member_id, #company_member_name, #company_member_telephone').val ''
+    $('#couriers-company-member-name').text 'Новое контактное лицо'

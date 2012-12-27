@@ -42,7 +42,7 @@ class CouriersCompaniesController < ApplicationController
   def update
     respond_to do |format|
       if @couriers_company.update_attributes(params[:couriers_company])
-        format.html { redirect_to couriers_tasks_path, notice: 'Место сохранено.' }
+        format.html { redirect_to @couriers_company, notice: 'Место сохранено.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

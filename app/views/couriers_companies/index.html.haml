@@ -1,35 +1,31 @@
-%h1 Listing couriers_companies
+.row.row-top-actions
+  .span8
+    .input-prepend.pull-left
+      %span.add-on
+        %i.icon-search
+      %input.span4#input-filter{:placeholder => "Поиск", :type => "text"}
+  .span4.text-right
+    = link_to 'К курьерам', couriers_tasks_path, class: 'btn'
+    = link_to 'Добавить место', new_couriers_company_path, class: 'btn'
 
-%table
-  %tr
-    %th Name
-    %th Zip code
-    %th City
-    %th Street
-    %th House
-    %th Stroenie
-    %th Office
-    %th Посылки в данное место
-    %th Посылки из данного места
-    %th
-    %th
-    %th
+%table.table.table-striped.table-condensed.table-hover.table-links#table-filter
+  %thead
+    %tr
+      %th.td-30{'data-sort' => 'string'} Название
+      %th.td-70{'data-sort' => 'string'} Адрес
+      %th
 
   - @couriers_companies.includes([:to_couriers_tasks, :from_couriers_tasks]).each do |couriers_company|
-    %tr
+    %tr{"data-link" => url_for(:action => 'show', :id => couriers_company.id)}
       %td= couriers_company.name
-      %td= couriers_company.zip_code
-      %td= couriers_company.city
-      %td= couriers_company.street
-      %td= couriers_company.house
-      %td= couriers_company.stroenie
-      %td= couriers_company.office
-      %td= couriers_company.to_couriers_tasks.pluck(:name)
-      %td= couriers_company.from_couriers_tasks.pluck(:name)
-      %td= link_to 'Show', couriers_company
-      %td= link_to 'Edit', edit_couriers_company_path(couriers_company)
-      %td= link_to 'Destroy', couriers_company, method: :delete, data: { confirm: 'Are you sure?' }
-
-%br
-
-= link_to 'New Couriers company', new_couriers_company_path
+      %td= courier_company_address couriers_company
+      %td
+        .btn-group
+          = link_to 'Войти', couriers_company, {:class => 'btn btn-mini'}
+          %button.btn.btn-mini.dropdown-toggle{"data-toggle" => "dropdown"}
+            %span.caret
+          %ul.dropdown-menu.dropdown-menu-narrow.dropdown-menu-left
+            %li
+              = link_to 'Редактировать', edit_couriers_company_path(couriers_company)
+            %li
+              = link_to 'Удалить', couriers_company, method: :delete, data: { confirm: 'Удалить место?' }

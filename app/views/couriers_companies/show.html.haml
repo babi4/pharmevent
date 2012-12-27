@@ -1,48 +1,65 @@
-%p#notice= notice
+%ul.breadcrumb
+  %li
+    = link_to 'Места курьеров', couriers_companies_path
+    %span.divider /
+  %li.active
+    = @couriers_company.name
+    %span.divider
+      |
+  %li
+    = link_to 'редактирование', edit_couriers_company_path(@couriers_company)
 
-%p
-  %b Name:
-  = @couriers_company.name
-%p
-  %b Zip code:
-  = @couriers_company.zip_code
-%p
-  %b City:
-  = @couriers_company.city
-%p
-  %b Street:
-  = @couriers_company.street
-%p
-  %b House:
-  = @couriers_company.house
-%p
-  %b Stroenie:
-  = @couriers_company.stroenie
-%p
-  %b Office:
-  = @couriers_company.office
-%p
-  %b Посылки в данное место:
-  = @couriers_company.to_couriers_tasks.pluck(:name)
-%p
-  %b Посылки из данного места:
-  = @couriers_company.from_couriers_tasks.pluck(:name)
-%p
-  %b Контактные лица:
-%table
-  %thead
-    %tr
-      %th Имя
-      %th Телефон
-      %th
-  - @couriers_company.couriers_company_members.each do |member|
-    %tr
-      %td= member.name
-      %td= member.telephone
-      %td= link_to 'Удалить', [@couriers_company, member], method: :delete, data: { confirm: 'Удалить контактное лицо?' }
+%h3= @couriers_company.name
+%p= courier_company_address @couriers_company
 
-= link_to 'Edit', edit_couriers_company_path(@couriers_company)
-\|
-= link_to 'Back', couriers_companies_path
-\|
-= link_to 'Перейти к заказу курьера', new_couriers_task_path
+%hr
+
+.row.row-top-actions
+  .span4
+    .input-prepend.pull-left
+      %span.add-on
+        %i.icon-search
+      %input.span4#input-filter{:placeholder => "Поиск", :type => "text"}
+  .span4.text-right
+    %a.btn#btn-courier-member-add{'data-toggle' => 'modal', href: '#courierCompanyMemberModal'} Добавить человека
+
+.row
+  .span8
+    %table.table.table-striped.table-condensed.table-hover#table-filter
+      %thead
+        %tr
+          %th.td-70{'data-sort' => 'string'} Имя
+          %th.td-30{'data-sort' => 'string'} Телефон
+          %th
+      - @couriers_company.couriers_company_members.each do |member|
+        %tr
+          %td= member.name
+          %td= member.telephone
+          %td
+            .btn-group
+              %a.btn.btn-mini.btn-courier-member-edit{'data-toggle' => 'modal', 'data-id' => member.id, href: '#courierCompanyMemberModal'} изменить
+              %button.btn.btn-mini.dropdown-toggle{"data-toggle" => "dropdown"}
+                %span.caret
+              %ul.dropdown-menu.dropdown-menu-narrow.dropdown-menu-left
+                %li
+                  = link_to 'Удалить', [@couriers_company, member], method: :delete, data: { confirm: 'Удалить контактное лицо?' }
+
+#courierCompanyMemberModal.modal.hide.fade{:role => "dialog", :tabindex => "-1"}
+  = form_tag("/couriers_companies/#{@couriers_company.id}/couriers_company_members/6", :method => 'put', :class => 'form-validate', :id => 'form-company-member') do
+    = hidden_field_tag :company_id, @couriers_company.id
+    = hidden_field :company_member, :id
+    .modal-header
+      %button.close{"data-dismiss" => "modal", :type => "button"} ×
+      %h3#couriers-company-member-name Новое контактное лицо
+    .modal-body
+      = label :company_member, :name, "Имя"
+      = text_field :company_member, :name, :class => 'input-modal-full', "data-required" => 'true'
+      = label :company_member, :telephone, "Телефон"
+      = text_field :company_member, :telephone, :class => 'input-modal-full', "data-required" => 'true'
+
+    .modal-footer
+      = button_tag 'Сохранить', :type => 'submit', :class => 'btn btn-primary', :id => 'courier-company-member-save'
+
+:javascript
+  window.couriersCompanyId = #{@couriers_company.id}
+  window.couriersCompanyMembers = #{@couriers_company.couriers_company_members.to_json}

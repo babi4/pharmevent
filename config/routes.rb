@@ -20,7 +20,7 @@ Rails3BootstrapDeviseCancan::Application.routes.draw do
   resources :clients
   resources :couriers_tasks
   resources :couriers_companies do
-    resources :couriers_company_members, :only => [:index, :create, :destroy]
+    resources :couriers_company_members, :only => [:index, :create, :update, :destroy]
   end
 
   resources :users do

@@ -1,5 +1,7 @@
-%h1 New couriers_company
+%ul.breadcrumb
+  %li
+    = link_to 'Места курьеров', couriers_companies_path
+    %span.divider /
+  %li.active Новое место
 
 = render 'form'
-
-= link_to 'Back', couriers_companies_path

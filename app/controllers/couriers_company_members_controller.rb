@@ -1,8 +1,8 @@
 # encoding: utf-8
 
 class CouriersCompanyMembersController < ApplicationController
-  load_and_authorize_resource :couriers_company, :only => :index
-  load_and_authorize_resource :couriers_company_member, :through => :couriers_company, :only => :index
+  load_and_authorize_resource :couriers_company, :only => [:index, :update, :destroy]
+  load_and_authorize_resource :couriers_company_member, :through => :couriers_company, :only => [:index, :update, :destroy]
 
   def index
     respond_to do |format|
@@ -16,10 +16,10 @@ class CouriersCompanyMembersController < ApplicationController
 
     respond_to do |format|
       if company_member.save
-        #format.html { redirect_to request.referer, notice: 'Контактное лицо добавлено.'  }
+        format.html { redirect_to request.referer, notice: 'Контактное лицо добавлено.'  }
         format.json { render json: company_member, status: :created }
       else
-        #format.html { redirect_to request.referer, alert: 'Произошла ошибка.'  }
+        format.html { redirect_to request.referer, alert: 'Произошла ошибка.'  }
         format.json { render json: company_member.errors, status: :unprocessable_entity }
       end
     end
@@ -27,8 +27,8 @@ class CouriersCompanyMembersController < ApplicationController
 
   def update
     respond_to do |format|
-      if @couriers_company_member.update_attributes(params[:couriers_company_member])
-        #format.html { redirect_to couriers_tasks_path, notice: 'Задание курьеру изменено.' }
+      if @couriers_company_member.update_attributes(params[:company_member])
+        format.html { redirect_to @couriers_company, notice: 'Контактное лицо сохранено.' }
         format.json { head :no_content }
       else
         #format.html { render action: "edit" }
