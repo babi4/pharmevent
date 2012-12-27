@@ -77,17 +77,22 @@ $ ->
   date_range_start = Date.parse($reportrange_field.data('start-date')) || Date.today()
   date_range_end   = Date.parse($reportrange_field.data('end-date')) || Date.today()
 
+  date_ranges =
+    "Сегодня": ["today", "today"]
+    "За неделю": [Date.today().add(days: -6), "today"]
+    "За 30 дней": [Date.today().add(days: -30), "today"]
+    "За текущий месяц": [Date.today().moveToFirstDayOfMonth(), Date.today().moveToLastDayOfMonth()]
+    "За прошлый месяц": [Date.today().moveToFirstDayOfMonth().add(months: -1), Date.today().moveToFirstDayOfMonth().add(days: -1)]
+    "За все время": ['', '']
+
+  if window.isCouriersPage
+    date_ranges["Невыполненные"] = ["today", Date.today().add(years: 1)]
+
   $reportrange_field.daterangepicker
     opens: 'right'
     startDate: date_range_start
     endDate: date_range_end
-    ranges:
-      "Сегодня": ["today", "today"]
-      "За неделю": [Date.today().add(days: -6), "today"]
-      "За 30 дней": [Date.today().add(days: -30), "today"]
-      "За текущий месяц": [Date.today().moveToFirstDayOfMonth(), Date.today().moveToLastDayOfMonth()]
-      "За прошлый месяц": [Date.today().moveToFirstDayOfMonth().add(months: -1), Date.today().moveToFirstDayOfMonth().add(days: -1)]
-      "За все время": ['', '']
+    ranges: date_ranges
   , (start, end) ->
     if @.active
       start_date = start.toString 'dd.MM.yyyy'
@@ -103,7 +108,10 @@ $ ->
       filter_end = false
       date_range = ''
     filterItems()
-    $("#reportrange").val date_range
+    if @.label is 'Невыполненные'
+      $("#reportrange").val 'Невыполненные'
+    else
+      $("#reportrange").val date_range
 
   if $reportrange_field.data('start-date') && $reportrange_field.data('end-date')
     filter_start = date_range_start.getTime()

@@ -63,3 +63,6 @@
 :javascript
   window.couriersCompanyId = #{@couriers_company.id}
   window.couriersCompanyMembers = #{@couriers_company.couriers_company_members.to_json}
+
+- content_for :title do
+  #{@couriers_company.name}

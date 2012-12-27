@@ -29,3 +29,6 @@
               = link_to 'Редактировать', edit_couriers_company_path(couriers_company)
             %li
               = link_to 'Удалить', couriers_company, method: :delete, data: { confirm: 'Удалить место?' }
+
+- content_for :title do
+  = "Курьеры / Места"

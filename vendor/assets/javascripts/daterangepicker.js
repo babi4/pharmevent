@@ -325,6 +325,7 @@
                 var dates = this.ranges[label];
 
                 if (dates[0] != null && dates[1] != null) {
+                    this.label = label;
                     this.active = true;
                     this.startDate = dates[0];
                     this.endDate = dates[1];

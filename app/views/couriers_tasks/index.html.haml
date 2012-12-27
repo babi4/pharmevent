@@ -5,7 +5,7 @@
         %i.icon-search
       %input.span4#input-filter{:placeholder => "Поиск", :type => "text"}
     .input-append.pull-left
-      %input.input-daterange#reportrange{:type => "text", :placeholder => 'За все время', :value => "#{(DateTime.now - 30.days).strftime("%d.%m.%Y")} - #{DateTime.now.strftime("%d.%m.%Y")}", :readonly => "readonly", "data-start-date" => 't - 30 d', "data-end-date" => 'today'}
+      %input.input-daterange#reportrange{:type => "text", :placeholder => 'За все время', :value => "Невыполненные", :readonly => "readonly", "data-start-date" => 'today', "data-end-date" => 't + 1 y'}
         %span.add-on
           %i.icon-calendar
   .span4.text-right
@@ -44,6 +44,9 @@
               = link_to 'Редактировать', edit_couriers_task_path(couriers_task)
             %li
               = link_to 'Удалить', couriers_task, method: :delete, data: { confirm: 'Удалить задание?' }
+
+:javascript
+  window.isCouriersPage = true
 
 - content_for :title do
   Курьеры
