@@ -8,7 +8,7 @@ class DocumentsBeznalRashodsController < ApplicationController
     update_document_state(@documents_beznal_rashod, params[:transaction], params[:state_note])
 
     respond_to do |format|
-      format.html { redirect_to event_documents_beznal_rashods_path(@event) }
+      format.html { redirect_to @event }
       format.json { head :no_content }
     end
   end
@@ -54,7 +54,7 @@ class DocumentsBeznalRashodsController < ApplicationController
 
     respond_to do |format|
       if @documents_beznal_rashod.save
-        format.html { redirect_to event_documents_beznal_rashods_path(@event), notice: 'Безналичный расход создан.' }
+        format.html { redirect_to @event, notice: 'Безналичный расход создан.' }
         format.json { render json: @documents_beznal_rashod, status: :created, location: @documents_beznal_rashod }
       else
         format.html { render action: "new" }
@@ -66,7 +66,7 @@ class DocumentsBeznalRashodsController < ApplicationController
   def update
     respond_to do |format|
       if @documents_beznal_rashod.update_attributes(params[:documents_beznal_rashod])
-        format.html { redirect_to event_documents_beznal_rashods_path(@event), notice: 'Безналичный расход изменен.' }
+        format.html { redirect_to @event, notice: 'Безналичный расход изменен.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -79,7 +79,7 @@ class DocumentsBeznalRashodsController < ApplicationController
     @documents_beznal_rashod.destroy
 
     respond_to do |format|
-      format.html { redirect_to event_documents_beznal_rashods_path(@event) }
+      format.html { redirect_to @event }
       format.json { head :no_content }
     end
   end

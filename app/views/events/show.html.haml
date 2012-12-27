@@ -79,6 +79,7 @@
         %td= doc.date.strftime("%d.%m.%Y") unless doc.date.blank?
         %td #{doc.summ}р.
         %td
+          /- links_collection(@event, doc)
           .btn-group
             = link_to 'изменить', edit_event_documents_nal_prihod_path(@event, doc), class: 'btn btn-mini'
             %button.btn.btn-mini.dropdown-toggle{"data-toggle" => "dropdown"}
