@@ -4,10 +4,6 @@ module Haml::DocumentsHelper
   def links_collection(event, document)
     document_type = document.class.name.underscore
 
-    if can? :read, document
-      haml_tag :li, link_to( 'Показать', [event, document] )
-    end
-
     if can? :update, document
       haml_tag :li, link_to( 'Изменить', send( "edit_event_#{document_type}_path", event, document ) )
     end
