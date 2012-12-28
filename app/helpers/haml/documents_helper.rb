@@ -25,7 +25,7 @@ module Haml::DocumentsHelper
     end
 
     if can? :send_for_revision, document
-      haml_tag :li, link_to( 'Отправить на доработку', send( "update_state_event_#{document_type}_path", event, document, transaction: "send_for_revision" , state_note: 'Note here'), method: :put )
+      haml_tag :li, link_to( 'Отправить на доработку', '#changeEventStateModal', "data-url" => send( "update_state_event_#{document_type}_path", event, document, transaction: "send_for_revision" ), "data-title" => 'Отправка на доработку', "data-toggle" => 'modal', class: 'document-state-modal' )
     end
 
     if can? :pay, document
@@ -33,7 +33,7 @@ module Haml::DocumentsHelper
     end
 
     if can? :block_payment, document
-      haml_tag :li, link_to( 'Запретить к оплате', send( "update_state_event_#{document_type}_path", event, document, transaction: "block_payment", state_note: 'Note here' ), method: :put )
+      haml_tag :li, link_to( 'Запретить к оплате', '#changeEventStateModal', "data-url" => send( "update_state_event_#{document_type}_path", event, document, transaction: "block_payment" ), "data-title" => 'Запрет оплаты', "data-toggle" => 'modal', class: 'document-state-modal' )
     end
 
   end

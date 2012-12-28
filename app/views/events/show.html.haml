@@ -26,7 +26,7 @@
   %table.table.table-striped.table-condensed.table-bordered.table-center.table-links
     %thead.thead-small
       %tr
-        %th.td-5 №
+        %th.td-10
         %th.text-left Плательщик
         %th.td-10 Счет №
         %th.td-10 Дата счета
@@ -38,6 +38,7 @@
     - @event.documents_beznal_schets.includes(:company).each do |doc|
       %tr{"data-link" => url_for([@event, doc])}
         %td
+          %span.label= event_state_text doc.state
         %td.text-left= link_to doc.company[:name], doc.company
         %td= doc.num_schet
         %td= doc.date_schet.strftime("%d.%m.%y") unless doc.date_schet.blank?
@@ -63,7 +64,7 @@
   %table.table.table-striped.table-condensed.table-bordered.table-center.table-links
     %thead.thead-small
       %tr
-        %th.td-5 №
+        %th.td-10
         %th.text-left Плательщик
         %th.text-left.td-30 Назначение платежа
         %th.td-10 Дата оплаты
@@ -73,12 +74,12 @@
     - @event.documents_nal_prihods.each do |doc|
       %tr{"data-link" => url_for([@event, doc])}
         %td
+          %span.label= event_state_text doc.state
         %td.text-left= doc.company
         %td.text-left= doc.description
         %td= doc.date.strftime("%d.%m.%Y") unless doc.date.blank?
         %td #{doc.summ}р.
         %td
-          /- links_collection(@event, doc)
           .btn-group
             = link_to 'войти', [@event, doc], class: 'btn btn-mini'
             %button.btn.btn-mini.dropdown-toggle{"data-toggle" => "dropdown"}
@@ -98,7 +99,7 @@
   %table.table.table-bordered.table-condensed.table-bordered.table-center.table-links
     %thead.thead-small
       %tr
-        %th.td-5 №
+        %th.td-10
         %th Получатель
         %th.td-25{colspan: 2} Платежные документы
         %th.td-10 Статус
@@ -109,6 +110,7 @@
     - @event.documents_beznal_rashods.each do |doc|
       %tr{"data-link" => url_for([@event, doc])}
         %td{rowspan: 10}
+          %span.label= event_state_text doc.state
         %td{rowspan: 5}= doc.company
         %td Счет №
         %td= doc.num_schet
@@ -163,7 +165,7 @@
   %table.table.table-striped.table-condensed.table-bordered.table-center.table-links
     %thead.thead-small
       %tr
-        %th.td-5 №
+        %th.td-10
         %th Получатель
         %th.td-25 Назначение платежа
         %th.td-10 Статус
@@ -174,6 +176,7 @@
     - @event.documents_nal_rashods.each do |doc|
       %tr{"data-link" => url_for([@event, doc])}
         %td
+          %span.label= event_state_text doc.state
         %td= doc.company
         %td= doc.description
         %td= doc.lectors ? 'Физ. лицо' : 'Агент'
@@ -210,6 +213,17 @@
         %td #{@nds_k_zachetu = @event.documents_beznal_rashods.sum(:nds)}р.
         %td #{@nds_k_uplate - @nds_k_zachetu}р.
         %td #{(@prihod_summ - @rashod_summ) - (@nds_k_uplate - @nds_k_zachetu)}р.
+
+#changeEventStateModal.modal.hide.fade{:role => "dialog", :tabindex => "-1"}
+  .modal-header
+    %button.close{"data-dismiss" => "modal", :type => "button"} ×
+    %h3#document-state-title
+  .modal-body
+    Примечание
+    %br
+    = text_area_tag(:document_state_note, '', :class => "input-modal-full")
+  .modal-footer
+    = link_to 'Сохранить', '#', :class => 'btn btn-primary', :id => 'document-state-save', 'data-method' => 'put'
 
 - content_for :title do
   Мероприятия / #{@event.name}

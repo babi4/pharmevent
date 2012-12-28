@@ -17,3 +17,12 @@ $(document).ready ->
     $.post "/events/#{event_id}/switch_archive", (data) =>
       $(@).closest('tr').fadeOut(250) if data.succ
     false
+
+  $('.document-state-modal').on 'click', ->
+    $('#document-state-title').text $(@).data 'title'
+    $('#document-state-save').attr 'href', $(@).data 'url'
+
+  $('#document-state-save').on 'click', (e) ->
+    e.preventDefault()
+    link = $(@).attr('href') + '&state_note=' + $('#document_state_note').val()
+    $(@).attr('href', link)

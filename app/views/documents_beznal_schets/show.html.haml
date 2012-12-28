@@ -11,6 +11,9 @@
 %p#notice= notice
 
 %p
+  %span.label= event_state_text @documents_beznal_schet.state
+  %span= @documents_beznal_schet.state_note
+%p
   %b Заказчик
   %br
   = link_to @documents_beznal_schet.company[:name], company_path(@documents_beznal_schet.company)

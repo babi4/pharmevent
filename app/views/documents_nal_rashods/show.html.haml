@@ -11,6 +11,9 @@
 %p#notice= notice
 
 %p
+  %span.label= event_state_text @documents_nal_rashod.state
+  %span= @documents_nal_rashod.state_note
+%p
   %b Получатель
   %br
   = @documents_nal_rashod.company

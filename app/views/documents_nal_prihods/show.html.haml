@@ -11,6 +11,9 @@
 %p#notice= notice
 
 %p
+  %span.label= event_state_text @documents_nal_prihod.state
+  %span= @documents_nal_prihod.state_note
+%p
   %b Плательщик
   %br
   = @documents_nal_prihod.company

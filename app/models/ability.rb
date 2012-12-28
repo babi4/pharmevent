@@ -15,6 +15,7 @@ class Ability
     # Генеральный директор: видит все проекты всех менеджеров.
     # Финансовые показатели мероприятия: рентабильность, прибыль.
 
+    can :manage, Event
     can :manage, User            # Управление учётными записями/правами
     can :manage, :user_passwords # Изменение паролей пользователей
 
@@ -40,6 +41,8 @@ class Ability
     # Главный Бухгалтер: видит что создают менеджеры,
     # подтверждает/создает счета,
     # ставит счетам соответствующие статусы.
+
+    can :manage, Event
 
     [DocumentsBeznalRashod, DocumentsBeznalSchet, DocumentsNalRashod, DocumentsNalPrihod].each do |document|
       can :read, document, :state => %w(paid signed not_for_payment)
