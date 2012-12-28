@@ -16,6 +16,12 @@ class Ability
     # Финансовые показатели мероприятия: рентабильность, прибыль.
 
     can :manage, Event
+    can :manage, CouriersTask    # Заказ, управление курьерами
+    can :manage, CouriersCompany # Управление местами доставки для курьеров
+    can :manage, CouriersCompanyMember # Управление контактыми лицами в местах доставки для курьеров
+    can :manage, Client          # Управление клиентской базой
+    can :manage, CompanyMember   # Управление предствителями заказчика
+    can :manage, Company         # Управление заказчиками
     can :manage, User            # Управление учётными записями/правами
     can :manage, :user_passwords # Изменение паролей пользователей
 
@@ -43,6 +49,12 @@ class Ability
     # ставит счетам соответствующие статусы.
 
     can :manage, Event
+    can :manage, CouriersTask    # Заказ, управление курьерами
+    can :manage, CouriersCompany # Управление местами доставки для курьеров
+    can :manage, CouriersCompanyMember # Управление контактыми лицами в местах доставки для курьеров
+    can :manage, Client          # Управление клиентской базой
+    can :manage, CompanyMember   # Управление предствителями заказчика
+    can :manage, Company         # Управление заказчиками
 
     [DocumentsBeznalRashod, DocumentsBeznalSchet, DocumentsNalRashod, DocumentsNalPrihod].each do |document|
       can :read, document, :state => %w(paid signed not_for_payment)
@@ -72,6 +84,12 @@ class Ability
 
     end
 
+    can :manage, CouriersTask, :user_id => @user[:id]    # Заказ, управление своими курьерами
+    can :manage, CouriersCompany # Управление местами доставки для курьеров
+    can :manage, CouriersCompanyMember # Управление контактыми лицами в местах доставки для курьеров
+    can :manage, Client          # Управление клиентской базой
+    can :manage, CompanyMember   # Управление предствителями заказчика
+    can :manage, Company         # Управление заказчиками
     can :manage, Event, :user_id => @user[:id]  # Управление своими событиями
   end
 
