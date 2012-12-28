@@ -54,7 +54,7 @@ $ ->
 
   initMembersSelect = (company, type) ->
     $.getJSON "/couriers_companies/#{company}/couriers_company_members.json", (data) ->
-      $("##{type}-people").autocomplete
+      $("##{type}-people").val('').autocomplete
         autoFocus: true
         minLength: 0
         source: ({value: item.name, id: item.id} for item in data)
@@ -78,7 +78,10 @@ $ ->
       source: ({value: item.name, id: item.id} for item in window.couriers_companies)
       change: (event, ui) ->
         type = $(@).data 'type'
-        $("#couriers-#{type}-member").slideUp(200) unless ui.item
+        unless ui.item
+          $("#{type}-people").val ''
+          $("#couriers-#{type}-company-address").text ''
+          $("#couriers-#{type}-member").slideUp(200)
       response: (event, ui) ->
         type = $(@).data 'type'
         if ui.content.length

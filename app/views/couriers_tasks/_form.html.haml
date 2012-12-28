@@ -12,6 +12,7 @@
       %a.btn.btn-small.new-company.hide#new-from-company{'data-toggle' => 'modal', 'data-type' => 'from', href: '#newAddressModal'} добавить
       %br
       %span.couriers-company-address#couriers-from-company-address
+        = courier_company_address(@couriers_task.from_couriers_company) if @couriers_task.from_couriers_company
 
     .span4
       %h4 Куда
@@ -19,6 +20,7 @@
       %a.btn.btn-small.new-company.hide#new-to-company{'data-toggle' => 'modal', 'data-type' => 'to', href: '#newAddressModal'} добавить
       %br
       %span.couriers-company-address#couriers-to-company-address
+        = courier_company_address(@couriers_task.to_couriers_company) if @couriers_task.to_couriers_company
 
     .span4
       %h4.couriers-date Когда
