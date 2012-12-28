@@ -37,8 +37,7 @@
 
     - @event.documents_beznal_schets.includes(:company).each do |doc|
       %tr{"data-link" => url_for([@event, doc])}
-        %td
-          %span.label= event_state_text doc.state
+        %td= event_state_text doc.state
         %td.text-left= link_to doc.company[:name], doc.company
         %td= doc.num_schet
         %td= doc.date_schet.strftime("%d.%m.%y") unless doc.date_schet.blank?
@@ -73,8 +72,7 @@
 
     - @event.documents_nal_prihods.each do |doc|
       %tr{"data-link" => url_for([@event, doc])}
-        %td
-          %span.label= event_state_text doc.state
+        %td= event_state_text doc.state
         %td.text-left= doc.company
         %td.text-left= doc.description
         %td= doc.date.strftime("%d.%m.%Y") unless doc.date.blank?
@@ -109,8 +107,7 @@
 
     - @event.documents_beznal_rashods.each do |doc|
       %tr{"data-link" => url_for([@event, doc])}
-        %td{rowspan: 10}
-          %span.label= event_state_text doc.state
+        %td{rowspan: 10}= event_state_text doc.state
         %td{rowspan: 5}= doc.company
         %td Счет №
         %td= doc.num_schet
@@ -175,8 +172,7 @@
 
     - @event.documents_nal_rashods.each do |doc|
       %tr{"data-link" => url_for([@event, doc])}
-        %td
-          %span.label= event_state_text doc.state
+        %td= event_state_text doc.state
         %td= doc.company
         %td= doc.description
         %td= doc.lectors ? 'Физ. лицо' : 'Агент'
