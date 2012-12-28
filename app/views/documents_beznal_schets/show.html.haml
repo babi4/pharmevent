@@ -1,75 +1,96 @@
-%h1= "Событие: #{@event[:name]}"
-%h2= "Безнал, счет"
+%ul.breadcrumb
+  %li
+    = link_to 'Мероприятия', events_path
+    %span.divider /
+  %li
+    = link_to @event.name, @event
+    %span.divider /
+  %li.active
+    Безналичный приход
 
 %p#notice= notice
 
 %p
-  %b Создал документ:
-  = @documents_beznal_schet.user[:name]
-%p
-  %b Заказчик:
+  %b Заказчик
+  %br
   = link_to @documents_beznal_schet.company[:name], company_path(@documents_beznal_schet.company)
 %p
-  %b Назначение платежа:
+  %b Назначение платежа
+  %br
   = @documents_beznal_schet.description
 %p
-  %b ФИО заказчика:
+  %b ФИО заказчика
+  %br
   = @documents_beznal_schet.name
 %p
-  %b Моб. тел. заказчика:
+  %b Телефон заказчика
+  %br
   = @documents_beznal_schet.telephone
 %p
-  %b Счет №:
+  %b Счет №
+  %br
   = @documents_beznal_schet.num_schet
 %p
-  %b Дата счета:
-  = @documents_beznal_schet.date_schet
+  %b Дата счета
+  %br
+  = @documents_beznal_schet.date_schet.strftime("%d.%m.%Y")
 %p
-  %b Сумма:
+  %b Сумма
+  %br
   = @documents_beznal_schet.summ
 %p
-  %b НДС:
+  %b НДС
+  %br
   = @documents_beznal_schet.nds
 %p
-  %b Договор №:
+  %b Договор №
+  %br
   = @documents_beznal_schet.dogovor_num
 %p
-  %b Дата договора:
-  = @documents_beznal_schet.dogovor_date
+  %b Дата договора
+  %br
+  = @documents_beznal_schet.dogovor_date.strftime("%d.%m.%Y")
 
-%h5 ________________________________
-%h3 Информация по исходящим закрывающим документам
+%hr
+%h4 Информация по исходящим закрывающим документам
 
 %p
-  %b Счет фактура №:
+  %b Счет фактура №
+  %br
   = @documents_beznal_schet.info_schet_factura
 %p
-  %b Акт №:
+  %b Акт №
+  %br
   = @documents_beznal_schet.info_act
 %p
-  %b Дата сч. фактуры:
-  = @documents_beznal_schet.info_date_schet
+  %b Дата сч. фактуры
+  %br
+  = @documents_beznal_schet.info_date_schet.strftime("%d.%m.%Y")
 %p
-  %b Дата акта:
-  = @documents_beznal_schet.info_date_act
+  %b Дата акта
+  %br
+  = @documents_beznal_schet.info_date_act.strftime("%d.%m.%Y")
 %p
-  %b Статус отправления закрывающих документов:
+  %b Статус отправления
+  %br
   = @documents_beznal_schet.info_state_act
 %p
-  %b Дата отправления закрывающих документов:
-  = @documents_beznal_schet.info_return_date
+  %b Дата отправления
+  %br
+  = @documents_beznal_schet.info_return_date.strftime("%d.%m.%Y")
 %p
-  %b Способ отправления закрывающих документов:
+  %b Способ отправления
+  %br
   = @documents_beznal_schet.info_type_return_act
 %p
-  %b ФИО отправителя закрывающих документов:
+  %b ФИО отправителя
+  %br
   = @documents_beznal_schet.info_name_sender
 
-%h5 ________________________________
+%hr
 %p
   %b Дата оплаты:
-  = @documents_beznal_schet.payment_date
+  = @documents_beznal_schet.payment_date.strftime("%d.%m.%Y")
 
-= link_to 'Edit', edit_event_documents_beznal_schet_path(@event, @documents_beznal_schet)
-\|
-= link_to 'Back', event_documents_beznal_schets_path(@event)
+- content_for :title do
+  Мероприятия / #{@event.name} / Безналичный приход

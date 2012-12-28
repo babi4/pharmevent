@@ -1,34 +1,43 @@
-%h1= "Событие: #{@event[:name]}"
-%h2= "Наличные, расход"
+%ul.breadcrumb
+  %li
+    = link_to 'Мероприятия', events_path
+    %span.divider /
+  %li
+    = link_to @event.name, @event
+    %span.divider /
+  %li.active
+    Наличный расход
 
 %p#notice= notice
 
 %p
-  %b Документ создал:
-  = @documents_nal_rashod.user[:name]
-%p
-  %b Получатель:
+  %b Получатель
+  %br
   = @documents_nal_rashod.company
 %p
-  %b Назначение платежа:
+  %b Назначение платежа
+  %br
   = @documents_nal_rashod.description
 %p
-  %b ФИО получателя:
+  %b ФИО получателя
+  %br
   = @documents_nal_rashod.name
 %p
-  %b Моб. тел. получателя:
+  %b Телефон получателя
+  %br
   = @documents_nal_rashod.telephone
 %p
-  %b Сумма:
-  = @documents_nal_rashod.summ
+  %b Сумма
+  %br
+  = "#{@documents_nal_rashod.summ} руб."
 %p
-  %b Дата оплаты:
-  = @documents_nal_rashod.date
+  %b Дата оплаты
+  %br
+  = @documents_nal_rashod.date.strftime("%d.%m.%Y")
 %p
-  %b Данный расход является:
-  %b= 'Расходом по логистике лекторов (статус: физ.лицо)' if @documents_nal_rashod.lectors
-  %b= 'Расходом по мероприятию в целом (статус: фгент/юр.лицо)' if @documents_nal_rashod.entire
+  %b Данный расход является
+  = 'расходом по логистике лекторов (статус: физ.лицо)' if @documents_nal_rashod.lectors
+  = 'расходом по мероприятию в целом (статус: фгент/юр.лицо)' if @documents_nal_rashod.entire
 
-= link_to 'Edit', edit_event_documents_nal_rashod_path(@event, @documents_nal_rashod)
-\|
-= link_to 'Back', event_documents_nal_rashods_path(@event)
+- content_for :title do
+  Мероприятия / #{@event.name} / Наличный расход

@@ -1,80 +1,103 @@
-%h1= "Событие: #{@event[:name]}"
-%h2= "Безнал, приход"
+%ul.breadcrumb
+  %li
+    = link_to 'Мероприятия', events_path
+    %span.divider /
+  %li
+    = link_to @event.name, @event
+    %span.divider /
+  %li.active
+    Безналичный расход
 
 %p#notice= notice
 
 %p
-  %b Создал документ:
-  = @documents_beznal_rashod.user[:name]
-%p
-  %b Получатель:
+  %b Получатель
+  %br
   = @documents_beznal_rashod.type_company
   = @documents_beznal_rashod.company
 %p
-  %b Назначение платежа:
+  %b Назначение платежа
+  %br
   = @documents_beznal_rashod.description
 %p
-  %b ФИО получателя:
+  %b ФИО получателя
+  %br
   = @documents_beznal_rashod.name
 %p
-  %b Моб. тел. получателя:
+  %b Телефон получателя
+  %br
   = @documents_beznal_rashod.telephone
 %p
-  %b Счет №:
+  %b Счет №
+  %br
   = @documents_beznal_rashod.num_schet
 %p
-  %b Дата счета:
-  = @documents_beznal_rashod.date_schet
+  %b Дата счета
+  %br
+  = @documents_beznal_rashod.date_schet.strftime("%d.%m.%Y")
 %p
-  %b Сумма:
-  = @documents_beznal_rashod.summ
+  %b Сумма
+  %br
+  = "#{@documents_beznal_rashod.summ} руб."
 %p
-  %b НДС:
-  = @documents_beznal_rashod.nds
+  %b НДС
+  %br
+  = "#{@documents_beznal_rashod.nds} руб."
 %p
-  %b Договор №:
+  %b Договор №
+  %br
   = @documents_beznal_rashod.dogovor_num
 %p
-  %b Дата договора:
-  = @documents_beznal_rashod.dogovor_date
+  %b Дата договора
+  %br
+  = @documents_beznal_rashod.dogovor_date.strftime("%d.%m.%Y")
 %p
   %b Данный расход является:
-  %b= 'Расходом по логистике лекторов (статус: физ.лицо)' if @documents_beznal_rashod.lectors
-  %b= 'Расходом по мероприятию в целом (статус: фгент/юр.лицо)' if @documents_beznal_rashod.entire
+  = 'расходом по логистике лекторов (статус: физ.лицо)' if @documents_beznal_rashod.lectors
+  = 'расходом по мероприятию в целом (статус: фгент/юр.лицо)' if @documents_beznal_rashod.entire
 
-%h5 ________________________________
-%h3 Информация по расходу
+%hr
+%h4 Информация по расходу
 %p
-  %b № п/п:
+  %b № п/п
+  %br
   = @documents_beznal_rashod.info_pp
 %p
-  %b Счет фактура №:
+  %b Счет фактура №
+  %br
   = @documents_beznal_rashod.info_schet_factura
 %p
-  %b Акт №:
+  %b Акт №
+  %br
   = @documents_beznal_rashod.info_act
 %p
-  %b Дата оплаты:
-  = @documents_beznal_rashod.info_date_pay
+  %b Дата оплаты
+  %br
+  = @documents_beznal_rashod.info_date_pay.strftime("%d.%m.%Y")
 %p
-  %b Дата сч. фактуры:
-  = @documents_beznal_rashod.info_date_schet
+  %b Дата сч. фактуры
+  %br
+  = @documents_beznal_rashod.info_date_schet.strftime("%d.%m.%Y")
 %p
-  %b Дата акта:
-  = @documents_beznal_rashod.info_date_act
+  %b Дата акта
+  %br
+  = @documents_beznal_rashod.info_date_act.strftime("%d.%m.%Y")
 %p
-  %b Статус возврата акта:
+  %b Статус возврата акта
+  %br
   = @documents_beznal_rashod.info_state_act
 %p
-  %b Дата возврата акта:
-  = @documents_beznal_rashod.info_return_date
+  %b Дата возврата акта
+  %br
+  = @documents_beznal_rashod.info_return_date.strftime("%d.%m.%Y")
 %p
-  %b Способ возврата акта:
+  %b Способ возврата акта
+  %br
   = @documents_beznal_rashod.info_type_return_act
 %p
-  %b ФИО отправителя:
+  %b ФИО отправителя
+  %br
   = @documents_beznal_rashod.info_name_sender
 
-= link_to 'Edit', edit_event_documents_beznal_rashod_path([@event, @documents_beznal_rashod])
-\|
-= link_to 'Back', event_documents_beznal_rashods_path(@event)
+- content_for :title do
+  Мероприятия / #{@event.name} / Безналичный расход

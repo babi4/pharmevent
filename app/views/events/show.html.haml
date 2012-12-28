@@ -23,7 +23,7 @@
 %h3.pagination-centered Оплата мероприятия: #{@prihod_summ} руб.
 - unless @event.documents_beznal_schets.empty?
   %h4.pagination-centered Приход безналичный
-  %table.table.table-striped.table-condensed.table-bordered.table-center
+  %table.table.table-striped.table-condensed.table-bordered.table-center.table-links
     %thead.thead-small
       %tr
         %th.td-5 №
@@ -36,7 +36,7 @@
         %th.td-10
 
     - @event.documents_beznal_schets.includes(:company).each do |doc|
-      %tr
+      %tr{"data-link" => url_for([@event, doc])}
         %td
         %td.text-left= link_to doc.company[:name], doc.company
         %td= doc.num_schet
@@ -46,12 +46,11 @@
         %td #{doc.nds}р.
         %td
           .btn-group
-            = link_to 'изменить', edit_event_documents_beznal_schet_path(@event, doc), class: 'btn btn-mini'
+            = link_to 'войти', [@event, doc], class: 'btn btn-mini'
             %button.btn.btn-mini.dropdown-toggle{"data-toggle" => "dropdown"}
               %span.caret
             %ul.dropdown-menu.dropdown-menu-narrow.dropdown-menu-left
-              %li
-                = link_to 'Удалить', [@event, doc], method: :delete, data: { confirm: 'Удалить документ?' }
+              - links_collection(@event, doc)
     %tr
       %td{colspan: 5}
         %span.pull-right Итого:
@@ -61,7 +60,7 @@
 
 - unless @event.documents_nal_prihods.empty?
   %h4.pagination-centered Приход наличный
-  %table.table.table-striped.table-condensed.table-bordered.table-center
+  %table.table.table-striped.table-condensed.table-bordered.table-center.table-links
     %thead.thead-small
       %tr
         %th.td-5 №
@@ -72,7 +71,7 @@
         %th.td-10
 
     - @event.documents_nal_prihods.each do |doc|
-      %tr
+      %tr{"data-link" => url_for([@event, doc])}
         %td
         %td.text-left= doc.company
         %td.text-left= doc.description
@@ -81,12 +80,11 @@
         %td
           /- links_collection(@event, doc)
           .btn-group
-            = link_to 'изменить', edit_event_documents_nal_prihod_path(@event, doc), class: 'btn btn-mini'
+            = link_to 'войти', [@event, doc], class: 'btn btn-mini'
             %button.btn.btn-mini.dropdown-toggle{"data-toggle" => "dropdown"}
               %span.caret
             %ul.dropdown-menu.dropdown-menu-narrow.dropdown-menu-left
-              %li
-                = link_to 'Удалить', [@event, doc], method: :delete, data: { confirm: 'Удалить документ?' }
+              - links_collection(@event, doc)
     %tr
       %td{colspan: 4}
         %span.pull-right Итого:
@@ -97,7 +95,7 @@
 
 - unless @event.documents_beznal_rashods.empty?
   %h4.pagination-centered Расход безналичный
-  %table.table.table-bordered.table-condensed.table-bordered.table-center
+  %table.table.table-bordered.table-condensed.table-bordered.table-center.table-links
     %thead.thead-small
       %tr
         %th.td-5 №
@@ -109,7 +107,7 @@
         %th.td-10 Действия
 
     - @event.documents_beznal_rashods.each do |doc|
-      %tr
+      %tr{"data-link" => url_for([@event, doc])}
         %td{rowspan: 10}
         %td{rowspan: 5}= doc.company
         %td Счет №
@@ -119,39 +117,38 @@
         %td{rowspan: 10} #{doc.nds}р.
         %td{rowspan: 10}
           .btn-group
-            = link_to 'изменить', edit_event_documents_beznal_rashod_path(@event, doc), class: 'btn btn-mini'
+            = link_to 'войти', [@event, doc], class: 'btn btn-mini'
             %button.btn.btn-mini.dropdown-toggle{"data-toggle" => "dropdown"}
               %span.caret
             %ul.dropdown-menu.dropdown-menu-narrow.dropdown-menu-left
-              %li
-                = link_to 'Удалить', [@event, doc], method: :delete, data: { confirm: 'Удалить документ?' }
-      %tr
+              - links_collection(@event, doc)
+      %tr{"data-link" => url_for([@event, doc])}
         %td Дата счета
         %td= doc.date_schet.strftime("%d.%m.%y") unless doc.date_schet.blank?
-      %tr
+      %tr{"data-link" => url_for([@event, doc])}
         %td Дата оплаты
         %td= doc.info_date_pay.strftime("%d.%m.%y") unless doc.info_date_pay.blank?
-      %tr
+      %tr{"data-link" => url_for([@event, doc])}
         %td № п/п
         %td= doc.info_pp
-      %tr
+      %tr{"data-link" => url_for([@event, doc])}
         %td Счет фактура №
         %td= doc.info_schet_factura
-      %tr
+      %tr{"data-link" => url_for([@event, doc])}
         %td{rowspan: 5}= doc.description
         %td Дата сч. фактуры
         %td= doc.info_date_schet.strftime("%d.%m.%Y") unless doc.info_date_schet.blank?
         %td{rowspan: 5}= doc.lectors ? 'Физ. лицо' : 'Агент'
-      %tr
+      %tr{"data-link" => url_for([@event, doc])}
         %td Акт №
         %td= doc.info_act
-      %tr
+      %tr{"data-link" => url_for([@event, doc])}
         %td Дата акта
         %td= doc.info_date_act.strftime("%d.%m.%Y") unless doc.info_date_act.blank?
-      %tr
+      %tr{"data-link" => url_for([@event, doc])}
         %td Договор №
         %td= doc.dogovor_num
-      %tr
+      %tr{"data-link" => url_for([@event, doc])}
         %td Дата договора
         %td= doc.dogovor_date.strftime("%d.%m.%Y") unless doc.dogovor_date.blank?
     %tr
@@ -163,7 +160,7 @@
 
 - unless @event.documents_nal_rashods.empty?
   %h4.pagination-centered Расход наличный
-  %table.table.table-striped.table-condensed.table-bordered.table-center
+  %table.table.table-striped.table-condensed.table-bordered.table-center.table-links
     %thead.thead-small
       %tr
         %th.td-5 №
@@ -175,7 +172,7 @@
         %th.td-10 Действия
 
     - @event.documents_nal_rashods.each do |doc|
-      %tr
+      %tr{"data-link" => url_for([@event, doc])}
         %td
         %td= doc.company
         %td= doc.description
@@ -184,12 +181,11 @@
         %td #{doc.summ}р.
         %td
           .btn-group
-            = link_to 'изменить', edit_event_documents_nal_rashod_path(@event, doc), class: 'btn btn-mini'
+            = link_to 'войти', [@event, doc], class: 'btn btn-mini'
             %button.btn.btn-mini.dropdown-toggle{"data-toggle" => "dropdown"}
               %span.caret
             %ul.dropdown-menu.dropdown-menu-narrow.dropdown-menu-left
-              %li
-                = link_to 'Удалить', [@event, doc], method: :delete, data: { confirm: 'Удалить документ?' }
+              - links_collection(@event, doc)
     %tr
       %td{colspan: 5} 
         %span.pull-right Итого:
