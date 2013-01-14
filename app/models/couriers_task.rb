@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 class CouriersTask < ActiveRecord::Base
-  attr_accessible :due_time, :from_couriers_company_id, :from_date, :name, :status, :to_couriers_company_id, :to_date, :to_couriers_company_member_id, :from_couriers_company_member_id
+  attr_accessible :due_time, :from_couriers_company_id, :from_date, :name, :status, :note, :to_couriers_company_id, :to_date, :to_couriers_company_member_id, :from_couriers_company_member_id
 
   validates :name, :from_couriers_company_id, :to_couriers_company_id, :presence => true
   validates :name, :uniqueness => true

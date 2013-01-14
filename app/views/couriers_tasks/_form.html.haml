@@ -47,6 +47,11 @@
         %input.people-select.no-margin#to-people{'data-type' => 'to', 'data-required' => 'true', tabindex: 4, type: 'text'}
         %a.btn.btn-small.new-company-member.hide#new-to-company-member{'data-toggle' => 'modal', 'data-type' => 'to', href: '#newMemberModal'} добавить
 
+    .span4
+      .couriers-member-b
+        Примечания
+        %br
+        = f.text_area :note, :class => 'span3'
 
 #newAddressModal.modal.hide.fade{:role => "dialog", :tabindex => "-1"}
   = simple_form_for(CouriersCompany.new, :html => {:class => 'form-validate' }) do |f|

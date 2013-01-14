@@ -16,29 +16,36 @@
       %button.btn.btn-print.pull-right#courier-print Распечатать
 
 .row
-  .span5
-    %h4 Отправка
-    %p
-      = @couriers_task.from_couriers_company[:name]
-      %br
-      = courier_company_address @couriers_task.from_couriers_company
+  %table.table.table-top.table-noborder.table-nopadding.span10
+    %tr
+      %td.td-35 
+        %h4 Отправка
+        %p
+          = @couriers_task.from_couriers_company[:name]
+          %br
+          = courier_company_address @couriers_task.from_couriers_company
 
-  .span5
-    %h4 Получение
-    %p
-      = @couriers_task.to_couriers_company[:name]
-      %br
-      = courier_company_address @couriers_task.to_couriers_company
+      %td.td-35
+        %h4 Получение
+        %p
+          = @couriers_task.to_couriers_company[:name]
+          %br
+          = courier_company_address @couriers_task.to_couriers_company
 
-.row
-  .span5
-    = @couriers_task.from_couriers_company_member.name unless @couriers_task.from_couriers_company_member_id.nil?
-    %br
-    = @couriers_task.from_couriers_company_member.telephone unless @couriers_task.from_couriers_company_member_id.nil?
-  .span5
-    = @couriers_task.to_couriers_company_member.name unless @couriers_task.to_couriers_company_member_id.nil?
-    %br
-    = @couriers_task.to_couriers_company_member.telephone unless @couriers_task.to_couriers_company_member_id.nil?
+      %td{:rowspan => 2}
+        %h4 Примечания
+        = @couriers_task.note
+
+    %tr
+      %td 
+        = @couriers_task.from_couriers_company_member.name unless @couriers_task.from_couriers_company_member_id.nil?
+        %br
+        = @couriers_task.from_couriers_company_member.telephone unless @couriers_task.from_couriers_company_member_id.nil?
+
+      %td
+        = @couriers_task.to_couriers_company_member.name unless @couriers_task.to_couriers_company_member_id.nil?
+        %br
+        = @couriers_task.to_couriers_company_member.telephone unless @couriers_task.to_couriers_company_member_id.nil?
 
 .row
   .span10
