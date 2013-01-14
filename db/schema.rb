@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121224204255) do
+ActiveRecord::Schema.define(:version => 20130114120931) do
 
   create_table "clients", :force => true do |t|
     t.string   "name"
@@ -31,14 +31,14 @@ ActiveRecord::Schema.define(:version => 20121224204255) do
     t.string   "name"
     t.string   "company_type"
     t.string   "short_name"
-    t.integer  "ur_zip_code"
+    t.string   "ur_zip_code"
     t.string   "ur_city"
     t.string   "ur_street"
     t.string   "ur_hous"
     t.string   "ur_stroenie"
     t.string   "ur_office"
     t.boolean  "ur_post_equal"
-    t.integer  "post_zip_code"
+    t.string   "post_zip_code"
     t.string   "post_city"
     t.string   "post_street"
     t.string   "post_house"
@@ -47,7 +47,7 @@ ActiveRecord::Schema.define(:version => 20121224204255) do
     t.string   "telephone"
     t.string   "fax"
     t.string   "email"
-    t.integer  "inn"
+    t.string   "inn"
     t.string   "kpp"
     t.string   "ogrn"
     t.string   "okpo"
@@ -57,7 +57,7 @@ ActiveRecord::Schema.define(:version => 20121224204255) do
     t.string   "bank_account"
     t.string   "bank_corr_account"
     t.string   "bank_name"
-    t.integer  "bank_zip"
+    t.string   "bank_zip"
     t.string   "bank_city"
     t.string   "bank_street"
     t.string   "bank_house"
