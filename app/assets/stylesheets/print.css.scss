@@ -41,6 +41,10 @@ h3 {
   display: block;
 }
 
-.span5 {
-  width: 45%;
+.table td {
+  border: 0;
+
+  &.td-35 {
+    width: 30%;
+  }
 }

@@ -73,7 +73,6 @@ $ ->
 
   if window.couriers_companies
     $(".company-select").autocomplete
-      autoFocus: true
       minLength: 0
       source: ({value: item.name, id: item.id} for item in window.couriers_companies)
       change: (event, ui) ->
@@ -98,6 +97,9 @@ $ ->
         $("#couriers-#{type}-company-address").text company_data.full_address
         initMembersSelect ui.item.id, type
         $("#couriers-#{type}-member").slideDown(200)
+    .focus ->   
+      search_val = $(@).val()
+      $(@).data("autocomplete").search(search_val) if search_val is ''
 
   $('.new-company').on 'click', ->
     type = $(@).data 'type'

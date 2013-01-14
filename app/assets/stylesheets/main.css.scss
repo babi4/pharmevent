@@ -214,6 +214,21 @@ input.input-required, select.input-required {
       text-align: center;
     }
   }
+  &.table-top {
+    td, th {
+      vertical-align: top;
+    }
+  }
+  &.table-noborder {
+    td {
+      border: 0;
+    }
+  }
+  &.table-nopadding {
+    td {
+      padding: 0;
+    }
+  }
   &.table-center {
     td, th {
       text-align: center;
@@ -241,6 +256,9 @@ input.input-required, select.input-required {
   }
   .td-30 {
     width: 30%;
+  }
+  .td-35 {
+    width: 35%;
   }
   .td-70 {
     width: 70%;
