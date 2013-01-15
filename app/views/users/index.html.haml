@@ -23,7 +23,7 @@
         %tr{"data-link" => url_for(:action => 'show', :id => user.id)}
           %td= user.name
           %td= user.email
-          %td= t "#{user.roles.first.name}"
+          %td= t "#{user.roles.first.name}", :locale => :ru
           %td= user.salary/100.0 if user.salary
           %td= "#{user.percent}% (#{user.salary*user.percent/10.0**4})" if user.salary && user.percent
           %td

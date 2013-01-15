@@ -21,7 +21,7 @@
     = f.label :password, "Пароль"
     = f.password_field :password, :class => 'span3'
 
-  = f.association :roles, :label => 'Роль', :include_blank => false, :label_method => lambda { |obj| t("#{obj.name}") }, :input_html => { :class => 'span3', :size => 1, :multiple => false }
+  = f.association :roles, :label => 'Роль', :include_blank => false, :label_method => lambda { |role| t "#{role.name}", :locale => :ru }, :input_html => { :class => 'span3', :size => 1, :multiple => false }
 
   .row
     .span2
