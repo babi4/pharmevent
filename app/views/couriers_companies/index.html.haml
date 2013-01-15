@@ -13,7 +13,9 @@
     %tr
       %th.td-30{'data-sort' => 'string'} Название
       %th.td-70{'data-sort' => 'string'} Адрес
-      %th
+      %th.text-right.th-count 
+        Всего - 
+        %span#table-filter-count= @couriers_companies.count
 
   - @couriers_companies.includes([:to_couriers_tasks, :from_couriers_tasks]).each do |couriers_company|
     %tr{"data-link" => url_for(:action => 'show', :id => couriers_company.id)}

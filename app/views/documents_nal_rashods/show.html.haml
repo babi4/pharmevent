@@ -7,6 +7,11 @@
     %span.divider /
   %li.active
     Наличный расход
+  - if can? :update, @documents_nal_rashod
+    %li
+      %span.divider
+        |
+      = link_to 'редактирование', edit_event_documents_nal_rashod_path(@event, @documents_nal_rashod)
 
 %p#notice= notice
 

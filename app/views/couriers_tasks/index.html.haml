@@ -22,7 +22,9 @@
       %th.td-20{'data-sort' => 'string'} Кому
 
       %th.td-15{'data-sort' => 'int'} Когда
-      %th.td-10
+      %th.td-10.text-right.th-count 
+        Всего - 
+        %span#table-filter-count= @couriers_tasks.count
 
   - @couriers_tasks.includes([:user, :from_couriers_company, :to_couriers_company]).each do |couriers_task|
     %tr{"data-link" => url_for(:action => 'show', :id => couriers_task.id)}

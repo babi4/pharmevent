@@ -214,6 +214,11 @@ input.input-required, select.input-required {
       text-align: center;
     }
   }
+  th.th-count {
+    font-weight: normal;
+    font-size: 13px;
+    white-space: nowrap;
+  }
   &.table-top {
     td, th {
       vertical-align: top;
@@ -282,7 +287,7 @@ input.input-required, select.input-required {
   }
 }
 
-.text-right {
+.text-right, .table td.text-right, .table th.text-right {
   text-align: right;
 }
 

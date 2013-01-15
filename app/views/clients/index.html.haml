@@ -15,7 +15,9 @@
       %th.clients-degree{'data-sort' => 'string'} Ученая степень
       %th.clients-work{'data-sort' => 'string'} Работа
       %th.clients-notes Примечания
-      %th.td-10
+      %th.td-10.text-right.th-count 
+        Всего - 
+        %span#table-filter-count= @clients.count
 
   - @clients.each do |client|
     %tr{"data-link" => url_for(:action => 'show', :id => client.id)}

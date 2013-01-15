@@ -7,6 +7,11 @@
     %span.divider /
   %li.active
     Безналичный приход
+  - if can? :update, @documents_beznal_schet
+    %li
+      %span.divider
+        |
+      = link_to 'редактирование', edit_event_documents_beznal_schet_path(@event, @documents_beznal_schet)
 
 %p#notice= notice
 

@@ -69,6 +69,11 @@ $ ->
             hideItem $item_row
           else
             showItem $item_row
+    countFilteredItems()
+
+  countFilteredItems = ->
+    count = $('#table-filter').find('tr.show').length
+    $('#table-filter-count').text count
 
   $('#table-filter').stupidtable()
 

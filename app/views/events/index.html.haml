@@ -22,8 +22,10 @@
       %th.events-customer{'data-sort' => 'string'} Заказчик
       %th.events-date{'data-sort' => 'int'} Начало
       %th.events-date{'data-sort' => 'int'} Конец
-      %th.events-city{'data-sort' => 'string'}  Город
-      %th.td-10
+      %th.events-city{'data-sort' => 'string'} Город
+      %th.td-10.text-right.th-count 
+        Всего - 
+        %span#table-filter-count= @events.count
   - @events.includes([:company]).each do |event|
     %tr{"data-link" => url_for(:action => 'show', :id => event.id)}
       %td= event.name
