@@ -3,17 +3,11 @@
     = link_to 'Пользователи', users_path
     %span.divider /
     = link_to @user.name, @user
+    %span.divider
+      |
+  %li.active редактирование
 
-= simple_form_for(@user) do |f|
-  = f.error_notification
+= render 'form'
 
-  .form-inputs
-    = f.input :first_name
-    = f.input :last_name
-    = f.input :middle_name
-    = f.input :email
-    = f.input :salary
-    = f.input :percent
-
-  .form-actions
-    = f.button :submit
+- content_for :title do
+  Пользователи / #{@user.name} - редактирование

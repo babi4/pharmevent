@@ -35,7 +35,7 @@ class UsersController < ApplicationController
   def create
     respond_to do |format|
       if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
+        format.html { redirect_to users_path, notice: 'Пользователь создан.' }
         format.json { render json: @user, status: :created, location: @company }
       else
         format.html { render action: "new" }
@@ -48,18 +48,18 @@ class UsersController < ApplicationController
     params[:user].delete :password
 
     if @user.update_attributes(params[:user])
-      redirect_to users_path, :notice => "User updated."
+      redirect_to users_path, :notice => "Пользователь сохранен."
     else
-      redirect_to users_path, :alert => "Unable to update user."
+      redirect_to users_path, :alert => "Не удалось сохранить пользователя."
     end
   end
     
   def destroy
     if @user == current_user
-      redirect_to users_path, :notice => "Can't delete yourself."
+      redirect_to users_path, :notice => "Вы не можете удалить себя."
     else
       @user.destroy
-      redirect_to users_path, :notice => "User deleted."
+      redirect_to users_path, :notice => "Пользователь удален."
     end
   end
 end

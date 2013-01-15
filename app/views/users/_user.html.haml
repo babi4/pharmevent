@@ -1,15 +1,13 @@
 .modal{:id => "password-options-#{user.id}", :style => "display: none;"}
-  = simple_form_for user, :url => change_pass_user_path(user), :html => {:method => :put, :class => 'form-horizontal', :data => { :confirm => "Are you sure?" } } do |f|
+  = simple_form_for user, :url => change_pass_user_path(user), :html => {:method => :put, :class => 'form-horizontal', :data => { :confirm => "Вы уверены?" } } do |f|
     .modal-header
       %a.close{"data-dismiss" => "modal"} ×
-      %h3 Change Password of #{user[:name]}
+      %h3 #{user.name} - новый пароль
     .modal-body
-      = f.input :password
-      = f.input :password_confirmation
+      = f.input :password, :label => 'Новый пароль'
+      = f.input :password_confirmation, :label => 'Новый пароль еще раз' 
     .modal-footer
-      = f.submit "Change Password", :class => "btn"
-      %a.btn{"data-dismiss" => "modal", :href => "#"} Close
-
+      = f.submit "Сохранить пароль", :class => "btn"
 
 .modal{:id => "role-options-#{user.id}", :style => "display: none;"}
   = simple_form_for user, :url => user_path(user), :html => {:method => :put, :class => 'form-horizontal' } do |f|

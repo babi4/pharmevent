@@ -1,7 +1,34 @@
-%h3 User
+%ul.breadcrumb
+  %li
+    = link_to 'Пользователи', users_path
+    %span.divider /
+  %li.active
+    = @user.name
+    %span.divider
+      |
+  %li
+    = link_to 'редактирование', edit_user_path(@user)
+
+%h4= @user.name
+- if @user.email
+  %p
+    %b E-mail
+    %br
+    = @user.email
 %p
-  User: #{@user.name}
-%p
-  Email: #{@user.email if @user.email}
-%p
-  Роль: #{user_role = @user.roles.first ; user_role.name.titleize unless user_role.nil?}
+  %b Роль
+  %br
+  = t "#{@user.roles.first.name}"
+- if @user.salary
+  %p
+    %b Зарплата
+    %br
+    = @user.salary/100.0
+- if @user.salary && @user.percent
+  %p
+    %b Процент
+    %br
+    = "#{@user.percent}% (#{@user.salary*@user.percent/10.0**4})"
+
+- content_for :title do
+  Пользователи / #{@user.name}

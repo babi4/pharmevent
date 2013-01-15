@@ -11,7 +11,7 @@
   .span4.text-right
     - if action_name == 'index'
       = link_to 'Архив', archive_events_path, class: 'btn'
-      %a.btn{"data-toggle" => "modal", :href => "#newEventModal"} Добавить мероприятие  
+      %a.btn.btn-success{"data-toggle" => "modal", :href => "#newEventModal"} Добавить мероприятие  
     - else
       = link_to 'К активным мероприятиям', events_path, class: 'btn'
 

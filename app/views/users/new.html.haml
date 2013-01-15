@@ -1,5 +1,10 @@
-%h1 New client
+%ul.breadcrumb
+  %li
+    = link_to 'Пользователи', users_path
+    %span.divider /
+  %li.active Новый пользователь
 
 = render 'form'
 
-= link_to 'Back', clients_path
+- content_for :title do
+  Новый пользователь

@@ -1,15 +1,35 @@
-= simple_form_for(@user) do |f|
+= simple_form_for(@user, :html => {:class => 'form-validate' }) do |f|
   = f.error_notification
 
-  .form-inputs
-    = f.input :first_name
-    = f.input :last_name
-    = f.input :middle_name
-    = f.input :email
-    = f.input :password
-    = f.association :roles, :as => :radio_buttons
-    = f.input :salary
-    = f.input :percent
+  .row
+    .span3
+      = f.label :first_name, "Имя"
+      = f.text_field :first_name, :class => 'span3', "data-required" => 'true'
 
-  .form-actions
-    = f.button :submit
+    .span3
+      = f.label :last_name, "Фамилия"
+      = f.text_field :last_name, :class => 'span3', "data-required" => 'true'
+
+    .span3
+      = f.label :last_name, "Отчество"
+      = f.text_field :middle_name, :class => 'span3'
+
+  = f.label :email, "E-mail"
+  = f.text_field :email, :class => 'span3'
+
+  - if current_page?(:controller => 'users', :action => 'new')
+    = f.label :password, "Пароль"
+    = f.password_field :password, :class => 'span3'
+
+  = f.association :roles, :label => 'Роль', :include_blank => false, :label_method => lambda { |obj| t("#{obj.name}") }, :input_html => { :class => 'span3', :size => 1, :multiple => false }
+
+  .row
+    .span2
+      = f.label :salary, "Зарплата"
+      = f.text_field :salary, :class => 'span2'
+
+    .span1
+      = f.label :percent, "Процент"
+      = f.text_field :percent, :class => 'span1'
+
+  = f.submit 'Сохранить', :class => 'btn btn-primary btn-primary-submit'

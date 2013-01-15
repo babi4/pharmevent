@@ -15,7 +15,7 @@
   %li
     %a{:href => "#"} Отчеты
   - if can? :manage, User
-    %li
+    %li{:class => ("active" if current_page?(:controller => 'users', :action => 'index'))}
       = link_to 'Пользователи', users_path
     %li
       = link_to 'Админка', rails_admin_path

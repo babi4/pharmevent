@@ -291,6 +291,10 @@ input.input-required, select.input-required {
   text-align: right;
 }
 
+select#user_role_ids {
+  height: 30px;
+}
+
 @media (max-width: 1270px) {
   .navbar-username {
     display: none;
