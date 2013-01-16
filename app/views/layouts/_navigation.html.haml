@@ -10,8 +10,8 @@
     = link_to 'Клиенты', clients_path
   %li
     %a{:href => "#"} Поставщики
-  %li
-    %a{:href => "#"} Документы
+  %li{:class => ("active" if current_page?(:controller => 'documents', :action => 'index'))}
+    = link_to 'Документы', documents_path
   %li
     %a{:href => "#"} Отчеты
   - if can? :manage, User

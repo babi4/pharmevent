@@ -5,6 +5,7 @@ class DocumentsNalRashod < ActiveRecord::Base
   DocumentStatesModule.included(self)
 
   default_scope where { state != 'deleted' }
+  scope :unsigned, where(:state => ['new', 'added', 'for_revision'])
 
   attr_accessible :state_note, :state, :company, :date, :description, :entire, :lectors, :name, :summ, :telephone, :user_id, :event_id
 

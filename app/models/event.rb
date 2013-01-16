@@ -15,6 +15,7 @@ class Event < ActiveRecord::Base
 
   scope :active, lambda { where(archived: false).where('date_end >= ?', DateTime.now.to_date) }
   scope :archive, lambda { where('archived = true or date_end < ?', DateTime.now.to_date) }
+  scope :unsigned_documents, active.includes(:documents_nal_prihods, :documents_nal_rashods, :documents_beznal_rashods,:documents_beznal_schets,:company).where(["documents_nal_prihods.state in (?) or documents_nal_rashods.state in (?) or documents_beznal_schets.state in (?) or documents_beznal_rashods.state in (?)", ['new', 'added', 'for_revision'], ['new', 'added', 'for_revision'], ['new', 'added', 'for_revision'], ['new', 'added', 'for_revision']])
   scope :latest, order('date_start DESC')
   scope :nearest, order('date_start')
 

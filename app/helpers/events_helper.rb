@@ -17,4 +17,8 @@ module EventsHelper
       content_tag 'span', 'Запрещен к оплате', class: 'label label-warning'
     end
   end
+
+  def unsigned_document(state)
+    ['new', 'added', 'for_revision'].include?(state)
+  end
 end

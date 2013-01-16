@@ -41,6 +41,7 @@ Rails3BootstrapDeviseCancan::Application.routes.draw do
 
   match 'company_members/update' => 'company_members#update'
   match 'company_members/destroy' => 'company_members#destroy'
+  match 'documents' => 'documents#index'
 
   match 'couriers_companies/:company_id/couriers_company_members/create' => 'couriers_company_members#create'
 
