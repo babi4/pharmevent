@@ -103,10 +103,10 @@
 
 - if @couriers_task.id
   :javascript
-    window.from_couriers_company = "#{@couriers_task.from_couriers_company.name}"
-    window.from_couriers_company_member = "#{@couriers_task.from_couriers_company_member.name}"
-    window.to_couriers_company = "#{@couriers_task.to_couriers_company.name}"
-    window.to_couriers_company_member = "#{@couriers_task.to_couriers_company_member.name}"
+    window.from_couriers_company = "#{@couriers_task.from_couriers_company.name if @couriers_task.from_couriers_company}"
+    window.from_couriers_company_member = "#{@couriers_task.from_couriers_company_member.name if @couriers_task.from_couriers_company_member}"
+    window.to_couriers_company = "#{@couriers_task.to_couriers_company.name if @couriers_task.to_couriers_company}"
+    window.to_couriers_company_member = "#{@couriers_task.to_couriers_company_member.name if @couriers_task.to_couriers_company_member}"
 
 :javascript
   window.couriers_companies = #{@couriers_companies.to_json}
