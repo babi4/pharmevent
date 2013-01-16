@@ -1,9 +1,12 @@
+%h3.pagination-centered.no-margin.documents-header
+  Задолженности по документам
+  = link_to 'Поиск по документам', search_documents_path, class: 'btn btn-success btn-search'
 - if @events
   - @events.each do |event|
     %h4.pagination-centered= event.name
     - if event.documents_beznal_schets
       %h5.pagination-centered Приход безналичный
-      %table.table.table-striped.table-condensed.table-bordered.table-center.table-links
+      %table.table.table-striped.table-condensed.table-bordered.table-center.table-links.table-documents
         %thead.thead-small
           %tr
             %th.td-10
@@ -35,7 +38,7 @@
 
     - if event.documents_nal_prihods
       %h5.pagination-centered Приход наличный
-      %table.table.table-striped.table-condensed.table-bordered.table-center.table-links
+      %table.table.table-striped.table-condensed.table-bordered.table-center.table-links.table-documents
         %thead.thead-small
           %tr
             %th.td-10
@@ -63,7 +66,7 @@
 
     - if event.documents_beznal_rashods
       %h5.pagination-centered Расход безналичный
-      %table.table.table-bordered.table-condensed.table-bordered.table-center.table-links
+      %table.table.table-bordered.table-condensed.table-bordered.table-center.table-links.table-documents
         %thead.thead-small
           %tr
             %th.td-10
@@ -123,7 +126,7 @@
 
     - if event.documents_nal_rashods
       %h5.pagination-centered Расход наличный
-      %table.table.table-striped.table-condensed.table-bordered.table-center.table-links
+      %table.table.table-striped.table-condensed.table-bordered.table-center.table-links.table-documents
         %thead.thead-small
           %tr
             %th.td-10

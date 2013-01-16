@@ -8,8 +8,8 @@
     = link_to 'Заказчики', companies_path
   %li{:class => ("active" if current_page?(:controller => 'clients', :action => 'index'))}
     = link_to 'Клиенты', clients_path
-  %li
-    %a{:href => "#"} Поставщики
+  / %li
+  /   %a{:href => "#"} Поставщики
   %li{:class => ("active" if current_page?(:controller => 'documents', :action => 'index'))}
     = link_to 'Документы', documents_path
   %li

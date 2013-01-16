@@ -6,4 +6,8 @@ class DocumentsController < ApplicationController
     @events = Event.unsigned_documents
   end
 
+  def search
+
+  end
+
 end

@@ -1,0 +1,35 @@
+%h3.pagination-centered.no-margin.documents-header
+  Поиск по документам
+  = link_to 'Задолженности по документам', documents_path, class: 'btn btn-success btn-search'
+
+= form_tag("/search", :method => "get") do
+  %table.documents-search
+    %tr
+      %td.text-right Документы
+      %td
+        %label.checkbox.inline
+          = check_box_tag(:type_in, 1, true)
+          входящие
+      %td
+        %label.checkbox.inline
+          = check_box_tag(:type_out)
+          исходящие
+      %td
+    %tr
+      %td.text-right Счет
+      %td= text_field_tag(:schet_num, '', :class => 'no-margin document-search-input')
+      %td= text_field_tag(:schet_date, '', :class => 'no-margin document-search-input', :placeholder => 'Дата')
+      %td= text_field_tag(:schet_sum, '', :class => 'no-margin document-search-input', :placeholder => 'Сумма')
+    %tr
+      %td.text-right Акт №
+      %td= text_field_tag(:act_num, '', :class => 'no-margin document-search-input')
+      %td= text_field_tag(:act_date, '', :class => 'no-margin document-search-input', :placeholder => 'Дата')
+      %td= text_field_tag(:act_sum, '', :class => 'no-margin document-search-input', :placeholder => 'Сумма')
+    %tr
+      %td.text-right Счет фактуры
+      %td= text_field_tag(:fact_num, '', :class => 'no-margin document-search-input')
+      %td= text_field_tag(:fact_date, '', :class => 'no-margin document-search-input', :placeholder => 'Дата')
+      %td= text_field_tag(:fact_sum, '', :class => 'no-margin document-search-input', :placeholder => 'Сумма')
+
+- content_for :title do
+  Поиск по документам

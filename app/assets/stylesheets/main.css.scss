@@ -246,6 +246,13 @@ input.input-required, select.input-required {
       }
     }
   }
+  &.table-documents {
+    font-size: 12px;
+
+    td {
+      padding: 1px 5px;
+    }
+  }
 
   .td-5 {
     width: 5%;
@@ -296,6 +303,12 @@ input.input-required, select.input-required {
 
 select#user_role_ids {
   height: 30px;
+}
+
+.btn-search {
+  position: absolute;
+  right: 0;
+  top: 4px;
 }
 
 @media (max-width: 1270px) {
