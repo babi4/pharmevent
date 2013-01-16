@@ -13,7 +13,7 @@
       = link_to 'Архив', archive_events_path, class: 'btn'
       %a.btn.btn-success{"data-toggle" => "modal", :href => "#newEventModal"} Добавить мероприятие  
     - else
-      = link_to 'К активным мероприятиям', events_path, class: 'btn'
+      = link_to 'К активным мероприятиям', events_path, class: 'btn btn-success'
 
 %table.table.table-striped.table-condensed.table-hover.table-links.table-events#table-filter
   %thead
@@ -24,7 +24,7 @@
       %th.events-date{'data-sort' => 'int'} Конец
       %th.events-city{'data-sort' => 'string'} Город
       %th.td-10.text-right.th-count 
-        Всего - 
+        Всего:
         %span#table-filter-count= @events.count
   - @events.includes([:company]).each do |event|
     %tr{"data-link" => url_for(:action => 'show', :id => event.id)}

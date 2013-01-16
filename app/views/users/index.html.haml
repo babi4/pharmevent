@@ -16,7 +16,7 @@
       %th.td-15{'data-sort' => 'int'} Зарплата
       %th.td-15{'data-sort' => 'string'} Процент
       %th.td-10.text-right.th-count 
-        Всего - 
+        Всего:
         %span#table-filter-count= @users.count
     %tbody
       - @users.includes(:roles).each do |user|
