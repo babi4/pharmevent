@@ -16,6 +16,21 @@ class DocumentsBeznalRashod < ActiveRecord::Base
   #validate :lectors_and_entire_fields
   validate :state_act_typo
 
+  def self.search(params = {})
+    result = self.scoped
+
+    result = result.where(:num_schet => params[:schet_num])                unless params[:schet_num].blank?
+    result = result.where(:date_schet => Date.parse(params[:schet_date]))  unless params[:schet_date].blank?
+    result = result.where(:summ => params[:schet_sum])                     unless params[:schet_sum].blank?
+
+    result = result.where(:info_act => params[:act_num])                   unless params[:act_num].blank?
+    result = result.where(:info_date_act => Date.parse(params[:act_date])) unless params[:act_date].blank?
+
+    result = result.where(:info_schet_factura => params[:fact_num])           unless params[:fact_num].blank?
+    result = result.where(:info_date_schet => Date.parse(params[:fact_date])) unless params[:fact_date].blank?
+
+    result
+  end
 
 
   private

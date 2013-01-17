@@ -1,15 +1,30 @@
 .documents-header {
   position: relative;
 }
+.documents-header-search {
+  padding-left: 105px;
+}
 
 .documents-search {
-  margin: 30px 0 10px;
-
   td {
-    padding: 2px 3px;
+    padding: 3px 5px;
+  }
+  tr:first-child {
+    td {
+      padding-top: 10px;
+      padding-bottom: 20px;
+
+      &:first-child {
+        padding-top: 14px;
+      }
+    }
   }
 }
 
 .document-search-input {
   width: 120px;
+}
+
+#submit-documents-search {
+  margin-top: 20px;
 }

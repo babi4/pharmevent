@@ -15,6 +15,18 @@ class DocumentsNalRashod < ActiveRecord::Base
   validates :event_id, :user_id, :company, :summ, :date, :presence => true
   validate :lectors_and_entire_fields
 
+  def self.search(params = {})
+    if params[:act_num].blank? && params[:act_date].blank? && params[:fact_num].blank? && params[:fact_date].blank?
+      unless params[:schet_num].blank? && params[:schet_date].blank? && params[:schet_sum].blank?
+        result = self.scoped
+        result = result.where(:description => params[:schet_num])       unless params[:schet_num].blank?
+        result = result.where(:date => Date.parse(params[:schet_date])) unless params[:schet_date].blank?
+        result = result.where(:summ => params[:schet_sum])              unless params[:schet_sum].blank?
+        result
+      end
+    end
+  end
+
 
   private
 
