@@ -4,9 +4,9 @@
   = f.label :name, "Полное наименование*"
   = f.text_field :name, :class => 'span8', "data-required" => 'true'
 
-  = f.label :short_name, "Краткое наименование"
+  = f.label :short_name, "Краткое наименование*"
   = f.select :company_type, [['ООО', 'ООО'], ['ОАО', 'ОАО'], ['ЗАО', 'ЗАО'], ['МОО', 'МОО'], ['НОА', 'НОА'], ['ИП', 'ИП']], {}, { :class => 'span1' }
-  = f.text_field :short_name, :class => 'span4'
+  = f.text_field :short_name, :class => 'span4', "data-required" => 'true'
   
   %legend Юридический адрес
 
@@ -122,19 +122,19 @@
   %legend Адрес банка
   .row
     .span2
-      = f.label :bank_zip, "Индекс*"
-      = f.text_field :bank_zip, :class => 'span2', "data-required" => 'true'
+      = f.label :bank_zip, "Индекс"
+      = f.text_field :bank_zip, :class => 'span2'
     .span3
       = f.label :bank_city, "Город*"
       = f.text_field :bank_city, :class => 'span3', "data-required" => 'true'
     .span3
-      = f.label :bank_street, "Улица*"
-      = f.text_field :bank_street, :class => 'span3', "data-required" => 'true'
+      = f.label :bank_street, "Улица"
+      = f.text_field :bank_street, :class => 'span3'
 
   .row
     .span1
-      = f.label :bank_house, "Дом*"
-      = f.text_field :bank_house, :class => 'span1', "data-required" => 'true'
+      = f.label :bank_house, "Дом"
+      = f.text_field :bank_house, :class => 'span1'
     .span1
       = f.label :bank_stroenie, "Строение"
       = f.text_field :bank_stroenie, :class => 'span1'
