@@ -26,15 +26,17 @@ class Ability
     can :manage, :user_passwords # Изменение паролей пользователей
 
     [DocumentsBeznalRashod, DocumentsBeznalSchet, DocumentsNalRashod, DocumentsNalPrihod].each do |document|
-      can :read, document, :state => %w(new added signed for_revision paid not_for_payment)
+      can :read, document
       can :create, document
-      can :update, document, :state => %w(new added signed for_revision paid)
-      can :remove, document, :state => 'not_for_payment'
+      can :update, document
+      can :remove, document
 
       can :sign, document, :state => %w(added for_revision)
       can :send_for_revision, document, :state => %w(added)
+      can :send_to_sign, document, :state => 'new'
 
       can :block_payment, document, :state => %w(added signed for_revision)
+      can :pay, document, :state => 'signed'
       can :update_state, document
     end
   end
