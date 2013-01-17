@@ -15,7 +15,7 @@ class Company < ActiveRecord::Base
     %w(city house office street stroenie zip_code).each do |attr_name|
       attrs[attr_name] = company["post_#{attr_name}"]
     end
-    attrs['name'] = "#{company[:company_type]} '#{company[:name]}'"
+    attrs['name'] = "#{company[:company_type]} '#{company[:short_name]}'"
 
     CouriersCompany.find_or_create_by_name(attrs) # TODO verify only by name?
   end

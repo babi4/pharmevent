@@ -29,7 +29,7 @@
   - @events.includes([:company]).each do |event|
     %tr{"data-link" => url_for(:action => 'show', :id => event.id)}
       %td= event.name
-      %td= event.company[:name]
+      %td= "#{event.company[:company_type]} #{event.company[:short_name]}"
       %td.events-date.filter-date{"data-sort-value" => event.date_start.to_time.to_i}
         = event.date_start.strftime("%d.%m.%y")
       %td.events-date.filter-date{"data-sort-value" => event.date_end.to_time.to_i}

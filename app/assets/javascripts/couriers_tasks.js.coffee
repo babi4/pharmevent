@@ -66,6 +66,9 @@ $ ->
         select: (event, ui) ->
           type = $(@).data 'type'
           $("#couriers_task_#{type}_couriers_company_member_id").val ui.item.id
+      .focus ->   
+        search_val = $(@).val()
+        $(@).data("autocomplete").search(search_val) if search_val is ''
 
   if window.from_couriers_company
     setAutocomplete 'from', window.from_couriers_company, window.from_couriers_company_member
