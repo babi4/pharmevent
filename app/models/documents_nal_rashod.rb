@@ -13,7 +13,6 @@ class DocumentsNalRashod < ActiveRecord::Base
   belongs_to :event
 
   validates :event_id, :user_id, :company, :summ, :date, :presence => true
-  validate :lectors_and_entire_fields
 
   def self.search(params = {})
     if params[:act_num].blank? && params[:act_date].blank? && params[:fact_num].blank? && params[:fact_date].blank?

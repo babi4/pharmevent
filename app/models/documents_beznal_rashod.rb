@@ -13,7 +13,6 @@ class DocumentsBeznalRashod < ActiveRecord::Base
   belongs_to :event
 
   validates :event_id, :user_id, :company, :type_company, :summ, :presence => true
-  #validate :lectors_and_entire_fields
   validate :state_act_typo
 
   def self.search(params = {})

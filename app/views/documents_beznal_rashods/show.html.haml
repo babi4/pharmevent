@@ -61,8 +61,11 @@
   = @documents_beznal_rashod.dogovor_date.strftime("%d.%m.%Y")
 %p
   %b Данный расход является:
-  = 'расходом по логистике лекторов (статус: физ.лицо)' if @documents_beznal_rashod.lectors
-  = 'расходом по мероприятию в целом (статус: фгент/юр.лицо)' if @documents_beznal_rashod.entire
+  = @documents_beznal_rashod.lectors
+  - if @documents_beznal_rashod.lectors
+    = 'расходом по логистике лекторов (статус: физ.лицо)' 
+  - else
+    = 'расходом по мероприятию в целом (статус: агент/юр.лицо)'
 
 %hr
 %h4 Информация по расходу
