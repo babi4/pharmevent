@@ -27,6 +27,7 @@ class Ability
 
     [DocumentsBeznalRashod, DocumentsBeznalSchet, DocumentsNalRashod, DocumentsNalPrihod].each do |document|
       can :read, document, :state => %w(added signed for_revision paid not_for_payment)
+      can :create, document
       can :update, document, :state => %w(added signed for_revision paid)
       can :remove, document, :state => 'not_for_payment'
 

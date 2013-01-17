@@ -1,8 +1,12 @@
 .client-table-label {
   display: inline-block;
-  width: 100px;
+  width: 95px;
   text-align: center;
   font-size: 11px;
+  padding-right: 5px;
+  position: relative;
+  top: -1px;
+  text-align: right;
 }
 
 .clients-name {
