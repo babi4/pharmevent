@@ -103,7 +103,7 @@ $ ->
       start_date = start.toString 'dd.MM.yyyy'
       end_date = end.toString 'dd.MM.yyyy'
       filter_start = start.getTime()
-      filter_end = end.getTime()
+      filter_end = end.getTime() + (86400 * 1000)
       if start_date is end_date
         date_range = start_date
       else
