@@ -17,6 +17,7 @@
   - if can? :manage, User
     %li{:class => ("active" if current_page?(:controller => 'users', :action => 'index'))}
       = link_to 'Пользователи', users_path
+  - if can? :access, :rails_admin
     %li
       = link_to 'Админка', rails_admin_path
 
