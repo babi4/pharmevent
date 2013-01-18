@@ -18,7 +18,7 @@
 %p
   %b Роль
   %br
-  = t "#{@user.roles.first.name}"
+  = t "#{@user.roles.first.name}", :locale => :ru
 - if @user.salary
   %p
     %b Зарплата

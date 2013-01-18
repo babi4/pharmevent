@@ -15,10 +15,10 @@
   .row
     .span4
       = f.label :name, "ФИО заказчика"
-      = f.text_field :name, :class => 'span4'
+      = f.select :name, [], {}, { :class => 'span4' }
     .span3
       = f.label :telephone, "Мобильный телефон заказчика"
-      = f.text_field :telephone, :class => 'span3'
+      = f.text_field :telephone, :class => 'span3', :readonly => true
 
   .row
     .span2
@@ -98,5 +98,10 @@
 
   = f.submit 'Сохранить', :class => 'btn btn-primary btn-primary-submit'
 
+- if @documents_beznal_schet.name
+  :javascript
+    window.docName = "#{@documents_beznal_schet.name}"
+
 :javascript
-  window.companies = #{@companies.to_json}
+  window.companies = #{Company.all.to_json(:include => { :company_members => { :only => [ :name, :telephone ] }})}
+  window.companyMembers = []
