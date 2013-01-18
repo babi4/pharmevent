@@ -140,7 +140,6 @@ $ ->
           initMembersSelect company_class, company_id
           $("#couriers_task_#{currentModalType}_couriers_company_member_id").val data.id
           $("#couriers_task_#{currentModalType}_couriers_company_member_class").val data.class
-          alert data.class
           $("#{currentModalType}-people").val data.name
           $("#new-#{currentModalType}-company-member").hide()
           $('#newMemberModal').modal 'hide'
