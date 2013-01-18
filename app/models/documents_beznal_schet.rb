@@ -16,10 +16,10 @@ class DocumentsBeznalSchet < ActiveRecord::Base
   validates :event_id, :user_id, :company_id, :summ, :nds, :presence => true
   validate :state_act_typo
 
-  before_create do
-    self.num_schet = DocumentsBeznalSchet.next_num_schet
-    self.date_schet = DateTime.now
-  end
+  # before_create do
+  #   self.num_schet = DocumentsBeznalSchet.next_num_schet
+  #   self.date_schet = DateTime.now
+  # end
 
   def self.next_num_schet
     DocumentsBeznalSchet.unscoped.where { date_schet > DateTime.now.beginning_of_year } .count + 1

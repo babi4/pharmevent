@@ -12,8 +12,8 @@
   /   %a{:href => "#"} Поставщики
   %li{:class => ("active" if current_page?(:controller => 'documents', :action => 'index'))}
     = link_to 'Документы', documents_path
-  %li
-    %a{:href => "#"} Отчеты
+  %li{:class => ("active" if current_page?(:controller => 'reports', :action => 'index'))}
+    = link_to 'Отчеты', reports_path
   - if can? :manage, User
     %li{:class => ("active" if current_page?(:controller => 'users', :action => 'index'))}
       = link_to 'Пользователи', users_path

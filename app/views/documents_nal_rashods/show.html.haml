@@ -41,7 +41,10 @@
 %p
   %b Дата оплаты
   %br
-  = @documents_nal_rashod.date.strftime("%d.%m.%Y")
+  - if @documents_nal_rashod.date.blank?
+    —
+  - else
+    = @documents_nal_rashod.date.strftime("%d.%m.%Y")
 %p
   %b Данный расход является
   - if @documents_nal_rashod.lectors

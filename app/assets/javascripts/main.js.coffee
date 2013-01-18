@@ -18,8 +18,9 @@ $ ->
     autoclose: true
   ).on "changeDate", (ev) ->
     new_date = ev.date.toString 'dd.MM.yyyy'
+    format_date = ev.date.toString 'yyyy-MM-dd'
     if @nodeName is 'SPAN'
-      $($(@).data('field')).val new_date
+      $($(@).data('field')).val format_date
       $(@).text new_date
     else
       $(@).find('.input-date').val new_date

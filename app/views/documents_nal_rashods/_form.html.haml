@@ -20,12 +20,12 @@
       = f.label :summ, "Сумма*"
       = f.text_field :summ, :class => 'span2', "data-required" => 'true'
     .span2
-      = f.label :date, "Дата оплаты*", :class => 'no-margin pull-right date-label-width'
+      = f.label :date, "Дата оплаты", :class => 'no-margin pull-right date-label-width'
       %br
       .input-prepend.input-prepend-margin.date-picker.pull-right{"data-date" => (@documents_nal_rashod.date.strftime("%d.%m.%Y") unless @documents_nal_rashod.date.blank?) }
         %span.add-on
           %i.icon-calendar
-        = f.text_field :date, :class => 'input-date', "data-required" => 'true', :value => (@documents_nal_rashod.date.strftime("%d.%m.%Y") unless @documents_nal_rashod.date.blank?)
+        = f.text_field :date, :class => 'input-date', :value => (@documents_nal_rashod.date.strftime("%d.%m.%Y") unless @documents_nal_rashod.date.blank?)
 
   %b.before-checkbox Данный расход является:
   %label.radio

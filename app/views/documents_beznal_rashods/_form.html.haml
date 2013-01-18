@@ -25,13 +25,13 @@
       = f.text_field :num_schet, :class => 'span2', "data-required" => 'true'
     .span2
       .span-date.pull-right
-        = f.label :date_schet, "Дата счета*", :class => 'no-margin'
+        = f.label :date_schet, "Дата счета", :class => 'no-margin'
         .input-prepend.input-prepend-margin.date-picker.pull-right{"data-date" => (@documents_beznal_rashod.date_schet.strftime("%d.%m.%Y") unless @documents_beznal_rashod.date_schet.blank?) }
           %span.add-on
             %i.icon-calendar
-          = f.text_field :date_schet, :class => 'input-date', "data-required" => 'true', :value => (@documents_beznal_rashod.date_schet.strftime("%d.%m.%Y") unless @documents_beznal_rashod.date_schet.blank?)
+          = f.text_field :date_schet, :class => 'input-date', :value => (@documents_beznal_rashod.date_schet.strftime("%d.%m.%Y") unless @documents_beznal_rashod.date_schet.blank?)
     .span2
-      = f.label :summ, "Сумма"
+      = f.label :summ, "Сумма*"
       = f.text_field :summ, :class => 'span2', "data-required" => 'true'
     .span1
       = f.label :nds, "НДС"
@@ -43,11 +43,11 @@
       = f.text_field :dogovor_num, :class => 'span2', "data-required" => 'true'
     .span2
       .span-date.pull-right
-        = f.label :date_schet, "Дата договора*", :class => 'no-margin'
+        = f.label :date_schet, "Дата договора", :class => 'no-margin'
         .input-prepend.input-prepend-margin.date-picker.pull-right{"data-date" => (@documents_beznal_rashod.dogovor_date.strftime("%d.%m.%Y") unless @documents_beznal_rashod.dogovor_date.blank?) }
           %span.add-on
             %i.icon-calendar
-          = f.text_field :dogovor_date, :class => 'input-date', "data-required" => 'true', :value => (@documents_beznal_rashod.dogovor_date.strftime("%d.%m.%Y") unless @documents_beznal_rashod.dogovor_date.blank?)
+          = f.text_field :dogovor_date, :class => 'input-date', :value => (@documents_beznal_rashod.dogovor_date.strftime("%d.%m.%Y") unless @documents_beznal_rashod.dogovor_date.blank?)
 
   %b.before-checkbox Данный расход является:
   %label.radio
@@ -100,7 +100,7 @@
   .row
     .span2
       = f.label :info_state_act, "Статус возврата акта"
-      = f.select :info_state_act, %w(отправлен неотправлен).map { |t| [t]*2 }, {}, { :class => 'span2' }
+      = f.select :info_state_act, %w(не\ отправлен отправлен).map { |t| [t]*2 }, {}, { :class => 'span2' }
     .span2
       .span-date.pull-right
         = f.label :info_return_date, "Дата возврата", :class => 'no-margin'
@@ -110,7 +110,7 @@
           = f.text_field :info_return_date, :class => 'input-date', :value => (@documents_beznal_rashod.info_return_date.strftime("%d.%m.%Y") unless @documents_beznal_rashod.info_return_date.blank?)
 
   = f.label :info_type_return_act, "Способ возврата акта"
-  = f.select :info_type_return_act,  %w(почтой курьером службой\ доставки).map { |t| [t]*2 }, {}, { :class => 'span2' }
+  = f.select :info_type_return_act,  %w(\  почтой курьером службой\ доставки).map { |t| [t]*2 }, {}, { :class => 'span2' }
 
   = f.label :info_name_sender, "ФИО отправителя"
   = f.select :info_name_sender, User.all.collect {|u| [ u.name, u.name ] }, {}, :class => 'span4'

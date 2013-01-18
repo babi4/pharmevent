@@ -42,6 +42,8 @@ Rails3BootstrapDeviseCancan::Application.routes.draw do
   match 'company_members/update' => 'company_members#update'
   match 'company_members/destroy' => 'company_members#destroy'
 
+  match 'reports' => 'reports#index'
+
   resources :documents do
     collection do
       get :search

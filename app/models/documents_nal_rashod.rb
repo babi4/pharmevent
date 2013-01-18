@@ -12,7 +12,7 @@ class DocumentsNalRashod < ActiveRecord::Base
   belongs_to :user
   belongs_to :event
 
-  validates :event_id, :user_id, :company, :summ, :date, :presence => true
+  validates :event_id, :user_id, :company, :summ, :presence => true
 
   def self.search(params = {})
     if params[:act_num].blank? && params[:act_date].blank? && params[:fact_num].blank? && params[:fact_date].blank?

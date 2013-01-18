@@ -42,7 +42,10 @@
 %p
   %b Дата счета
   %br
-  = @documents_beznal_rashod.date_schet.strftime("%d.%m.%Y")
+  - if @documents_beznal_rashod.date_schet.blank?
+    —
+  - else
+    = @documents_beznal_rashod.date_schet.strftime("%d.%m.%Y")
 %p
   %b Сумма
   %br
@@ -58,7 +61,10 @@
 %p
   %b Дата договора
   %br
-  = @documents_beznal_rashod.dogovor_date.strftime("%d.%m.%Y")
+  - if @documents_beznal_rashod.dogovor_date.blank?
+    —
+  - else
+    = @documents_beznal_rashod.dogovor_date.strftime("%d.%m.%Y")
 %p
   %b Данный расход является:
   - if @documents_beznal_rashod.lectors
@@ -83,15 +89,24 @@
 %p
   %b Дата оплаты
   %br
-  = @documents_beznal_rashod.info_date_pay.strftime("%d.%m.%Y")
+  - if @documents_beznal_rashod.info_date_pay.blank?
+    —
+  - else
+    = @documents_beznal_rashod.info_date_pay.strftime("%d.%m.%Y")
 %p
   %b Дата сч. фактуры
   %br
-  = @documents_beznal_rashod.info_date_schet.strftime("%d.%m.%Y")
+  - if @documents_beznal_rashod.info_date_schet.blank?
+    —
+  - else
+    = @documents_beznal_rashod.info_date_schet.strftime("%d.%m.%Y")
 %p
   %b Дата акта
   %br
-  = @documents_beznal_rashod.info_date_act.strftime("%d.%m.%Y")
+  - if @documents_beznal_rashod.info_date_act.blank?
+    —
+  - else
+    = @documents_beznal_rashod.info_date_act.strftime("%d.%m.%Y")
 %p
   %b Статус возврата акта
   %br
@@ -99,7 +114,10 @@
 %p
   %b Дата возврата акта
   %br
-  = @documents_beznal_rashod.info_return_date.strftime("%d.%m.%Y")
+  - if @documents_beznal_rashod.info_return_date.blank?
+    —
+  - else
+    = @documents_beznal_rashod.info_return_date.strftime("%d.%m.%Y")
 %p
   %b Способ возврата акта
   %br

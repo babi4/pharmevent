@@ -5,7 +5,11 @@
   %li
     = link_to @event.name, @event
     %span.divider /
-  %li.active Редактирование наличного расхода
+  %li.active
+    = link_to 'Наличный расход', [@event, @documents_nal_rashod]
+    %span.divider
+      |
+    редактирование
 
 = render 'form'
 

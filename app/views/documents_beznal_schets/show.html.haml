@@ -18,6 +18,8 @@
 %p
   = event_state_text @documents_beznal_schet.state
   %span= @documents_beznal_schet.state_note
+%h4 
+  Счет №#{@documents_beznal_schet.num_schet} от #{@documents_beznal_schet.date_schet.strftime("%d.%m.%Y")}
 %p
   %b Заказчик
   %br
@@ -35,14 +37,6 @@
   %br
   = @documents_beznal_schet.telephone
 %p
-  %b Счет №
-  %br
-  = @documents_beznal_schet.num_schet
-%p
-  %b Дата счета
-  %br
-  = @documents_beznal_schet.date_schet.strftime("%d.%m.%Y")
-%p
   %b Сумма
   %br
   = @documents_beznal_schet.summ
@@ -57,7 +51,10 @@
 %p
   %b Дата договора
   %br
-  = @documents_beznal_schet.dogovor_date.strftime("%d.%m.%Y")
+  - if @documents_beznal_schet.dogovor_date.blank?
+    —
+  - else
+    = @documents_beznal_schet.dogovor_date.strftime("%d.%m.%Y")
 
 %hr
 %h4 Информация по исходящим закрывающим документам
@@ -73,11 +70,17 @@
 %p
   %b Дата сч. фактуры
   %br
-  = @documents_beznal_schet.info_date_schet.strftime("%d.%m.%Y")
+  - if @documents_beznal_schet.info_date_schet.blank?
+    —
+  - else
+    = @documents_beznal_schet.info_date_schet.strftime("%d.%m.%Y")
 %p
   %b Дата акта
   %br
-  = @documents_beznal_schet.info_date_act.strftime("%d.%m.%Y")
+  - if @documents_beznal_schet.info_date_act.blank?
+    —
+  - else
+    = @documents_beznal_schet.info_date_act.strftime("%d.%m.%Y")
 %p
   %b Статус отправления
   %br
@@ -85,7 +88,10 @@
 %p
   %b Дата отправления
   %br
-  = @documents_beznal_schet.info_return_date.strftime("%d.%m.%Y")
+  - if @documents_beznal_schet.info_return_date.blank?
+    —
+  - else
+    = @documents_beznal_schet.info_return_date.strftime("%d.%m.%Y")
 %p
   %b Способ отправления
   %br
@@ -98,7 +104,10 @@
 %hr
 %p
   %b Дата оплаты:
-  = @documents_beznal_schet.payment_date.strftime("%d.%m.%Y")
+  - if @documents_beznal_schet.payment_date.blank?
+    —
+  - else
+    = @documents_beznal_schet.payment_date.strftime("%d.%m.%Y")
 
 - content_for :title do
   Мероприятия / #{@event.name} / Безналичный приход

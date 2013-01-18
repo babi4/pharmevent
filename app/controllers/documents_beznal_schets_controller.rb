@@ -29,16 +29,11 @@ class DocumentsBeznalSchetsController < ApplicationController
   end
 
   def new
-    date_now = DateTime.now.strftime("%d.%m.%Y")
     @documents_beznal_schet.attributes =
       {
-        date_schet: date_now,
-        dogovor_date: date_now,
-        payment_date: date_now,
-        info_date_schet: date_now,
-        info_date_act: date_now,
-        info_return_date: date_now,
-        num_schet: DocumentsBeznalSchet.next_num_schet
+        date_schet: DateTime.now,
+        num_schet: DocumentsBeznalSchet.next_num_schet,
+        info_name_sender: current_user.name
       }
 
     respond_to do |format|
