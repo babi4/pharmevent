@@ -8,7 +8,7 @@ FactoryGirl.define do
     ur_zip_code "MyString"
     ur_city "MyString"
     ur_street "MyString"
-    ur_hous "MyString"
+    ur_house "MyString"
     ur_stroenie "MyString"
     ur_office "MyString"
     ur_post_equal "MyString"

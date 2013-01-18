@@ -9,7 +9,7 @@ class CompanyMembersController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @company_members }
+      format.json { render json: @company_members.map { |t| q = t.attributes ; q.update({'class' => t.class.to_s}) } }
     end
   end
 

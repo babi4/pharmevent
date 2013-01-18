@@ -26,7 +26,7 @@
         Всего:
         %span#table-filter-count= @couriers_tasks.count
 
-  - @couriers_tasks.includes([:user, :from_couriers_company, :to_couriers_company]).each do |couriers_task|
+  - @couriers_tasks.includes(:user).each do |couriers_task|
     %tr{"data-link" => url_for(:action => 'show', :id => couriers_task.id)}
       %td= couriers_task.from_couriers_company[:name]
       %td= couriers_task.from_couriers_company_member[:name] if couriers_task.from_couriers_company_member

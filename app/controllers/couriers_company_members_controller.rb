@@ -6,7 +6,7 @@ class CouriersCompanyMembersController < ApplicationController
 
   def index
     respond_to do |format|
-      format.json { render json: @couriers_company_members }
+      format.json { render json: @couriers_company_members.map { |t| q = t.attributes ; q.update({'class' => t.class.to_s}) } }
     end
   end
 

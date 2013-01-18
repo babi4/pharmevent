@@ -42,7 +42,7 @@ company1 = Company.create!(
     ur_zip_code: 123123,
     ur_city: 'Москва',
     ur_street: 'Первая',
-    ur_hous: '1'
+    ur_house: '1'
   }
 )
 
@@ -52,7 +52,7 @@ company2 = Company.create!(
     ur_zip_code: 123123,
     ur_city: 'Москва',
     ur_street: 'Вторая',
-    ur_hous: '25'
+    ur_house: '25'
   }
 )
 

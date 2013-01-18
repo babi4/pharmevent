@@ -17,7 +17,7 @@
         Всего:
         %span#table-filter-count= @couriers_companies.count
 
-  - @couriers_companies.includes([:to_couriers_tasks, :from_couriers_tasks]).each do |couriers_company|
+  - @couriers_companies.each do |couriers_company|
     %tr{"data-link" => url_for(:action => 'show', :id => couriers_company.id)}
       %td= couriers_company.name
       %td= courier_company_address couriers_company

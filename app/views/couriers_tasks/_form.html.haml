@@ -1,9 +1,13 @@
 = simple_form_for(@couriers_task, :html => {:class => 'form-validate form-courier-task' }) do |f|
   = f.error_notification
   = f.hidden_field :from_couriers_company_id
+  = f.hidden_field :from_couriers_company_class
   = f.hidden_field :from_couriers_company_member_id
+  = f.hidden_field :from_couriers_company_member_class
   = f.hidden_field :to_couriers_company_id
+  = f.hidden_field :to_couriers_company_class
   = f.hidden_field :to_couriers_company_member_id
+  = f.hidden_field :to_couriers_company_member_class
 
   .row
     .span4
@@ -12,7 +16,7 @@
       %a.btn.btn-small.new-company.hide#new-from-company{'data-toggle' => 'modal', 'data-type' => 'from', href: '#newAddressModal'} добавить
       %br
       %span.couriers-company-address#couriers-from-company-address
-        = courier_company_address(@couriers_task.from_couriers_company) if @couriers_task.from_couriers_company
+        = courier_company_address(@couriers_task.from_couriers_company) if @couriers_task.from_couriers_company_id
 
     .span4
       %h4 Куда
@@ -20,7 +24,7 @@
       %a.btn.btn-small.new-company.hide#new-to-company{'data-toggle' => 'modal', 'data-type' => 'to', href: '#newAddressModal'} добавить
       %br
       %span.couriers-company-address#couriers-to-company-address
-        = courier_company_address(@couriers_task.to_couriers_company) if @couriers_task.to_couriers_company
+        = courier_company_address(@couriers_task.to_couriers_company) if @couriers_task.to_couriers_company_id
 
     .span4
       %h4.couriers-date Когда
@@ -34,14 +38,14 @@
 
   .row
     .span4
-      .couriers-member-b#couriers-from-member{:class => ("hide" unless @couriers_task.from_couriers_company_member)}
+      .couriers-member-b#couriers-from-member{:class => ("hide" unless @couriers_task.from_couriers_company_member_id)}
         Отправитель
         %br
         %input.people-select.no-margin#from-people{'data-type' => 'from', 'data-required' => 'true', tabindex: 2, type: 'text'}
         %a.btn.btn-small.new-company-member.hide#new-from-company-member{'data-toggle' => 'modal', 'data-type' => 'from',  href: '#newMemberModal'} добавить
 
     .span4
-      .couriers-member-b#couriers-to-member{:class => ("hide" unless @couriers_task.to_couriers_company_member)}
+      .couriers-member-b#couriers-to-member{:class => ("hide" unless @couriers_task.to_couriers_company_member_id)}
         Получатель
         %br
         %input.people-select.no-margin#to-people{'data-type' => 'to', 'data-required' => 'true', tabindex: 4, type: 'text'}
@@ -88,7 +92,8 @@
 
 #newMemberModal.modal.hide.fade{:role => "dialog", :tabindex => "-1"}
   = form_tag("#", :class => 'form-validate', :id => 'form-company-member') do
-    = hidden_field_tag :couriers_member_company, ""
+    = hidden_field_tag :couriers_member_company_id, ""
+    = hidden_field_tag :couriers_member_company_class, ""
     .modal-header
       %button.close{"data-dismiss" => "modal", :type => "button"} ×
       %h3 Новое контактное лицо
@@ -109,4 +114,4 @@
     window.to_couriers_company_member = "#{@couriers_task.to_couriers_company_member.name if @couriers_task.to_couriers_company_member}"
 
 :javascript
-  window.couriers_companies = #{@couriers_companies.to_json}
+  window.couriers_companies = #{ @couriers_companies ? @couriers_companies.map { |t| q = t.attributes ; q.update({'class' => t.class.to_s, 'full_address' => t.full_address}) }.to_json : '[]' }

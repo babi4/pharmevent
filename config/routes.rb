@@ -49,6 +49,6 @@ Rails3BootstrapDeviseCancan::Application.routes.draw do
     end
   end
 
-  match 'couriers_companies/:company_id/couriers_company_members/create' => 'couriers_company_members#create'
+  match 'couriers_tasks/create_member' => 'couriers_tasks#create_member', :via => :post
 
 end

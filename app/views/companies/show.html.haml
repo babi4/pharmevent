@@ -21,7 +21,7 @@
       - if @company.ur_post_equal
         (почтовый адрес тот же)
     %p
-      %span>= "#{@company.ur_zip_code}, г.#{@company.ur_city}, ул.#{@company.ur_street}, дом #{@company.ur_hous}"
+      %span>= "#{@company.ur_zip_code}, г.#{@company.ur_city}, ул.#{@company.ur_street}, дом #{@company.ur_house}"
       - unless @company.ur_stroenie.blank?
         %span>= ", строение #{@company.ur_stroenie}"
       - unless @company.ur_office.blank?

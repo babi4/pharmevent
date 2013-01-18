@@ -40,7 +40,7 @@ $ ->
   
   $('#btn-courier-task-save').on 'click', (e) ->
     e.preventDefault()
-    if $('#couriers_task_from_couriers_company_id').val() is $('#couriers_task_to_couriers_company_id').val()
+    if ($('#couriers_task_from_couriers_company_id').val() is $('#couriers_task_to_couriers_company_id').val()) and ($('#couriers_task_from_couriers_company_class').val() is $('#couriers_task_to_couriers_company_class').val())
       alert 'Место отправки совпадает с местом получения. Выберите, пожалуйста, правильные места.'
     else
       $('.form-courier-task').submit()
@@ -50,14 +50,21 @@ $ ->
       $(@).val people_val
     $("##{type}-company").on "autocompletecreate", (event, ui) ->
       $(@).val val
-      initMembersSelect $("#couriers_task_#{type}_couriers_company_id").val(), type
+      initMembersSelect $("#couriers_task_#{type}_couriers_company_class").val(), $("#couriers_task_#{type}_couriers_company_id").val(), type
 
-  initMembersSelect = (company, type) ->
-    $.getJSON "/couriers_companies/#{company}/couriers_company_members.json", (data) ->
+  initMembersSelect = (company_class, company_id, type) ->
+    link = ''
+    switch company_class
+      when 'CouriersCompany'
+        link = "/couriers_companies/#{company_id}/couriers_company_members.json"
+      when 'Company'
+        link = "/companies/#{company_id}/company_members.json"
+
+    $.getJSON link, (data) ->
       $("##{type}-people").val('').autocomplete
         autoFocus: true
         minLength: 0
-        source: ({value: item.name, id: item.id} for item in data)
+        source: ({value: item.name, id: item.id, class: item.class} for item in data)
         response: (event, ui) ->
           if ui.content.length
             $("#new-#{type}-company-member").addClass('hide')
@@ -66,7 +73,8 @@ $ ->
         select: (event, ui) ->
           type = $(@).data 'type'
           $("#couriers_task_#{type}_couriers_company_member_id").val ui.item.id
-      .focus ->   
+          $("#couriers_task_#{type}_couriers_company_member_class").val ui.item.class
+      .focus ->
         search_val = $(@).val()
         $(@).data("autocomplete").search(search_val) if search_val is ''
 
@@ -77,7 +85,7 @@ $ ->
   if window.couriers_companies
     $(".company-select").autocomplete
       minLength: 0
-      source: ({value: item.name, id: item.id} for item in window.couriers_companies)
+      source: ({value: item.name, id: item.id, class: item.class} for item in window.couriers_companies)
       change: (event, ui) ->
         type = $(@).data 'type'
         unless ui.item
@@ -95,10 +103,11 @@ $ ->
           $("#couriers-#{type}-member").slideUp(200)
       select: (event, ui) ->
         type = $(@).data 'type'
-        $("#couriers_member_company, #couriers_task_#{type}_couriers_company_id").val ui.item.id
+        $("#couriers_member_company_id, #couriers_task_#{type}_couriers_company_id").val ui.item.id
+        $("#couriers_member_company_class, #couriers_task_#{type}_couriers_company_class").val ui.item.class
         company_data = _.find window.couriers_companies, (item) -> item.id is parseInt(ui.item.id)
         $("#couriers-#{type}-company-address").text company_data.full_address
-        initMembersSelect ui.item.id, type
+        initMembersSelect ui.item.class, ui.item.id, type
         $("#couriers-#{type}-member").slideDown(200)
     .focus ->   
       search_val = $(@).val()
@@ -116,15 +125,22 @@ $ ->
 
   $('#courier-company-member-add').on 'click', ->
     if validateForm($('#form-company-member'))
-      company_id = $('#couriers_member_company').val().trim()
-      $.post "/couriers_companies/#{company_id}/couriers_company_members/create",
+      company_id = $('#couriers_member_company_id').val().trim()
+      company_class = $('#couriers_member_company_class').val().trim()
+      $.post "/couriers_tasks/create_member",
+        company:
+          id: company_id
+          class: company_class
         company_member:
           name: $('#couriers_member_name').val().trim()
           telephone: $('#couriers_member_telephone').val().trim()
         company_id: company_id
         (data) ->
-          initMembersSelect company_id
+          data = data.company_member
+          initMembersSelect company_class, company_id
           $("#couriers_task_#{currentModalType}_couriers_company_member_id").val data.id
+          $("#couriers_task_#{currentModalType}_couriers_company_member_class").val data.class
+          alert data.class
           $("#{currentModalType}-people").val data.name
           $("#new-#{currentModalType}-company-member").hide()
           $('#newMemberModal').modal 'hide'
