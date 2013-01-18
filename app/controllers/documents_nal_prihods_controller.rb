@@ -28,8 +28,6 @@ class DocumentsNalPrihodsController < ApplicationController
   end
 
   def new
-    @documents_nal_prihod[:date] = DateTime.now.strftime("%d.%m.%Y")
-
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @documents_nal_prihod }

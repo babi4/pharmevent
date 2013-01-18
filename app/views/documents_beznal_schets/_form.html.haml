@@ -1,4 +1,4 @@
-= form_for([@event, @documents_beznal_schet], :html => {:class => 'form-validate'}) do |f|
+= simple_form_for([@event, @documents_beznal_schet], :html => {:class => 'form-validate'}) do |f|
 
   %h4 
     Счет №#{@documents_beznal_schet.num_schet} от
@@ -7,9 +7,7 @@
   = f.hidden_field :num_schet
   = f.hidden_field :date_schet
 
-  = f.label :company_id, "Заказчик*"
-  - @companies = Company.all
-  = f.collection_select(:company_id, @companies, :id, :name)
+  = f.association :company, :label => 'Заказчик*', :required => false, :input_html => { 'data-required' => 'true' }
 
   = f.label :description, "Назначение платежа*"
   = f.text_field :description, :class => 'span7', "data-required" => 'true'
@@ -28,11 +26,11 @@
       = f.text_field :dogovor_num, :class => 'span2', "data-required" => 'true'
     .span2
       .span-date.pull-right
-        = f.label :date_schet, "Дата договора*", :class => 'no-margin'
+        = f.label :date_schet, "Дата договора", :class => 'no-margin'
         .input-prepend.input-prepend-margin.date-picker.pull-right{"data-date" => (@documents_beznal_schet.dogovor_date.strftime("%d.%m.%Y") unless @documents_beznal_schet.dogovor_date.blank?) }
           %span.add-on
             %i.icon-calendar
-          = f.text_field :dogovor_date, :class => 'input-date', "data-required" => 'true', :value => (@documents_beznal_schet.dogovor_date.strftime("%d.%m.%Y") unless @documents_beznal_schet.dogovor_date.blank?)
+          = f.text_field :dogovor_date, :class => 'input-date', :value => (@documents_beznal_schet.dogovor_date.strftime("%d.%m.%Y") unless @documents_beznal_schet.dogovor_date.blank?)
     .span2
       = f.label :summ, "Сумма*"
       = f.text_field :summ, :class => 'span2', "data-required" => 'true'
@@ -94,7 +92,7 @@
           = f.text_field :info_return_date, :class => 'input-date', :value => (@documents_beznal_schet.info_return_date.strftime("%d.%m.%Y") unless @documents_beznal_schet.info_return_date.blank?)
 
   = f.label :info_name_sender, "ФИО отправителя закрывающих документов"
-  = f.text_field :info_name_sender, :class => 'span4'
+  = f.collection_select :info_name_sender, User.all, :name, :name, :include_blank => true
 
   %br
 

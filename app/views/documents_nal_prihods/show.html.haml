@@ -41,7 +41,10 @@
 %p
   %b Дата оплаты
   %br
-  = @documents_nal_prihod.date.strftime("%d.%m.%Y")
+  - if @documents_nal_prihod.date.blank?
+    —
+  - else
+    = @documents_nal_prihod.date.strftime("%d.%m.%Y")
 
 - content_for :title do
   Мероприятия / #{@event.name} / Наличный приход

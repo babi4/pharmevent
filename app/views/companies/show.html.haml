@@ -9,7 +9,7 @@
   %li
     = link_to 'редактирование', edit_company_path(@company)
 
-%h3.no-margin= @company.name
+%h4.no-margin= @company.name
 - unless @company.short_name.blank?
   %p.no-margin "#{@company.company_type} #{@company.short_name}"
 
