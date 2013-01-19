@@ -103,8 +103,8 @@ $ ->
           $("#couriers-#{type}-member").slideUp(200)
       select: (event, ui) ->
         type = $(@).data 'type'
-        $("#couriers_member_company_id, #couriers_task_#{type}_couriers_company_id").val ui.item.id
-        $("#couriers_member_company_class, #couriers_task_#{type}_couriers_company_class").val ui.item.class
+        $("#couriers_task_#{type}_couriers_company_id").val ui.item.id
+        $("#couriers_task_#{type}_couriers_company_class").val ui.item.class
         company_data = _.find window.couriers_companies, (item) -> item.id is parseInt(ui.item.id)
         $("#couriers-#{type}-company-address").text company_data.full_address
         initMembersSelect ui.item.class, ui.item.id, type
@@ -121,6 +121,8 @@ $ ->
   $('.new-company-member').on 'click', ->
     type = $(@).data 'type'
     currentModalType = type
+    $("#couriers_member_company_id").val $("#couriers_task_#{type}_couriers_company_id").val()
+    $("#couriers_member_company_class").val $("#couriers_task_#{type}_couriers_company_class").val()
     $('#couriers_member_name').val $("##{type}-people").val()
 
   $('#courier-company-member-add').on 'click', ->
