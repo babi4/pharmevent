@@ -21,7 +21,10 @@
     = f.label :password, "Пароль"
     = f.password_field :password, :class => 'span3'
 
-  = f.association :roles, :label => 'Роль', :include_blank => false, :label_method => lambda { |role| t "#{role.name}", :locale => :ru }, :input_html => { :class => 'span3', :size => 1, :multiple => false }
+  - if @current_user.roles.first.name == 'admin'
+    = f.association :roles, :label => 'Роль', :include_blank => false, :label_method => lambda { |role| t "#{role.name}", :locale => :ru }, :input_html => { :class => 'span3', :size => 1, :multiple => false }
+  - else
+    = f.association :roles, :collection => Role.where('id != ?', 2), :label => 'Роль', :include_blank => false, :label_method => lambda { |role| t "#{role.name}", :locale => :ru }, :input_html => { :class => 'span3', :size => 1, :multiple => false }
 
   .row
     .span2

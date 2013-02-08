@@ -20,26 +20,27 @@
         %span#table-filter-count= @users.count
     %tbody
       - @users.includes(:roles).each do |user|
-        %tr{"data-link" => url_for(:action => 'show', :id => user.id)}
-          %td= user.name
-          %td= user.email
-          %td= t "#{user.roles.first.name}", :locale => :ru
-          %td= user.salary/100.0 if user.salary
-          %td= "#{user.percent}% (#{user.salary*user.percent/10.0**4})" if user.salary && user.percent
-          %td
-            .btn-group
-              = link_to 'Войти', user, {:class => 'btn btn-mini'}
-              %button.btn.btn-mini.dropdown-toggle{"data-toggle" => "dropdown"}
-                %span.caret
-              %ul.dropdown-menu.dropdown-menu-narrow.dropdown-menu-left
-                %li
-                  = link_to 'Редактировать', edit_user_path(user), :method => :get
-                %li
-                  %a{"data-toggle" => "modal", :href => "#password-options-#{user.id}"} Изменить пароль
-                - unless user == current_user
+        - unless user.roles.first.name == 'admin' and @current_user.roles.first.name != 'admin'
+          %tr{"data-link" => url_for(:action => 'show', :id => user.id)}
+            %td= user.name
+            %td= user.email
+            %td= t "#{user.roles.first.name}", :locale => :ru
+            %td= user.salary/100.0 if user.salary
+            %td= "#{user.percent}% (#{user.salary*user.percent/10.0**4})" if user.salary && user.percent
+            %td
+              .btn-group
+                = link_to 'Войти', user, {:class => 'btn btn-mini'}
+                %button.btn.btn-mini.dropdown-toggle{"data-toggle" => "dropdown"}
+                  %span.caret
+                %ul.dropdown-menu.dropdown-menu-narrow.dropdown-menu-left
                   %li
-                    = link_to 'Удалить', user_path(user), method: :delete, data: { confirm: 'Удалить пользователя?' }
-            = render user
+                    = link_to 'Редактировать', edit_user_path(user), :method => :get
+                  %li
+                    %a{"data-toggle" => "modal", :href => "#password-options-#{user.id}"} Изменить пароль
+                  - unless user == current_user
+                    %li
+                      = link_to 'Удалить', user_path(user), method: :delete, data: { confirm: 'Удалить пользователя?' }
+              = render user
 
 - content_for :title do
   Пользователи
