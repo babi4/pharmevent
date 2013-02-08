@@ -44,6 +44,18 @@ class Ability
   def administrative_director
     # Администратор: следит за курьерами,
     # входящими и исходящими задолжностями.
+
+    can :manage, Event
+    can :manage, CouriersTask    # Заказ, управление курьерами
+    can :manage, CouriersCompany # Управление местами доставки для курьеров
+    can :manage, CouriersCompanyMember # Управление контактыми лицами в местах доставки для курьеров
+    can :manage, Client          # Управление клиентской базой
+    can :manage, CompanyMember   # Управление предствителями заказчика
+    can :manage, Company         # Управление заказчиками
+
+    [DocumentsBeznalRashod, DocumentsBeznalSchet, DocumentsNalRashod, DocumentsNalPrihod].each do |document|
+      can :read, document
+    end
   end
 
   def chief_accountant
