@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   private
 
     def update_document_state(document, transaction, state_note)
-      transactions_collection = %w(send_to_sign sign send_for_revision pay block_payment remove)
+      transactions_collection = %w(add_to_1c revise set_ready_to_post post complete receive send_to_sign sign send_for_revision pay block_payment remove)
 
       if transactions_collection.include?( transaction ) && can?( transaction.to_sym, document )
         document.send transaction

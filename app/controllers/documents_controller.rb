@@ -3,7 +3,7 @@
 class DocumentsController < ApplicationController
 
   def index
-    @events = Event.unsigned_documents
+    @events = Event.uncomplited_documents
   end
 
   def search

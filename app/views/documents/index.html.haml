@@ -7,7 +7,7 @@
       = event.name
       %br
       %span.event-date= "(#{event.date_start.strftime('%d.%m.%Y')} - #{event.date_end.strftime('%d.%m.%Y')})"
-    - documents = event.documents_beznal_schets.unsigned.includes(:company)
+    - documents = event.documents_beznal_schets.uncomplited.includes(:company)
     - if documents.any?
       %h5.pagination-centered Приход безналичный
       %table.table.table-striped.table-condensed.table-bordered.table-center.table-links.table-documents
@@ -39,7 +39,7 @@
                 %ul.dropdown-menu.dropdown-menu-narrow.dropdown-menu-left
                   - links_collection(event, doc)
 
-    - documents = event.documents_nal_prihods.unsigned        
+    - documents = event.documents_nal_prihods.uncomplited
     - if documents.any?
       %h5.pagination-centered Приход наличный
       %table.table.table-striped.table-condensed.table-bordered.table-center.table-links.table-documents
@@ -67,7 +67,7 @@
                 %ul.dropdown-menu.dropdown-menu-narrow.dropdown-menu-left
                   - links_collection(event, doc)
 
-    - documents = event.documents_beznal_rashods.unsigned
+    - documents = event.documents_beznal_rashods.uncomplited
     - if documents.any?
       %h5.pagination-centered Расход безналичный
       %table.table.table-bordered.table-condensed.table-bordered.table-center.table-links.table-documents
@@ -127,7 +127,7 @@
             %td Дата договора
             %td= doc.dogovor_date.strftime("%d.%m.%Y") unless doc.dogovor_date.blank?
 
-    - documents = event.documents_nal_rashods.unsigned
+    - documents = event.documents_nal_rashods.uncomplited
     - if documents.any?
       %h5.pagination-centered Расход наличный
       %table.table.table-striped.table-condensed.table-bordered.table-center.table-links.table-documents

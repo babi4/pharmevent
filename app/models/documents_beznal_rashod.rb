@@ -1,11 +1,9 @@
 # -*- coding: utf-8 -*-
 
 class DocumentsBeznalRashod < ActiveRecord::Base
-  extend DocumentStatesModule
-  DocumentStatesModule.included(self)
 
   default_scope where { state != 'deleted' }
-  scope :unsigned, where(:state => %w(new added for_revision))
+  scope :uncomplited, where { state << %w(completed deleted) }
 
   attr_accessible :state_note, :state, :event_id, :company, :date_schet, :description, :dogovor_date, :dogovor_num, :entire, :info_act, :info_date_act, :info_date_pay, :info_date_schet, :info_name_sender, :info_pp, :info_type_return_act, :info_return_date, :info_schet_factura, :info_state_act, :lectors, :name, :nds, :num_schet, :summ, :telephone, :type_company, :user_id
 
@@ -14,6 +12,48 @@ class DocumentsBeznalRashod < ActiveRecord::Base
 
   validates :event_id, :user_id, :company, :type_company, :summ, :presence => true
   validate :state_act_typo
+
+  state_machine :state, :initial => :new do
+
+    state :new       # Новый (менеджер, гендир)
+    state :signed    # Подписано/на доработку (менеджер, гендир)
+    state :for_revision
+    state :revised
+    state :paid      # Оплачено (бухгалтер, гендир)
+    state :received  # Документы получены  (бухгалтер, гендир)
+    state :completed # Завершено
+    state :deleted
+
+    event :sign do
+      transition [:new, :for_revision, :revised] => :signed
+    end
+
+    event :send_for_revision do
+      transition [:new, :revised] => :for_revision
+    end
+
+    event :revise do
+      transition :for_revision => :revised
+    end
+
+    event :pay do
+      transition :signed => :paid
+    end
+
+    event :receive do
+      transition :paid => :received
+    end
+
+    event :complete do
+      transition :received => :completed
+    end
+
+    event :remove do
+      transition all => :deleted
+    end
+
+  end
+
 
   def self.search(params = {})
     result = self.scoped

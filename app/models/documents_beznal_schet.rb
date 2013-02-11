@@ -1,11 +1,9 @@
 # -*- coding: utf-8 -*-
 
 class DocumentsBeznalSchet < ActiveRecord::Base
-  extend DocumentStatesModule
-  DocumentStatesModule.included(self)
 
   default_scope where { state != 'deleted' }
-  scope :unsigned, where(:state => %w(new added for_revision))
+  scope :uncomplited, where { state << %w(completed deleted) }
 
   attr_accessible :state_note, :num_schet, :date_schet, :state, :nds, :payment_date, :company_id, :description, :dogovor_date, :dogovor_num, :info_act, :info_date_act, :info_date_schet, :info_name_sender, :info_type_return_act, :info_return_date, :info_schet_factura, :info_state_act, :name, :summ, :telephone, :user_id, :event_id
 
@@ -20,6 +18,37 @@ class DocumentsBeznalSchet < ActiveRecord::Base
   #   self.num_schet = DocumentsBeznalSchet.next_num_schet
   #   self.date_schet = DateTime.now
   # end
+
+  state_machine :state, :initial => :new do
+
+    state :new           # Новый (менеджер, гендир)
+    state :added_to_1c   # Внесен в 1C  (бухгалтер, гендир)
+    state :ready_to_post # Документы готовы(Админ директор, гендир)
+    state :posted        # Документы отправлены(Админ директор, гендир)
+    state :completed     # Завершено (Админ директор, гендир)
+    state :deleted
+
+    event :add_to_1c do
+      transition :new => :added_to_1c
+    end
+
+    event :set_ready_to_post do
+      transition :added_to_1c => :ready_to_post
+    end
+
+    event :post do
+      transition :ready_to_post => :posted
+    end
+
+    event :complete do
+      transition :posted => :completed
+    end
+
+    event :remove do
+      transition all => :deleted
+    end
+
+  end
 
   def self.next_num_schet
     DocumentsBeznalSchet.unscoped.where { date_schet > DateTime.now.beginning_of_year } .count + 1

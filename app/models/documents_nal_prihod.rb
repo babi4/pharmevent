@@ -1,9 +1,7 @@
 class DocumentsNalPrihod < ActiveRecord::Base
-  extend DocumentStatesModule
-  DocumentStatesModule.included(self)
 
   default_scope where { state != 'deleted' }
-  scope :unsigned, where(:state => %w(new added for_revision))
+  scope :uncomplited, where { state << %w(paid deleted) }
 
   attr_accessible :state_note, :state, :company, :date, :description, :name, :summ, :telephone, :user_id, :event_id
 
@@ -11,6 +9,21 @@ class DocumentsNalPrihod < ActiveRecord::Base
   belongs_to :event
 
   validates :event_id, :user_id, :company, :summ, :presence => true
+
+  state_machine :state, :initial => :new do
+
+    state :new
+    state :paid
+    state :deleted
+
+    event :pay do # w/o state_note
+      transition :new => :paid
+    end
+
+    event :remove do
+      transition all => :deleted
+    end
+  end
 
   def self.search(params = {})
     if params[:act_num].blank? && params[:act_date].blank? && params[:fact_num].blank? && params[:fact_date].blank?

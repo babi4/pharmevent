@@ -25,18 +25,44 @@ class Ability
     can :manage, User            # Управление учётными записями/правами
     can :manage, :user_passwords # Изменение паролей пользователей
 
-    [DocumentsBeznalRashod, DocumentsBeznalSchet, DocumentsNalRashod, DocumentsNalPrihod].each do |document|
+    # ========= ****** =========
+    [DocumentsBeznalRashod].each do |document|
       can :read, document
       can :create, document
       can :update, document
       can :remove, document
 
-      can :sign, document, :state => %w(added for_revision)
-      can :send_for_revision, document, :state => %w(added)
-      can :send_to_sign, document, :state => 'new'
-
-      can :block_payment, document, :state => %w(added signed for_revision)
+      can :sign, document, :state => %w(new for_revision revised)
+      can :send_for_revision, document, :state => 'new revised'
+      can :revise, document, :state => 'for_revision'
       can :pay, document, :state => 'signed'
+      can :receive, document, :state => 'paid'
+      can :complete, document, :state => 'received'
+      can :update_state, document
+    end
+
+    # ========= ****** =========
+    [DocumentsBeznalSchet].each do |document|
+      can :read, document
+      can :create, document
+      can :update, document
+      can :remove, document
+      can :update_state, document
+
+      can :add_to_1c, document, :state => 'new'
+      can :set_ready_to_post, document, :state => 'added_to_1c'
+      can :post, document, :state => 'ready_to_post'
+      can :complete, document, :state => 'posted'
+    end
+
+    # ========= ****** =========
+    [DocumentsNalPrihod, DocumentsNalRashod].each do |document|
+      can :read, document
+      can :create, document
+      can :update, document
+      can :remove, document
+
+      can :pay, document, :state => 'new'
       can :update_state, document
     end
   end
@@ -53,9 +79,23 @@ class Ability
     can :manage, CompanyMember   # Управление предствителями заказчика
     can :manage, Company         # Управление заказчиками
 
-    [DocumentsBeznalRashod, DocumentsBeznalSchet, DocumentsNalRashod, DocumentsNalPrihod].each do |document|
+    # ========= ****** =========
+    [DocumentsNalRashod, DocumentsNalPrihod, DocumentsBeznalRashod].each do |document|
       can :read, document
     end
+
+    # ========= ****** =========
+    [DocumentsBeznalSchet].each do |document|
+      can :read, document, :state => %w(added_to_1c ready_to_post posted completed)
+      can :update, document, :state => %w(added_to_1c ready_to_post posted completed)
+      can :update_state, document, :state => %w(added_to_1c ready_to_post posted)
+      can :remove, document, :state => %w(ready_to_post posted completed)
+
+      can :set_ready_to_post, document, :state => 'added_to_1c'
+      can :post, document, :state => 'ready_to_post'
+      can :complete, document, :state => 'posted'
+    end
+
   end
 
   def chief_accountant
@@ -71,13 +111,33 @@ class Ability
     can :manage, CompanyMember   # Управление предствителями заказчика
     can :manage, Company         # Управление заказчиками
 
-    [DocumentsBeznalRashod, DocumentsBeznalSchet, DocumentsNalRashod, DocumentsNalPrihod].each do |document|
-      can :read, document, :state => %w(paid signed not_for_payment)
-      can :update, document, :state => 'signed'
-      can :remove, document, :state => 'not_for_payment'
+
+    # ========= ****** =========
+    [DocumentsBeznalRashod].each do |document|
+      can :read, document, :state => %w(signed paid received completed)
+      can :update, document, :state => %w(signed paid received completed)
+      can :remove, document, :state => %w(signed paid received completed)
 
       can :pay, document, :state => 'signed'
-      can :update_state, document, :state => 'signed'
+      can :revise, document, :state => 'for_revision'
+      can :receive, document, :state => 'paid'
+      can :complete, document, :state => 'received'
+      can :update_state, document
+    end
+
+    # ========= ****** =========
+    [DocumentsBeznalSchet].each do |document|
+      can :read, document, :state => %w(new added_to_1c)
+      can :update, document, :state => %w(new added_to_1c)
+      can :remove, document, :state => %w(new added_to_1c)
+      can :update_state, document, :state => 'new'
+
+      can :add_to_1c, document, :state => 'new'
+    end
+
+    # ========= ****** =========
+    [DocumentsNalPrihod, DocumentsNalRashod].each do |document|
+      can :read, document
     end
   end
 
@@ -86,19 +146,6 @@ class Ability
     # добавляют в интерфейс все платежные документы.
     # Работают с курьерами, клиентами.
 
-    #Права на добавление любых документов.
-
-    [DocumentsBeznalRashod, DocumentsBeznalSchet, DocumentsNalRashod, DocumentsNalPrihod].each do |document|
-      can :read, document, :user_id => @user[:id], :state => %w(new added signed for_revision paid not_for_payment)
-      can :create, document
-      can :update, document, :user_id => @user[:id], :state => %w(new added for_revision)
-      can :remove, document, :user_id => @user[:id], :state =>%w(new added for_revision not_for_payment)
-
-      can :send_to_sign, document, :user_id => @user[:id], :state => 'new'
-      can :update_state, document, :user_id => @user[:id], :state => 'new'
-
-    end
-
     can :manage, CouriersTask, :user_id => @user[:id]    # Заказ, управление своими курьерами
     can :manage, CouriersCompany # Управление местами доставки для курьеров
     can :manage, CouriersCompanyMember # Управление контактыми лицами в местах доставки для курьеров
@@ -106,6 +153,37 @@ class Ability
     can :manage, CompanyMember   # Управление предствителями заказчика
     can :manage, Company         # Управление заказчиками
     can :manage, Event, :user_id => @user[:id]  # Управление своими событиями
+
+    #Права на добавление любых документов.
+
+
+    # ========= ****** =========
+    [DocumentsBeznalRashod].each do |document|
+      can :read, document, :user_id => @user[:id]
+      can :create, document
+      can :update, document, :user_id => @user[:id], :state => %w[new for_revision]
+      can :remove, document, :user_id => @user[:id], :state => %w[new for_revision]
+
+      can :revise, document, :state => 'for_revision'
+      can :update_state, document, :state => 'for_revision'
+    end
+
+    # ========= ****** =========
+    [DocumentsBeznalSchet].each do |document|
+      can :read, document, :user_id => @user[:id], :state => %w(new added_to_1c ready_to_post posted completed)
+      can :create, document
+      can :update, document, :user_id => @user[:id], :state => 'new'
+      can :remove, document, :user_id => @user[:id], :state => 'new'
+    end
+
+
+    # ========= ****** =========
+    [DocumentsNalPrihod, DocumentsNalRashod].each do |document|
+      can :read, document, :user_id => @user[:id], :state => %w(new paid)
+      can :create, document
+      can :update, document, :user_id => @user[:id]
+      can :remove, document, :user_id => @user[:id]
+    end
   end
 
   def admin
@@ -116,20 +194,48 @@ class Ability
     #chief_accountant
     #general_director
 
-    [DocumentsBeznalRashod, DocumentsBeznalSchet, DocumentsNalRashod, DocumentsNalPrihod].each do |document|
+    # ========= ****** =========
+    [DocumentsBeznalRashod].each do |document|
       can :read, document
       can :create, document
       can :update, document
       can :remove, document
 
-
-      can :sign, document, :state => %w(added for_revision)
-      can :send_for_revision, document, :state => %w(added)
-      can :send_to_sign, document, :state => 'new'
-      can :block_payment, document, :state => %w(added signed for_revision)
+      can :sign, document, :state => %w(new for_revision revised)
+      can :send_for_revision, document, :state => %w(new revised)
+      can :revise, document, :state => 'for_revision'
       can :pay, document, :state => 'signed'
+      can :receive, document, :state => 'paid'
+      can :complete, document, :state => 'received'
       can :update_state, document
     end
+
+    # ========= ****** =========
+    [DocumentsBeznalSchet].each do |document|
+      can :read, document
+      can :create, document
+      can :update, document
+      can :remove, document
+      can :update_state, document
+
+      can :add_to_1c, document, :state => 'new'
+      can :set_ready_to_post, document, :state => 'added_to_1c'
+      can :post, document, :state => 'ready_to_post'
+      can :complete, document, :state => 'posted'
+    end
+
+    # ========= ****** =========
+    [DocumentsNalPrihod, DocumentsNalRashod].each do |document|
+      can :read, document
+      can :create, document
+      can :update, document
+      can :remove, document
+
+      can :pay, document, :state => 'new'
+      can :update_state, document
+    end
+
+    # ========= ****** =========
 
     can :manage, CouriersTask    # Заказ, управление курьерами
     can :manage, CouriersCompany # Управление местами доставки для курьеров
