@@ -75,6 +75,13 @@ $ ->
   countFilteredItems = ->
     count = $('#table-filter').find('tr.show').length
     $('#table-filter-count').text count
+    if window.isCouriersPage
+      if count > 0
+        $('#table-filter').show()
+        $('.empty-message').hide()
+      else
+        $('#table-filter').hide()
+        $('.empty-message').show()
 
   $('#table-filter').stupidtable()
 

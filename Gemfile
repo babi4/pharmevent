@@ -40,6 +40,8 @@ gem 'awesome_print'
 gem "squeel", "~> 1.0.14"
 gem "state_machine", "~> 1.1.2"
 
+gem 'newrelic_rpm'
+
 group :development do
   gem "binding_of_caller"
   gem "better_errors", "~> 0.3.2"

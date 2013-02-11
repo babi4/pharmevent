@@ -8,29 +8,33 @@
     = link_to 'К курьерам', couriers_tasks_path, class: 'btn'
     = link_to 'Добавить место', new_couriers_company_path, class: 'btn btn-success'
 
-%table.table.table-striped.table-condensed.table-hover.table-links#table-filter
-  %thead
-    %tr
-      %th.td-30{'data-sort' => 'string'} Название
-      %th.td-70{'data-sort' => 'string'} Адрес
-      %th.text-right.th-count 
-        Всего:
-        %span#table-filter-count= @couriers_companies.count
+- if @couriers_companies.count > 0
+  %table.table.table-striped.table-condensed.table-hover.table-links#table-filter
+    %thead
+      %tr
+        %th.td-30{'data-sort' => 'string'} Название
+        %th.td-70{'data-sort' => 'string'} Адрес
+        %th.text-right.th-count 
+          Всего:
+          %span#table-filter-count= @couriers_companies.count
 
-  - @couriers_companies.each do |couriers_company|
-    %tr{"data-link" => url_for(:action => 'show', :id => couriers_company.id)}
-      %td= couriers_company.name
-      %td= courier_company_address couriers_company
-      %td
-        .btn-group
-          = link_to 'Войти', couriers_company, {:class => 'btn btn-mini'}
-          %button.btn.btn-mini.dropdown-toggle{"data-toggle" => "dropdown"}
-            %span.caret
-          %ul.dropdown-menu.dropdown-menu-narrow.dropdown-menu-left
-            %li
-              = link_to 'Редактировать', edit_couriers_company_path(couriers_company)
-            %li
-              = link_to 'Удалить', couriers_company, method: :delete, data: { confirm: 'Удалить место?' }
+    - @couriers_companies.each do |couriers_company|
+      %tr{"data-link" => url_for(:action => 'show', :id => couriers_company.id)}
+        %td= couriers_company.name
+        %td= courier_company_address couriers_company
+        %td
+          .btn-group
+            = link_to 'Войти', couriers_company, {:class => 'btn btn-mini'}
+            %button.btn.btn-mini.dropdown-toggle{"data-toggle" => "dropdown"}
+              %span.caret
+            %ul.dropdown-menu.dropdown-menu-narrow.dropdown-menu-left
+              %li
+                = link_to 'Редактировать', edit_couriers_company_path(couriers_company)
+              %li
+                = link_to 'Удалить', couriers_company, method: :delete, data: { confirm: 'Удалить место?' }
+
+- else
+  %p.empty-message Места для курьеров еще не были добавлены.
 
 - content_for :title do
   = "Курьеры / Места"

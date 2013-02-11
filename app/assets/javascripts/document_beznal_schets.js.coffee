@@ -34,3 +34,13 @@ $ ->
       $('#documents_beznal_schet_telephone').val ''
 
   $('#documents_beznal_schet_company_id, #documents_beznal_schet_name').trigger 'change'
+
+  $('#documents_beznal_schet_summ').on 'keyup', ->
+    if $('#auto_nds').attr('checked')
+      nds = $(@).val() * 18 / 118
+      $('#documents_beznal_schet_nds').val nds.toFixed(2)
+
+  $('#auto_nds').on 'change', ->
+    if $(@).attr('checked')
+      nds = $('#documents_beznal_schet_summ').val() * 18 / 118
+      $('#documents_beznal_schet_nds').val nds.toFixed(2)

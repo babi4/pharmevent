@@ -50,12 +50,10 @@
           = f.text_field :dogovor_date, :class => 'input-date', :value => (@documents_beznal_rashod.dogovor_date.strftime("%d.%m.%Y") unless @documents_beznal_rashod.dogovor_date.blank?)
 
   %b.before-checkbox Данный расход является:
-  %label.radio
-    = f.radio_button :lectors, true
-    расходом по логистике лекторов (статус: физ.лицо)
-  %label.radio
-    = f.radio_button :lectors, false
-    расходом по мероприятию в целом (статус: агент/юр.лицо)
+  - RASHOD_TYPES.each_with_index do |type, index|
+    %label.radio
+      = f.radio_button :type_rashod, index
+      #{type[0]} (статус: #{type[1]})
 
   %hr
   

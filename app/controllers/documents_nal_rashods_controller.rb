@@ -28,6 +28,8 @@ class DocumentsNalRashodsController < ApplicationController
   end
 
   def new
+    @documents_nal_rashod[:type_rashod] = 0
+
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @documents_nal_rashod }

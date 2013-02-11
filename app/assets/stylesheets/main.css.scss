@@ -315,6 +315,18 @@ select#user_role_ids {
   top: 4px;
 }
 
+.empty-message {
+  text-align: center;
+  font-size: 18px;
+  margin: 30px 0;
+  color: #666;
+}
+
+.table tbody > tr > td.payment-alert {
+  background: #FFD1D1;
+  background: rgba(255,0,0,0.1);
+}
+
 @media (max-width: 1270px) {
   .navbar-username {
     display: none;

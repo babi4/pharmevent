@@ -47,6 +47,8 @@
             %li
               = link_to 'Удалить', couriers_task, method: :delete, data: { confirm: 'Удалить задание?' }
 
+%p.hide.empty-message Курьерских заданий не найдено.
+
 :javascript
   window.isCouriersPage = true
 

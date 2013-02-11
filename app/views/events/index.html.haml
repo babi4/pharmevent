@@ -15,43 +15,46 @@
     - else
       = link_to 'К активным мероприятиям', events_path, class: 'btn btn-success'
 
-%table.table.table-striped.table-condensed.table-hover.table-links.table-events#table-filter
-  %thead
-    %tr
-      %th.events-title{'data-sort' => 'string'} Название
-      %th.events-customer{'data-sort' => 'string'} Заказчик
-      %th.events-date{'data-sort' => 'int'} Начало
-      %th.events-date{'data-sort' => 'int'} Конец
-      %th.events-city{'data-sort' => 'string'} Город
-      %th.td-10.text-right.th-count 
-        Всего:
-        %span#table-filter-count= @events.count
-  - @events.includes([:company]).each do |event|
-    %tr{"data-link" => url_for(:action => 'show', :id => event.id)}
-      %td= event.name
-      %td= "#{event.company[:company_type]} #{event.company[:short_name]}"
-      %td.events-date.filter-date{"data-sort-value" => event.date_start.to_time.to_i}
-        = event.date_start.strftime("%d.%m.%y")
-      %td.events-date.filter-date{"data-sort-value" => event.date_end.to_time.to_i}
-        = event.date_end.strftime("%d.%m.%y")
-      %td= event.city
-      %td
-        .btn-group
-          = link_to 'Войти', event, {:class => 'btn btn-mini'}
-          %button.btn.btn-mini.dropdown-toggle{"data-toggle" => "dropdown"}
-            %span.caret
-          %ul.dropdown-menu.dropdown-menu-narrow.dropdown-menu-left
-            %li
-              = link_to 'Редактировать', edit_event_path(event)
-            - if event.date_end >= DateTime.now.to_date
+- if @events.count > 0
+  %table.table.table-striped.table-condensed.table-hover.table-links.table-events#table-filter
+    %thead
+      %tr
+        %th.events-title{'data-sort' => 'string'} Название
+        %th.events-customer{'data-sort' => 'string'} Заказчик
+        %th.events-date{'data-sort' => 'int'} Начало
+        %th.events-date{'data-sort' => 'int'} Конец
+        %th.events-city{'data-sort' => 'string'} Город
+        %th.td-10.text-right.th-count 
+          Всего:
+          %span#table-filter-count= @events.count
+    - @events.includes([:company]).each do |event|
+      %tr{"data-link" => url_for(:action => 'show', :id => event.id)}
+        %td= event.name
+        %td= "#{event.company[:company_type]} #{event.company[:short_name]}"
+        %td.events-date.filter-date{"data-sort-value" => event.date_start.to_time.to_i}
+          = event.date_start.strftime("%d.%m.%y")
+        %td.events-date.filter-date{"data-sort-value" => event.date_end.to_time.to_i}
+          = event.date_end.strftime("%d.%m.%y")
+        %td= event.city
+        %td
+          .btn-group
+            = link_to 'Войти', event, {:class => 'btn btn-mini'}
+            %button.btn.btn-mini.dropdown-toggle{"data-toggle" => "dropdown"}
+              %span.caret
+            %ul.dropdown-menu.dropdown-menu-narrow.dropdown-menu-left
               %li
-                %a.event-to-archive{href: "#", 'data-event-id' => event.id}
-                  - if action_name == 'index'
-                    В архив
-                  - else
-                    Восстановить из архива
-            %li
-              = link_to 'Удалить', event, method: :delete, data: { confirm: 'Удалить мероприятие?' }
+                = link_to 'Редактировать', edit_event_path(event)
+              - if event.date_end >= DateTime.now.to_date
+                %li
+                  %a.event-to-archive{href: "#", 'data-event-id' => event.id}
+                    - if action_name == 'index'
+                      В архив
+                    - else
+                      Восстановить из архива
+              %li
+                = link_to 'Удалить', event, method: :delete, data: { confirm: 'Удалить мероприятие?' }
+- else
+  %p.empty-message Активных мероприятий нету.
 
 - if action_name == 'index'
   #newEventModal.modal.hide.fade{:role => "dialog", :tabindex => "-1"}
