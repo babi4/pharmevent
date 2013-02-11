@@ -10,15 +10,15 @@
   = f.association :company, :label => 'Заказчик*', :required => false, :input_html => { 'data-required' => 'true' }
 
   = f.label :description, "Назначение платежа*"
-  = f.text_field :description, :class => 'span7', "data-required" => 'true'
+  = f.text_field :description, :class => 'span8', "data-required" => 'true'
 
   .row
     .span4
       = f.label :name, "ФИО заказчика"
       = f.select :name, [], {}, { :class => 'span4' }
-    .span3
+    .span4
       = f.label :telephone, "Мобильный телефон заказчика"
-      = f.text_field :telephone, :class => 'span3', :readonly => true
+      = f.text_field :telephone, :class => 'span4', :readonly => true
 
   .row
     .span2
@@ -34,15 +34,21 @@
     .span2
       = f.label :summ, "Сумма*"
       = f.text_field :summ, :class => 'span2', "data-required" => 'true'
-    .span1
+    .span2
       = f.label :nds, "НДС*"
-      = f.text_field :nds, :class => 'span1', "data-required" => 'true'
+      = f.text_field :nds, :class => 'span2', "data-required" => 'true'
 
-  = f.label :payment_date, "Дата оплаты", :class => 'no-margin'
-  .input-prepend.input-prepend-margin.date-picker{"data-date" => (@documents_beznal_schet.info_date_act.strftime("%d.%m.%Y")unless @documents_beznal_schet.info_date_act.blank?) }
-    %span.add-on
-      %i.icon-calendar
-    = f.text_field :payment_date, :class => 'input-date', :value => (@documents_beznal_schet.payment_date.strftime("%d.%m.%Y") unless @documents_beznal_schet.payment_date.blank?)
+  .row
+    .span6
+      = f.label :payment_date, "Дата оплаты", :class => 'no-margin'
+      .input-prepend.input-prepend-margin.date-picker{"data-date" => (@documents_beznal_schet.info_date_act.strftime("%d.%m.%Y")unless @documents_beznal_schet.info_date_act.blank?) }
+        %span.add-on
+          %i.icon-calendar
+        = f.text_field :payment_date, :class => 'input-date', :value => (@documents_beznal_schet.payment_date.strftime("%d.%m.%Y") unless @documents_beznal_schet.payment_date.blank?)
+    .span2
+      %label.checkbox
+        = check_box_tag :auto_nds, 1, ('true' if params[:action] == 'new')
+        автоматически
 
   %hr
   
