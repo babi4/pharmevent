@@ -78,6 +78,9 @@
             %i.icon-calendar
           = f.text_field :info_date_act, :class => 'input-date', :value => (@documents_beznal_schet.info_date_act.strftime("%d.%m.%Y") unless @documents_beznal_schet.info_date_act.blank?)
 
+  %hr
+  %h4 Информация по исходящим закрывающим документам
+  
   %p 
     Адрес отправления:
     %span#address-company
