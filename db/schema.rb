@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130118183549) do
+ActiveRecord::Schema.define(:version => 20130211114714) do
 
   create_table "clients", :force => true do |t|
     t.string   "name"
@@ -159,7 +159,7 @@ ActiveRecord::Schema.define(:version => 20130118183549) do
     t.integer  "num_schet"
     t.date     "date_schet"
     t.integer  "summ"
-    t.integer  "nds"
+    t.decimal  "nds",                  :precision => 8, :scale => 2
     t.integer  "dogovor_num"
     t.date     "dogovor_date"
     t.date     "payment_date"
@@ -171,8 +171,8 @@ ActiveRecord::Schema.define(:version => 20130118183549) do
     t.date     "info_return_date"
     t.string   "info_type_return_act"
     t.string   "info_name_sender"
-    t.datetime "created_at",           :null => false
-    t.datetime "updated_at",           :null => false
+    t.datetime "created_at",                                         :null => false
+    t.datetime "updated_at",                                         :null => false
     t.string   "state"
     t.text     "state_note"
   end
