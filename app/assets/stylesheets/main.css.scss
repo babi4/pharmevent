@@ -322,6 +322,11 @@ select#user_role_ids {
   color: #666;
 }
 
+.table tbody > tr > td.payment-alert {
+  background: #FFD1D1;
+  background: rgba(255,0,0,0.1);
+}
+
 @media (max-width: 1270px) {
   .navbar-username {
     display: none;
