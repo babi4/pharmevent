@@ -210,7 +210,7 @@
       %tr
         %td #{@prihod_summ - @rashod_summ}р.
         %td #{@nds_k_uplate = @event.documents_beznal_schets.sum(:nds)}р.
-        %td #{@nds_k_zachetu = @event.documents_beznal_rashods.sum(:nds)}р.
+        %td #{@nds_k_zachetu = @event.documents_beznal_rashods.where(:lectors => true).sum(:nds)}р.
         %td #{@nds_k_uplate - @nds_k_zachetu}р.
         %td #{(@prihod_summ - @rashod_summ) - (@nds_k_uplate - @nds_k_zachetu)}р.
 
