@@ -7,7 +7,7 @@ class DocumentsBeznalSchet < ActiveRecord::Base
   default_scope where { state != 'deleted' }
   scope :unsigned, where(:state => %w(new added for_revision))
 
-  attr_accessible :state_note, :num_schet, :date_schet, :state, :nds, :payment_date, :company_id, :description, :dogovor_date, :dogovor_num, :info_act, :info_date_act, :info_date_schet, :info_name_sender, :info_type_return_act, :info_return_date, :info_schet_factura, :info_state_act, :name, :summ, :telephone, :user_id, :event_id
+  attr_accessible :state_note, :num_schet, :date_schet, :state, :nds, :payment_date, :company_id, :description, :dogovor_date, :dogovor_num, :info_act, :info_date_act, :info_date_schet, :info_name_sender, :info_type_return_act, :info_return_date, :info_return_status, :info_schet_factura, :info_state_act, :name, :summ, :telephone, :user_id, :event_id
 
   belongs_to :user
   belongs_to :event

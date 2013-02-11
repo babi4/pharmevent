@@ -80,7 +80,7 @@
 
   %hr
   %h4 Информация по исходящим закрывающим документам
-  
+
   %p 
     Адрес отправления:
     %span#address-company
@@ -102,6 +102,9 @@
 
   = f.label :info_name_sender, "ФИО отправителя закрывающих документов"
   = f.collection_select :info_name_sender, User.all, :name, :name, :include_blank => true
+
+  = f.label :info_return_status, "Статус возврата акта"
+  = f.select :info_return_status,  %w(не\ получен получен ).map { |t| [t]*2 }
 
   %br
 
