@@ -1,7 +1,7 @@
 %h3.pagination-centered.no-margin.documents-header
   Задолженности по документам
   = link_to 'Поиск по документам', search_documents_path, class: 'btn btn-success btn-search'
-- if @events
+- if @events.count > 0
   - @events.each do |event|
     %h4.pagination-centered
       = event.name
@@ -158,6 +158,9 @@
                   - links_collection(event, doc)
 
     %hr.events-sep
+
+- else
+  %p.empty-message Задолженности отсутствуют.
 
 - content_for :title do
   Документы

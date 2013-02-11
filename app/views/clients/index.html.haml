@@ -7,50 +7,53 @@
   .span4
     = link_to 'Добавить клиента', new_client_path, :class => 'btn btn-success pull-right'
 
-%table.table.table-striped.table-condensed.table-hover.table-links#table-filter
-  %thead
-    %tr
-      %th.clients-name{'data-sort' => 'string'} ФИО
-      %th.clients-passport Паспортные данные
-      %th.clients-degree{'data-sort' => 'string'} Ученая степень
-      %th.clients-work{'data-sort' => 'string'} Работа
-      %th.clients-notes Примечания
-      %th.td-10.text-right.th-count 
-        Всего:
-        %span#table-filter-count= @clients.count
+- if @clients.count > 0
+  %table.table.table-striped.table-condensed.table-hover.table-links#table-filter
+    %thead
+      %tr
+        %th.clients-name{'data-sort' => 'string'} ФИО
+        %th.clients-passport Паспортные данные
+        %th.clients-degree{'data-sort' => 'string'} Ученая степень
+        %th.clients-work{'data-sort' => 'string'} Работа
+        %th.clients-notes Примечания
+        %th.td-10.text-right.th-count 
+          Всего:
+          %span#table-filter-count= @clients.count
 
-  - @clients.each do |client|
-    %tr{"data-link" => url_for(:action => 'show', :id => client.id)}
-      %td= client.name
-      %td
-        %span.client-table-label дата рождения
-        = client.birthday.strftime("%d.%m.%Y")
-        %br
-        %span.client-table-label № паспорта РФ
-        = client.passport_number
-        %br
-        %span.client-table-label № загран.п.
-        = client.zagran_passport_number
-        %br
-        %span.client-table-label срок действия
-        = client.zagran_passport_use_before.strftime("%d.%m.%Y")
-      %td= client.degree
-      %td
-        = "#{client.position},"
-        %br
-        = "#{client.work}"
-      %td= client.notes
-      %td
-        .btn-group.pull-right
-          = link_to 'Войти', client, {:class => 'btn btn-mini'}
-          %button.btn.btn-mini.dropdown-toggle{"data-toggle" => "dropdown"}
-            %span.caret
-          %ul.dropdown-menu.dropdown-menu-narrow.dropdown-menu-left
-            %li
-              = link_to 'Редактировать', edit_client_path(client)
-            %li
-              = link_to 'Удалить', client, method: :delete, data: { confirm: 'Удалить клиента?' }
+    - @clients.each do |client|
+      %tr{"data-link" => url_for(:action => 'show', :id => client.id)}
+        %td= client.name
+        %td
+          %span.client-table-label дата рождения
+          = client.birthday.strftime("%d.%m.%Y")
+          %br
+          %span.client-table-label № паспорта РФ
+          = client.passport_number
+          %br
+          %span.client-table-label № загран.п.
+          = client.zagran_passport_number
+          %br
+          %span.client-table-label срок действия
+          = client.zagran_passport_use_before.strftime("%d.%m.%Y")
+        %td= client.degree
+        %td
+          = "#{client.position},"
+          %br
+          = "#{client.work}"
+        %td= client.notes
+        %td
+          .btn-group.pull-right
+            = link_to 'Войти', client, {:class => 'btn btn-mini'}
+            %button.btn.btn-mini.dropdown-toggle{"data-toggle" => "dropdown"}
+              %span.caret
+            %ul.dropdown-menu.dropdown-menu-narrow.dropdown-menu-left
+              %li
+                = link_to 'Редактировать', edit_client_path(client)
+              %li
+                = link_to 'Удалить', client, method: :delete, data: { confirm: 'Удалить клиента?' }
 
+- else
+  %p.empty-message Список клиентов пока пуст.
 
 - content_for :title do
   Клиенты
