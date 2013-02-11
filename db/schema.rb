@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130211123302) do
+ActiveRecord::Schema.define(:version => 20130211143102) do
 
   create_table "clients", :force => true do |t|
     t.string   "name"
@@ -147,6 +147,7 @@ ActiveRecord::Schema.define(:version => 20130211123302) do
     t.datetime "updated_at",                              :null => false
     t.string   "state"
     t.text     "state_note"
+    t.integer  "type_rashod"
   end
 
   create_table "documents_beznal_schets", :force => true do |t|
@@ -208,6 +209,7 @@ ActiveRecord::Schema.define(:version => 20130211123302) do
     t.datetime "updated_at",                     :null => false
     t.string   "state"
     t.text     "state_note"
+    t.integer  "type_rashod"
   end
 
   create_table "events", :force => true do |t|

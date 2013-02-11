@@ -140,7 +140,7 @@
         %td{rowspan: 5}= doc.description
         %td Дата сч. фактуры
         %td= doc.info_date_schet.strftime("%d.%m.%Y") unless doc.info_date_schet.blank?
-        %td{rowspan: 5}= doc.lectors ? 'Физ. лицо' : 'Агент'
+        %td{rowspan: 5}= RASHOD_TYPES[doc.type_rashod][1] unless doc.type_rashod.blank?
       %tr{"data-link" => url_for([@event, doc])}
         %td Акт №
         %td= doc.info_act
@@ -178,7 +178,7 @@
         %td= event_state_text doc.state
         %td= doc.company
         %td= doc.description
-        %td= doc.lectors ? 'Физ. лицо' : 'Агент'
+        %td= RASHOD_TYPES[doc.type_rashod][1] unless doc.type_rashod.blank?
         %td{:class => ("payment-alert" if doc.date.blank?)}
           = doc.date.strftime("%d.%m.%y") unless doc.date.blank?
         %td #{doc.summ}р.
@@ -210,7 +210,7 @@
       %tr
         %td #{@prihod_summ - @rashod_summ}р.
         %td #{@nds_k_uplate = @event.documents_beznal_schets.sum(:nds)}р.
-        %td #{@nds_k_zachetu = @event.documents_beznal_rashods.where(:lectors => true).sum(:nds)}р.
+        %td #{@nds_k_zachetu = @event.documents_beznal_rashods.where(:type_rashod => 2).sum(:nds)}р.
         %td #{@nds_k_uplate - @nds_k_zachetu}р.
         %td #{(@prihod_summ - @rashod_summ) - (@nds_k_uplate - @nds_k_zachetu)}р.
 

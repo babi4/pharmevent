@@ -142,7 +142,7 @@
           %td{rowspan: 5}= doc.description
           %td Дата сч. фактуры
           %td= doc.info_date_schet.strftime("%d.%m.%Y") unless doc.info_date_schet.blank?
-          %td{rowspan: 5}= doc.lectors ? 'Физ. лицо' : 'Агент'
+          %td{rowspan: 5}= RASHOD_TYPES[doc.type_rashod][1] unless doc.type_rashod.blank?
         %tr{"data-link" => url_for([doc.event, doc])}
           %td Акт №
           %td= doc.info_act
@@ -174,7 +174,7 @@
           %td= event_state_text doc.state
           %td= doc.company
           %td= doc.description
-          %td= doc.lectors ? 'Физ. лицо' : 'Агент'
+          %td= RASHOD_TYPES[doc.type_rashod][1] unless doc.type_rashod.blank?
           %td{:class => ("payment-alert" if doc.date.blank?)}
             = doc.date.strftime("%d.%m.%y") unless doc.date.blank?
           %td #{doc.summ}р.

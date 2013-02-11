@@ -47,10 +47,7 @@
     = @documents_nal_rashod.date.strftime("%d.%m.%Y")
 %p
   %b Данный расход является
-  - if @documents_nal_rashod.lectors
-    = 'расходом по логистике лекторов (статус: физ.лицо)' 
-  - else
-    = 'расходом по мероприятию в целом (статус: агент/юр.лицо)'
+  = "#{RASHOD_TYPES[@documents_nal_rashod.type_rashod][0]} (статус: #{RASHOD_TYPES[@documents_nal_rashod.type_rashod][1]})" unless @documents_nal_rashod.type_rashod.blank?
 
 - content_for :title do
   Мероприятия / #{@event.name} / Наличный расход

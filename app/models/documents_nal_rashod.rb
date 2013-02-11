@@ -7,7 +7,7 @@ class DocumentsNalRashod < ActiveRecord::Base
   default_scope where { state != 'deleted' }
   scope :unsigned, where(:state => %w(new added for_revision))
 
-  attr_accessible :state_note, :state, :company, :date, :description, :entire, :lectors, :name, :summ, :telephone, :user_id, :event_id
+  attr_accessible :state_note, :state, :company, :date, :description, :entire, :lectors, :name, :summ, :telephone, :type_rashod, :user_id, :event_id
 
   belongs_to :user
   belongs_to :event

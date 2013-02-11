@@ -29,6 +29,8 @@ class DocumentsBeznalRashodsController < ApplicationController
   end
 
   def new
+    @documents_beznal_rashod[:type_rashod] = 0
+
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @documents_beznal_rashod }
