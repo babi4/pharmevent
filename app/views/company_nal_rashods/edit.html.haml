@@ -1,0 +1,14 @@
+%ul.breadcrumb
+  %li
+    = link_to 'Расходы компании', company_consumptions_path
+    %span.divider /
+  %li.active
+    = link_to 'Наличный расход', company_nal_rashod_path(@documents_nal_rashod)
+    %span.divider
+      |
+    редактирование
+
+= render 'form'
+
+- content_for :title do
+  Компания - редактирование наличного расхода

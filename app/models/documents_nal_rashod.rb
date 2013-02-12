@@ -4,6 +4,7 @@ class DocumentsNalRashod < ActiveRecord::Base
 
   default_scope where { state != 'deleted' }
   scope :uncomplited, where { state << %w(paid deleted) }
+  scope :by_company, where { event_id == 0 }
 
   attr_accessible :state_note, :state, :company, :date, :description, :entire, :lectors, :name, :summ, :telephone, :type_rashod, :user_id, :event_id
 
@@ -18,7 +19,7 @@ class DocumentsNalRashod < ActiveRecord::Base
     state :paid
     state :deleted
 
-    event :pay do # w/o state_note
+    event :pay do
       transition :new => :paid
     end
 

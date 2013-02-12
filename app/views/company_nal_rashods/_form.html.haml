@@ -1,0 +1,36 @@
+= simple_form_for(@documents_nal_rashod, :url => company_nal_rashods_path + (@documents_nal_rashod.id.nil? ? '' : "/#{@documents_nal_rashod.id}") , :html => {:class => 'form-validate' }) do |f|
+  = f.error_notification
+
+  = f.label :company, "Получатель*"
+  = f.text_field :company, :class => 'span7', "data-required" => 'true'
+
+  = f.label :description, "Назначение платежа*"
+  = f.text_field :description, :class => 'span7', "data-required" => 'true'
+
+  .row
+    .span4
+      = f.label :name, "ФИО получателя"
+      = f.text_field :name, :class => 'span4'
+    .span3
+      = f.label :telephone, "Мобильный телефон получателя"
+      = f.text_field :telephone, :class => 'span3'
+
+  .row
+    .span2
+      = f.label :summ, "Сумма*"
+      = f.text_field :summ, :class => 'span2', "data-required" => 'true'
+    .span2
+      = f.label :date, "Дата оплаты", :class => 'no-margin pull-right date-label-width'
+      %br
+      .input-prepend.input-prepend-margin.date-picker.pull-right{"data-date" => (@documents_nal_rashod.date.strftime("%d.%m.%Y") unless @documents_nal_rashod.date.blank?) }
+        %span.add-on
+          %i.icon-calendar
+        = f.text_field :date, :class => 'input-date', :value => (@documents_nal_rashod.date.strftime("%d.%m.%Y") unless @documents_nal_rashod.date.blank?)
+
+  %b.before-checkbox Данный расход является:
+  - RASHOD_TYPES.each_with_index do |type, index|
+    %label.radio
+      = f.radio_button :type_rashod, index
+      #{type[0]} (статус: #{type[1]})
+
+  = f.button :submit, 'Сохранить', :class => 'btn btn-primary btn-primary-submit'

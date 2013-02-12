@@ -1,0 +1,125 @@
+%ul.breadcrumb
+  %li
+    = link_to 'Расходы компании', company_consumptions_path
+    %span.divider /
+  %li.active
+    Безналичный расход
+  - if can? :update, @documents_beznal_rashod
+    %li
+      %span.divider
+        |
+      = link_to 'редактирование', edit_company_beznal_rashod_path(@documents_beznal_rashod)
+
+%p#notice= notice
+
+%p
+  = event_state_text @documents_beznal_rashod.state
+  %span= @documents_beznal_rashod.state_note
+%p
+  %b Получатель
+  %br
+  = @documents_beznal_rashod.type_company
+  = @documents_beznal_rashod.company
+%p
+  %b Назначение платежа
+  %br
+  = @documents_beznal_rashod.description
+%p
+  %b ФИО получателя
+  %br
+  = @documents_beznal_rashod.name
+%p
+  %b Телефон получателя
+  %br
+  = @documents_beznal_rashod.telephone
+%p
+  %b Счет №
+  %br
+  = @documents_beznal_rashod.num_schet
+%p
+  %b Дата счета
+  %br
+  - if @documents_beznal_rashod.date_schet.blank?
+    —
+  - else
+    = @documents_beznal_rashod.date_schet.strftime("%d.%m.%Y")
+%p
+  %b Сумма
+  %br
+  = "#{@documents_beznal_rashod.summ} руб."
+%p
+  %b НДС
+  %br
+  = "#{@documents_beznal_rashod.nds} руб."
+%p
+  %b Договор №
+  %br
+  = @documents_beznal_rashod.dogovor_num
+%p
+  %b Дата договора
+  %br
+  - if @documents_beznal_rashod.dogovor_date.blank?
+    —
+  - else
+    = @documents_beznal_rashod.dogovor_date.strftime("%d.%m.%Y")
+%p
+  %b Данный расход является:
+  = "#{RASHOD_TYPES[@documents_beznal_rashod.type_rashod][0]} (статус: #{RASHOD_TYPES[@documents_beznal_rashod.type_rashod][1]})" unless @documents_beznal_rashod.type_rashod.blank?
+
+%hr
+%h4 Информация по расходу
+%p
+  %b № п/п
+  %br
+  = @documents_beznal_rashod.info_pp
+%p
+  %b Счет фактура №
+  %br
+  = @documents_beznal_rashod.info_schet_factura
+%p
+  %b Акт №
+  %br
+  = @documents_beznal_rashod.info_act
+%p
+  %b Дата оплаты
+  %br
+  - if @documents_beznal_rashod.info_date_pay.blank?
+    —
+  - else
+    = @documents_beznal_rashod.info_date_pay.strftime("%d.%m.%Y")
+%p
+  %b Дата сч. фактуры
+  %br
+  - if @documents_beznal_rashod.info_date_schet.blank?
+    —
+  - else
+    = @documents_beznal_rashod.info_date_schet.strftime("%d.%m.%Y")
+%p
+  %b Дата акта
+  %br
+  - if @documents_beznal_rashod.info_date_act.blank?
+    —
+  - else
+    = @documents_beznal_rashod.info_date_act.strftime("%d.%m.%Y")
+%p
+  %b Статус возврата акта
+  %br
+  = @documents_beznal_rashod.info_state_act
+%p
+  %b Дата возврата акта
+  %br
+  - if @documents_beznal_rashod.info_return_date.blank?
+    —
+  - else
+    = @documents_beznal_rashod.info_return_date.strftime("%d.%m.%Y")
+%p
+  %b Способ возврата акта
+  %br
+  = @documents_beznal_rashod.info_type_return_act
+%p
+  %b ФИО отправителя
+  %br
+  = @documents_beznal_rashod.info_name_sender
+
+- content_for :title do
+  Компания / Наличный расход

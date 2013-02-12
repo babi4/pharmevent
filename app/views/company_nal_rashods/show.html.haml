@@ -1,0 +1,50 @@
+%ul.breadcrumb
+  %li
+    = link_to 'Расходы компании', company_consumptions_path
+    %span.divider /
+  %li.active
+    Наличный расход
+  - if can? :update, @documents_nal_rashod
+    %li
+      %span.divider
+        |
+      = link_to 'редактирование', edit_company_nal_rashod_path(@documents_nal_rashod)
+
+%p#notice= notice
+
+%p
+  = event_state_text @documents_nal_rashod.state
+  %span= @documents_nal_rashod.state_note
+%p
+  %b Получатель
+  %br
+  = @documents_nal_rashod.company
+%p
+  %b Назначение платежа
+  %br
+  = @documents_nal_rashod.description
+%p
+  %b ФИО получателя
+  %br
+  = @documents_nal_rashod.name
+%p
+  %b Телефон получателя
+  %br
+  = @documents_nal_rashod.telephone
+%p
+  %b Сумма
+  %br
+  = "#{@documents_nal_rashod.summ} руб."
+%p
+  %b Дата оплаты
+  %br
+  - if @documents_nal_rashod.date.blank?
+    —
+  - else
+    = @documents_nal_rashod.date.strftime("%d.%m.%Y")
+%p
+  %b Данный расход является
+  = "#{RASHOD_TYPES[@documents_nal_rashod.type_rashod][0]} (статус: #{RASHOD_TYPES[@documents_nal_rashod.type_rashod][1]})" unless @documents_nal_rashod.type_rashod.blank?
+
+- content_for :title do
+  Компания / Наличный расход

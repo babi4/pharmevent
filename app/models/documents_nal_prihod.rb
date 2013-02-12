@@ -16,7 +16,7 @@ class DocumentsNalPrihod < ActiveRecord::Base
     state :paid
     state :deleted
 
-    event :pay do # w/o state_note
+    event :pay do
       transition :new => :paid
     end
 
