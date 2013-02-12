@@ -2,7 +2,7 @@ $ ->
   if window.isDocumentsPage
     documentsStatuses =
       all:
-        statuses: [['Новые', 'uncompleted'], ['Завершенные', 'completed']]
+        statuses: [['Новые', 'new'], ['Завершенные', 'completed']]
       beznal_prihod:
         statuses: [['Все', ''], ['Новые', 'new'], ['Внесен в 1С', 'added_to_1c'], ['Закрывающие документы готовы', 'ready_to_post'], ['Закрывающие документы отправлены', 'posted'], ['Завершенные', 'completed']]
       beznal_rashod:
@@ -21,6 +21,7 @@ $ ->
       $('#documents-filter-status').html html
 
     $('#documents-filter-type').trigger 'change'
+    $('#documents-filter-status').val(window.documentsState) if window.documentsState
 
     $('#documents-advanced-toggle').on 'click', ->
       $('#documents-advanced-search').slideToggle 300
