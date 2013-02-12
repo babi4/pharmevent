@@ -67,7 +67,7 @@
     = @documents_beznal_rashod.dogovor_date.strftime("%d.%m.%Y")
 %p
   %b Данный расход является:
-  = "#{RASHOD_TYPES[@documents_beznal_rashod.type_rashod][0]} (статус: #{RASHOD_TYPES[@documents_beznal_rashod.type_rashod][1]})" unless @documents_beznal_rashod.type_rashod.blank?
+  = "#{RASHOD_TYPES[@documents_beznal_rashod.type_rashod.to_s][:text]} (статус: #{RASHOD_TYPES[@documents_beznal_rashod.type_rashod.to_s][:title]})" unless @documents_beznal_rashod.type_rashod.blank?
 
 %hr
 %h4 Информация по расходу
