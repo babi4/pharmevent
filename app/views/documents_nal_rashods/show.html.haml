@@ -47,7 +47,7 @@
     = @documents_nal_rashod.date.strftime("%d.%m.%Y")
 %p
   %b Данный расход является
-  = "#{RASHOD_TYPES[@documents_nal_rashod.type_rashod][0]} (статус: #{RASHOD_TYPES[@documents_nal_rashod.type_rashod][1]})" unless @documents_nal_rashod.type_rashod.blank?
+  = "#{RASHOD_TYPES[@documents_nal_rashod.type_rashod.to_s][:text]} (статус: #{RASHOD_TYPES[@documents_nal_rashod.type_rashod.to_s][:title]})" unless @documents_nal_rashod.type_rashod.blank?
 
 - content_for :title do
   Мероприятия / #{@event.name} / Наличный расход

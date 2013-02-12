@@ -28,9 +28,9 @@
         = f.text_field :date, :class => 'input-date', :value => (@documents_nal_rashod.date.strftime("%d.%m.%Y") unless @documents_nal_rashod.date.blank?)
 
   %b.before-checkbox Данный расход является:
-  - RASHOD_TYPES.each_with_index do |type, index|
+  - RASHOD_TYPES.each do |index, type|
     %label.radio
       = f.radio_button :type_rashod, index
-      #{type[0]} (статус: #{type[1]})
+      #{type[:text]} (статус: #{type[:title]})
 
   = f.button :submit, 'Сохранить', :class => 'btn btn-primary btn-primary-submit'
