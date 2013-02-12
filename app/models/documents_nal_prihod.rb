@@ -28,8 +28,9 @@ class DocumentsNalPrihod < ActiveRecord::Base
 
   def self.search(params = {})
     if params[:act_num].blank? && params[:act_date].blank? && params[:fact_num].blank? && params[:fact_date].blank?
-      unless params[:schet_num].blank? && params[:schet_date].blank? && params[:schet_sum].blank?
+      unless params[:schet_num].blank? && params[:schet_date].blank? && params[:schet_sum].blank? && params[:state].blank?
         result = self.scoped
+        result = result.where(:state => params[:state])                 unless params[:state].blank?
         result = result.where(:description => params[:schet_num])       unless params[:schet_num].blank?
         result = result.where(:date => Date.parse(params[:schet_date])) unless params[:schet_date].blank?
         result = result.where(:summ => params[:schet_sum])              unless params[:schet_sum].blank?

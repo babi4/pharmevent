@@ -59,6 +59,7 @@ class DocumentsBeznalRashod < ActiveRecord::Base
   def self.search(params = {})
     result = self.scoped
 
+    result = result.where(:state => params[:state])                        unless params[:state].blank?
     result = result.where(:num_schet => params[:schet_num])                unless params[:schet_num].blank?
     result = result.where(:date_schet => Date.parse(params[:schet_date]))  unless params[:schet_date].blank?
     result = result.where(:summ => params[:schet_sum])                     unless params[:schet_sum].blank?
