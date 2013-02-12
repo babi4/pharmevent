@@ -1,0 +1,127 @@
+%ul.breadcrumb
+  %li.active
+    Расходы компании
+
+.pagination-centered
+  = link_to 'Добавить безналичный расход', new_company_beznal_rashod_path, :class => 'btn'
+  = link_to 'Добавить наличный расход',    new_company_nal_rashod_path, :class => 'btn'
+
+%hr
+
+
+- unless @documents_beznal_rashods.empty?
+  %h4.pagination-centered Расход безналичный
+  %table.table.table-bordered.table-condensed.table-bordered.table-center.table-links
+    %thead.thead-small
+      %tr
+        %th.td-10
+        %th Получатель
+        %th.td-25{colspan: 2} Платежные документы
+        %th.td-10 Статус
+        %th.td-10 Сумма
+        %th.td-10 Включая НДС
+        %th.td-10 Действия
+
+    - @documents_beznal_rashods.each do |doc|
+      %tr{"data-link" => company_beznal_rashod_path(doc)}
+        %td{rowspan: 10}= event_state_text doc.state
+        %td{rowspan: 5}= doc.company
+        %td Счет №
+        %td= doc.num_schet
+        %td{rowspan: 5}= doc.info_state_act
+        %td{rowspan: 10} #{doc.summ}р.
+        %td{rowspan: 10} #{doc.nds}р.
+        %td{rowspan: 10}
+          .btn-group
+            = link_to 'войти', company_beznal_rashod_path(doc), class: 'btn btn-mini'
+            %button.btn.btn-mini.dropdown-toggle{"data-toggle" => "dropdown"}
+              %span.caret
+            %ul.dropdown-menu.dropdown-menu-narrow.dropdown-menu-left
+              - links_collection(@event, doc)
+      %tr{"data-link" => company_beznal_rashod_path(doc)}
+        %td Дата счета
+        %td= doc.date_schet.strftime("%d.%m.%y") unless doc.date_schet.blank?
+      %tr{"data-link" => company_beznal_rashod_path(doc)}
+        %td Дата оплаты
+        %td{:class => ("payment-alert" if doc.info_date_pay.blank?)}
+          = doc.info_date_pay.strftime("%d.%m.%y") unless doc.info_date_pay.blank?
+      %tr{"data-link" => company_beznal_rashod_path(doc)}
+        %td № п/п
+        %td= doc.info_pp
+      %tr{"data-link" => company_beznal_rashod_path(doc)}
+        %td Счет фактура №
+        %td= doc.info_schet_factura
+      %tr{"data-link" => company_beznal_rashod_path(doc)}
+        %td{rowspan: 5}= doc.description
+        %td Дата сч. фактуры
+        %td= doc.info_date_schet.strftime("%d.%m.%Y") unless doc.info_date_schet.blank?
+        %td{rowspan: 5}= RASHOD_TYPES[doc.type_rashod][1] unless doc.type_rashod.blank?
+      %tr{"data-link" => company_beznal_rashod_path(doc)}
+        %td Акт №
+        %td= doc.info_act
+      %tr{"data-link" => company_beznal_rashod_path(doc)}
+        %td Дата акта
+        %td= doc.info_date_act.strftime("%d.%m.%Y") unless doc.info_date_act.blank?
+      %tr{"data-link" => company_beznal_rashod_path(doc)}
+        %td Договор №
+        %td= doc.dogovor_num
+      %tr{"data-link" => company_beznal_rashod_path(doc)}
+        %td Дата договора
+        %td= doc.dogovor_date.strftime("%d.%m.%Y") unless doc.dogovor_date.blank?
+    %tr
+      %td{colspan:5}
+        %span.pull-right Итого:
+      %td #{@documents_beznal_rashods.sum(:summ)}р.
+      %td #{@documents_beznal_rashods.sum(:nds)}р.
+      %td
+
+- unless @documents_nal_rashods.empty?
+  %h4.pagination-centered Расход наличный
+  %table.table.table-striped.table-condensed.table-bordered.table-center.table-links
+    %thead.thead-small
+      %tr
+        %th.td-10
+        %th Получатель
+        %th.td-25 Назначение платежа
+        %th.td-10 Статус
+        %th.td-10 Дата оплаты
+        %th.td-10 Сумма
+        %th.td-10 Действия
+
+    - @documents_nal_rashods.each do |doc|
+      %tr{"data-link" => company_nal_rashod_path(doc)}
+        %td= event_state_text doc.state
+        %td= doc.company
+        %td= doc.description
+        %td= RASHOD_TYPES[doc.type_rashod][1] unless doc.type_rashod.blank?
+        %td{:class => ("payment-alert" if doc.date.blank?)}
+          = doc.date.strftime("%d.%m.%y") unless doc.date.blank?
+        %td #{doc.summ}р.
+        %td
+          .btn-group
+            = link_to 'войти', company_nal_rashod_path(doc), class: 'btn btn-mini'
+            %button.btn.btn-mini.dropdown-toggle{"data-toggle" => "dropdown"}
+              %span.caret
+            %ul.dropdown-menu.dropdown-menu-narrow.dropdown-menu-left
+              - links_collection(@event, doc)
+    %tr
+      %td{colspan: 5}
+        %span.pull-right Итого:
+      %td #{@documents_nal_rashods.sum(:summ)}р.
+      %td
+
+%h3.pagination-centered Расход мероприятия: #{@rashod_summ} руб.
+
+#changeEventStateModal.modal.hide.fade{:role => "dialog", :tabindex => "-1"}
+  .modal-header
+    %button.close{"data-dismiss" => "modal", :type => "button"} ×
+    %h3#document-state-title
+  .modal-body
+    Примечание
+    %br
+    = text_area_tag(:document_state_note, '', :class => "input-modal-full")
+  .modal-footer
+    = link_to 'Сохранить', '#', :class => 'btn btn-primary', :id => 'document-state-save', 'data-method' => 'put'
+
+- content_for :title do
+  Компания

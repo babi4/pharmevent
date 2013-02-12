@@ -1,5 +1,16 @@
 Rails3BootstrapDeviseCancan::Application.routes.draw do
 
+  resources :company_consumptions, :only => [:index]
+
+  resources :company_beznal_rashods, :path => "/events/0/documents_beznal_rashods" do
+    member { put 'update_state' }
+  end
+
+  resources :company_nal_rashods, :path => "/events/0/documents_nal_rashods" do
+    member { put 'update_state' }
+  end
+
+
   resources :events do
     resources :documents_beznal_rashods,
               :documents_nal_prihods,
@@ -15,7 +26,6 @@ Rails3BootstrapDeviseCancan::Application.routes.draw do
   resources :companies do
     resources :company_members
   end
-
 
   resources :clients
   resources :couriers_tasks

@@ -24,6 +24,7 @@ class Ability
     can :manage, Company         # Управление заказчиками
     can :manage, User            # Управление учётными записями/правами
     can :manage, :user_passwords # Изменение паролей пользователей
+    can :manage, :company_consumption  #Расходы компании
 
     # ========= ****** =========
     [DocumentsBeznalRashod].each do |document|
@@ -78,6 +79,7 @@ class Ability
     can :manage, Client          # Управление клиентской базой
     can :manage, CompanyMember   # Управление предствителями заказчика
     can :manage, Company         # Управление заказчиками
+    can :manage, :company_consumption  #Расходы компании
 
     # ========= ****** =========
     [DocumentsNalRashod, DocumentsNalPrihod, DocumentsBeznalRashod].each do |document|
@@ -110,6 +112,7 @@ class Ability
     can :manage, Client          # Управление клиентской базой
     can :manage, CompanyMember   # Управление предствителями заказчика
     can :manage, Company         # Управление заказчиками
+    can :manage, :company_consumption  #Расходы компании
 
 
     # ========= ****** =========
@@ -153,6 +156,7 @@ class Ability
     can :manage, CompanyMember   # Управление предствителями заказчика
     can :manage, Company         # Управление заказчиками
     can :manage, Event, :user_id => @user[:id]  # Управление своими событиями
+    can :manage, :company_consumption  #Расходы компании
 
     #Права на добавление любых документов.
 
@@ -237,6 +241,7 @@ class Ability
 
     # ========= ****** =========
 
+    can :manage, :company_consumption  #Расходы компании
     can :manage, CouriersTask    # Заказ, управление курьерами
     can :manage, CouriersCompany # Управление местами доставки для курьеров
     can :manage, CouriersCompanyMember # Управление контактыми лицами в местах доставки для курьеров

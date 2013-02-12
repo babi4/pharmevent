@@ -3,8 +3,10 @@
 class DocumentsBeznalRashod < ActiveRecord::Base
 
   default_scope where { state != 'deleted' }
+
   scope :uncompleted, where { state << %w(completed deleted) }
   scope :completed,   where(:state => 'completed')
+  scope :by_company, where { event_id == 0 }
 
   attr_accessible :state_note, :state, :event_id, :company, :date_schet, :description, :dogovor_date, :dogovor_num, :entire, :info_act, :info_date_act, :info_date_pay, :info_date_schet, :info_name_sender, :info_pp, :info_type_return_act, :info_return_date, :info_schet_factura, :info_state_act, :lectors, :name, :nds, :num_schet, :summ, :telephone, :type_company, :type_rashod, :user_id
 
