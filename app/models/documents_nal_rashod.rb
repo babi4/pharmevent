@@ -3,7 +3,7 @@
 class DocumentsNalRashod < ActiveRecord::Base
 
   default_scope where { state != 'deleted' }
-  scope :uncomplited, where { state << %w(paid deleted) }
+  scope :uncompleted, where { state << %w(paid deleted) }
 
   attr_accessible :state_note, :state, :company, :date, :description, :entire, :lectors, :name, :summ, :telephone, :type_rashod, :user_id, :event_id
 
