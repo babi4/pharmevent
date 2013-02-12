@@ -27,7 +27,7 @@ class BeznalRashodsController < ApplicationController
   end
 
   def new
-    @documents_beznal_rashod[:type_rashod] = RASHOD_TYPES.first.first
+    @documents_beznal_rashod[:type_rashod] = RASHOD_TYPES.keys.first
 
     respond_to do |format|
       format.html # new.html.erb

@@ -26,7 +26,7 @@ class NalRashodsController < ApplicationController
   end
 
   def new
-    @documents_nal_rashod[:type_rashod] = RASHOD_TYPES.first.first
+    @documents_nal_rashod[:type_rashod] = RASHOD_TYPES.keys.first
 
     respond_to do |format|
       format.html # new.html.erb
