@@ -21,6 +21,9 @@
     }
   }
 }
+.navbar-username {
+  margin-right: 10px;
+}
 
 hr {
   border-top-color: #E5E5E5;
@@ -160,6 +163,10 @@ input.input-required, select.input-required {
   }
 }
 
+.topmargin-medium {
+  margin-top: 15px;
+}
+
 .topmargin-big {
   margin-top: 20px;
 }
@@ -202,6 +209,11 @@ input.input-required, select.input-required {
   label.no-margin {
     margin-bottom: 2px;
   }
+}
+
+.span-centered {
+  float: none;
+  margin: 0 auto;
 }
 
 .before-checkbox {

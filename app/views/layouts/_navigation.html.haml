@@ -25,4 +25,6 @@
 
 %p.navbar-text.pull-right
   %b.navbar-username= "#{current_user.name}"
+  - unless can? :manage, User
+    = link_to 'сменить пароль', change_password_path, :class => 'navbar-link'
   = link_to 'выйти', destroy_user_session_path, :method=>'delete', :class => 'navbar-link logout-link'
