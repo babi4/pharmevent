@@ -2,7 +2,7 @@ $ ->
   if window.isDocumentsPage
     documentsStatuses =
       all:
-        statuses: [['Новые', 'new'], ['Завершенные', 'finished']]
+        statuses: [['Новые', 'uncompleted'], ['Завершенные', 'completed']]
       beznal_prihod:
         statuses: [['Все', ''], ['Новые', 'new'], ['Внесен в 1С', 'added_to_1c'], ['Закрывающие документы готовы', 'ready_to_post'], ['Закрывающие документы отправлены', 'posted'], ['Завершенные', 'completed']]
       beznal_rashod:
