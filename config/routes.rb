@@ -43,6 +43,7 @@ Rails3BootstrapDeviseCancan::Application.routes.draw do
   match 'company_members/destroy' => 'company_members#destroy'
 
   match 'reports' => 'reports#index'
+  match 'new_password' => 'users#new_password', :as => 'change_password'
 
   resources :documents do
     collection do

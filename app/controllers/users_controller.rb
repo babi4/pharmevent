@@ -2,6 +2,7 @@
 
 class UsersController < ApplicationController
   load_and_authorize_resource
+  skip_load_and_authorize_resource :only => :new_password
 
   def change_pass
     authorize! :manage, :user_passwords
@@ -14,6 +15,21 @@ class UsersController < ApplicationController
       notice = @user.errors.messages.inspect
     end
     redirect_to users_path, :notice => notice, :alert => alert
+  end
+
+  def new_password
+    @current_user = current_user
+    if params[:user]
+      if @current_user.reset_password!( params[:user][:password], params[:user][:password_confirmation])
+        notice = 'Пароль обновлён!'
+        alert  = nil
+        sign_in @current_user, :bypass => true
+      else
+        alert  = 'Пароль НЕ обновлён!'
+        notice = @current_user.errors.messages.inspect
+      end
+      redirect_to root_path, :notice => notice, :alert => alert
+    end
   end
 
   def index
