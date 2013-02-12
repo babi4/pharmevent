@@ -11,7 +11,7 @@ $ ->
         statuses: [['Все', ''], ['Новые', 'new'], ['Оплаченные', 'paid']]
       nal_rashod:
         statuses: [['Все', ''], ['Новые', 'new'], ['Оплаченные', 'paid']]
-      company_rashod:
+      company_consumption:
         statuses: [['Все', ''], ['Новые', 'new'], ['На подпись', 'unsigned'], ['Подписано / на доработку', 'signed'], ['Оплачено', 'paid'], ['Закрывающие документы получены', 'closed_documents_received'], ['Завершенные', 'finished']]
 
     $('#documents-filter-type').on 'change', ->

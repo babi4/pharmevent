@@ -1,13 +1,8 @@
-%ul.breadcrumb
-  %li.active
-    Расходы компании
-
 .pagination-centered
   = link_to 'Добавить безналичный расход', new_company_beznal_rashod_path, :class => 'btn'
   = link_to 'Добавить наличный расход',    new_company_nal_rashod_path, :class => 'btn'
 
 %hr
-
 
 - unless @documents_beznal_rashods.empty?
   %h4.pagination-centered Расход безналичный
@@ -110,7 +105,7 @@
       %td #{@documents_nal_rashods.sum(:summ)}р.
       %td
 
-%h3.pagination-centered Расход мероприятия: #{@rashod_summ} руб.
+%h3.text-right Итого: #{@rashod_summ} руб.
 
 #changeEventStateModal.modal.hide.fade{:role => "dialog", :tabindex => "-1"}
   .modal-header
@@ -124,4 +119,4 @@
     = link_to 'Сохранить', '#', :class => 'btn btn-primary', :id => 'document-state-save', 'data-method' => 'put'
 
 - content_for :title do
-  Компания
+  Расходы компании
