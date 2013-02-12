@@ -56,6 +56,11 @@ h3.page-title {
   margin: 0 0 20px;
 }
 
+a.dashed {
+  text-decoration: none;
+  border-bottom: 1px dashed;
+}
+
 input[readonly] {
   cursor: pointer;
   background-color: transparent;

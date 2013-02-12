@@ -9,16 +9,16 @@
   td {
     padding: 3px 5px;
   }
-  tr:first-child {
-    td {
-      padding-top: 10px;
-      padding-bottom: 20px;
+  // tr:first-child {
+  //   td {
+  //     padding-top: 10px;
+  //     padding-bottom: 20px;
 
-      &:first-child {
-        padding-top: 14px;
-      }
-    }
-  }
+  //     &:first-child {
+  //       padding-top: 14px;
+  //     }
+  //   }
+  // }
 }
 
 .document-search-input {
@@ -26,10 +26,14 @@
 }
 
 #submit-documents-search {
-  margin-top: 20px;
+  margin-top: 10px;
 }
 .event-date {
   font-size: 12px;
   font-weight: normal;
   color: #bbb;
+}
+
+#documents-advanced-toggle {
+  margin-left: 15px;
 }

@@ -45,12 +45,7 @@ Rails3BootstrapDeviseCancan::Application.routes.draw do
   match 'reports' => 'reports#index'
   match 'new_password' => 'users#new_password', :as => 'change_password'
 
-  resources :documents do
-    collection do
-      get :search
-      post :search
-    end
-  end
+  match 'documents' => 'documents#index', :as => 'documents'
 
   match 'couriers_tasks/create_member' => 'couriers_tasks#create_member', :via => :post
   match 'couriers_companies/:company_id/couriers_company_members/create' => 'couriers_company_members#create'

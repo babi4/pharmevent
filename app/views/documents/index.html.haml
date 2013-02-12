@@ -1,170 +1,213 @@
-%h3.pagination-centered.no-margin.documents-header
-  Задолженности по документам
-  = link_to 'Поиск по документам', search_documents_path, class: 'btn btn-success btn-search'
-- if @events.count > 0
-  - @events.each do |event|
-    %h4.pagination-centered
-      = event.name
-      %br
-      %span.event-date= "(#{event.date_start.strftime('%d.%m.%Y')} - #{event.date_end.strftime('%d.%m.%Y')})"
-    - documents = event.documents_beznal_schets.uncomplited.includes(:company)
-    - if documents.any?
-      %h5.pagination-centered Приход безналичный
-      %table.table.table-striped.table-condensed.table-bordered.table-center.table-links.table-documents
-        %thead.thead-small
-          %tr
-            %th.td-10
-            %th.text-left Плательщик
-            %th.td-10 Счет №
-            %th.td-10 Дата счета
-            %th.td-10 Дата оплаты
-            %th.td-10 Сумма
-            %th.td-10 Включая НДС
-            %th.td-10
+= form_tag(documents_path) do
+  .row
+    .span3
+      = select_tag :document_type, options_for_select([['Все документы', 'all'], ['Безналичный расход', 'beznal_rashod'], ['Безналичный приход', 'beznal_prihod'], ['Наличный расход', 'nal_rashod'], ['Наличный приход', 'nal_prihod']]), :class => 'span3', :id => 'documents-filter-type'
+    .span3
+      = select_tag :document_status, [], :class => 'span3', :id => 'documents-filter-status'
+    .span4
+      = submit_tag 'Искать', :class => 'btn'
+      %a.dashed#documents-advanced-toggle{:href => '#'} дополнительные параметры
+  .row.hide#documents-advanced-search
+    .well.well-small.span10
+      %table.documents-search
+        / %tr
+        /   %td.text-right Документы
+        /   %td{colspan: 3}
+        /     %label.checkbox.inline
+        /       = check_box_tag(:type_in, 1, true)
+        /       входящие
+        /     %label.checkbox.inline
+        /       = check_box_tag(:type_out, 1, true)
+        /       исходящие
+        %tr
+          %td.text-right Счет
+          %td= text_field_tag("search[schet_num]", '', :class => 'no-margin document-search-input')
+          %td= text_field_tag("search[schet_date]", '', :class => 'no-margin document-search-input date-picker', :placeholder => 'Дата')
+          %td= text_field_tag("search[schet_sum]", '', :class => 'no-margin document-search-input', :placeholder => 'Сумма')
+        %tr
+          %td.text-right Акт №
+          %td= text_field_tag("search[act_num]", '', :class => 'no-margin document-search-input')
+          %td= text_field_tag("search[act_date]", '', :class => 'no-margin document-search-input date-picker', :placeholder => 'Дата')
+          %td
+        %tr
+          %td.text-right Счет фактуры
+          %td= text_field_tag("search[fact_num]", '', :class => 'no-margin document-search-input')
+          %td= text_field_tag("search[fact_date]", '', :class => 'no-margin document-search-input date-picker', :placeholder => 'Дата')
+          %td
+        / %tr
+        /   %td
+        /   %td{colspan:3}= submit_tag 'Искать', :class => 'btn', :id => 'submit-documents-search'
 
-        - documents.each do |doc|
-          %tr{"data-link" => url_for([event, doc])}
-            %td= event_state_text doc.state
-            %td.text-left= link_to doc.company[:name], doc.company
-            %td= doc.num_schet
-            %td= doc.date_schet.strftime("%d.%m.%y") unless doc.date_schet.blank?
-            %td{:class => ("payment-alert" if doc.payment_date.blank?)}
-              = doc.payment_date.strftime("%d.%m.%y") unless doc.payment_date.blank?
-            %td #{doc.summ}р.
-            %td #{doc.nds}р.
-            %td
-              .btn-group
-                = link_to 'войти', [event, doc], class: 'btn btn-mini'
-                %button.btn.btn-mini.dropdown-toggle{"data-toggle" => "dropdown"}
-                  %span.caret
-                %ul.dropdown-menu.dropdown-menu-narrow.dropdown-menu-left
-                  - links_collection(event, doc)
+/ %h3.pagination-centered.no-margin.documents-header
+/   Задолженности по документам
+/   = link_to 'Поиск по документам', search_documents_path, class: 'btn btn-success btn-search'
+/ - if @events.count > 0
+/   - @events.each do |event|
+/     %h4.pagination-centered
+/       = event.name
+/       %br
+/       %span.event-date= "(#{event.date_start.strftime('%d.%m.%Y')} - #{event.date_end.strftime('%d.%m.%Y')})"
+/     - documents = event.documents_beznal_schets.uncomplited.includes(:company)
+/     - if documents.any?
+/       %h5.pagination-centered Приход безналичный
+/       %table.table.table-striped.table-condensed.table-bordered.table-center.table-links.table-documents
+/         %thead.thead-small
+/           %tr
+/             %th.td-10
+/             %th.text-left Плательщик
+/             %th.td-10 Счет №
+/             %th.td-10 Дата счета
+/             %th.td-10 Дата оплаты
+/             %th.td-10 Сумма
+/             %th.td-10 Включая НДС
+/             %th.td-10
 
-    - documents = event.documents_nal_prihods.uncomplited
-    - if documents.any?
-      %h5.pagination-centered Приход наличный
-      %table.table.table-striped.table-condensed.table-bordered.table-center.table-links.table-documents
-        %thead.thead-small
-          %tr
-            %th.td-10
-            %th.text-left Плательщик
-            %th.text-left.td-30 Назначение платежа
-            %th.td-10 Дата оплаты
-            %th.td-10 Сумма
-            %th.td-10
+/         - documents.each do |doc|
+/           %tr{"data-link" => url_for([event, doc])}
+/             %td= event_state_text doc.state
+/             %td.text-left= link_to doc.company[:name], doc.company
+/             %td= doc.num_schet
+/             %td= doc.date_schet.strftime("%d.%m.%y") unless doc.date_schet.blank?
+/             %td{:class => ("payment-alert" if doc.payment_date.blank?)}
+/               = doc.payment_date.strftime("%d.%m.%y") unless doc.payment_date.blank?
+/             %td #{doc.summ}р.
+/             %td #{doc.nds}р.
+/             %td
+/               .btn-group
+/                 = link_to 'войти', [event, doc], class: 'btn btn-mini'
+/                 %button.btn.btn-mini.dropdown-toggle{"data-toggle" => "dropdown"}
+/                   %span.caret
+/                 %ul.dropdown-menu.dropdown-menu-narrow.dropdown-menu-left
+/                   - links_collection(event, doc)
 
-        - documents.each do |doc|
-          %tr{"data-link" => url_for([event, doc])}
-            %td= event_state_text doc.state
-            %td.text-left= doc.company
-            %td.text-left= doc.description
-            %td{:class => ("payment-alert" if doc.date.blank?)}
-              = doc.date.strftime("%d.%m.%y") unless doc.date.blank?
-            %td #{doc.summ}р.
-            %td
-              .btn-group
-                = link_to 'войти', [event, doc], class: 'btn btn-mini'
-                %button.btn.btn-mini.dropdown-toggle{"data-toggle" => "dropdown"}
-                  %span.caret
-                %ul.dropdown-menu.dropdown-menu-narrow.dropdown-menu-left
-                  - links_collection(event, doc)
+/     - documents = event.documents_nal_prihods.uncomplited
+/     - if documents.any?
+/       %h5.pagination-centered Приход наличный
+/       %table.table.table-striped.table-condensed.table-bordered.table-center.table-links.table-documents
+/         %thead.thead-small
+/           %tr
+/             %th.td-10
+/             %th.text-left Плательщик
+/             %th.text-left.td-30 Назначение платежа
+/             %th.td-10 Дата оплаты
+/             %th.td-10 Сумма
+/             %th.td-10
 
-    - documents = event.documents_beznal_rashods.uncomplited
-    - if documents.any?
-      %h5.pagination-centered Расход безналичный
-      %table.table.table-bordered.table-condensed.table-bordered.table-center.table-links.table-documents
-        %thead.thead-small
-          %tr
-            %th.td-10
-            %th Получатель
-            %th.td-25{colspan: 2} Платежные документы
-            %th.td-10 Статус
-            %th.td-10 Сумма
-            %th.td-10 Включая НДС
-            %th.td-10 Действия
+/         - documents.each do |doc|
+/           %tr{"data-link" => url_for([event, doc])}
+/             %td= event_state_text doc.state
+/             %td.text-left= doc.company
+/             %td.text-left= doc.description
+/             %td{:class => ("payment-alert" if doc.date.blank?)}
+/               = doc.date.strftime("%d.%m.%y") unless doc.date.blank?
+/             %td #{doc.summ}р.
+/             %td
+/               .btn-group
+/                 = link_to 'войти', [event, doc], class: 'btn btn-mini'
+/                 %button.btn.btn-mini.dropdown-toggle{"data-toggle" => "dropdown"}
+/                   %span.caret
+/                 %ul.dropdown-menu.dropdown-menu-narrow.dropdown-menu-left
+/                   - links_collection(event, doc)
 
-        - documents.each do |doc|
-          %tr{"data-link" => url_for([event, doc])}
-            %td{rowspan: 10}= event_state_text doc.state
-            %td{rowspan: 5}= doc.company
-            %td Счет №
-            %td= doc.num_schet
-            %td{rowspan: 5}= doc.info_state_act
-            %td{rowspan: 10} #{doc.summ}р.
-            %td{rowspan: 10} #{doc.nds}р.
-            %td{rowspan: 10}
-              .btn-group
-                = link_to 'войти', [event, doc], class: 'btn btn-mini'
-                %button.btn.btn-mini.dropdown-toggle{"data-toggle" => "dropdown"}
-                  %span.caret
-                %ul.dropdown-menu.dropdown-menu-narrow.dropdown-menu-left
-                  - links_collection(event, doc)
-          %tr{"data-link" => url_for([event, doc])}
-            %td Дата счета
-            %td= doc.date_schet.strftime("%d.%m.%y") unless doc.date_schet.blank?
-          %tr{"data-link" => url_for([event, doc])}
-            %td Дата оплаты
-            %td{:class => ("payment-alert" if doc.info_date_pay.blank?)}
-              = doc.info_date_pay.strftime("%d.%m.%y") unless doc.info_date_pay.blank?
-          %tr{"data-link" => url_for([event, doc])}
-            %td № п/п
-            %td= doc.info_pp
-          %tr{"data-link" => url_for([event, doc])}
-            %td Счет фактура №
-            %td= doc.info_schet_factura
-          %tr{"data-link" => url_for([event, doc])}
-            %td{rowspan: 5}= doc.description
-            %td Дата сч. фактуры
-            %td= doc.info_date_schet.strftime("%d.%m.%Y") unless doc.info_date_schet.blank?
-            %td{rowspan: 5}= RASHOD_TYPES[doc.type_rashod][1] unless doc.type_rashod.blank?
-          %tr{"data-link" => url_for([event, doc])}
-            %td Акт №
-            %td= doc.info_act
-          %tr{"data-link" => url_for([event, doc])}
-            %td Дата акта
-            %td= doc.info_date_act.strftime("%d.%m.%Y") unless doc.info_date_act.blank?
-          %tr{"data-link" => url_for([event, doc])}
-            %td Договор №
-            %td= doc.dogovor_num
-          %tr{"data-link" => url_for([event, doc])}
-            %td Дата договора
-            %td= doc.dogovor_date.strftime("%d.%m.%Y") unless doc.dogovor_date.blank?
+/     - documents = event.documents_beznal_rashods.uncomplited
+/     - if documents.any?
+/       %h5.pagination-centered Расход безналичный
+/       %table.table.table-bordered.table-condensed.table-bordered.table-center.table-links.table-documents
+/         %thead.thead-small
+/           %tr
+/             %th.td-10
+/             %th Получатель
+/             %th.td-25{colspan: 2} Платежные документы
+/             %th.td-10 Статус
+/             %th.td-10 Сумма
+/             %th.td-10 Включая НДС
+/             %th.td-10 Действия
 
-    - documents = event.documents_nal_rashods.uncomplited
-    - if documents.any?
-      %h5.pagination-centered Расход наличный
-      %table.table.table-striped.table-condensed.table-bordered.table-center.table-links.table-documents
-        %thead.thead-small
-          %tr
-            %th.td-10
-            %th Получатель
-            %th.td-25 Назначение платежа
-            %th.td-10 Статус
-            %th.td-10 Дата оплаты
-            %th.td-10 Сумма
-            %th.td-10 Действия
+/         - documents.each do |doc|
+/           %tr{"data-link" => url_for([event, doc])}
+/             %td{rowspan: 10}= event_state_text doc.state
+/             %td{rowspan: 5}= doc.company
+/             %td Счет №
+/             %td= doc.num_schet
+/             %td{rowspan: 5}= doc.info_state_act
+/             %td{rowspan: 10} #{doc.summ}р.
+/             %td{rowspan: 10} #{doc.nds}р.
+/             %td{rowspan: 10}
+/               .btn-group
+/                 = link_to 'войти', [event, doc], class: 'btn btn-mini'
+/                 %button.btn.btn-mini.dropdown-toggle{"data-toggle" => "dropdown"}
+/                   %span.caret
+/                 %ul.dropdown-menu.dropdown-menu-narrow.dropdown-menu-left
+/                   - links_collection(event, doc)
+/           %tr{"data-link" => url_for([event, doc])}
+/             %td Дата счета
+/             %td= doc.date_schet.strftime("%d.%m.%y") unless doc.date_schet.blank?
+/           %tr{"data-link" => url_for([event, doc])}
+/             %td Дата оплаты
+/             %td{:class => ("payment-alert" if doc.info_date_pay.blank?)}
+/               = doc.info_date_pay.strftime("%d.%m.%y") unless doc.info_date_pay.blank?
+/           %tr{"data-link" => url_for([event, doc])}
+/             %td № п/п
+/             %td= doc.info_pp
+/           %tr{"data-link" => url_for([event, doc])}
+/             %td Счет фактура №
+/             %td= doc.info_schet_factura
+/           %tr{"data-link" => url_for([event, doc])}
+/             %td{rowspan: 5}= doc.description
+/             %td Дата сч. фактуры
+/             %td= doc.info_date_schet.strftime("%d.%m.%Y") unless doc.info_date_schet.blank?
+/             %td{rowspan: 5}= RASHOD_TYPES[doc.type_rashod][1] unless doc.type_rashod.blank?
+/           %tr{"data-link" => url_for([event, doc])}
+/             %td Акт №
+/             %td= doc.info_act
+/           %tr{"data-link" => url_for([event, doc])}
+/             %td Дата акта
+/             %td= doc.info_date_act.strftime("%d.%m.%Y") unless doc.info_date_act.blank?
+/           %tr{"data-link" => url_for([event, doc])}
+/             %td Договор №
+/             %td= doc.dogovor_num
+/           %tr{"data-link" => url_for([event, doc])}
+/             %td Дата договора
+/             %td= doc.dogovor_date.strftime("%d.%m.%Y") unless doc.dogovor_date.blank?
 
-        - documents.each do |doc|
-          %tr{"data-link" => url_for([event, doc])}
-            %td= event_state_text doc.state
-            %td= doc.company
-            %td= doc.description
-            %td= RASHOD_TYPES[doc.type_rashod][1] unless doc.type_rashod.blank?
-            %td{:class => ("payment-alert" if doc.date.blank?)}
-              = doc.date.strftime("%d.%m.%y") unless doc.date.blank?
-            %td #{doc.summ}р.
-            %td
-              .btn-group
-                = link_to 'войти', [event, doc], class: 'btn btn-mini'
-                %button.btn.btn-mini.dropdown-toggle{"data-toggle" => "dropdown"}
-                  %span.caret
-                %ul.dropdown-menu.dropdown-menu-narrow.dropdown-menu-left
-                  - links_collection(event, doc)
+/     - documents = event.documents_nal_rashods.uncomplited
+/     - if documents.any?
+/       %h5.pagination-centered Расход наличный
+/       %table.table.table-striped.table-condensed.table-bordered.table-center.table-links.table-documents
+/         %thead.thead-small
+/           %tr
+/             %th.td-10
+/             %th Получатель
+/             %th.td-25 Назначение платежа
+/             %th.td-10 Статус
+/             %th.td-10 Дата оплаты
+/             %th.td-10 Сумма
+/             %th.td-10 Действия
 
-    %hr.events-sep
+/         - documents.each do |doc|
+/           %tr{"data-link" => url_for([event, doc])}
+/             %td= event_state_text doc.state
+/             %td= doc.company
+/             %td= doc.description
+/             %td= RASHOD_TYPES[doc.type_rashod][1] unless doc.type_rashod.blank?
+/             %td{:class => ("payment-alert" if doc.date.blank?)}
+/               = doc.date.strftime("%d.%m.%y") unless doc.date.blank?
+/             %td #{doc.summ}р.
+/             %td
+/               .btn-group
+/                 = link_to 'войти', [event, doc], class: 'btn btn-mini'
+/                 %button.btn.btn-mini.dropdown-toggle{"data-toggle" => "dropdown"}
+/                   %span.caret
+/                 %ul.dropdown-menu.dropdown-menu-narrow.dropdown-menu-left
+/                   - links_collection(event, doc)
 
-- else
-  %p.empty-message Задолженности отсутствуют.
+/     %hr.events-sep
+
+/ - else
+/   %p.empty-message Задолженности отсутствуют.
+
+:javascript 
+  window.isDocumentsPage = true;
 
 - content_for :title do
   Документы
