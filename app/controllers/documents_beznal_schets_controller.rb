@@ -43,6 +43,7 @@ class DocumentsBeznalSchetsController < ApplicationController
   end
 
   def edit
+    @disable_fields = (current_user.roles.first.name == 'administrative_director')
   end
 
   def create

@@ -7,36 +7,36 @@
   = f.hidden_field :num_schet
   = f.hidden_field :date_schet
 
-  = f.association :company, :label => 'Заказчик*', :required => false, :input_html => { 'data-required' => 'true' }
+  = f.association :company, :label => 'Заказчик*', :required => false, :disabled => @disable_fields, :input_html => { 'data-required' => 'true' }
 
   = f.label :description, "Назначение платежа*"
-  = f.text_field :description, :class => 'span8', "data-required" => 'true'
+  = f.text_field :description, :class => 'span8', "data-required" => 'true', :disabled => @disable_fields
 
   .row
     .span4
       = f.label :name, "ФИО заказчика"
-      = f.select :name, [], {}, { :class => 'span4' }
+      = f.select :name, [], {}, { :class => 'span4', :disabled => @disable_fields }
     .span4
       = f.label :telephone, "Мобильный телефон заказчика"
-      = f.text_field :telephone, :class => 'span4', :readonly => true
+      = f.text_field :telephone, :class => 'span4', :readonly => true, :disabled => @disable_fields
 
   .row
     .span2
       = f.label :dogovor_num, "Договор №*"
-      = f.text_field :dogovor_num, :class => 'span2', "data-required" => 'true'
+      = f.text_field :dogovor_num, :class => 'span2', "data-required" => 'true', :disabled => @disable_fields
     .span2
       .span-date.pull-right
         = f.label :date_schet, "Дата договора", :class => 'no-margin'
         .input-prepend.input-prepend-margin.date-picker.pull-right{"data-date" => (@documents_beznal_schet.dogovor_date.strftime("%d.%m.%Y") unless @documents_beznal_schet.dogovor_date.blank?) }
           %span.add-on
             %i.icon-calendar
-          = f.text_field :dogovor_date, :class => 'input-date', :value => (@documents_beznal_schet.dogovor_date.strftime("%d.%m.%Y") unless @documents_beznal_schet.dogovor_date.blank?)
+          = f.text_field :dogovor_date, :class => 'input-date', :disabled => @disable_fields, :value => (@documents_beznal_schet.dogovor_date.strftime("%d.%m.%Y") unless @documents_beznal_schet.dogovor_date.blank?)
     .span2
       = f.label :summ, "Сумма*"
-      = f.text_field :summ, :class => 'span2', "data-required" => 'true'
+      = f.text_field :summ, :class => 'span2', "data-required" => 'true', :disabled => @disable_fields
     .span2
       = f.label :nds, "НДС*"
-      = f.text_field :nds, :class => 'span2', "data-required" => 'true'
+      = f.text_field :nds, :class => 'span2', "data-required" => 'true', :disabled => @disable_fields
 
   .row
     .span6
@@ -44,10 +44,10 @@
       .input-prepend.input-prepend-margin.date-picker{"data-date" => (@documents_beznal_schet.info_date_act.strftime("%d.%m.%Y")unless @documents_beznal_schet.info_date_act.blank?) }
         %span.add-on
           %i.icon-calendar
-        = f.text_field :payment_date, :class => 'input-date', :value => (@documents_beznal_schet.payment_date.strftime("%d.%m.%Y") unless @documents_beznal_schet.payment_date.blank?)
+        = f.text_field :payment_date, :class => 'input-date', :disabled => @disable_fields, :value => (@documents_beznal_schet.payment_date.strftime("%d.%m.%Y") unless @documents_beznal_schet.payment_date.blank?)
     .span2
       %label.checkbox
-        = check_box_tag :auto_nds, 1, ('true' if params[:action] == 'new')
+        = check_box_tag :auto_nds, 1, ('true' if params[:action] == 'new'), :disabled => @disable_fields
         автоматически
 
   %hr
@@ -57,26 +57,26 @@
   .row
     .span2
       = f.label :info_schet_factura, "Счет-фактура №"
-      = f.text_field :info_schet_factura, :class => 'span2'
+      = f.text_field :info_schet_factura, :class => 'span2', :disabled => @disable_fields
     .span2
       .span-date.pull-right
         = f.label :info_date_schet, "Дата сч.фактуры", :class => 'no-margin'
         .input-prepend.input-prepend-margin.date-picker.pull-right{"data-date" => (@documents_beznal_schet.info_date_schet.strftime("%d.%m.%Y") unless @documents_beznal_schet.info_date_schet.blank?)}
           %span.add-on
             %i.icon-calendar
-          = f.text_field :info_date_schet, :class => 'input-date', :value => (@documents_beznal_schet.info_date_schet.strftime("%d.%m.%Y") unless @documents_beznal_schet.info_date_schet.blank?)
+          = f.text_field :info_date_schet, :class => 'input-date', :disabled => @disable_fields, :value => (@documents_beznal_schet.info_date_schet.strftime("%d.%m.%Y") unless @documents_beznal_schet.info_date_schet.blank?)
 
   .row
     .span2
       = f.label :info_act, "Акт №"
-      = f.text_field :info_act, :class => 'span2'
+      = f.text_field :info_act, :class => 'span2', :disabled => @disable_fields
     .span2
       .span-date.pull-right
         = f.label :info_date_act, "Дата акта", :class => 'no-margin'
         .input-prepend.input-prepend-margin.date-picker.pull-right{"data-date" => (@documents_beznal_schet.info_date_act.strftime("%d.%m.%Y") unless @documents_beznal_schet.info_date_act.blank?) }
           %span.add-on
             %i.icon-calendar
-          = f.text_field :info_date_act, :class => 'input-date', :value => (@documents_beznal_schet.info_date_act.strftime("%d.%m.%Y") unless @documents_beznal_schet.info_date_act.blank?)
+          = f.text_field :info_date_act, :class => 'input-date', :disabled => @disable_fields, :value => (@documents_beznal_schet.info_date_act.strftime("%d.%m.%Y") unless @documents_beznal_schet.info_date_act.blank?)
 
   %hr
   %h4 Информация по исходящим закрывающим документам

@@ -5,4 +5,5 @@ $ ->
     else
       $('#documents_beznal_rashod_nds').removeAttr 'disabled'
 
-  $('#documents_beznal_rashod_type_company').trigger 'change'
+  unless $('#documents_beznal_rashod_nds').attr 'disabled'
+    $('#documents_beznal_rashod_type_company').trigger 'change'

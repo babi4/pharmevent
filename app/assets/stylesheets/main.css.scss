@@ -66,6 +66,11 @@ input[readonly] {
   background-color: transparent;
 }
 
+input[readonly][disabled] {
+  cursor: not-allowed;
+  background-color: #eee;
+}
+
 .input-date {
   width: 82px;
 }
