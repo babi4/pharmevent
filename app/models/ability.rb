@@ -25,6 +25,7 @@ class Ability
     can :manage, User            # Управление учётными записями/правами
     can :manage, :user_passwords # Изменение паролей пользователей
     can :manage, :company_consumption  #Расходы компании
+    can :access, :profitability  # Рентабельность
 
     # ========= ****** =========
     [DocumentsBeznalRashod].each do |document|
@@ -241,6 +242,7 @@ class Ability
 
     # ========= ****** =========
 
+    can :access, :profitability  # Рентабельность
     can :manage, :company_consumption  #Расходы компании
     can :manage, CouriersTask    # Заказ, управление курьерами
     can :manage, CouriersCompany # Управление местами доставки для курьеров

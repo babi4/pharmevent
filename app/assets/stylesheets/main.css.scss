@@ -344,13 +344,18 @@ select#user_role_ids {
   background: rgba(255,0,0,0.1);
 }
 
-@media (max-width: 1270px) {
+.profitability-event {
+  margin-bottom: 3px;
+  font-weight: bold;
+}
+
+@media (max-width: 1370px) {
   .navbar-username {
     display: none;
   }
 }
 
-@media (max-width: 1150px) {
+@media (max-width: 1250px) {
   .navbar .brand {
     display: none;
   }

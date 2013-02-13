@@ -56,6 +56,7 @@ Rails3BootstrapDeviseCancan::Application.routes.draw do
   match 'new_password' => 'users#new_password', :as => 'change_password'
 
   match 'documents' => 'documents#index', :as => 'documents'
+  match 'profitability' => 'profitability#index', :as => 'profitability'
 
   match 'couriers_tasks/create_member' => 'couriers_tasks#create_member', :via => :post
   match 'couriers_companies/:company_id/couriers_company_members/create' => 'couriers_company_members#create'
