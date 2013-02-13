@@ -7,13 +7,20 @@
   text-shadow: none !important;
 }
 
-tr,
-img {
+body {
+  font-size: 12px;
+}
+
+table, tr, img, .print-not-break  {
   page-break-inside: avoid;
 }
 
 img {
   max-width: 100% !important;
+}
+
+hr {
+  border-top-color: #000;
 }
 
 @page {
@@ -32,8 +39,9 @@ h3 {
   page-break-after: avoid;
 }
 
-.navbar, .breadcrumb, .btn-print, #couriers-map {
+.navbar, .breadcrumb, .btn-print, #couriers-map, .print-hide {
   display: none;
+  visibility: hidden;
 }
 
 .couriers-map-static {
@@ -48,3 +56,22 @@ h3 {
     width: 30%;
   }
 }
+
+.events .table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  border-top: 1px solid #000;
+
+  td, th {
+    border: 1px solid #000;
+  }
+}
+
+.table-center {
+  td, th {
+    text-align: center;
+    vertical-align: middle;
+  }
+}
+
+a:link:after { content: ""; }

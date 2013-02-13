@@ -134,3 +134,6 @@ $ ->
   $("#input-filter").on 'keyup', (event) ->
     filter = $(@).val().trim()
     filterItems()
+
+  $('.btn-print').on 'click', ->
+    window.print()

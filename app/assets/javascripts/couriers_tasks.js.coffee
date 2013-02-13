@@ -33,9 +33,6 @@ $ ->
       ), (error) ->
         alert "Возникла ошибка: " + error.message
 
-  $('#courier-print').on 'click', ->
-    window.print()
-
   currentModalType = false
   
   $('#btn-courier-task-save').on 'click', (e) ->
