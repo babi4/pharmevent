@@ -18,10 +18,32 @@ $ ->
       currentType = $(@).val()
       html = for status in documentsStatuses[currentType].statuses
         "<option value='#{status[1]}'>#{status[0]}</option>"
-      $('#documents-filter-status').html html
+      $('#documents-filter-status').html(html)
+      $('#documents-filter-status').trigger('updatecomplete')
 
     $('#documents-filter-type').trigger 'change'
     $('#documents-filter-status').val(window.documentsState) if window.documentsState
 
     $('#documents-advanced-toggle').on 'click', ->
       $('#documents-advanced-search').slideToggle 300
+
+    $('#accountant-new').on 'click', ->
+      $('#documents-advanced-search').find('input').val('')
+      $('#documents-filter-type').val('beznal_prihod')
+      $('#documents-filter-status').val('new')
+      $('#documents-search-submit').click()
+      false
+
+    $('#accountant-pay').on 'click', ->
+      $('#documents-advanced-search').find('input').val('')
+      $('#documents-filter-type').val('beznal_rashod')
+      $('#documents-filter-status').html("<option value='signed'>Подписано / на доработку</option>").val('signed')
+      $('#documents-search-submit').click()
+      false
+
+    $('#accountant-close').on 'click', ->
+      $('#documents-advanced-search').find('input').val('')
+      $('#documents-filter-type').val('beznal_prihod')
+      $('#documents-filter-status').val('new')
+      $('#documents-search-submit').click()
+      false

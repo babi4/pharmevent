@@ -110,10 +110,11 @@ class Ability
     can :manage, CouriersTask    # Заказ, управление курьерами
     can :manage, CouriersCompany # Управление местами доставки для курьеров
     can :manage, CouriersCompanyMember # Управление контактыми лицами в местах доставки для курьеров
-    can :manage, Client          # Управление клиентской базой
-    can :manage, CompanyMember   # Управление предствителями заказчика
-    can :manage, Company         # Управление заказчиками
+    # can :manage, Client          # Управление клиентской базой
+    # can :manage, CompanyMember   # Управление предствителями заказчика
+    # can :manage, Company         # Управление заказчиками
     can :manage, :company_consumption  #Расходы компании
+    can :access, :profitability  # Рентабельность
 
 
     # ========= ****** =========
