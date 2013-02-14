@@ -77,14 +77,20 @@ class Ability
     can :manage, CouriersTask    # Заказ, управление курьерами
     can :manage, CouriersCompany # Управление местами доставки для курьеров
     can :manage, CouriersCompanyMember # Управление контактыми лицами в местах доставки для курьеров
-    can :manage, Client          # Управление клиентской базой
-    can :manage, CompanyMember   # Управление предствителями заказчика
-    can :manage, Company         # Управление заказчиками
-    can :manage, :company_consumption  #Расходы компании
 
     # ========= ****** =========
-    [DocumentsNalRashod, DocumentsNalPrihod, DocumentsBeznalRashod].each do |document|
+    [DocumentsNalRashod, DocumentsNalPrihod].each do |document|
       can :read, document
+    end
+
+    # ========= ****** =========
+    [DocumentsBeznalRashod].each do |document|
+      can :read, document
+      can :update, document, :state => %w(signed paid received completed)
+
+      can :receive, document, :state => 'paid'
+      can :complete, document, :state => 'received'
+      can :update_state, document
     end
 
     # ========= ****** =========

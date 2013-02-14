@@ -1,11 +1,19 @@
 = form_tag(documents_path) do
   = hidden_field_tag :only_uncompleted
-  .row.row-accountant-actions
-    .span12.pagination-centered
-      .btn-group
-        %button.btn#accountant-new Новые счета
-        %button.btn#accountant-pay Оплатить
-        %button.btn#accountant-close Подготовить закрывающие документы
+  - if current_user.roles.first.name == 'chief_accountant'
+    .row.row-accountant-actions
+      .span12.pagination-centered
+        .btn-group
+          %button.btn#accountant-new Новые счета
+          %button.btn#accountant-pay Оплатить
+          %button.btn#accountant-close Подготовить закрывающие документы
+  - elsif current_user.roles.first.name == 'administrative_director'
+    .row.row-accountant-actions
+      .span12.pagination-centered
+        .btn-group
+          %button.btn#admindir-close Отправить закрывающие документы
+          %button.btn#admindir-return Вернуть акты
+          %button.btn#admindir-receive Получить закрывающие документы
   .row
     .span3
       = select_tag :document_type, options_for_select(@document_types, params[:document_type]), :class => 'span3', :id => 'documents-filter-type'

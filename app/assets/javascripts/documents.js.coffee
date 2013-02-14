@@ -47,3 +47,24 @@ $ ->
       $('#only_uncompleted').val('true')
       $('#documents-search-submit').click()
       false
+
+    $('#admindir-close').on 'click', ->
+      $('#documents-advanced-search').find('input').val('')
+      $('#documents-filter-type').val('beznal_prihod')
+      $('#documents-filter-status').html("<option value='ready_to_post'>Закрывающие документы готовы</option>").val('ready_to_post')
+      $('#documents-search-submit').click()
+      false
+
+    $('#admindir-return').on 'click', ->
+      $('#documents-advanced-search').find('input').val('')
+      $('#documents-filter-type').val('beznal_rashod')
+      $('#documents-filter-status').html("<option value='received'>Закрывающие документы получены</option>").val('received')
+      $('#documents-search-submit').click()
+      false
+
+    $('#admindir-receive').on 'click', ->
+      $('#documents-advanced-search').find('input').val('')
+      $('#documents-filter-type').val('beznal_rashod')
+      $('#documents-filter-status').html("<option value='paid'>Оплачено</option>").val('paid')
+      $('#documents-search-submit').click()
+      false

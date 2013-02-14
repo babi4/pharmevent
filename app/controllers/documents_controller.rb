@@ -31,7 +31,7 @@ class DocumentsController < ApplicationController
       when 'beznal_rashod'
         @documents_beznal_rashod = DocumentsBeznalRashod.search params[:search]
       when 'beznal_prihod'
-        if params[:only_uncompleted]
+        if !params[:only_uncompleted].blank?
           @documents_beznal_schet = DocumentsBeznalSchet.for_closing
         else
           @documents_beznal_schet = DocumentsBeznalSchet.search params[:search]
