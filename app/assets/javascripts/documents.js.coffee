@@ -44,6 +44,6 @@ $ ->
     $('#accountant-close').on 'click', ->
       $('#documents-advanced-search').find('input').val('')
       $('#documents-filter-type').val('beznal_prihod')
-      $('#documents-filter-status').val('new')
+      $('#only_uncompleted').val('true')
       $('#documents-search-submit').click()
       false

@@ -38,7 +38,7 @@ Rails3BootstrapDeviseCancan::Application.routes.draw do
   end
 
   authenticated :user do
-    root :to => 'documents#index', :constraints => lambda { |request| request.env['warden'].user.roles.first.name == 'chief_accountant' unless request.env['warden'].user.roles.nil? }
+    root :to => 'documents#index', :constraints => lambda { |request| request.env['warden'].user.roles.first.name == 'chief_accountant' unless request.env['warden'].user.nil? }
     root :to => 'events#index'
   end
   root :to => "home#index"

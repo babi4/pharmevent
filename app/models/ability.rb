@@ -135,9 +135,11 @@ class Ability
       can :read, document, :state => %w(new added_to_1c)
       can :update, document, :state => %w(new added_to_1c)
       can :remove, document, :state => %w(new added_to_1c)
-      can :update_state, document, :state => 'new'
 
       can :add_to_1c, document, :state => 'new'
+      can :receive, document, :state => 'paid'
+      can :complete, document, :state => 'received'
+      can :update_state, document
     end
 
     # ========= ****** =========
