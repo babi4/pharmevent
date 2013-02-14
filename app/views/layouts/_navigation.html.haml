@@ -14,8 +14,9 @@
   /   %a{:href => "#"} Поставщики
   %li{:class => ("active" if controller.controller_name == 'documents' && controller.action_name == 'index')}
     = link_to 'Документы', documents_path
-  / %li{:class => ("active" if current_page?(:controller => 'reports', :action => 'index'))}
-  /   = link_to 'Отчеты', reports_path
+  - if can? :access, :manager_reports
+    %li{:class => ("active" if controller.controller_name == 'reports' && controller.action_name == 'index')}
+      = link_to 'Отчеты', reports_path
   - if can? :manage, :company_consumption
     %li{:class => ("active" if current_page?(:controller => 'company_consumptions', :action => 'index'))}
       = link_to 'Расходы компании', company_consumptions_path

@@ -57,7 +57,7 @@ h3 {
   }
 }
 
-.events .table {
+.events .table, .table.table-reports {
   border-collapse: collapse;
   border-spacing: 0;
   border-top: 1px solid #000;
@@ -71,6 +71,10 @@ h3 {
   td, th {
     text-align: center;
     vertical-align: middle;
+    
+    &.text-right {
+      text-align: right;
+    }
   }
 }
 

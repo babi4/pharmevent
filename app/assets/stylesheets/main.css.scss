@@ -194,6 +194,10 @@ input.input-required, select.input-required {
   margin-top: 25px;
 }
 
+.btn-print-report {
+  margin-bottom: 25px;
+}
+
 .datepicker {
   z-index: 1050;
 }
@@ -356,6 +360,16 @@ select#user_role_ids {
 .profitability-event {
   margin-bottom: 3px;
   font-weight: bold;
+}
+
+#date_month {
+  width: 110px;
+}
+#date_year {
+  width: 75px;
+}
+#date_month, #date_year {
+  margin: 0 5px;
 }
 
 @media (max-width: 1370px) {

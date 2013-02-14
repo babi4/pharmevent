@@ -1,2 +1,61 @@
+.row.print-hide
+  .span12
+    = form_tag(reports_path, :class => 'form-inline pagination-centered') do
+      Отчет за
+      = select_month(@report_from)
+      = select_year(@report_from, :start_year => 2012, :end_year => Date.today.year)
+      = submit_tag 'Показать', :class => 'btn'
+- if @events
+  - if @events.count > 0
+    .row
+      .span12
+        %h4.pagination-centered= "#{current_user.name} - расчет прибыли менеджера за январь 2013"
+        %table.table.table-condensed.table-bordered.table-center.table-reports
+          %thead
+            %tr
+              %th №
+              %th.td-20 Даты мероприятия
+              %th Заказчик
+              %th Город
+              %th.td-20 Прибыль
+          %tbody
+            - profit_total = 0
+            - @events.each_with_index do |event, index|
+              - prihod_summ = event.documents_nal_prihods.sum(:summ) + event.documents_beznal_schets.sum(:summ)
+              - rashod_summ = event.documents_nal_rashods.sum(:summ) + event.documents_beznal_rashods.sum(:summ)
+              - nds_k_uplate = event.documents_beznal_schets.sum(:nds)
+              - nds_k_zachetu = event.documents_beznal_rashods.where(:type_rashod => 2).sum(:nds)
+              - profit = (prihod_summ - rashod_summ) - (nds_k_uplate - nds_k_zachetu)
+              - profit_total += profit
+              %tr
+                %td= index + 1
+                %td= "#{event.date_start.strftime("%d.%m.%Y")} - #{event.date_end.strftime("%d.%m.%Y")}"
+                %td= event.company.name
+                %td= event.city
+                %td= "#{profit} руб."
+            %tr
+              %td.text-right{colspan:4} Итого
+              %td= "#{profit_total} руб."
+            %tr
+              %td.text-right{colspan:4} Ваш оклад
+              %td= "#{current_user.salary} руб."
+            %tr
+              %td.text-right{colspan:4} Ваша премия за месяц
+              - bonus = ((profit_total - current_user.salary) * current_user.percent / 100).round(2)
+              %td= "#{bonus} руб."
+            %tr
+              %td.text-right{colspan:4}
+                %b Итоговая заработная плата
+              %td
+                %b= "#{current_user.salary + bonus} руб."
+    .row
+      .span12.pagination-centered
+        %button.btn.btn-print.btn-print-report
+          %i.icon-print
+          Распечатать
+
+  - else
+    %h5.pagination-centered В этом месяце вы не провели ни одного мероприятия.
+
 - content_for :title do
   Отчеты
