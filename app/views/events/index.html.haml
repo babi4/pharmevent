@@ -54,7 +54,7 @@
               %li
                 = link_to 'Удалить', event, method: :delete, data: { confirm: 'Удалить мероприятие?' }
 - else
-  %p.empty-message Активных мероприятий нету.
+  %p.empty-message Активных мероприятий нет.
 
 - if action_name == 'index'
   #newEventModal.modal.hide.fade{:role => "dialog", :tabindex => "-1"}

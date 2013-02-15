@@ -45,7 +45,7 @@
                   %li
                     = link_to 'Удалить', [@couriers_company, member], method: :delete, data: { confirm: 'Удалить контактное лицо?' }
     - else
-      %p.empty-message Контактных лиц пока нету.
+      %p.empty-message Контактных лиц пока нет.
 
 #courierCompanyMemberModal.modal.hide.fade{:role => "dialog", :tabindex => "-1"}
   = form_tag("/couriers_companies/#{@couriers_company.id}/couriers_company_members/6", :method => 'put', :class => 'form-validate', :id => 'form-company-member') do
