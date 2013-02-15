@@ -41,7 +41,10 @@
           %td= text_field_tag("search[fact_date]", '', :class => 'no-margin document-search-input date-picker', :placeholder => 'Дата')
           %td
 
+- no_documents = true
+
 - if @events and @events.count > 0
+  - no_documents = false
   - @events.each do |event|
     %h4.pagination-centered
       = event.name
@@ -217,6 +220,7 @@
     %hr.events-sep
 
 - if @documents_beznal_schet and @documents_beznal_schet.any?
+  - no_documents = false
   %h5.pagination-centered Приход безналичный
   %table.table.table-striped.table-condensed.table-bordered.table-center.table-links.table-documents
     %thead.thead-small
@@ -249,6 +253,7 @@
               - links_collection(doc.event, doc)
 
 - if @documents_nal_prihod and @documents_nal_prihod.any?
+  - no_documents = false
   %h5.pagination-centered Приход наличный
   %table.table.table-striped.table-condensed.table-bordered.table-center.table-links.table-documents
     %thead.thead-small
@@ -277,6 +282,7 @@
               - links_collection(doc.event, doc)
 
 - if @documents_beznal_rashod and @documents_beznal_rashod.any?
+  - no_documents = false
   %h5.pagination-centered Расход безналичный
   %table.table.table-bordered.table-condensed.table-bordered.table-center.table-links.table-documents
     %thead.thead-small
@@ -340,6 +346,7 @@
         %td= doc.dogovor_date.strftime("%d.%m.%Y") unless doc.dogovor_date.blank?
 
 - if @documents_nal_rashod and @documents_nal_rashod.any?
+  - no_documents = false
   %h5.pagination-centered Расход наличный
   %table.table.table-striped.table-condensed.table-bordered.table-center.table-links.table-documents
     %thead.thead-small
@@ -371,6 +378,9 @@
                 - links_collection(0, doc)
               - else
                 - links_collection(doc.event, doc)
+
+- if no_documents
+  %h4.pagination-centered Документов не найдено.
 
 :javascript 
   window.isDocumentsPage = true;
