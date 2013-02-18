@@ -27,44 +27,31 @@ $ ->
     $('#documents-advanced-toggle').on 'click', ->
       $('#documents-advanced-search').slideToggle 300
 
-    $('#accountant-new').on 'click', ->
+    selectDocumentsFilter = (type, status, statusText) ->
       $('#documents-advanced-search').find('input').val('')
-      $('#documents-filter-type').val('beznal_prihod')
-      $('#documents-filter-status').val('new')
+      $('#documents-filter-type').val(type)
+      $('#documents-filter-status').html("<option value='#{status}'>#{statusText}</option>").val(status)
       $('#documents-search-submit').click()
       false
+
+    $('#accountant-new').on 'click', ->
+      selectDocumentsFilter 'beznal_prihod', 'new', 'Новые'
 
     $('#accountant-pay').on 'click', ->
-      $('#documents-advanced-search').find('input').val('')
-      $('#documents-filter-type').val('beznal_rashod')
-      $('#documents-filter-status').html("<option value='signed'>Подписано / на доработку</option>").val('signed')
-      $('#documents-search-submit').click()
-      false
+      selectDocumentsFilter 'beznal_rashod', 'signed', 'Подписано / на доработку'
 
     $('#accountant-close').on 'click', ->
-      $('#documents-advanced-search').find('input').val('')
-      $('#documents-filter-type').val('beznal_prihod')
       $('#only_uncompleted').val('true')
-      $('#documents-search-submit').click()
-      false
+      selectDocumentsFilter 'beznal_prihod', 'new', 'Новые'
 
     $('#admindir-close').on 'click', ->
-      $('#documents-advanced-search').find('input').val('')
-      $('#documents-filter-type').val('beznal_prihod')
-      $('#documents-filter-status').html("<option value='ready_to_post'>Закрывающие документы готовы</option>").val('ready_to_post')
-      $('#documents-search-submit').click()
-      false
+      selectDocumentsFilter 'beznal_prihod', 'ready_to_post', 'Закрывающие документы готовы'
 
     $('#admindir-return').on 'click', ->
-      $('#documents-advanced-search').find('input').val('')
-      $('#documents-filter-type').val('beznal_rashod')
-      $('#documents-filter-status').html("<option value='received'>Закрывающие документы получены</option>").val('received')
-      $('#documents-search-submit').click()
-      false
+      selectDocumentsFilter 'beznal_rashod', 'received', 'Закрывающие документы получены'
 
     $('#admindir-receive').on 'click', ->
-      $('#documents-advanced-search').find('input').val('')
-      $('#documents-filter-type').val('beznal_rashod')
-      $('#documents-filter-status').html("<option value='paid'>Оплачено</option>").val('paid')
-      $('#documents-search-submit').click()
-      false
+      selectDocumentsFilter 'beznal_rashod', 'paid', 'Оплачено'
+
+    $('#admindir-return-our').on 'click', ->
+      selectDocumentsFilter 'beznal_prihod', 'posted', 'Закрывающие документы отправлены'

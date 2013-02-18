@@ -12,8 +12,9 @@
       .span12.pagination-centered
         .btn-group
           %button.btn#admindir-close Отправить закрывающие документы
-          %button.btn#admindir-return Вернуть акты
+          %button.btn#admindir-return Вернуть акты заказчику
           %button.btn#admindir-receive Получить закрывающие документы
+          %button.btn#admindir-return-our Вернуть наши акты
   .row
     .span3
       = select_tag :document_type, options_for_select(@document_types, params[:document_type]), :class => 'span3', :id => 'documents-filter-type'
