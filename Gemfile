@@ -42,6 +42,8 @@ gem "state_machine", "~> 1.1.2"
 
 gem 'newrelic_rpm'
 
+gem 'russian', '~> 0.6.0'
+
 group :development do
   gem "binding_of_caller"
   gem "better_errors", "~> 0.3.2"

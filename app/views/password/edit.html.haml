@@ -1,0 +1,21 @@
+!!!
+%html
+  %head
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}
+      %title= content_for?(:title) ? yield(:title) : "Pharm Event"
+      %meta{:content => content_for?(:description) ? yield(:description) : "Pharm Event", :name => "description"}
+        = stylesheet_link_tag "application", :media => "all"
+        = javascript_include_tag "application"
+        = csrf_meta_tags
+
+  %body.auth
+    .container
+      = simple_form_for(@user, :url => password_path(@user), :html => { :method => :put, :class => 'form-signin'  }) do |f|
+        %h2.form-signin-heading Сменить пароль
+        = f.error_notification
+        = f.input :reset_password_token, :as => :hidden
+        = f.full_error :reset_password_token
+
+        = f.input :password, :label => false, :placeholder => 'Новый пароль', :class => 'input-block-level'
+        = f.input :password_confirmation, :label => false, :placeholder => 'Подтверждение нового пароль', :class => 'input-block-level'
+        = f.button :submit, 'Сменить пароль', :class => 'btn btn-large btn-primary'
