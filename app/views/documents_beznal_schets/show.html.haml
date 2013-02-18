@@ -81,6 +81,10 @@
     —
   - else
     = @documents_beznal_schet.info_date_act.strftime("%d.%m.%Y")
+%p
+  %b Статус возврата акта
+  %br
+  = @documents_beznal_schet.info_return_status
 
 %hr
 %h4 Информация по передаче счета
@@ -103,10 +107,6 @@
   %b ФИО отправителя
   %br
   = @documents_beznal_schet.info_name_sender
-%p
-  %b Статус возврата акта
-  %br
-  = @documents_beznal_schet.info_return_status
 
 %hr
 %p

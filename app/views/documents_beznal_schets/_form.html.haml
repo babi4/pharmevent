@@ -7,7 +7,7 @@
   = f.hidden_field :num_schet
   = f.hidden_field :date_schet
 
-  = f.association :company, :label => 'Заказчик*', :required => false, :disabled => @disable_fields, :input_html => { 'data-required' => 'true' }
+  = f.association :company, :label => 'Заказчик*', :required => false, :label_method => lambda { |company| "#{company.company_type} #{company.short_name}" }, :disabled => @disable_fields, :input_html => { 'data-required' => 'true' }
 
   = f.label :description, "Назначение платежа*"
   = f.text_field :description, :class => 'span8', "data-required" => 'true', :disabled => @disable_fields
@@ -86,12 +86,12 @@
     %span#address-company
 
   = f.label :info_state_act, 'Статус отправления закрывающих документов'
-  = f.select :info_state_act, %w(отправлен неотправлен).map { |t| [t]*2 }, {}, { :class => 'span2' }
+  = f.select :info_state_act, %w(неотправлен отправлен ).map { |t| [t]*2 }, {}, { :class => 'span2' }
 
   .row
     .span2
       = f.label :info_type_return_act, "Способ отправки"
-      = f.select :info_type_return_act,  %w(почтой курьером службой\ доставки).map { |t| [t]*2 }, {}, { :class => 'span2' }
+      = f.select :info_type_return_act,  %w(\  почтой курьером службой\ доставки).map { |t| [t]*2 }, {}, { :class => 'span2' }
     .span2
       .span-date.pull-right
         = f.label :info_return_date, "Дата отправки", :class => 'no-margin'
