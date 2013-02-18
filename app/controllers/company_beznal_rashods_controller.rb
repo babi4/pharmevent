@@ -5,6 +5,10 @@ class CompanyBeznalRashodsController < BeznalRashodsController
 
   before_filter :fix_event_id
 
+  def new
+    @documents_beznal_rashod[:type_rashod] = RASHOD_TYPES.keys.last
+  end
+
   private
 
   def fix_event_id
