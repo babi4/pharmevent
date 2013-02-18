@@ -372,6 +372,12 @@ select#user_role_ids {
   margin: 0 5px;
 }
 
+.label-nowrap {
+  .label br {
+    display: none;
+  }
+}
+
 @media (max-width: 1370px) {
   .navbar-username {
     display: none;
