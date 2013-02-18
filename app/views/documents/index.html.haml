@@ -17,8 +17,8 @@
   .row
     .span3
       = select_tag :document_type, options_for_select(@document_types, params[:document_type]), :class => 'span3', :id => 'documents-filter-type'
-    .span3
-      = select_tag "search[state]", [], :class => 'span3', :id => 'documents-filter-status'
+    .span4
+      = select_tag "search[state]", [], :class => 'span4', :id => 'documents-filter-status'
     .span4
       = submit_tag 'Искать', :class => 'btn', :id => 'documents-search-submit'
       %a.dashed#documents-advanced-toggle{:href => '#'} дополнительные параметры
@@ -235,22 +235,23 @@
         %th.td-10
 
     - @documents_beznal_schet.each do |doc|
-      %tr{"data-link" => url_for([doc.event, doc])}
-        %td= event_state_text doc.state
-        %td.text-left= link_to doc.company[:name], doc.company
-        %td= doc.num_schet
-        %td= doc.date_schet.strftime("%d.%m.%y") unless doc.date_schet.blank?
-        %td{:class => ("payment-alert" if doc.payment_date.blank?)}
-          = doc.payment_date.strftime("%d.%m.%y") unless doc.payment_date.blank?
-        %td #{doc.summ}р.
-        %td #{doc.nds}р.
-        %td
-          .btn-group
-            = link_to 'войти', [doc.event, doc], class: 'btn btn-mini'
-            %button.btn.btn-mini.dropdown-toggle{"data-toggle" => "dropdown"}
-              %span.caret
-            %ul.dropdown-menu.dropdown-menu-narrow.dropdown-menu-left
-              - links_collection(doc.event, doc)
+      - if doc.event
+        %tr{"data-link" => url_for([doc.event, doc])}
+          %td= event_state_text doc.state
+          %td.text-left= link_to doc.company[:name], doc.company
+          %td= doc.num_schet
+          %td= doc.date_schet.strftime("%d.%m.%y") unless doc.date_schet.blank?
+          %td{:class => ("payment-alert" if doc.payment_date.blank?)}
+            = doc.payment_date.strftime("%d.%m.%y") unless doc.payment_date.blank?
+          %td #{doc.summ}р.
+          %td #{doc.nds}р.
+          %td
+            .btn-group
+              = link_to 'войти', [doc.event, doc], class: 'btn btn-mini'
+              %button.btn.btn-mini.dropdown-toggle{"data-toggle" => "dropdown"}
+                %span.caret
+              %ul.dropdown-menu.dropdown-menu-narrow.dropdown-menu-left
+                - links_collection(doc.event, doc)
 
 - if @documents_nal_prihod and @documents_nal_prihod.any?
   - no_documents = false
@@ -266,20 +267,21 @@
         %th.td-10
 
     - @documents_nal_prihod.each do |doc|
-      %tr{"data-link" => url_for([doc.event, doc])}
-        %td= event_state_text doc.state
-        %td.text-left= doc.company
-        %td.text-left= doc.description
-        %td{:class => ("payment-alert" if doc.date.blank?)}
-          = doc.date.strftime("%d.%m.%y") unless doc.date.blank?
-        %td #{doc.summ}р.
-        %td
-          .btn-group
-            = link_to 'войти', [doc.event, doc], class: 'btn btn-mini'
-            %button.btn.btn-mini.dropdown-toggle{"data-toggle" => "dropdown"}
-              %span.caret
-            %ul.dropdown-menu.dropdown-menu-narrow.dropdown-menu-left
-              - links_collection(doc.event, doc)
+      - if doc.event
+        %tr{"data-link" => url_for([doc.event, doc])}
+          %td= event_state_text doc.state
+          %td.text-left= doc.company
+          %td.text-left= doc.description
+          %td{:class => ("payment-alert" if doc.date.blank?)}
+            = doc.date.strftime("%d.%m.%y") unless doc.date.blank?
+          %td #{doc.summ}р.
+          %td
+            .btn-group
+              = link_to 'войти', [doc.event, doc], class: 'btn btn-mini'
+              %button.btn.btn-mini.dropdown-toggle{"data-toggle" => "dropdown"}
+                %span.caret
+              %ul.dropdown-menu.dropdown-menu-narrow.dropdown-menu-left
+                - links_collection(doc.event, doc)
 
 - if @documents_beznal_rashod and @documents_beznal_rashod.any?
   - no_documents = false
@@ -296,54 +298,55 @@
         %th.td-10 Действия
 
     - @documents_beznal_rashod.each do |doc|
-      %tr{"data-link" => company_beznal_rashod_path(doc)}
-        %td{rowspan: 10}= event_state_text doc.state
-        %td{rowspan: 5}= doc.company
-        %td Счет №
-        %td= doc.num_schet
-        %td{rowspan: 5}= doc.info_state_act
-        %td{rowspan: 10} #{doc.summ}р.
-        %td{rowspan: 10} #{doc.nds}р.
-        %td{rowspan: 10}
-          .btn-group
-            = link_to 'войти', company_beznal_rashod_path(doc), class: 'btn btn-mini'
-            %button.btn.btn-mini.dropdown-toggle{"data-toggle" => "dropdown"}
-              %span.caret
-            %ul.dropdown-menu.dropdown-menu-narrow.dropdown-menu-left
-              - if doc.event_id == 0
-                - links_collection(0, doc)
-              - else
-                - links_collection(doc.event, doc)
-      %tr{"data-link" => company_beznal_rashod_path(doc)}
-        %td Дата счета
-        %td= doc.date_schet.strftime("%d.%m.%y") unless doc.date_schet.blank?
-      %tr{"data-link" => company_beznal_rashod_path(doc)}
-        %td Дата оплаты
-        %td{:class => ("payment-alert" if doc.info_date_pay.blank?)}
-          = doc.info_date_pay.strftime("%d.%m.%y") unless doc.info_date_pay.blank?
-      %tr{"data-link" => company_beznal_rashod_path(doc)}
-        %td № п/п
-        %td= doc.info_pp
-      %tr{"data-link" => company_beznal_rashod_path(doc)}
-        %td Счет фактура №
-        %td= doc.info_schet_factura
-      %tr{"data-link" => company_beznal_rashod_path(doc)}
-        %td{rowspan: 5}= doc.description
-        %td Дата сч. фактуры
-        %td= doc.info_date_schet.strftime("%d.%m.%Y") unless doc.info_date_schet.blank?
-        %td{rowspan: 5}= RASHOD_TYPES[doc.type_rashod.to_s][:title] unless doc.type_rashod.blank?
-      %tr{"data-link" => company_beznal_rashod_path(doc)}
-        %td Акт №
-        %td= doc.info_act
-      %tr{"data-link" => company_beznal_rashod_path(doc)}
-        %td Дата акта
-        %td= doc.info_date_act.strftime("%d.%m.%Y") unless doc.info_date_act.blank?
-      %tr{"data-link" => company_beznal_rashod_path(doc)}
-        %td Договор №
-        %td= doc.dogovor_num
-      %tr{"data-link" => company_beznal_rashod_path(doc)}
-        %td Дата договора
-        %td= doc.dogovor_date.strftime("%d.%m.%Y") unless doc.dogovor_date.blank?
+      - if doc.event or doc.event_id == 0
+        %tr{"data-link" => company_beznal_rashod_path(doc)}
+          %td{rowspan: 10}= event_state_text doc.state
+          %td{rowspan: 5}= doc.company
+          %td Счет №
+          %td= doc.num_schet
+          %td{rowspan: 5}= doc.info_state_act
+          %td{rowspan: 10} #{doc.summ}р.
+          %td{rowspan: 10} #{doc.nds}р.
+          %td{rowspan: 10}
+            .btn-group
+              = link_to 'войти', company_beznal_rashod_path(doc), class: 'btn btn-mini'
+              %button.btn.btn-mini.dropdown-toggle{"data-toggle" => "dropdown"}
+                %span.caret
+              %ul.dropdown-menu.dropdown-menu-narrow.dropdown-menu-left
+                - if doc.event_id == 0
+                  - links_collection(0, doc)
+                - else
+                  - links_collection(doc.event, doc)
+        %tr{"data-link" => company_beznal_rashod_path(doc)}
+          %td Дата счета
+          %td= doc.date_schet.strftime("%d.%m.%y") unless doc.date_schet.blank?
+        %tr{"data-link" => company_beznal_rashod_path(doc)}
+          %td Дата оплаты
+          %td{:class => ("payment-alert" if doc.info_date_pay.blank?)}
+            = doc.info_date_pay.strftime("%d.%m.%y") unless doc.info_date_pay.blank?
+        %tr{"data-link" => company_beznal_rashod_path(doc)}
+          %td № п/п
+          %td= doc.info_pp
+        %tr{"data-link" => company_beznal_rashod_path(doc)}
+          %td Счет фактура №
+          %td= doc.info_schet_factura
+        %tr{"data-link" => company_beznal_rashod_path(doc)}
+          %td{rowspan: 5}= doc.description
+          %td Дата сч. фактуры
+          %td= doc.info_date_schet.strftime("%d.%m.%Y") unless doc.info_date_schet.blank?
+          %td{rowspan: 5}= RASHOD_TYPES[doc.type_rashod.to_s][:title] unless doc.type_rashod.blank?
+        %tr{"data-link" => company_beznal_rashod_path(doc)}
+          %td Акт №
+          %td= doc.info_act
+        %tr{"data-link" => company_beznal_rashod_path(doc)}
+          %td Дата акта
+          %td= doc.info_date_act.strftime("%d.%m.%Y") unless doc.info_date_act.blank?
+        %tr{"data-link" => company_beznal_rashod_path(doc)}
+          %td Договор №
+          %td= doc.dogovor_num
+        %tr{"data-link" => company_beznal_rashod_path(doc)}
+          %td Дата договора
+          %td= doc.dogovor_date.strftime("%d.%m.%Y") unless doc.dogovor_date.blank?
 
 - if @documents_nal_rashod and @documents_nal_rashod.any?
   - no_documents = false
@@ -360,24 +363,25 @@
         %th.td-10 Действия
 
     - @documents_nal_rashod.each do |doc|
-      %tr{"data-link" => company_nal_rashod_path(doc)}
-        %td= event_state_text doc.state
-        %td= doc.company
-        %td= doc.description
-        %td= RASHOD_TYPES[doc.type_rashod.to_s][:title] unless doc.type_rashod.blank?
-        %td{:class => ("payment-alert" if doc.date.blank?)}
-          = doc.date.strftime("%d.%m.%y") unless doc.date.blank?
-        %td #{doc.summ}р.
-        %td
-          .btn-group
-            = link_to 'войти', company_nal_rashod_path(doc), class: 'btn btn-mini'
-            %button.btn.btn-mini.dropdown-toggle{"data-toggle" => "dropdown"}
-              %span.caret
-            %ul.dropdown-menu.dropdown-menu-narrow.dropdown-menu-left
-              - if doc.event_id == 0
-                - links_collection(0, doc)
-              - else
-                - links_collection(doc.event, doc)
+      - if doc.event or doc.event_id == 0
+        %tr{"data-link" => company_nal_rashod_path(doc)}
+          %td= event_state_text doc.state
+          %td= doc.company
+          %td= doc.description
+          %td= RASHOD_TYPES[doc.type_rashod.to_s][:title] unless doc.type_rashod.blank?
+          %td{:class => ("payment-alert" if doc.date.blank?)}
+            = doc.date.strftime("%d.%m.%y") unless doc.date.blank?
+          %td #{doc.summ}р.
+          %td
+            .btn-group
+              = link_to 'войти', company_nal_rashod_path(doc), class: 'btn btn-mini'
+              %button.btn.btn-mini.dropdown-toggle{"data-toggle" => "dropdown"}
+                %span.caret
+              %ul.dropdown-menu.dropdown-menu-narrow.dropdown-menu-left
+                - if doc.event_id == 0
+                  - links_collection(0, doc)
+                - else
+                  - links_collection(doc.event, doc)
 
 - if no_documents
   %h4.pagination-centered Документов не найдено.

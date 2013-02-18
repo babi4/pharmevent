@@ -5,19 +5,19 @@
   .row
     .span2
       = f.select :type_company, [['ООО', 'ООО'], ['ОАО', 'ОАО'], ['ЗАО', 'ЗАО'], ['ИП', 'ИП']], {}, { :class => 'span2' }
-    .span5
-      = f.text_field :company, :class => 'span5', "data-required" => 'true'
+    .span6
+      = f.text_field :company, :class => 'span6', "data-required" => 'true'
 
   = f.label :description, "Назначение платежа*"
-  = f.text_field :description, :class => 'span7', "data-required" => 'true'
+  = f.text_field :description, :class => 'span8', "data-required" => 'true'
 
   .row
     .span4
       = f.label :name, "ФИО получателя"
       = f.text_field :name, :class => 'span4'
-    .span3
+    .span4
       = f.label :telephone, "Мобильный телефон получателя"
-      = f.text_field :telephone, :class => 'span3'
+      = f.text_field :telephone, :class => 'span4'
 
   .row
     .span2
@@ -33,9 +33,9 @@
     .span2
       = f.label :summ, "Сумма*"
       = f.text_field :summ, :class => 'span2', "data-required" => 'true'
-    .span1
+    .span2
       = f.label :nds, "НДС"
-      = f.text_field :nds, :class => 'span1'
+      = f.text_field :nds, :class => 'span2'
 
   .row
     .span2

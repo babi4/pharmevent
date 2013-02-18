@@ -166,7 +166,6 @@ class Ability
     can :manage, CompanyMember   # Управление предствителями заказчика
     can :manage, Company         # Управление заказчиками
     can :manage, Event, :user_id => @user[:id]  # Управление своими событиями
-    can :manage, :company_consumption  #Расходы компании
     can :access, :manager_reports  # Отчеты менеджера
 
     #Права на добавление любых документов.

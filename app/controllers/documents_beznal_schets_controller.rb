@@ -32,8 +32,7 @@ class DocumentsBeznalSchetsController < ApplicationController
     @documents_beznal_schet.attributes =
       {
         date_schet: DateTime.now,
-        num_schet: DocumentsBeznalSchet.next_num_schet,
-        info_name_sender: current_user.name
+        num_schet: DocumentsBeznalSchet.next_num_schet
       }
 
     respond_to do |format|
