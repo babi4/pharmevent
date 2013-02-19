@@ -10,13 +10,21 @@
 
   %body.auth
     .container
-      = simple_form_for(@user, :url => password_path(@user), :html => { :method => :put, :class => 'form-signin form-password-new'  }) do |f|
-        %h2.form-signin-heading Смена пароля
-        = f.input :reset_password_token, :as => :hidden
-        = f.full_error :reset_password_token
+      - if defined?(@expired_token)
+        .form-password
+          %p.instructions-sent
+            Эта ссылка уже устарела.
+            %br
+            %br
+            = link_to 'Запросить новую ссылку для восстановления пароля', password_index_path
+      - else
+        = simple_form_for(@user, :url => password_path(@user), :html => { :method => :put, :class => 'form-signin form-password-new'  }) do |f|
+          %h2.form-signin-heading Смена пароля
+          = f.input :reset_password_token, :as => :hidden
+          = f.full_error :reset_password_token
 
-        - unless @user.errors.empty?
-          .alert.alert-error= @user.errors.messages[:password].first
-        = f.input :password, :label => false, :placeholder => 'Пароль', :class => 'input-block-level', :error => false
-        = f.input :password_confirmation, :label => false, :placeholder => 'Подтверждение нового пароля', :class => 'input-block-level'
-        = f.button :submit, 'Сменить пароль', :class => 'btn-large btn-primary'
+          - unless @user.errors.empty?
+            .alert.alert-error= @user.errors.messages[:password].first
+          = f.input :password, :label => false, :placeholder => 'Пароль', :class => 'input-block-level', :error => false
+          = f.input :password_confirmation, :label => false, :placeholder => 'Подтверждение нового пароля', :class => 'input-block-level'
+          = f.button :submit, 'Сменить пароль', :class => 'btn-large btn-primary'

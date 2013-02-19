@@ -16,7 +16,7 @@ class PasswordController < ApplicationController
 
   def edit #edit pass
     @user = User.find(params[:id])
-    @user.reset_password_token = params[:reset_password_token]
+    @expired_token = true if @user.reset_password_token != params[:reset_password_token]
     render :layout => false
   end
 
