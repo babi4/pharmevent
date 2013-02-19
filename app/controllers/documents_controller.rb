@@ -16,7 +16,7 @@ class DocumentsController < ApplicationController
 
     if params[:document_type] == 'all'
 
-      if params[:search] && params[:search].delete_if{ |k, v| v != true and v.empty? }.count > 2
+      if params[:search] && params[:search].delete_if{ |k, v| ![true, false].include?(v) and v.empty? }.count > 2
         @documents_beznal_rashod = DocumentsBeznalRashod.accessible_by(current_ability).search params[:search]
         @documents_beznal_schet = DocumentsBeznalSchet.accessible_by(current_ability).search params[:search]
         @documents_nal_rashod = DocumentsNalRashod.accessible_by(current_ability).search params[:search]
