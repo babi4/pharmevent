@@ -13,7 +13,7 @@
 .navbar {
   font-size: 13px;
 
-  li {
+  & > li {
     line-height: 21px;
 
     a {
@@ -21,8 +21,11 @@
     }
   }
 }
-.navbar-username {
-  margin-right: 10px;
+
+.navbar-role {
+  font-size: 11px;
+  color: #aaa;
+  text-transform: lowercase;
 }
 
 hr {
@@ -378,14 +381,10 @@ select#user_role_ids {
   }
 }
 
-@media (max-width: 1370px) {
-  .navbar-username {
-    display: none;
-  }
-}
-
-@media (max-width: 1250px) {
-  .navbar .brand {
-    display: none;
+@media (max-width: 1350px) {
+  .general_director, .admin {
+    .navbar .brand {
+      display: none;
+    }
   }
 }
