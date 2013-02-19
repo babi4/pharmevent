@@ -52,9 +52,9 @@
       %br
       %span.event-date= "(#{event.date_start.strftime('%d.%m.%Y')} - #{event.date_end.strftime('%d.%m.%Y')})"
     - if params[:search][:state] == 'new'
-      - documents = event.documents_beznal_schets.uncompleted.includes(:company)
+      - documents = event.documents_beznal_schets.accessible_by(current_ability).uncompleted.includes(:company)
     - else
-      - documents = event.documents_beznal_schets.completed.includes(:company)
+      - documents = event.documents_beznal_schets.accessible_by(current_ability).completed.includes(:company)
     - if documents.any?
       %h5.pagination-centered Приход безналичный
       %table.table.table-striped.table-condensed.table-bordered.table-center.table-links.table-documents
@@ -88,9 +88,9 @@
                   - links_collection(event, doc)
 
     - if params[:search][:state] == 'new'
-      - documents = event.documents_nal_prihods.uncompleted
+      - documents = event.documents_nal_prihods.accessible_by(current_ability).uncompleted
     - else
-      - documents = event.documents_nal_prihods.completed
+      - documents = event.documents_nal_prihods.accessible_by(current_ability).completed
     - if documents.any?
       %h5.pagination-centered Приход наличный
       %table.table.table-striped.table-condensed.table-bordered.table-center.table-links.table-documents
@@ -120,9 +120,9 @@
                   - links_collection(event, doc)
 
     - if params[:search][:state] == 'new'
-      - documents = event.documents_beznal_rashods.uncompleted
+      - documents = event.documents_beznal_rashods.accessible_by(current_ability).uncompleted
     - else
-      - documents = event.documents_beznal_rashods.completed
+      - documents = event.documents_beznal_rashods.accessible_by(current_ability).completed
 
     - if documents.any?
       %h5.pagination-centered Расход безналичный
@@ -185,9 +185,9 @@
             %td= doc.dogovor_date.strftime("%d.%m.%Y") unless doc.dogovor_date.blank?
 
     - if params[:search][:state] == 'new'
-      - documents = event.documents_nal_rashods.uncompleted
+      - documents = event.documents_nal_rashods.accessible_by(current_ability).uncompleted
     - else
-      - documents = event.documents_nal_rashods.completed
+      - documents = event.documents_nal_rashods.accessible_by(current_ability).completed
     - if documents.any?
       %h5.pagination-centered Расход наличный
       %table.table.table-striped.table-condensed.table-bordered.table-center.table-links.table-documents

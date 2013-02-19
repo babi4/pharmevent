@@ -17,38 +17,38 @@ class DocumentsController < ApplicationController
     if params[:document_type] == 'all'
 
       if params[:search] && params[:search].delete_if{ |k, v| v != true and v.empty? }.count > 2
-        @documents_beznal_rashod = DocumentsBeznalRashod.search params[:search]
-        @documents_beznal_schet = DocumentsBeznalSchet.search params[:search]
-        @documents_nal_rashod = DocumentsNalRashod.search params[:search]
-        @documents_nal_prihod = DocumentsNalPrihod.search params[:search]
+        @documents_beznal_rashod = DocumentsBeznalRashod.accessible_by(current_ability).search params[:search]
+        @documents_beznal_schet = DocumentsBeznalSchet.accessible_by(current_ability).search params[:search]
+        @documents_nal_rashod = DocumentsNalRashod.accessible_by(current_ability).search params[:search]
+        @documents_nal_prihod = DocumentsNalPrihod.accessible_by(current_ability).search params[:search]
       elsif params[:search][:state] == 'completed'
-        @events = Event.completed_documents
+        @events = Event.accessible_by(current_ability).completed_documents
       elsif params[:search][:state] == 'new'
-        @events = Event.uncompleted_documents
+        @events = Event.accessible_by(current_ability).uncompleted_documents
       end
     elsif params[:document_type]
       case params[:document_type]
       when 'beznal_rashod'
-        @documents_beznal_rashod = DocumentsBeznalRashod.search params[:search]
+        @documents_beznal_rashod = DocumentsBeznalRashod.accessible_by(current_ability).search params[:search]
       when 'beznal_prihod'
         if !params[:only_uncompleted].blank?
-          @documents_beznal_schet = DocumentsBeznalSchet.for_closing
+          @documents_beznal_schet = DocumentsBeznalSchet.accessible_by(current_ability).for_closing
         else
-          @documents_beznal_schet = DocumentsBeznalSchet.search params[:search]
+          @documents_beznal_schet = DocumentsBeznalSchet.accessible_by(current_ability).search params[:search]
         end
       when 'nal_rashod'
-        @documents_nal_rashod = DocumentsNalRashod.search params[:search]
+        @documents_nal_rashod = DocumentsNalRashod.accessible_by(current_ability).search params[:search]
       when 'nal_prihod'
-        @documents_nal_prihod = DocumentsNalPrihod.search params[:search]
+        @documents_nal_prihod = DocumentsNalPrihod.accessible_by(current_ability).search params[:search]
       when 'company_consumption'
         params[:search][:company_consumption] = true
-        @documents_beznal_rashod = DocumentsBeznalRashod.search params[:search]
-        @documents_nal_rashod = DocumentsNalRashod.search params[:search]        
+        @documents_beznal_rashod = DocumentsBeznalRashod.accessible_by(current_ability).search params[:search]
+        @documents_nal_rashod = DocumentsNalRashod.accessible_by(current_ability).search params[:search]
       end
     else
       params[:document_type] = 'all'
       params[:search][:state] = 'new'
-      @events = Event.uncompleted_documents
+      @events = Event.accessible_by(current_ability).uncompleted_documents
     end
   end
 

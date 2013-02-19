@@ -9,7 +9,7 @@ class Event < ActiveRecord::Base
   has_many :documents_beznal_rashods, :dependent => :destroy
   has_many :documents_beznal_schets, :dependent => :destroy
   has_many :documents_nal_rashods, :dependent => :destroy
-  has_many :documents_nal_prihods, :dependent => :destroy
+  has_many :documents_nal_prihods
 
   validates_as_paranoid
   validates :company_id, :user_id, :name, :presence => true
