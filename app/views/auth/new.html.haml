@@ -10,6 +10,11 @@
 
   %body.auth
     .container
+      - if flash
+        - flash.each do |name, msg|
+          - if msg.is_a?(String) and msg != ''
+            %div{:class => "alert alert-#{name == :notice ? "success" : "error"}"}
+              = content_tag :div, msg
 
       = simple_form_for("user", :url => user_session_path, :html => { :class => 'form-signin' }) do |f|
         %h2.form-signin-heading Вход в систему

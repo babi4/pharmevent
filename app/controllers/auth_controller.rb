@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class AuthController < ApplicationController
   skip_before_filter :authenticate_user!
 
@@ -14,7 +16,14 @@ class AuthController < ApplicationController
       sign_in(User, user)
       redirect_to root_path
     else
-      redirect_to new_user_session_path
+      if user
+        alert = 'Вы ввели неправильный пароль.'
+      elsif params.has_key?(:user)
+        alert = 'Такой пользователь не зарегистрирован.'
+      else
+        alert = ''
+      end
+      redirect_to new_user_session_path, alert: alert
     end
   end
 

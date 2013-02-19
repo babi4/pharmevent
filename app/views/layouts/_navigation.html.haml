@@ -29,9 +29,13 @@
   - if can? :access, :rails_admin
     %li
       = link_to 'Админка', rails_admin_path
-
-%p.navbar-text.pull-right
-  %b.navbar-username= "#{current_user.name}"
-  - unless can? :manage, User
-    = link_to 'сменить пароль', change_password_path, :class => 'navbar-link'
-  = link_to 'выйти', destroy_user_session_path, :method=>'delete', :class => 'navbar-link logout-link'
+%ul.nav.pull-right
+  %li.dropdown
+    %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+      %span.navbar-role= t "#{current_user.roles.first.name}", locale: :ru
+      #{current_user.name}
+      %b.caret
+    %ul.dropdown-menu
+      - unless can? :manage, User
+        %li= link_to 'сменить пароль', change_password_path
+      %li= link_to 'выйти', destroy_user_session_path, :method=>'delete'  
