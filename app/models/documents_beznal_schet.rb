@@ -7,7 +7,7 @@ class DocumentsBeznalSchet < ActiveRecord::Base
   scope :completed,   where(:state => 'completed')
   scope :for_closing, lambda { uncompleted.joins(:event).where('date_end < ?', Time.zone.now) }
 
-  attr_accessible :state_note, :num_schet, :date_schet, :state, :nds, :payment_date, :company_id, :description, :dogovor_date, :dogovor_num, :info_act, :info_date_act, :info_date_schet, :info_name_sender, :info_type_return_act, :info_return_date, :info_return_status, :info_schet_factura, :info_state_act, :name, :summ, :telephone, :user_id, :event_id
+  attr_accessible :state_note, :num_schet, :date_schet, :state, :nds, :payment_date, :company_id, :description, :dogovor_date, :dogovor_num, :info_act, :info_date_act, :info_date_schet, :info_name_sender, :info_type_return_act, :info_return_date, :info_return_status, :info_schet_factura, :info_state_act, :name, :summ, :telephone, :type_schet, :user_id, :event_id
 
   belongs_to :user
   belongs_to :event

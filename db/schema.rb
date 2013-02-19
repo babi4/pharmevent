@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130211143102) do
+ActiveRecord::Schema.define(:version => 20130219141058) do
 
   create_table "clients", :force => true do |t|
     t.string   "name"
@@ -177,6 +177,7 @@ ActiveRecord::Schema.define(:version => 20130211143102) do
     t.string   "state"
     t.text     "state_note"
     t.string   "info_return_status"
+    t.integer  "type_schet"
   end
 
   create_table "documents_nal_prihods", :force => true do |t|
