@@ -2,7 +2,7 @@
 %html
   %head
     %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}
-      %title= content_for?(:title) ? yield(:title) : "Pharm Event"
+      %title= content_for?(:title) ? yield(:title) : "Восстановление пароля | Pharm Event"
       %meta{:content => content_for?(:description) ? yield(:description) : "Pharm Event", :name => "description"}
         = stylesheet_link_tag "application", :media => "all"
         = javascript_include_tag "application"
@@ -10,9 +10,14 @@
 
   %body.auth
     .container
-
-      = simple_form_for("user", :url => password_index_path, :html => { :class => 'form-signin' }) do |f|
-        %h2.form-signin-heading Отправить инструкцию по восстановлению пароля
-        = f.error_notification
-        = f.input :email, :label => false, :placeholder => 'Электронная почта', :class => 'input-block-level'
-        = f.button :submit, 'Отправить', :class => 'btn btn-large btn-primary'
+      - if @user.id and @user.errors.empty?
+        .form-password
+          %p.instructions-sent= "Инструкции отправлены на #{@user.email}."
+      - else
+        = simple_form_for("user", :url => password_index_path, :html => { :class => 'form-password form-validate', :id => 'send-pass-form' }) do |f|
+          %h4 Отправить инструкцию по восстановлению пароля
+          .input-append
+            = f.email_field :email, placeholder: 'Электронная почта', class: 'span4', 'data-required' => 'true'
+            = submit_tag 'Отправить', :class => 'btn', :disable_with => 'Отправляем...'
+          - unless @user.errors.empty?
+            .alert.alert-error Указанная электронная почта не зарегистрирована.

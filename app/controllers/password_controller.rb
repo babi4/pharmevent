@@ -11,17 +11,12 @@ class PasswordController < ApplicationController
 
   def create
     @user = User.send_reset_password_instructions(params[:user])
-
-    if @user.errors.empty?
-      render 'index', :layout => false, :notice => 'Инструкции отправленны' # TODO показывать уведомления
-    else
-      render 'index', :layout => false
-    end
+    render 'index', :layout => false
   end
 
   def edit #edit pass
     @user = User.find(params[:id])
-    @user.reset_password_token = params[:reset_password_token]
+    @expired_token = true if @user.reset_password_token != params[:reset_password_token]
     render :layout => false
   end
 
@@ -34,6 +29,17 @@ class PasswordController < ApplicationController
       sign_in(User, @user)
       redirect_to root_path
     else
+
+      if @user.errors.messages.has_key?(:password)
+        if @user.errors.messages[:password].first == 'не совпадает с подтверждением'
+          @user.errors.messages[:password][0] = 'Указанные пароли не совпадают.'
+        elsif @user.errors.messages[:password].first == 'не может быть пустым'
+          @user.errors.messages[:password][0] = 'Пароль не может быть пустым.'
+        elsif @user.errors.messages[:password].first.include?('недостаточной длины')
+          @user.errors.messages[:password][0] = 'В пароле должно быть больше 6 символов.'
+        end
+      end
+
       render 'edit', :layout => false
     end
   end

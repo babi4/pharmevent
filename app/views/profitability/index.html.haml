@@ -35,7 +35,7 @@
             %tbody
               %tr
                 %td #{prihod_summ - rashod_summ}р.
-                %td #{nds_k_uplate = event.documents_beznal_schets.sum(:nds)}р.
+                %td #{nds_k_uplate = event.documents_beznal_schets.where('type_schet != 0').sum(:nds)}р.
                 %td #{nds_k_zachetu = event.documents_beznal_rashods.where(:type_rashod => 2).sum(:nds)}р.
                 %td #{ost_nds_k_uplate = nds_k_uplate - nds_k_zachetu}р.
                 %td #{profit = (prihod_summ - rashod_summ) - (nds_k_uplate - nds_k_zachetu)}р.

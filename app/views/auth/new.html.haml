@@ -21,3 +21,5 @@
         = f.input :email, :label => false, :placeholder => 'Электронная почта', :class => 'input-block-level'
         = f.input :password, :label => false, :placeholder => 'Пароль', :class => 'input-block-level'
         = f.button :submit, 'Войти', :class => 'btn btn-large btn-primary'
+        %p.forgot-password
+          = link_to 'Забыли пароль?', password_index_path

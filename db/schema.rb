@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130219133425) do
+ActiveRecord::Schema.define(:version => 20130219143425) do
 
   create_table "clients", :force => true do |t|
     t.string   "name"
@@ -207,6 +207,7 @@ ActiveRecord::Schema.define(:version => 20130219133425) do
     t.string   "state"
     t.text     "state_note"
     t.string   "info_return_status"
+    t.integer  "type_schet"
     t.time     "deleted_at"
   end
 

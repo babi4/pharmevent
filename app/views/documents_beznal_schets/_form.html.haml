@@ -50,6 +50,12 @@
         = check_box_tag :auto_nds, 1, ('true' if params[:action] == 'new'), :disabled => @disable_fields
         автоматически
 
+  %b.before-checkbox Данный счет является:
+  - SCHET_TYPES.each do |index, type|
+    %label.radio
+      = f.radio_button :type_schet, index, :disabled => @disable_fields
+      = type[:text]
+
   %hr
   
   %h4 Информация по исходящим закрывающим документам

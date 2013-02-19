@@ -33,9 +33,10 @@
         %tr
           %th.td-10
           %th.text-left Плательщик
-          %th.td-10 Счет №
+          %th.td-5 Счет №
           %th.td-10 Дата счета
           %th.td-10 Дата оплаты
+          %th.td-10 Статус
           %th.td-10 Сумма
           %th.td-10 Включая НДС
           %th.td-10.print-hide
@@ -48,6 +49,7 @@
           %td= doc.date_schet.strftime("%d.%m.%y") unless doc.date_schet.blank?
           %td{:class => ("payment-alert" if doc.payment_date.blank?)}
             = doc.payment_date.strftime("%d.%m.%y") unless doc.payment_date.blank?
+          %td= SCHET_TYPES[doc.type_schet.to_s][:title] unless doc.type_schet.blank?
           %td #{doc.summ}р.
           %td #{doc.nds}р.
           %td.print-hide
@@ -58,7 +60,7 @@
               %ul.dropdown-menu.dropdown-menu-narrow.dropdown-menu-left
                 - links_collection(@event, doc)
       %tr
-        %td{colspan: 5}
+        %td{colspan: 6}
           %span.pull-right Итого:
         %td #{@event.documents_beznal_schets.sum(:summ)}р.
         %td #{@event.documents_beznal_schets.sum(:nds)}р.
@@ -217,7 +219,7 @@
     %tbody
       %tr
         %td #{@prihod_summ - @rashod_summ}р.
-        %td #{@nds_k_uplate = @event.documents_beznal_schets.sum(:nds)}р.
+        %td #{@nds_k_uplate = @event.documents_beznal_schets.where('type_schet != 0').sum(:nds)}р.
         %td #{@nds_k_zachetu = @event.documents_beznal_rashods.where(:type_rashod => 2).sum(:nds)}р.
         %td #{@nds_k_uplate - @nds_k_zachetu}р.
         %td #{(@prihod_summ - @rashod_summ) - (@nds_k_uplate - @nds_k_zachetu)}р.

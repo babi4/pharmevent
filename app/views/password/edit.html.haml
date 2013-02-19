@@ -2,7 +2,7 @@
 %html
   %head
     %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}
-      %title= content_for?(:title) ? yield(:title) : "Pharm Event"
+      %title= content_for?(:title) ? yield(:title) : "Смена пароля | Pharm Event"
       %meta{:content => content_for?(:description) ? yield(:description) : "Pharm Event", :name => "description"}
         = stylesheet_link_tag "application", :media => "all"
         = javascript_include_tag "application"
@@ -10,12 +10,21 @@
 
   %body.auth
     .container
-      = simple_form_for(@user, :url => password_path(@user), :html => { :method => :put, :class => 'form-signin'  }) do |f|
-        %h2.form-signin-heading Сменить пароль
-        = f.error_notification
-        = f.input :reset_password_token, :as => :hidden
-        = f.full_error :reset_password_token
+      - if defined?(@expired_token)
+        .form-password
+          %p.instructions-sent
+            Эта ссылка уже устарела.
+            %br
+            %br
+            = link_to 'Запросить новую ссылку для восстановления пароля', password_index_path
+      - else
+        = simple_form_for(@user, :url => password_path(@user), :html => { :method => :put, :class => 'form-signin form-password-new'  }) do |f|
+          %h2.form-signin-heading Смена пароля
+          = f.input :reset_password_token, :as => :hidden
+          = f.full_error :reset_password_token
 
-        = f.input :password, :label => false, :placeholder => 'Новый пароль', :class => 'input-block-level'
-        = f.input :password_confirmation, :label => false, :placeholder => 'Подтверждение нового пароль', :class => 'input-block-level'
-        = f.button :submit, 'Сменить пароль', :class => 'btn btn-large btn-primary'
+          - unless @user.errors.empty?
+            .alert.alert-error= @user.errors.messages[:password].first
+          = f.input :password, :label => false, :placeholder => 'Пароль', :class => 'input-block-level', :error => false
+          = f.input :password_confirmation, :label => false, :placeholder => 'Подтверждение нового пароля', :class => 'input-block-level'
+          = f.button :submit, 'Сменить пароль', :class => 'btn-large btn-primary'
