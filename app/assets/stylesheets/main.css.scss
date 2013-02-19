@@ -381,6 +381,10 @@ select#user_role_ids {
   }
 }
 
+.help-inline {
+  margin-bottom: 10px;
+}
+
 @media (max-width: 1350px) {
   .general_director, .admin {
     .navbar .brand {
