@@ -39,12 +39,11 @@ gem 'awesome_print'
 
 gem "squeel", "~> 1.0.14"
 gem "state_machine", "~> 1.1.2"
-
 gem 'newrelic_rpm'
-
 gem 'russian', '~> 0.6.0'
-
 gem "acts_as_paranoid", "~> 0.4.1"
+gem "airbrake", "~> 3.1.8"
+gem "girl_friday", "~> 0.11.2"
 
 group :development do
   gem "binding_of_caller"
