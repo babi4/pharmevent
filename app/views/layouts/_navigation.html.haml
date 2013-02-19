@@ -32,7 +32,7 @@
 %ul.nav.pull-right
   %li.dropdown
     %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
-      %span.navbar-role= t "#{current_user.roles.first.name}", locale: :ru
+      %span.navbar-role= t "roles.#{current_user.roles.first.name}", locale: :ru
       #{current_user.name}
       %b.caret
     %ul.dropdown-menu

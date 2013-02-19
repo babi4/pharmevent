@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130211143102) do
+ActiveRecord::Schema.define(:version => 20130219133425) do
 
   create_table "clients", :force => true do |t|
     t.string   "name"
@@ -25,7 +25,11 @@ ActiveRecord::Schema.define(:version => 20130211143102) do
     t.text     "notes"
     t.datetime "created_at",                 :null => false
     t.datetime "updated_at",                 :null => false
+    t.time     "deleted_at"
   end
+
+  add_index "clients", ["deleted_at"], :name => "index_clients_on_deleted_at"
+  add_index "clients", ["name"], :name => "index_clients_on_name"
 
   create_table "companies", :force => true do |t|
     t.string   "name"
@@ -67,7 +71,11 @@ ActiveRecord::Schema.define(:version => 20130211143102) do
     t.datetime "created_at",           :null => false
     t.datetime "updated_at",           :null => false
     t.string   "okato"
+    t.time     "deleted_at"
   end
+
+  add_index "companies", ["deleted_at"], :name => "index_companies_on_deleted_at"
+  add_index "companies", ["name"], :name => "index_companies_on_name"
 
   create_table "company_members", :force => true do |t|
     t.integer  "company_id"
@@ -77,7 +85,12 @@ ActiveRecord::Schema.define(:version => 20130211143102) do
     t.string   "email"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.time     "deleted_at"
   end
+
+  add_index "company_members", ["company_id"], :name => "index_company_members_on_company_id"
+  add_index "company_members", ["deleted_at"], :name => "index_company_members_on_deleted_at"
+  add_index "company_members", ["name"], :name => "index_company_members_on_name"
 
   create_table "couriers_companies", :force => true do |t|
     t.string   "name"
@@ -89,13 +102,21 @@ ActiveRecord::Schema.define(:version => 20130211143102) do
     t.string   "office"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.time     "deleted_at"
   end
+
+  add_index "couriers_companies", ["deleted_at"], :name => "index_couriers_companies_on_deleted_at"
+  add_index "couriers_companies", ["name"], :name => "index_couriers_companies_on_name"
 
   create_table "couriers_company_members", :force => true do |t|
     t.string  "name"
     t.integer "couriers_company_id"
     t.string  "telephone"
+    t.time    "deleted_at"
   end
+
+  add_index "couriers_company_members", ["couriers_company_id"], :name => "index_couriers_company_members_on_couriers_company_id"
+  add_index "couriers_company_members", ["deleted_at"], :name => "index_couriers_company_members_on_deleted_at"
 
   create_table "couriers_tasks", :force => true do |t|
     t.integer  "user_id"
@@ -115,7 +136,12 @@ ActiveRecord::Schema.define(:version => 20130211143102) do
     t.string   "to_couriers_company_class"
     t.string   "from_couriers_company_member_class"
     t.string   "to_couriers_company_member_class"
+    t.time     "deleted_at"
   end
+
+  add_index "couriers_tasks", ["deleted_at"], :name => "index_couriers_tasks_on_deleted_at"
+  add_index "couriers_tasks", ["name"], :name => "index_couriers_tasks_on_name"
+  add_index "couriers_tasks", ["user_id"], :name => "index_couriers_tasks_on_user_id"
 
   create_table "documents_beznal_rashods", :force => true do |t|
     t.integer  "user_id"
@@ -148,7 +174,11 @@ ActiveRecord::Schema.define(:version => 20130211143102) do
     t.string   "state"
     t.text     "state_note"
     t.integer  "type_rashod"
+    t.time     "deleted_at"
   end
+
+  add_index "documents_beznal_rashods", ["deleted_at"], :name => "index_documents_beznal_rashods_on_deleted_at"
+  add_index "documents_beznal_rashods", ["user_id", "event_id"], :name => "index_documents_beznal_rashods_on_user_id_and_event_id"
 
   create_table "documents_beznal_schets", :force => true do |t|
     t.integer  "user_id"
@@ -177,7 +207,11 @@ ActiveRecord::Schema.define(:version => 20130211143102) do
     t.string   "state"
     t.text     "state_note"
     t.string   "info_return_status"
+    t.time     "deleted_at"
   end
+
+  add_index "documents_beznal_schets", ["deleted_at"], :name => "index_documents_beznal_schets_on_deleted_at"
+  add_index "documents_beznal_schets", ["user_id", "event_id"], :name => "index_documents_beznal_schets_on_user_id_and_event_id"
 
   create_table "documents_nal_prihods", :force => true do |t|
     t.integer  "user_id"
@@ -192,7 +226,11 @@ ActiveRecord::Schema.define(:version => 20130211143102) do
     t.datetime "updated_at",  :null => false
     t.string   "state"
     t.text     "state_note"
+    t.time     "deleted_at"
   end
+
+  add_index "documents_nal_prihods", ["deleted_at"], :name => "index_documents_nal_prihods_on_deleted_at"
+  add_index "documents_nal_prihods", ["user_id", "event_id"], :name => "index_documents_nal_prihods_on_user_id_and_event_id"
 
   create_table "documents_nal_rashods", :force => true do |t|
     t.integer  "user_id"
@@ -210,7 +248,11 @@ ActiveRecord::Schema.define(:version => 20130211143102) do
     t.string   "state"
     t.text     "state_note"
     t.integer  "type_rashod"
+    t.time     "deleted_at"
   end
+
+  add_index "documents_nal_rashods", ["deleted_at"], :name => "index_documents_nal_rashods_on_deleted_at"
+  add_index "documents_nal_rashods", ["user_id", "event_id"], :name => "index_documents_nal_rashods_on_user_id_and_event_id"
 
   create_table "events", :force => true do |t|
     t.string   "name"
@@ -222,7 +264,11 @@ ActiveRecord::Schema.define(:version => 20130211143102) do
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
     t.boolean  "archived",   :default => false
+    t.time     "deleted_at"
   end
+
+  add_index "events", ["deleted_at"], :name => "index_events_on_deleted_at"
+  add_index "events", ["user_id", "company_id", "archived"], :name => "index_events_on_user_id_and_company_id_and_archived"
 
   create_table "rails_admin_histories", :force => true do |t|
     t.text     "message"
@@ -261,8 +307,10 @@ ActiveRecord::Schema.define(:version => 20130211143102) do
     t.string   "middle_name"
     t.integer  "salary"
     t.integer  "percent",                :limit => 2
+    t.time     "deleted_at"
   end
 
+  add_index "users", ["deleted_at"], :name => "index_users_on_deleted_at"
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
 

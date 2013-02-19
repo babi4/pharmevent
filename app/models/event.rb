@@ -1,16 +1,19 @@
 # -*- coding: utf-8 -*-
 
 class Event < ActiveRecord::Base
+  acts_as_paranoid
+
   attr_accessible :city, :company_id, :date_end, :date_start, :name, :user_id
   belongs_to :user
   belongs_to :company
-  has_many :documents_beznal_rashods
-  has_many :documents_beznal_schets
-  has_many :documents_nal_rashods
-  has_many :documents_nal_prihods
+  has_many :documents_beznal_rashods, :dependent => :destroy
+  has_many :documents_beznal_schets, :dependent => :destroy
+  has_many :documents_nal_rashods, :dependent => :destroy
+  has_many :documents_nal_prihods, :dependent => :destroy
 
+  validates_as_paranoid
   validates :company_id, :user_id, :name, :presence => true
-  validates :name, :uniqueness => { :scope => :company_id,
+  validates_uniqueness_of_without_deleted :name, { :scope => :company_id,
     :message => "событие с таким именем для этой компании уже создано" }
 
   scope :active, lambda { where(archived: false).where('date_end >= ?', DateTime.now.to_date) }

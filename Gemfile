@@ -44,6 +44,8 @@ gem 'newrelic_rpm'
 
 gem 'russian', '~> 0.6.0'
 
+gem "acts_as_paranoid", "~> 0.4.1"
+
 group :development do
   gem "binding_of_caller"
   gem "better_errors", "~> 0.3.2"

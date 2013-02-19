@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 class DocumentsNalRashod < ActiveRecord::Base
+  acts_as_paranoid
 
   default_scope where { state != 'deleted' }
 

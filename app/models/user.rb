@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  acts_as_paranoid
+
   has_and_belongs_to_many :roles, :join_table => :users_roles
   has_many :events
   has_many :couriers_tasks

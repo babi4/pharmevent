@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
 class CouriersTask < ActiveRecord::Base
+  acts_as_paranoid
+
   attr_accessible :from_couriers_company_member_class, :to_couriers_company_member_class, :from_couriers_company_class, :to_couriers_company_class, :due_time, :from_couriers_company_id, :from_date, :name, :status, :note, :to_couriers_company_id, :to_date, :to_couriers_company_member_id, :from_couriers_company_member_id
 
   validates :name,
@@ -10,7 +12,8 @@ class CouriersTask < ActiveRecord::Base
             :to_couriers_company_member_class, :to_couriers_company_member_id,
             :presence => true
 
-  validates :name, :uniqueness => true
+  validates_as_paranoid
+  validates_uniqueness_of_without_deleted :name
 
   validate :from_to_companies
 
@@ -19,7 +22,7 @@ class CouriersTask < ActiveRecord::Base
   %w[to from].each do |direction|
     ['', '_member'].each do |comp_or_memb|
       define_method "#{direction}_couriers_company#{comp_or_memb}" do
-        self.send("#{direction}_couriers_company#{comp_or_memb}_class").constantize.find( self.send("#{direction}_couriers_company#{comp_or_memb}_id") )
+        self.send("#{direction}_couriers_company#{comp_or_memb}_class").constantize.with_deleted.find( self.send("#{direction}_couriers_company#{comp_or_memb}_id") )
       end
     end
   end

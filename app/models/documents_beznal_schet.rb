@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 class DocumentsBeznalSchet < ActiveRecord::Base
+  acts_as_paranoid
 
   default_scope where { state != 'deleted' }
   scope :uncompleted, where { state << %w(completed deleted) }

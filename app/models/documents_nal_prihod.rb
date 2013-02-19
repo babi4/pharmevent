@@ -1,4 +1,5 @@
 class DocumentsNalPrihod < ActiveRecord::Base
+  acts_as_paranoid
 
   default_scope where { state != 'deleted' }
   scope :uncompleted, where { state << %w(paid deleted) }

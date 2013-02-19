@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 class DocumentsBeznalRashod < ActiveRecord::Base
+  acts_as_paranoid
 
   default_scope where { state != 'deleted' }
 
@@ -80,7 +81,6 @@ class DocumentsBeznalRashod < ActiveRecord::Base
 
     result.includes(:event)
   end
-
 
   private
 
