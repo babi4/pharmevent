@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 class Event < ActiveRecord::Base
-  #acts_as_paranoid
+  acts_as_paranoid
 
   attr_accessible :city, :company_id, :date_end, :date_start, :name, :user_id
   belongs_to :user
