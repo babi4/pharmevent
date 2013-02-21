@@ -118,7 +118,7 @@ class Ability
     can :manage, CouriersCompanyMember # Управление контактыми лицами в местах доставки для курьеров
     # can :manage, Client          # Управление клиентской базой
     # can :manage, CompanyMember   # Управление предствителями заказчика
-    # can :manage, Company         # Управление заказчиками
+    can :read, Company         # Просмотр заказчиков
     can :manage, :company_consumption  #Расходы компании
     can :access, :profitability  # Рентабельность
 

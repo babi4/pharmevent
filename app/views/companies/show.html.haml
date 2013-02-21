@@ -2,12 +2,15 @@
   %li
     = link_to 'Заказчики', companies_path
     %span.divider /
-  %li.active 
-    = @company.name
-    %span.divider
-      |
-  %li
-    = link_to 'редактирование', edit_company_path(@company)
+  - if can? :manage, Company
+    %li.active 
+      = @company.name
+      %span.divider
+        |
+    %li
+      = link_to 'редактирование', edit_company_path(@company)
+  - else
+    %li.active= @company.name
 
 %h4.no-margin= @company.name
 - unless @company.short_name.blank?
