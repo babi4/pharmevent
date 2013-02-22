@@ -1,7 +1,7 @@
 $ ->
   window.validateForm = (form) ->
     errors = form.find('input, select').filter(->
-      $(@).data("required") and $(@).val().trim() is ""
+      $(@).data("required") and $(@).val() and $(@).val().trim() is ""
     ).addClass 'input-required'
     return false  if errors.length
     true

@@ -13,5 +13,13 @@
 
 = render 'form'
 
+- if @current_user.roles.first.name == 'administrative_director'
+  :javascript
+    window.old_state_act = "#{@documents_beznal_schet.info_state_act}";
+    window.old_state = "#{@documents_beznal_schet.state}";
+    window.doc_url = "#{url_for([@event, @documents_beznal_schet])}";
+    window.doc_type = 'documents_beznal_schet';
+
+
 - content_for :title do
   #{@event.name} - редактирование безналичного счета
