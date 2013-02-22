@@ -24,11 +24,11 @@
     %b Зарплата
     %br
     = "#{@user.salary} руб."
-- if @user.salary && @user.percent
+- if @user.percent
   %p
     %b Процент
     %br
-    = "#{@user.percent}% (#{number_with_precision(@user.salary*@user.percent/10.0**4, precision: 2)})"
+    = "#{@user.percent}%"
 
 - content_for :title do
   Пользователи / #{@user.name}
