@@ -26,8 +26,8 @@
               %td= user.name
               %td= user.email
               %td= t "roles.#{user.roles.first.name}", :locale => :ru
-              %td= user.salary/100.0 if user.salary
-              %td= "#{user.percent}% (#{user.salary*user.percent/10.0**4})" if user.salary && user.percent
+              %td= "#{user.salary} руб." if user.salary
+              %td= "#{user.percent}% (#{number_with_precision(user.salary*user.percent/10.0**4, precision: 2)})" if user.salary && user.percent
               %td
                 .btn-group
                   = link_to 'Войти', user, {:class => 'btn btn-mini'}
