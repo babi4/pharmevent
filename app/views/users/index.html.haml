@@ -20,7 +20,7 @@
           Всего:
           %span#table-filter-count= @users.count
       %tbody
-        - @users.includes(:roles).each do |user|
+        - @users.each do |user|
           - unless user.roles.first.name == 'admin' and @current_user.roles.first.name != 'admin'
             %tr{"data-link" => url_for(:action => 'show', :id => user.id)}
               %td= user.name

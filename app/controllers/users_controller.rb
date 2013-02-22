@@ -33,6 +33,11 @@ class UsersController < ApplicationController
   end
 
   def index
+    if @current_user.roles.first.name == 'admin'
+      @users = User.all
+    else
+      @users = User.all(:include => :roles, :conditions => ["roles.name != ?", 'admin'])
+    end
   end
 
   def show
