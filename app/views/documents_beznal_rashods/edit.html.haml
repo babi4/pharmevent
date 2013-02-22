@@ -13,5 +13,11 @@
 
 = render 'form'
 
+- if @current_user.roles.first.name == 'chief_accountant'
+  :javascript
+    window.old_beznal_rashod_state = "#{@documents_beznal_rashod.state}";
+    window.doc_url = "#{url_for([@event, @documents_beznal_rashod])}";
+    window.doc_type = 'documents_beznal_rashod';
+
 - content_for :title do
   #{@event.name} - редактирование безналичного расхода
