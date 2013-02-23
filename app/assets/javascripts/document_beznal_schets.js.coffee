@@ -44,3 +44,24 @@ $ ->
     if $(@).attr('checked')
       nds = $('#documents_beznal_schet_summ').val() * 18 / 118
       $('#documents_beznal_schet_nds').val nds.toFixed(2)
+
+  if window.old_state? and window.old_state_act?
+    check_state = true
+    $('.form-validate').on 'submit', (e) ->
+      if check_state
+        check_state = false
+        new_state_act = $("##{window.doc_type}_info_state_act").val()
+        if new_state_act is 'отправлен' and new_state_act != old_state_act and old_state is 'ready_to_post' and confirm('Поменять статус на "Документы отправлены"?')
+          $.ajax
+            type: 'PUT'
+            dataType: 'json'
+            url: "#{window.doc_url}/update_state"
+            data: 
+              transaction: 'post'
+            success: (data) ->
+              $('.form-validate').submit()
+          false
+        else
+          true
+      else
+        true

@@ -20,14 +20,14 @@
           Всего:
           %span#table-filter-count= @users.count
       %tbody
-        - @users.includes(:roles).each do |user|
+        - @users.each do |user|
           - unless user.roles.first.name == 'admin' and @current_user.roles.first.name != 'admin'
             %tr{"data-link" => url_for(:action => 'show', :id => user.id)}
               %td= user.name
               %td= user.email
               %td= t "roles.#{user.roles.first.name}", :locale => :ru
-              %td= user.salary/100.0 if user.salary
-              %td= "#{user.percent}% (#{user.salary*user.percent/10.0**4})" if user.salary && user.percent
+              %td= "#{user.salary} руб." if user.salary
+              %td= "#{user.percent}%" if user.percent
               %td
                 .btn-group
                   = link_to 'Войти', user, {:class => 'btn btn-mini'}
