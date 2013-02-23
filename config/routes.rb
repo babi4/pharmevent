@@ -20,6 +20,7 @@ Rails3BootstrapDeviseCancan::Application.routes.draw do
     end
 
     get 'archive', :on => :collection
+    get 'export', :on => :member
     post 'switch_archive', :on => :member
   end
 

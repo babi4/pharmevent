@@ -23,4 +23,8 @@ class Event < ActiveRecord::Base
   scope :latest, order('date_start DESC')
   scope :nearest, order('date_start')
 
+  def date_range_str
+    "#{date_start.strftime("%d.%m.%Y")} - #{date_end.strftime("%d.%m.%Y")}"
+  end
+
 end

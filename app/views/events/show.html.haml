@@ -10,7 +10,7 @@
     = link_to 'редактирование', edit_event_path(@event)
 
 %h3.no-margin.pagination-centered= "#{@event.city}, #{@event.name}"
-%h4.pagination-centered.event-subtitle= "#{@event.date_start.strftime("%d.%m.%Y")} - #{@event.date_end.strftime("%d.%m.%Y")}"
+%h4.pagination-centered.event-subtitle= @event.date_range_str
 
 .pagination-centered.print-hide
   = link_to 'Добавить безналичный расход', new_event_documents_beznal_rashod_path(@event), :class => 'btn'

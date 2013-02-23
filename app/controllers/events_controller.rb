@@ -6,10 +6,35 @@ class EventsController < ApplicationController
   def index
     @events = @events.active.nearest
     @new_event = Event.new
+
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @events }
     end
+  end
+
+  def export  # TODO Need refactoring!!!! Auth, load, filters, beautify!!
+    event_id = params[:id]
+
+    type_rashod_id =
+      if params[:agent] and %w[0 1].include?(params[:agent])
+        params[:agent]
+      else
+        0
+      end
+
+    book = ExportExcel.new(event_id, type_rashod_id).create
+
+    spreadsheet = StringIO.new
+    book.write  spreadsheet
+    send_data   spreadsheet.string, :filename => "export_#{Time.now.to_i}.xls", :type => 'application/xls' # 'application/vnd.ms-excel'
+
+=begin
+    book = ExportExcel.new(1, 1).create
+    temp = Tempfile.new("export.xls")
+    book.write temp.path
+    send_file temp.path, :filename => "export.xls", :type => "application/xls"
+=end
   end
 
   def archive

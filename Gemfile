@@ -45,6 +45,10 @@ gem "acts_as_paranoid", "~> 0.4.1"
 gem "airbrake", "~> 3.1.8"
 gem "girl_friday", "~> 0.11.2"
 
+#gem "sidekiq", "~> 2.7.3"
+gem "spreadsheet", "~> 0.8.1"
+gem "configuration", "~> 1.3.2"
+
 group :development do
   gem "binding_of_caller"
   gem "better_errors", "~> 0.3.2"

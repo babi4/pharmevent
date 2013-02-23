@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 class Company < ActiveRecord::Base
   acts_as_paranoid
 
@@ -41,5 +43,12 @@ class Company < ActiveRecord::Base
     company_events = Event.where{ company_id == self_id }
     DocumentsNalPrihod.where{event_id.in(company_events.select{id})}.sum(:summ) +
     DocumentsBeznalSchet.where{event_id.in(company_events.select{id})}.sum(:summ)
+  end
+
+  def ur_full_address
+    addr = "#{ur_zip_code}, г.#{ur_city}, ул.#{ur_street}, дом #{ur_house}"
+    addr += ", строение #{ur_stroenie}" unless ur_stroenie.blank?
+    addr += ", офис #{ur_office}" unless ur_office.blank?
+    addr
   end
 end
