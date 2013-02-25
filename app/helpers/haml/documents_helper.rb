@@ -12,9 +12,9 @@ module Haml::DocumentsHelper
       haml_tag :li, link_to( 'Удалить', send( "update_state_event_#{document_type}_path", event, document, transaction: "remove" ), method: :put )
     end
 
-    #if can? :send_to_sign, document
-    #  haml_tag :li, link_to( 'Отправить на подпись', send( "update_state_event_#{document_type}_path", event, document, transaction: "send_to_sign" ), method: :put )
-    #end
+    if can? :send_to_sign, document
+      haml_tag :li, link_to( 'Отправить на подпись', send( "update_state_event_#{document_type}_path", event, document, transaction: "send_to_sign" ), method: :put )
+    end
 
     if can? :sign, document
       haml_tag :li, link_to( 'Подписать', send( "update_state_event_#{document_type}_path", event, document, transaction: "sign" ), method: :put )

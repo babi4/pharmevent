@@ -47,7 +47,7 @@ class EventsController < ApplicationController
       @event.documents_nal_rashods.sum(:summ) +
       @event.documents_beznal_rashods.sum(:summ)
 
-      respond_to do |format|
+    respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @event }
     end

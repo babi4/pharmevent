@@ -20,6 +20,7 @@ class DocumentsBeznalRashod < ActiveRecord::Base
   state_machine :state, :initial => :new do
 
     state :new       # Новый (менеджер, гендир)
+    state :added     # Добавлено. Добавляет менеджер, он же может редактировать/удалить.
     state :signed    # Подписано/на доработку (менеджер, гендир)
     state :for_revision
     state :revised
@@ -28,12 +29,16 @@ class DocumentsBeznalRashod < ActiveRecord::Base
     state :completed # Завершено
     state :deleted
 
+    event :send_to_sign do # w/o state_note
+      transition :new => :added
+    end
+
     event :sign do
-      transition [:new, :for_revision, :revised] => :signed
+      transition [:added, :for_revision, :revised] => :signed
     end
 
     event :send_for_revision do
-      transition [:new, :revised] => :for_revision
+      transition [:added, :revised] => :for_revision
     end
 
     event :revise do

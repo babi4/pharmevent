@@ -38,11 +38,7 @@ Rails3BootstrapDeviseCancan::Application.routes.draw do
     put 'change_pass', :on => :member
   end
 
-  authenticated :user do
-    root :to => 'documents#index', :constraints => lambda { |request| ['chief_accountant', 'administrative_director'].include?(request.env['warden'].user.roles.first.name) unless request.env['warden'].user.nil? }
-    root :to => 'events#index'
-  end
-  root :to => "home#index"
+  root :to => 'documents#index'
 
   get "/auth", :to => "auth#new", :as => 'new_user_session'
   post "/auth", :to => "auth#create", :as => 'user_session'

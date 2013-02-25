@@ -34,8 +34,9 @@ class Ability
       can :update, document
       can :remove, document
 
-      can :sign, document, :state => %w(new for_revision revised)
-      can :send_for_revision, document, :state => 'new revised'
+      can :send_to_sign, document, :state => 'new'
+      can :sign, document, :state => %w(added revised)
+      can :send_for_revision, document, :state => %w(added revised)
       can :revise, document, :state => 'for_revision'
       can :pay, document, :state => 'signed'
       can :receive, document, :state => 'paid'
@@ -77,6 +78,8 @@ class Ability
     can :manage, CouriersTask    # Заказ, управление курьерами
     can :manage, CouriersCompany # Управление местами доставки для курьеров
     can :manage, CouriersCompanyMember # Управление контактыми лицами в местах доставки для курьеров
+    can :manage, CompanyMember   # Управление предствителями заказчика
+    can :manage, Company         # Управление заказчиками
 
     # ========= ****** =========
     [DocumentsNalRashod, DocumentsNalPrihod].each do |document|
@@ -85,22 +88,20 @@ class Ability
 
     # ========= ****** =========
     [DocumentsBeznalRashod].each do |document|
-      can :read, document
-      can :update, document, :state => %w(signed paid received completed)
+      can :read, document, :state => 'received'
+      can :update, document, :state => 'received'
 
-      can :receive, document, :state => 'paid'
       can :complete, document, :state => 'received'
       can :update_state, document
     end
 
     # ========= ****** =========
     [DocumentsBeznalSchet].each do |document|
-      can :read, document, :state => %w(added_to_1c ready_to_post posted completed)
-      can :update, document, :state => %w(added_to_1c ready_to_post posted completed)
-      can :update_state, document, :state => %w(added_to_1c ready_to_post posted)
+      can :read, document, :state => %w(ready_to_post posted completed)
+      can :update, document, :state => %w(ready_to_post posted completed)
+      can :update_state, document, :state => %w(ready_to_post posted)
       can :remove, document, :state => %w(ready_to_post posted completed)
 
-      can :set_ready_to_post, document, :state => 'added_to_1c'
       can :post, document, :state => 'ready_to_post'
       can :complete, document, :state => 'posted'
     end
@@ -117,8 +118,8 @@ class Ability
     can :manage, CouriersCompany # Управление местами доставки для курьеров
     can :manage, CouriersCompanyMember # Управление контактыми лицами в местах доставки для курьеров
     # can :manage, Client          # Управление клиентской базой
-    # can :manage, CompanyMember   # Управление предствителями заказчика
-    can :read, Company         # Просмотр заказчиков
+    can :manage, CompanyMember   # Управление предствителями заказчика
+    can :manage, Company         # Управление заказчиками
     can :manage, :company_consumption  #Расходы компании
     can :access, :profitability  # Рентабельность
 
@@ -126,23 +127,22 @@ class Ability
     # ========= ****** =========
     [DocumentsBeznalRashod].each do |document|
       can :read, document, :state => %w(signed paid received completed)
-      can :update, document, :state => %w(signed paid received completed)
-      can :remove, document, :state => %w(signed paid received completed)
+      can :update, document, :state => %w(signed paid received)
+      can :remove, document, :state => %w(signed paid received)
 
       can :pay, document, :state => 'signed'
-      can :revise, document, :state => 'for_revision'
       can :receive, document, :state => 'paid'
-      can :complete, document, :state => 'received'
       can :update_state, document
     end
 
     # ========= ****** =========
     [DocumentsBeznalSchet].each do |document|
-      can :read, document, :state => %w(new added_to_1c)
-      can :update, document, :state => %w(new added_to_1c)
-      can :remove, document, :state => %w(new added_to_1c)
+      can :read, document, :state => %w(new added_to_1c ready_to_post)
+      can :update, document, :state => %w(new added_to_1c ready_to_post)
+      can :remove, document, :state => %w(new added_to_1c ready_to_post)
 
       can :add_to_1c, document, :state => 'new'
+      can :set_ready_to_post, document, :state => 'added_to_1c'
       can :receive, document, :state => 'paid'
       can :complete, document, :state => 'received'
       can :update_state, document
@@ -178,8 +178,9 @@ class Ability
       can :update, document, :user_id => @user[:id], :state => %w[new for_revision]
       can :remove, document, :user_id => @user[:id], :state => %w[new for_revision]
 
+      can :send_to_sign, document, :state => 'new'
       can :revise, document, :state => 'for_revision'
-      can :update_state, document, :state => 'for_revision'
+      can :update_state, document, :state => %w[new for_revision]
     end
 
     # ========= ****** =========
@@ -215,8 +216,9 @@ class Ability
       can :update, document
       can :remove, document
 
-      can :sign, document, :state => %w(new for_revision revised)
-      can :send_for_revision, document, :state => %w(new revised)
+      can :sign, document, :state => %w(added revised)
+      can :send_to_sign, document, :state => 'new'
+      can :send_for_revision, document, :state => %w(added revised)
       can :revise, document, :state => 'for_revision'
       can :pay, document, :state => 'signed'
       can :receive, document, :state => 'paid'
