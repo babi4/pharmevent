@@ -18,9 +18,14 @@
   = link_to 'Добавить наличный приход',    new_event_documents_nal_prihod_path(@event), :class => 'btn'
   = link_to 'Выставить счёт',              new_event_documents_beznal_schet_path(@event), :class => 'btn'
 
-  %button.btn.btn-print.pull-right 
+  %button.btn.btn-print.pull-right
     %i.icon-print
     PDF
+
+.pagination-centered.print-hide
+  = link_to 'Отчет агента (мероприятие)',  export_event_path(@event, :type_rashod => '1'), :class => 'btn'
+  = link_to 'Отчет агента (лектор)',       export_event_path(@event, :type_rashod => '0'), :class => 'btn'
+
 
 %hr
 

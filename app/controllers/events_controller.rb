@@ -3,6 +3,8 @@
 class EventsController < ApplicationController
   load_and_authorize_resource
 
+  before_filter :check_type_rashod, :only => :export
+
   def index
     @events = @events.active.nearest
     @new_event = Event.new
@@ -13,28 +15,13 @@ class EventsController < ApplicationController
     end
   end
 
-  def export  # TODO Need refactoring!!!! Auth, load, filters, beautify!!
-    event_id = params[:id]
+  def export
+    book = ExportExcel.new(@event[:id], @type_rashod_id).create
 
-    type_rashod_id =
-      if params[:agent] and %w[0 1].include?(params[:agent])
-        params[:agent]
-      else
-        0
-      end
+    xls_data = StringIO.new
+    book.write xls_data
 
-    book = ExportExcel.new(event_id, type_rashod_id).create
-
-    spreadsheet = StringIO.new
-    book.write  spreadsheet
-    send_data   spreadsheet.string, :filename => "export_#{Time.now.to_i}.xls", :type => 'application/xls' # 'application/vnd.ms-excel'
-
-=begin
-    book = ExportExcel.new(1, 1).create
-    temp = Tempfile.new("export.xls")
-    book.write temp.path
-    send_file temp.path, :filename => "export.xls", :type => "application/xls"
-=end
+    send_data xls_data.string, :filename => "export_#{@event[:id]}_#{@type_rashod_id}_#{Time.now.to_i}.xls", :type => 'application/xls' # 'application/vnd.ms-excel'
   end
 
   def archive
@@ -47,7 +34,7 @@ class EventsController < ApplicationController
     if @event.save
       render json: {succ: true}
     else
-      # add @event.errors ?
+      # TODO add @event.errors ?
       render json: {succ: false}
     end
   end
@@ -109,4 +96,18 @@ class EventsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  private
+
+    def check_type_rashod
+      agent_ids = RASHOD_TYPES.select { |k, v| ['Агент (мероприятие)', 'Агент (лектор)'].include?(v[:title])  }.keys
+
+      @type_rashod_id =
+        if params[:type_rashod] and agent_ids.include?(params[:type_rashod])
+          params[:type_rashod]
+        else
+          agent_ids.first
+        end
+    end
+
 end

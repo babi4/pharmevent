@@ -6,9 +6,7 @@ require 'spreadsheet'
 class ExportExcel
 
   def initialize(event_id, type_rashod_id)
-
 =begin
-  event_id = 1
   type_rashod_id = RASHOD_TYPES.select { |k, v| v[:title] == 'Агент (мероприятие)' }.keys.first
   type_rashod_id = RASHOD_TYPES.select { |k, v| v[:title] == 'Агент (лектор)' }.keys.first
 =end
@@ -23,8 +21,7 @@ class ExportExcel
     @replacement_machine = ReplacementMachine.new event, company, documents
 
     @from_xls = "#{Rails.root}/app/export_excels/clear_excels/clear_excel_#{documents.count}.xls"
-    p @from_xls
-    @to_xls = 'excel.xls'
+    #@to_xls = 'excel.xls'
   end
 
   def create
@@ -37,7 +34,6 @@ class ExportExcel
       end
     end
 
-    #book.write @to_xls
     book
   end
 
