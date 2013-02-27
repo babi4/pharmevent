@@ -18,7 +18,7 @@ class ReplacementMachine
 
   def replace(replace_key)
     replace_action = key_to_action replace_key
-    p "#{replace_key} -> #{replace_action}"
+    # p "#{replace_key} -> #{replace_action}"
     eval(replace_action).to_s
   end
 
