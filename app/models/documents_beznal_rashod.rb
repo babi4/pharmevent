@@ -14,7 +14,7 @@ class DocumentsBeznalRashod < ActiveRecord::Base
   belongs_to :user
   belongs_to :event
 
-  validates :event_id, :user_id, :company, :type_company, :summ, :presence => true
+  validates :event_id, :user_id, :company, :type_company, :summ, :nds, :presence => true
   validate :state_act_typo
 
   state_machine :state, :initial => :new do

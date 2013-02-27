@@ -6,6 +6,8 @@ Configuration.for('replacement_machine') {
     name '@event.name'
     city '@event.city'
 
+    agent_bonus '"#{@event.documents_beznal_schets.where(type_schet: SCHET_TYPES.select { |k, v| v[:title] == \'вознаграждение\'  }.keys.first).sum(:summ)} р."'
+
     date {
       end_day   '@event.date_end.day'
       end_month 'Russian::strftime(@event.date_end, \'%b\')'
