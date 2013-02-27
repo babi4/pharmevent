@@ -17,7 +17,10 @@ class ExportExcel
 
     @replacement_machine = ReplacementMachine.new event, company, documents
 
-    @from_xls = "#{Rails.root}/app/export_excels/clear_excels/clear_#{documents.count}.xls"
+    documents_count = documents.count
+    documents_count = 41 if documents_count > 40
+
+    @from_xls = "#{Rails.root}/app/export_excels/clear_excels/clear_#{documents_count}.xls"
   end
 
   def create
