@@ -1,3 +1,4 @@
+=begin
 from_xls = "#{Rails.root}/app/export_excels/clear_excels/clear_excel_2.xls"
 from_book = Spreadsheet.open from_xls  ; nil
 from_sheet = from_book.worksheet 0 ; nil
@@ -40,3 +41,4 @@ rows_2 = (26..27).map { |i| from_sheet.row(i) }
 
   to_book.write "#{Rails.root}/app/export_excels/clear_excels/clear_#{index}.xls"
 end
+=end
