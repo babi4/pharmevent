@@ -9,10 +9,4 @@ class PseudoEvent < OpenStruct
     )
   end
 
-  def self.model_name
-    t = OpenStruct.new
-    t.singular_route_key = 'event'
-    t
-  end
-
 end
