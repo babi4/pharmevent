@@ -68,10 +68,10 @@ class DocumentsBeznalSchet < ActiveRecord::Base
     result = result.where(:info_act => params[:act_num])                   unless params[:act_num].blank?
     result = result.where(:info_date_act => Date.parse(params[:act_date])) unless params[:act_date].blank?
 
-    result = result.where(:info_schet_factura => params[:fact_num])           unless params[:fact_num].blank?
-    result = result.where(:info_date_schet => Date.parse(params[:fact_date])) unless params[:fact_date].blank?
+    result = result.where(:info_schet_factura => params[:fact_num])        unless params[:fact_num].blank?
+    result = result.where(:info_date_schet => Date.parse(params[:fact_date]))       unless params[:fact_date].blank?
 
-    result.includes(:event, :company)
+    result
   end
 
   private

@@ -2,17 +2,18 @@ $ ->
   if window.isDocumentsPage
     documentsStatuses =
       all:
-        statuses: [['Новые', 'new'], ['Завершенные', 'completed']]
-      beznal_prihod:
+        statuses: [['Все', ''], ['Все незавершенные', 'new'], ['Завершенные', 'completed']]
+      documents_beznal_schet:
         statuses: [['Все', ''], ['Новые', 'new'], ['Внесен в 1С', 'added_to_1c'], ['Закрывающие документы готовы', 'ready_to_post'], ['Закрывающие документы отправлены', 'posted'], ['Завершенные', 'completed']]
-      beznal_rashod:
+      documents_beznal_rashod:
         statuses: [['Все', ''], ['Новые', 'new'], ['На подпись', 'unsigned'], ['Подписано / на доработку', 'signed'], ['Оплачено', 'paid'], ['Закрывающие документы получены', 'received'], ['Завершенные', 'completed']]
-      nal_prihod:
+      documents_nal_prihod:
         statuses: [['Все', ''], ['Новые', 'new'], ['Оплаченные', 'paid']]
-      nal_rashod:
+      documents_nal_rashod:
         statuses: [['Все', ''], ['Новые', 'new'], ['Оплаченные', 'paid']]
       company_consumption:
         statuses: [['Все', ''], ['Новые', 'new'], ['На подпись', 'unsigned'], ['Подписано / на доработку', 'signed'], ['Оплачено', 'paid'], ['Закрывающие документы получены', 'closed_documents_received'], ['Завершенные', 'finished']]
+
 
     $('#documents-filter-type').on 'change', ->
       currentType = $(@).val()
@@ -35,23 +36,23 @@ $ ->
       false
 
     $('#accountant-new').on 'click', ->
-      selectDocumentsFilter 'beznal_prihod', 'new', 'Новые'
+      selectDocumentsFilter 'documents_beznal_schet', 'new', 'Новые'
 
     $('#accountant-pay').on 'click', ->
-      selectDocumentsFilter 'beznal_rashod', 'signed', 'Подписано / на доработку'
+      selectDocumentsFilter 'documents_beznal_schet', 'signed', 'Подписано / на доработку'
 
     $('#accountant-close').on 'click', ->
-      $('#only_uncompleted').val('true')
-      selectDocumentsFilter 'beznal_prihod', 'new', 'Новые'
+      $('#search_only_uncompleted').val('true')
+      selectDocumentsFilter 'documents_beznal_schet', 'new', 'Новые'
 
     $('#admindir-close').on 'click', ->
-      selectDocumentsFilter 'beznal_prihod', 'ready_to_post', 'Закрывающие документы готовы'
+      selectDocumentsFilter 'documents_beznal_schet', 'ready_to_post', 'Закрывающие документы готовы'
 
     $('#admindir-return').on 'click', ->
-      selectDocumentsFilter 'beznal_rashod', 'received', 'Закрывающие документы получены'
+      selectDocumentsFilter 'documents_beznal_rashod', 'received', 'Закрывающие документы получены'
 
     $('#admindir-receive').on 'click', ->
-      selectDocumentsFilter 'beznal_rashod', 'paid', 'Оплачено'
+      selectDocumentsFilter 'documents_beznal_rashod', 'paid', 'Оплачено'
 
     $('#admindir-return-our').on 'click', ->
-      selectDocumentsFilter 'beznal_prihod', 'posted', 'Закрывающие документы отправлены'
+      selectDocumentsFilter 'documents_beznal_schet', 'posted', 'Закрывающие документы отправлены'

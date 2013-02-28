@@ -205,10 +205,6 @@ class Ability
 
     can :manage, Event           # Управление событиями
 
-    #manager
-    #chief_accountant
-    #general_director
-
     # ========= ****** =========
     [DocumentsBeznalRashod].each do |document|
       can :read, document

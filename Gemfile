@@ -52,4 +52,5 @@ gem "configuration", "~> 1.3.2"
 group :development do
   gem "binding_of_caller"
   gem "better_errors", "~> 0.3.2"
+  gem "bullet", "~> 4.3.0"
 end

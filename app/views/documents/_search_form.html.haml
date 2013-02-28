@@ -1,0 +1,44 @@
+= form_tag documents_search_path, :method => :get do
+  = hidden_field_tag 'search[only_uncompleted]'
+  - if current_user.roles.first.name == 'chief_accountant'
+    .row.row-accountant-actions
+      .span12.pagination-centered
+        .btn-group
+          %button.btn#accountant-new Новые счета
+          %button.btn#accountant-pay Оплатить
+          %button.btn#accountant-close Подготовить закрывающие документы
+  - elsif current_user.roles.first.name == 'administrative_director'
+    .row.row-accountant-actions
+      .span12.pagination-centered
+        .btn-group
+          %button.btn#admindir-close Отправить закрывающие документы
+          %button.btn#admindir-return Вернуть акты заказчику
+          %button.btn#admindir-receive Получить закрывающие документы
+          %button.btn#admindir-return-our Вернуть наши акты
+
+  .row
+    .span3
+      = select_tag :document_type, options_for_select(@document_types, params[:document_type]), :class => 'span3', :id => 'documents-filter-type'
+    .span4
+      = select_tag "search[state]", [], :class => 'span4', :id => 'documents-filter-status'
+    .span4
+      = submit_tag 'Искать', :class => 'btn', :id => 'documents-search-submit'
+      %a.dashed#documents-advanced-toggle{:href => '#'} дополнительные параметры
+  .row.hide#documents-advanced-search
+    .well.well-small.span10
+      %table.documents-search
+        %tr
+          %td.text-right Счет
+          %td= text_field_tag("search[schet_num]", '', :class => 'no-margin document-search-input')
+          %td= text_field_tag("search[schet_date]", '', :class => 'no-margin document-search-input date-picker', :placeholder => 'Дата')
+          %td= text_field_tag("search[schet_sum]", '', :class => 'no-margin document-search-input', :placeholder => 'Сумма')
+        %tr
+          %td.text-right Акт №
+          %td= text_field_tag("search[act_num]", '', :class => 'no-margin document-search-input')
+          %td= text_field_tag("search[act_date]", '', :class => 'no-margin document-search-input date-picker', :placeholder => 'Дата')
+          %td
+        %tr
+          %td.text-right Счет фактуры
+          %td= text_field_tag("search[fact_num]", '', :class => 'no-margin document-search-input')
+          %td= text_field_tag("search[fact_date]", '', :class => 'no-margin document-search-input date-picker', :placeholder => 'Дата')
+          %td

@@ -1,0 +1,10 @@
+#changeEventStateModal.modal.hide.fade{:role => "dialog", :tabindex => "-1"}
+  .modal-header
+    %button.close{"data-dismiss" => "modal", :type => "button"} ×
+    %h3#document-state-title
+  .modal-body
+    Примечание
+    %br
+    = text_area_tag(:document_state_note, '', :class => "input-modal-full")
+  .modal-footer
+    = link_to 'Сохранить', '#', :class => 'btn btn-primary', :id => 'document-state-save', 'data-method' => 'put'

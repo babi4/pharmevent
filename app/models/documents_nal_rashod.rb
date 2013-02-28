@@ -46,7 +46,8 @@ class DocumentsNalRashod < ActiveRecord::Base
       result = result.where(:description => params[:schet_num])       unless params[:schet_num].blank?
       result = result.where(:date => Date.parse(params[:schet_date])) unless params[:schet_date].blank?
       result = result.where(:summ => params[:schet_sum])              unless params[:schet_sum].blank?
-      result.includes(:event)
+
+      result
     end
   end
 

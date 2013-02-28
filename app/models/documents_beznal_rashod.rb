@@ -84,7 +84,7 @@ class DocumentsBeznalRashod < ActiveRecord::Base
     result = result.where(:info_schet_factura => params[:fact_num])           unless params[:fact_num].blank?
     result = result.where(:info_date_schet => Date.parse(params[:fact_date])) unless params[:fact_date].blank?
 
-    result.includes(:event)
+    result
   end
 
   private
