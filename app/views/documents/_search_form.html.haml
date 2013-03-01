@@ -4,17 +4,17 @@
     .row.row-accountant-actions
       .span12.pagination-centered
         .btn-group
-          %button.btn#accountant-new Новые счета
-          %button.btn#accountant-pay Оплатить
-          %button.btn#accountant-close Подготовить закрывающие документы
+          %button#accountant-new{:class => "btn #{params[:document_type] == 'documents_beznal_schet' && params[:search][:state] == 'new' && params[:search][:only_uncompleted] != 'true' ? "active" : ""}"} Новые счета
+          %button#accountant-pay{:class => "btn #{params[:document_type] == 'documents_beznal_rashod' && params[:search][:state] == 'signed' ? "active" : ""}"} Оплатить
+          %button.btn#accountant-close{:class => "btn #{params[:document_type] == 'documents_beznal_schet' && params[:search][:only_uncompleted] == 'true' ? "active" : ""}"} Подготовить закрывающие документы
   - elsif current_user.roles.first.name == 'administrative_director'
     .row.row-accountant-actions
       .span12.pagination-centered
         .btn-group
-          %button.btn#admindir-close Отправить закрывающие документы
-          %button.btn#admindir-return Вернуть акты заказчику
-          %button.btn#admindir-receive Получить закрывающие документы
-          %button.btn#admindir-return-our Вернуть наши акты
+          %button#admindir-close{:class => "btn #{params[:document_type] == 'documents_beznal_schet' && params[:search][:state] == 'ready_to_post' ? "active" : ""}"} Отправить закрывающие документы
+          %button#admindir-return{:class => "btn #{params[:document_type] == 'documents_beznal_rashod' && params[:search][:state] == 'received' ? "active" : ""}"} Вернуть акты заказчику
+          %button#admindir-receive{:class => "btn #{params[:document_type] == 'documents_beznal_rashod' && params[:search][:state] == 'paid' ? "active" : ""}"} Получить закрывающие документы
+          %button#admindir-return-our{:class => "btn #{params[:document_type] == 'documents_beznal_schet' && params[:search][:state] == 'posted' ? "active" : ""}"} Вернуть наши акты
 
   .row
     .span3

@@ -39,7 +39,7 @@ $ ->
       selectDocumentsFilter 'documents_beznal_schet', 'new', 'Новые'
 
     $('#accountant-pay').on 'click', ->
-      selectDocumentsFilter 'documents_beznal_schet', 'signed', 'Подписано / на доработку'
+      selectDocumentsFilter 'documents_beznal_rashod', 'signed', 'Подписано / на доработку'
 
     $('#accountant-close').on 'click', ->
       $('#search_only_uncompleted').val('true')
