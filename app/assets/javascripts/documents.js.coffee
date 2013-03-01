@@ -1,4 +1,15 @@
 $ ->
+  window.changeDocumentState = (state, state_text, url) ->
+    if confirm("Поменять статус на \"#{state_text}\"?")
+      $.ajax
+        type: 'PUT'
+        dataType: 'json'
+        url: "#{url}/update_state"
+        data: 
+          transaction: state
+        success: (data) ->
+          $('.form-validate').submit()
+
   if window.isDocumentsPage
     documentsStatuses =
       all:

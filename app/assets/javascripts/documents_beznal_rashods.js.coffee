@@ -14,15 +14,8 @@ $ ->
       if check_state
         check_state = false
         doc_date = $("##{window.doc_type}_info_date_pay").val()
-        if doc_date != '' and confirm('Поменять статус на "Оплачено"?')
-          $.ajax
-            type: 'PUT'
-            dataType: 'json'
-            url: "#{window.doc_url}/update_state"
-            data: 
-              transaction: 'pay'
-            success: (data) ->
-              $('.form-validate').submit()
+        if doc_date != ''
+          changeDocumentState 'pay', 'Оплачено', window.doc_url
           false
         else
           true

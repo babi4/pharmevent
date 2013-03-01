@@ -51,15 +51,12 @@ $ ->
       if check_state
         check_state = false
         new_state_act = $("##{window.doc_type}_info_state_act").val()
-        if new_state_act is 'отправлен' and new_state_act != old_state_act and old_state is 'ready_to_post' and confirm('Поменять статус на "Документы отправлены"?')
-          $.ajax
-            type: 'PUT'
-            dataType: 'json'
-            url: "#{window.doc_url}/update_state"
-            data: 
-              transaction: 'post'
-            success: (data) ->
-              $('.form-validate').submit()
+        new_return_status = $("##{window.doc_type}_info_return_status").val()
+        if (new_state_act is 'отправлен' and new_state_act != old_state_act and old_state is 'ready_to_post')
+          changeDocumentState 'post', 'Документы отправлены', window.doc_url
+          false
+        else if (new_return_status is 'получен' and new_return_status != old_return_status)
+          changeDocumentState 'complete', 'Документы получены', window.doc_url
           false
         else
           true
