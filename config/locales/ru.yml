@@ -9,12 +9,16 @@ ru:
     month_names: [~, "Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"]
   activerecord:
     models:
-      client: 'Клиент'
-      company: 'Компания'
-      documents_beznal_rashod: 'Безналичный расход'
-      documents_beznal_schet: 'Безналичный счет'
-      documents_nal_rashod: 'Наличный расход'
-      documents_nal_prihod: 'Наличный доход'
+      client: 'Клиенты'
+      company: 'Компании'
+      company_member: 'Заказчики'
+      couriers_company: 'Места курьеров'
+      documents_beznal_rashod: 'Безналичные расходы'
+      documents_beznal_schet: 'Безналичные счета'
+      documents_nal_rashod: 'Наличные расходы'
+      documents_nal_prihod: 'Наличные доходы'
+      event: 'Мероприятия'
+      user: 'Пользователи'
     attributes:
       client:
         birthday: 'Дата рождения'
@@ -27,6 +31,16 @@ ru:
         zagran_passport_number: 'Номер загранпаспорта'
         zagran_passport_use_before: 'Дата окончания загранпаспорта'
       company:
+        bank_account: 'Расчетный счет'
+        bank_bik: 'БИК банка'
+        bank_city: 'Город банка'
+        bank_corr_account: 'Корр. счет'
+        bank_house: 'Дом банка'
+        bank_name: 'Наименование банка'
+        bank_office: 'Офис банка'
+        bank_street: 'Улица банка'
+        bank_stroenie: 'Строение банка'
+        bank_zip: 'Индекс банка'
         email: 'E-mail'
         fax: 'Факс'
         inn: 'ИНН'
@@ -52,6 +66,19 @@ ru:
         ur_street: 'Улица юридического адреса'
         ur_stroenie: 'Строение юридического адреса'
         ur_zip_code: 'Индекс юридического адреса'
+      company_members:
+        email: 'E-mail'
+        name: 'ФИО'
+        position: 'Должность'
+        telephone: 'Телефон'
+      couriers_company:
+        city: 'Город'
+        house: 'Дом'
+        name: 'Название'
+        office: 'Офис'
+        street: 'Улица'
+        stroenie: 'Строение'
+        zip_code: 'Индекс'
       documents_beznal_rashod:
         company: 'Компания'
         date_schet: 'Дата счета'
@@ -113,3 +140,18 @@ ru:
         summ: 'Сумма'
         telephone: 'Мобильный телефон получателя'
         type_rashod: 'Тип расхода'
+      event:
+        city: 'Город'
+        company: 'Заказчик'
+        date_start: 'Дата начала'
+        date_end: 'Дата окончания'
+        name: 'Название'
+      user:
+        email: 'E-mail'
+        first_name: 'Имя'
+        last_name: 'Фамилия'
+        middle_name: 'Отчество'
+        password: 'Пароль'
+        percent: 'Процент'
+        roles: 'роли'
+        salary: 'Зарплата'
