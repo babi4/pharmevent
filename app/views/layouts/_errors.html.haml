@@ -1,0 +1,5 @@
+- if object.errors.messages.count > 0
+  .row
+    .span8
+      - object.errors.full_messages.each do |error|
+        .alert.alert-error= error

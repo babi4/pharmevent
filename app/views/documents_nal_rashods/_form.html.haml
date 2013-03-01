@@ -1,5 +1,5 @@
 = simple_form_for([@event, @documents_nal_rashod], :html => {:class => 'form-validate' }) do |f|
-  = f.error_notification
+  = render 'layouts/errors', object: @documents_nal_rashod
 
   = f.label :company, "Получатель*"
   = f.text_field :company, :class => 'span7', "data-required" => 'true'

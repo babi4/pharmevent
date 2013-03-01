@@ -1,5 +1,5 @@
 = simple_form_for(@couriers_company, :html => {:class => 'form-validate' }) do |f|
-  = f.error_notification
+  = render 'layouts/errors', object: @couriers_company
 
   = f.label :name, "Название"
   = f.text_field :name, :class => 'span5', "data-required" => 'true'

@@ -1,5 +1,5 @@
 = simple_form_for(@client, :html => {:class => 'form-validate' }) do |f|
-  = f.error_notification
+  = render 'layouts/errors', object: @client
 
   .row
     .span4

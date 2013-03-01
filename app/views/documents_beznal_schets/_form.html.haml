@@ -1,4 +1,5 @@
 = simple_form_for([@event, @documents_beznal_schet], :html => {:class => 'form-validate'}) do |f|
+  = render 'layouts/errors', object: @documents_beznal_schet
 
   %h4 
     Счет №#{@documents_beznal_schet.num_schet} от
@@ -26,7 +27,7 @@
       = f.text_field :dogovor_num, :class => 'span2', "data-required" => 'true', :disabled => @disable_fields
     .span2
       .span-date.pull-right
-        = f.label :date_schet, "Дата договора", :class => 'no-margin'
+        = f.label :dogovor_date, "Дата договора", :class => 'no-margin'
         .input-prepend.input-prepend-margin.date-picker.pull-right{"data-date" => (@documents_beznal_schet.dogovor_date.strftime("%d.%m.%Y") unless @documents_beznal_schet.dogovor_date.blank?) }
           %span.add-on
             %i.icon-calendar
