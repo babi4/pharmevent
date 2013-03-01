@@ -68,8 +68,6 @@ class DocumentsBeznalRashod < ActiveRecord::Base
       result = result.where('event_id > 0')
     end
 
-    params[:state] = 'added' if params[:state] == 'unsigned'
-
     result = result.where(:state => params[:state])                        unless params[:state].blank?
     result = result.where(:num_schet => params[:schet_num])                unless params[:schet_num].blank?
     result = result.where(:date_schet => Date.parse(params[:schet_date]))  unless params[:schet_date].blank?

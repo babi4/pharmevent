@@ -17,14 +17,13 @@ $ ->
       documents_beznal_schet:
         statuses: [['Все', ''], ['Новые', 'new'], ['Внесен в 1С', 'added_to_1c'], ['Закрывающие документы готовы', 'ready_to_post'], ['Закрывающие документы отправлены', 'posted'], ['Завершенные', 'completed']]
       documents_beznal_rashod:
-        statuses: [['Все', ''], ['Новые', 'new'], ['На подпись', 'unsigned'], ['Подписано', 'signed'], ['На доработку', 'for_revision'], ['Оплачено', 'paid'], ['Закрывающие документы получены', 'received'], ['Завершенные', 'completed']]
+        statuses: [['Все', ''], ['Новые', 'new'], ['На подпись', 'added'], ['Подписано', 'signed'], ['На доработку', 'for_revision'], ['Оплачено', 'paid'], ['Закрывающие документы получены', 'received'], ['Завершенные', 'completed']]
       documents_nal_prihod:
         statuses: [['Все', ''], ['Новые', 'new'], ['Оплаченные', 'paid']]
       documents_nal_rashod:
         statuses: [['Все', ''], ['Новые', 'new'], ['Оплаченные', 'paid']]
       company_consumption:
-        statuses: [['Все', ''], ['Новые', 'new'], ['На подпись', 'unsigned'], ['Подписано / на доработку', 'signed'], ['Оплачено', 'paid'], ['Закрывающие документы получены', 'closed_documents_received'], ['Завершенные', 'finished']]
-
+        statuses: [['Все', ''], ['Новые', 'new'], ['На подпись', 'added'], ['Подписано', 'signed'], ['На доработку', 'for_revision'], ['Оплачено', 'paid'], ['Закрывающие документы получены', 'received'], ['Завершенные', 'completed']]
 
     $('#documents-filter-type').on 'change', ->
       currentType = $(@).val()
