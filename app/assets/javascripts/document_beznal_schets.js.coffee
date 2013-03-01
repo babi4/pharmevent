@@ -56,7 +56,7 @@ $ ->
           changeDocumentState 'post', 'Документы отправлены', window.doc_url
           false
         else if (new_return_status is 'получен' and new_return_status != old_return_status)
-          changeDocumentState 'complete', 'Документы получены', window.doc_url
+          changeDocumentState 'complete', 'Завершено', window.doc_url
           false
         else
           true
