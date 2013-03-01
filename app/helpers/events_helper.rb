@@ -25,8 +25,8 @@ module EventsHelper
       content_tag 'span', 'Исправлено', class: 'label label-important'
     when 'paid'
       content_tag 'span', 'Оплачен', class: 'label label-success'
-    #when 'not_for_payment'
-    #  content_tag 'span', 'Запрещен к оплате', class: 'label label-warning'
+    when 'not_for_payment'
+      content_tag 'span', 'Запрещен к оплате', class: 'label label-warning'
     end
   end
 end

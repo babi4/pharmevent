@@ -34,10 +34,9 @@ class Ability
       can :update, document
       can :remove, document
 
-      can :send_to_sign, document, :state => 'new'
-      can :sign, document, :state => %w(added revised)
-      can :send_for_revision, document, :state => %w(added revised)
-      can :revise, document, :state => 'for_revision'
+      can :send_to_sign, document, :state => %w[new]
+      can :sign, document, :state => %w(added for_revision)
+      can :send_for_revision, document, :state => %w(added)
       can :pay, document, :state => 'signed'
       can :receive, document, :state => 'paid'
       can :complete, document, :state => 'received'
@@ -178,8 +177,7 @@ class Ability
       can :update, document, :user_id => @user[:id], :state => %w[new for_revision]
       can :remove, document, :user_id => @user[:id], :state => %w[new for_revision]
 
-      can :send_to_sign, document, :state => 'new'
-      can :revise, document, :state => 'for_revision'
+      can :send_to_sign, document, :state => %w[new for_revision]
       can :update_state, document, :state => %w[new for_revision]
     end
 
@@ -212,10 +210,9 @@ class Ability
       can :update, document
       can :remove, document
 
-      can :sign, document, :state => %w(added revised)
-      can :send_to_sign, document, :state => 'new'
-      can :send_for_revision, document, :state => %w(added revised)
-      can :revise, document, :state => 'for_revision'
+      can :sign, document, :state => %w(added for_revision)
+      can :send_to_sign, document, :state => %w[for_revision new]
+      can :send_for_revision, document, :state => %w(added)
       can :pay, document, :state => 'signed'
       can :receive, document, :state => 'paid'
       can :complete, document, :state => 'received'

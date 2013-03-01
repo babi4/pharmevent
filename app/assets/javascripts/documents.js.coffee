@@ -17,7 +17,7 @@ $ ->
       documents_beznal_schet:
         statuses: [['Все', ''], ['Новые', 'new'], ['Внесен в 1С', 'added_to_1c'], ['Закрывающие документы готовы', 'ready_to_post'], ['Закрывающие документы отправлены', 'posted'], ['Завершенные', 'completed']]
       documents_beznal_rashod:
-        statuses: [['Все', ''], ['Новые', 'new'], ['На подпись', 'unsigned'], ['Подписано / на доработку', 'signed'], ['Оплачено', 'paid'], ['Закрывающие документы получены', 'received'], ['Завершенные', 'completed']]
+        statuses: [['Все', ''], ['Новые', 'new'], ['На подпись', 'unsigned'], ['Подписано', 'signed'], ['На доработку', 'for_revision'], ['Оплачено', 'paid'], ['Закрывающие документы получены', 'received'], ['Завершенные', 'completed']]
       documents_nal_prihod:
         statuses: [['Все', ''], ['Новые', 'new'], ['Оплаченные', 'paid']]
       documents_nal_rashod:
@@ -50,7 +50,7 @@ $ ->
       selectDocumentsFilter 'documents_beznal_schet', 'new', 'Новые'
 
     $('#accountant-pay').on 'click', ->
-      selectDocumentsFilter 'documents_beznal_rashod', 'signed', 'Подписано / на доработку'
+      selectDocumentsFilter 'documents_beznal_rashod', 'signed', 'Подписано'
 
     $('#accountant-close').on 'click', ->
       $('#search_only_uncompleted').val('true')

@@ -21,28 +21,23 @@ class DocumentsBeznalRashod < ActiveRecord::Base
 
     state :new       # Новый (менеджер, гендир)
     state :added     # Добавлено. Добавляет менеджер, он же может редактировать/удалить.
-    state :signed    # Подписано/на доработку (менеджер, гендир)
-    state :for_revision
-    state :revised
+    state :signed    # Подписано (менеджер, гендир)
+    state :for_revision # На доработку (менеджер, гендир)
     state :paid      # Оплачено (бухгалтер, гендир)
     state :received  # Документы получены  (бухгалтер, гендир)
     state :completed # Завершено
     state :deleted
 
     event :send_to_sign do # w/o state_note
-      transition :new => :added
+      transition [:new, :for_revision] => :added
     end
 
     event :sign do
-      transition [:added, :for_revision, :revised] => :signed
+      transition [:added, :for_revision] => :signed
     end
 
     event :send_for_revision do
-      transition [:added, :revised] => :for_revision
-    end
-
-    event :revise do
-      transition :for_revision => :revised
+      transition :added => :for_revision
     end
 
     event :pay do
@@ -73,9 +68,7 @@ class DocumentsBeznalRashod < ActiveRecord::Base
       result = result.where('event_id > 0')
     end
 
-    if params[:state] == 'unsigned'
-      params[:state] = ['added', 'revised']
-    end
+    params[:state] = 'added' if params[:state] == 'unsigned'
 
     result = result.where(:state => params[:state])                        unless params[:state].blank?
     result = result.where(:num_schet => params[:schet_num])                unless params[:schet_num].blank?
