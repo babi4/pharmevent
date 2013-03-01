@@ -16,6 +16,8 @@ class DocumentsController < ApplicationController
   end
 
   def search
+    check_for_roles_default()
+
     @events =
       DocumentsAggregator.new(current_ability).
         in_document_type(params[:document_type]).
@@ -38,6 +40,14 @@ class DocumentsController < ApplicationController
     def set_company_consumption_ability
       params[:search] ||= {}
       params[:search][:can_company_consumption] = can? :manage, :company_consumption
+    end
+
+    def check_for_roles_default
+      if !params.has_key?(:document_type) and %w(administrative_director chief_accountant).include? current_user.roles.first.name
+        params[:document_type] = 'documents_beznal_schet'
+        params[:search][:state] = 
+          current_user.roles.first.name == 'administrative_director' ? 'ready_to_post' : 'new'
+      end
     end
 
 end
