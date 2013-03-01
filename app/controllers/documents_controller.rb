@@ -29,13 +29,15 @@ class DocumentsController < ApplicationController
     end
 
     def set_defaults
-      if !params.has_key?(:document_type) and %w(administrative_director chief_accountant).include? current_user.roles.first.name
-        params[:document_type] = 'documents_beznal_schet'
-        params[:search][:state] = 
-          current_user.roles.first.name == 'administrative_director' ? 'ready_to_post' : 'new'
-      else
-        params[:document_type] = 'all'
-        params[:search][:state] = 'new'
+      unless params.has_key?(:document_type)
+        if %w(administrative_director chief_accountant).include? current_user.roles.first.name
+          params[:document_type] = 'documents_beznal_schet'
+          params[:search][:state] =
+            current_user.roles.first.name == 'administrative_director' ? 'ready_to_post' : 'new'
+        else
+          params[:document_type] = 'all'
+          params[:search][:state] = 'new'
+        end
       end
     end
 
