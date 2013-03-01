@@ -2,7 +2,7 @@
   %input{:type => "hidden", :name => "event[date_start]", :id => "event-start", :value => @event.date_start.strftime("%d.%m.%Y")}
   %input{:type => "hidden", :name => "event[date_end]", :id => "event-end", :value => @event.date_end.strftime("%d.%m.%Y")}
 
-  = f.error_notification
+  = render 'layouts/errors', object: @event
 
   = f.label :name, "Название"
   = f.text_field :name, :class => 'input-modal-full', "data-required" => 'true'

@@ -1,5 +1,5 @@
 = simple_form_for(@documents_beznal_rashod, :url => company_beznal_rashods_path + (@documents_beznal_rashod.id.nil? ? '' : "/#{@documents_beznal_rashod.id}") , :html => {:class => 'form-validate' }) do |f|
-  = f.error_notification
+  = render 'layouts/errors', object: @documents_beznal_rashod
 
   = f.label :short_name, "Получатель*"
   .row
