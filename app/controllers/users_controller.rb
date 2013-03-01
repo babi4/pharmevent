@@ -34,7 +34,7 @@ class UsersController < ApplicationController
 
   def index
     if @current_user.roles.first.name == 'admin'
-      @users = User.all
+      @users = User.all(:include => :roles)
     else
       @users = User.all(:include => :roles, :conditions => ["roles.name != ?", 'admin'])
     end

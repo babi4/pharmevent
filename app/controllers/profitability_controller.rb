@@ -3,7 +3,7 @@
 class ProfitabilityController < ApplicationController
 
   def index
-    @event = 0
+    @event = PseudoEvent.company_event
     if params[:from] and params[:to]
       params[:from] = Date.parse(params[:from])
       params[:to] = Date.parse(params[:to])

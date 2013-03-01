@@ -3,7 +3,11 @@
 class CompanyBeznalRashodsController < BeznalRashodsController
   load_and_authorize_resource :documents_beznal_rashod, :parent => false
 
-  before_filter :fix_event_id
+  before_filter :fix_event_id, :except => :index
+
+  def index
+    render :nothing => true
+  end
 
   def new
     @documents_beznal_rashod[:type_rashod] = RASHOD_TYPES.keys.last

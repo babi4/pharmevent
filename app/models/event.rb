@@ -18,8 +18,6 @@ class Event < ActiveRecord::Base
 
   scope :active, lambda { where(archived: false).where('date_end >= ?', DateTime.now.to_date) }
   scope :archive, lambda { where('archived = true or date_end < ?', DateTime.now.to_date) }
-  #scope :uncompleted_documents, lambda { active.joins(:documents_beznal_rashods).merge( DocumentsBeznalRashod.unscoped.uncompleted ) | active.joins(:documents_nal_rashods).merge( DocumentsNalRashod.unscoped.uncompleted ) | active.joins(:documents_nal_prihods).merge( DocumentsNalPrihod.unscoped.uncompleted | active.joins(:documents_beznal_schets).merge( DocumentsBeznalSchet.unscoped.uncompleted ) ) }
-  #scope :completed_documents, lambda { active.joins(:documents_beznal_rashods).merge( DocumentsBeznalRashod.unscoped.completed ) | active.joins(:documents_nal_rashods).merge( DocumentsNalRashod.unscoped.completed ) | active.joins(:documents_nal_prihods).merge( DocumentsNalPrihod.unscoped.completed | active.joins(:documents_beznal_schets).merge( DocumentsBeznalSchet.unscoped.completed ) ) }
   scope :latest, order('date_start DESC')
   scope :nearest, order('date_start')
 

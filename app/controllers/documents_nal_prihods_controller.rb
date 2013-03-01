@@ -67,7 +67,7 @@ class DocumentsNalPrihodsController < ApplicationController
     @documents_nal_prihod.destroy
 
     respond_to do |format|
-      format.html { redirect_to @event }
+      format.html { redirect_to root_path }
       format.json { head :no_content }
     end
   end
