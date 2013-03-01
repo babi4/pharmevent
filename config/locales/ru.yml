@@ -1,12 +1,17 @@
 ru:
+  unauthorized:
+    default: 'У вас нет прав доступа к данному действию.'
+
   roles:
     admin: "Администратор"
     general_director: "Гендиректор"
     administrative_director: "Административный директор"
     chief_accountant: "Бухгалтер"
     manager: "Менеджер"
+
   date:
     month_names: [~, "Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"]
+
   activerecord:
     models:
       client: 'Клиенты'
