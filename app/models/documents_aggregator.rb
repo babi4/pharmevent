@@ -81,7 +81,7 @@ class DocumentsAggregator
     prepend_rules
 
     # Создадим псевдо Евенты. Они абсолютно как настоящие, но документы там уже подгружены, да еще и в соответствии с правами на чтение!!
-    pseudo_events = Event.accessible_by(@ability).map { |t| PseudoEvent.new(t.attributes) }
+    pseudo_events = Event.active.accessible_by(@ability).map { |t| PseudoEvent.new(t.attributes) }
     # Добавим Несуществующий евент -> Расходы компании с id=0
     pseudo_events << PseudoEvent.company_event
 

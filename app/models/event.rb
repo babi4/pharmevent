@@ -16,8 +16,8 @@ class Event < ActiveRecord::Base
   validates_uniqueness_of_without_deleted :name, { :scope => :company_id,
     :message => "событие с таким именем для этой компании уже создано" }
 
-  scope :active, lambda { where(archived: false).where('date_end >= ?', DateTime.now.to_date) }
-  scope :archive, lambda { where('archived = true or date_end < ?', DateTime.now.to_date) }
+  scope :active, where(archived: false)
+  scope :archive, where(archived: true)
   scope :latest, order('date_start DESC')
   scope :nearest, order('date_start')
 
