@@ -52,11 +52,18 @@ $ ->
         check_state = false
         new_state_act = $("##{window.doc_type}_info_state_act").val()
         new_return_status = $("##{window.doc_type}_info_return_status").val()
+        factura = $("##{window.doc_type}_info_schet_factura").val()
+        factura_date = $("##{window.doc_type}_info_date_schet").val()
+        act = $("##{window.doc_type}_info_act").val()
+        act_date = $("##{window.doc_type}_info_date_act").val()
         if (new_state_act is 'отправлен' and new_state_act != old_state_act and old_state is 'ready_to_post')
           changeDocumentState 'post', 'Документы отправлены', window.doc_url
           false
         else if (new_return_status is 'получен' and new_return_status != old_return_status)
           changeDocumentState 'complete', 'Завершено', window.doc_url
+          false
+        else if old_state == 'added_to_1c' and _.compact([factura, factura_date, act, act_date]).length == 4
+          changeDocumentState 'set_ready_to_post', 'Документы готовы', window.doc_url
           false
         else
           true

@@ -13,7 +13,7 @@
 
 = render 'form'
 
-- if @current_user.roles.first.name == 'administrative_director'
+- if %w(chief_accountant general_director administrative_director).include?(@current_user.roles.first.name)
   :javascript
     window.old_state_act = "#{@documents_beznal_schet.info_state_act}";
     window.old_state = "#{@documents_beznal_schet.state}";
