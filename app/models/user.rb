@@ -21,9 +21,17 @@ class User < ActiveRecord::Base
 
   validates :first_name, :last_name, :presence => true
 
+  before_destroy :clear_email
+
+
   def name
     middle_name_str = middle_name ? "#{middle_name} " : ''
     "#{first_name} #{middle_name_str}#{last_name}"
+  end
+
+  def clear_email
+    self.email = "deleted_at_#{Time.now.to_i} #{self.email}"
+    self.save
   end
 
 end
