@@ -132,7 +132,14 @@ class Ability
 
       can :pay, document, :state => 'signed'
       can :receive, document, :state => 'paid'
-      can :update_state, document
+      can :update_state, document, :state => %w[paid signed]
+
+      #Расходы компании
+      can :create, document, :event_id => 0
+      can :update, document, :event_id => 0, :state => %w(new for_revision)
+      can :remove, document, :event_id => 0, :state => %w[new for_revision]
+      can :send_to_sign, document, :event_id => 0, :state => %w[new for_revision]
+      can :update_state, document, :event_id => 0, :state => %w[new for_revision]
     end
 
     # ========= ****** =========
@@ -149,8 +156,19 @@ class Ability
     end
 
     # ========= ****** =========
-    [DocumentsNalPrihod, DocumentsNalRashod].each do |document|
+    [DocumentsNalPrihod].each do |document|
       can :read, document
+    end
+
+    # ========= ****** =========
+    [DocumentsNalRashod].each do |document|
+      can :read, document
+      can :create, document, :event_id => 0 #Расходы компании
+      can :update, document, :event_id => 0 #Расходы компании
+      can :remove, document, :event_id => 0 #Расходы компании
+
+      can :pay, document, :state => 'new', :event_id => 0 #Расходы компании
+      can :update_state, document, :event_id => 0 #Расходы компании
     end
   end
 
