@@ -79,6 +79,7 @@ class Ability
     can :manage, CouriersCompanyMember # Управление контактыми лицами в местах доставки для курьеров
     can :manage, CompanyMember   # Управление предствителями заказчика
     can :manage, Company         # Управление заказчиками
+    can :manage, :company_consumption  #Расходы компании
 
     # ========= ****** =========
     [DocumentsNalRashod, DocumentsNalPrihod].each do |document|
@@ -166,6 +167,7 @@ class Ability
     can :manage, Company         # Управление заказчиками
     can :manage, Event, :user_id => @user[:id]  # Управление своими событиями
     can :access, :manager_reports  # Отчеты менеджера
+    can :manage, :company_consumption  #Расходы компании
 
     #Права на добавление любых документов.
 
