@@ -9,7 +9,7 @@ module Haml::DocumentsHelper
     end
 
     if can? :remove, document
-      haml_tag :li, link_to( 'Удалить', send( "update_state_event_#{document_type}_path", event.id, document, transaction: "remove" ), method: :put )
+      haml_tag :li, link_to( 'Удалить', send( "update_state_event_#{document_type}_path", event.id, document, transaction: "remove" ), method: :put, data: { confirm: 'Удалить документ?' } )
     end
 
     if can? :send_to_sign, document
