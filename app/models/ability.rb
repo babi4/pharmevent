@@ -87,7 +87,7 @@ class Ability
 
     # ========= ****** =========
     [DocumentsBeznalRashod].each do |document|
-      can :read, document, :state => %w[paid received]
+      can :read, document
       can :update, document, :state => 'received'
 
       can :complete, document, :state => 'received'
@@ -96,7 +96,7 @@ class Ability
 
     # ========= ****** =========
     [DocumentsBeznalSchet].each do |document|
-      can :read, document, :state => %w(ready_to_post posted completed)
+      can :read, document
       can :update, document, :state => %w(ready_to_post posted completed)
       can :update_state, document, :state => %w(ready_to_post posted)
       can :remove, document, :state => %w(ready_to_post posted completed)
@@ -125,7 +125,7 @@ class Ability
 
     # ========= ****** =========
     [DocumentsBeznalRashod].each do |document|
-      can :read, document, :state => %w(signed paid received completed)
+      can :read, document
       can :update, document, :state => %w(signed paid received)
       can :remove, document, :state => %w(signed paid received)
 
@@ -136,7 +136,7 @@ class Ability
 
     # ========= ****** =========
     [DocumentsBeznalSchet].each do |document|
-      can :read, document, :state => %w(new added_to_1c ready_to_post)
+      can :read, document
       can :update, document, :state => %w(new added_to_1c ready_to_post)
       can :remove, document, :state => %w(new added_to_1c ready_to_post)
 
@@ -183,7 +183,7 @@ class Ability
 
     # ========= ****** =========
     [DocumentsBeznalSchet].each do |document|
-      can :read, document, :user_id => @user[:id], :state => %w(new added_to_1c ready_to_post posted completed)
+      can :read, document, :user_id => @user[:id]
       can :create, document
       can :update, document, :user_id => @user[:id], :state => 'new'
       can :remove, document, :user_id => @user[:id], :state => 'new'
@@ -192,7 +192,7 @@ class Ability
 
     # ========= ****** =========
     [DocumentsNalPrihod, DocumentsNalRashod].each do |document|
-      can :read, document, :user_id => @user[:id], :state => %w(new paid)
+      can :read, document, :user_id => @user[:id]
       can :create, document
       can :update, document, :user_id => @user[:id]
       can :remove, document, :user_id => @user[:id]
