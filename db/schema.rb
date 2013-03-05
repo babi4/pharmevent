@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130219143425) do
+ActiveRecord::Schema.define(:version => 20130305153704) do
 
   create_table "clients", :force => true do |t|
     t.string   "name"
@@ -154,11 +154,11 @@ ActiveRecord::Schema.define(:version => 20130219143425) do
     t.integer  "num_schet"
     t.date     "date_schet"
     t.integer  "summ"
-    t.integer  "nds"
+    t.decimal  "nds",                  :precision => 12, :scale => 2
     t.integer  "dogovor_num"
     t.date     "dogovor_date"
-    t.boolean  "lectors",              :default => false, :null => false
-    t.boolean  "entire",               :default => false, :null => false
+    t.boolean  "lectors",                                             :default => false, :null => false
+    t.boolean  "entire",                                              :default => false, :null => false
     t.integer  "info_pp"
     t.string   "info_schet_factura"
     t.string   "info_act"
@@ -169,8 +169,8 @@ ActiveRecord::Schema.define(:version => 20130219143425) do
     t.date     "info_return_date"
     t.string   "info_type_return_act"
     t.string   "info_name_sender"
-    t.datetime "created_at",                              :null => false
-    t.datetime "updated_at",                              :null => false
+    t.datetime "created_at",                                                             :null => false
+    t.datetime "updated_at",                                                             :null => false
     t.string   "state"
     t.text     "state_note"
     t.integer  "type_rashod"
@@ -190,7 +190,7 @@ ActiveRecord::Schema.define(:version => 20130219143425) do
     t.integer  "num_schet"
     t.date     "date_schet"
     t.integer  "summ"
-    t.decimal  "nds",                  :precision => 8, :scale => 2
+    t.decimal  "nds",                  :precision => 12, :scale => 2
     t.integer  "dogovor_num"
     t.date     "dogovor_date"
     t.date     "payment_date"
@@ -202,8 +202,8 @@ ActiveRecord::Schema.define(:version => 20130219143425) do
     t.date     "info_return_date"
     t.string   "info_type_return_act"
     t.string   "info_name_sender"
-    t.datetime "created_at",                                         :null => false
-    t.datetime "updated_at",                                         :null => false
+    t.datetime "created_at",                                          :null => false
+    t.datetime "updated_at",                                          :null => false
     t.string   "state"
     t.text     "state_note"
     t.string   "info_return_status"
