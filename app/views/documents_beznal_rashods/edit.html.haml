@@ -13,8 +13,9 @@
 
 = render 'form'
 
-- if %w(chief_accountant general_director).include?(@current_user.roles.first.name)
+- if %w(chief_accountant general_director administrative_director).include?(@current_user.roles.first.name)
   :javascript
+    window.old_info_state_act = "#{@documents_beznal_rashod.info_state_act}";
     window.old_beznal_rashod_state = "#{@documents_beznal_rashod.state}";
     window.doc_url = "#{url_for([@event, @documents_beznal_rashod])}";
     window.doc_type = 'documents_beznal_rashod';
