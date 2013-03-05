@@ -8,7 +8,7 @@ class DocumentsNalPrihodsController < ApplicationController
     update_document_state(@documents_nal_prihod, params[:transaction], params[:state_note])
 
     respond_to do |format|
-      format.html { redirect_to root_path }
+      format.html { redirect_to root_or_current_path(@event) }
       format.json { head :no_content }
     end
   end
@@ -42,7 +42,7 @@ class DocumentsNalPrihodsController < ApplicationController
 
     respond_to do |format|
       if @documents_nal_prihod.save
-        format.html { redirect_to root_path, notice: 'Наличный приход создан.' }
+        format.html { redirect_to root_or_current_path(@event), notice: 'Наличный приход создан.' }
         format.json { render json: @documents_nal_prihod, status: :created, location: @documents_nal_prihod }
       else
         format.html { render action: "new" }
@@ -54,7 +54,7 @@ class DocumentsNalPrihodsController < ApplicationController
   def update
     respond_to do |format|
       if @documents_nal_prihod.update_attributes(params[:documents_nal_prihod])
-        format.html { redirect_to root_path, notice: 'Наличный приход изменен.' }
+        format.html { redirect_to root_or_current_path(@event), notice: 'Наличный приход изменен.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -67,7 +67,7 @@ class DocumentsNalPrihodsController < ApplicationController
     @documents_nal_prihod.destroy
 
     respond_to do |format|
-      format.html { redirect_to root_path }
+      format.html { redirect_to root_or_current_path(@event) }
       format.json { head :no_content }
     end
   end

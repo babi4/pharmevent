@@ -16,4 +16,13 @@ class ApplicationController < ActionController::Base
         document.update_attributes(state_note: state_note)
       end
     end
+
+    def root_or_current_path(current_item)
+      if can? :redirect_to, :root
+        root_path
+      else
+        current_item
+      end
+    end
+
 end

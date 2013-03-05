@@ -80,6 +80,7 @@ class Ability
     can :manage, CompanyMember   # Управление предствителями заказчика
     can :manage, Company         # Управление заказчиками
     can :manage, :company_consumption  #Расходы компании
+    can :redirect_to, :root # Redirect to root после каждого действия
 
     # ========= ****** =========
     [DocumentsNalRashod, DocumentsNalPrihod].each do |document|
@@ -122,7 +123,7 @@ class Ability
     can :manage, Company         # Управление заказчиками
     can :manage, :company_consumption  #Расходы компании
     can :access, :profitability  # Рентабельность
-
+    can :redirect_to, :root # Redirect to root после каждого действия
 
     # ========= ****** =========
     [DocumentsBeznalRashod].each do |document|
@@ -278,7 +279,6 @@ class Ability
     can :manage, :user_passwords # Изменение паролей пользователей
 
     can :manage, Role
-    #can :manage, :all
 
     can :access, :rails_admin   # grant access to rails_admin
     can :dashboard              # grant access to the dashboard
