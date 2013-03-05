@@ -90,7 +90,7 @@ class Ability
     # ========= ****** =========
     [DocumentsBeznalRashod].each do |document|
       can :read, document
-      can :update, document, :state => 'received'
+      can :update, document, :state => %w(received completed)
 
       can :complete, document, :state => 'received'
       can :update_state, document

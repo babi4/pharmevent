@@ -34,8 +34,8 @@
       = f.label :summ, "Сумма*"
       = f.text_field :summ, :class => 'span2', "data-required" => 'true'
     .span2
-      = f.label :nds, "НДС"
-      = f.text_field :nds, :class => 'span2'
+      = f.label :nds, "НДС*"
+      = f.text_field :nds, :class => 'span2', "data-required" => 'true'
 
   .row
     .span2
@@ -111,7 +111,7 @@
   = f.select :info_type_return_act,  %w(\  почтой курьером службой\ доставки).map { |t| [t]*2 }, {}, { :class => 'span2' }
 
   = f.label :info_name_sender, "ФИО отправителя"
-  = f.select :info_name_sender, User.all.collect {|u| [ u.name, u.name ] }, {}, :class => 'span4'
+  = f.select :info_name_sender, User.all.collect {|u| [ u.name, u.name ] }, {include_blank: ''}, :class => 'span4'
 
   %br
 

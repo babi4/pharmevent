@@ -3,12 +3,19 @@
     = link_to 'Расходы компании', company_consumptions_path
     %span.divider /
   %li.active
-    = link_to 'Безналичный расход', company_nal_rashod_path(@documents_beznal_rashod)
+    = link_to 'Безналичный расход', company_beznal_rashod_path(@documents_beznal_rashod)
     %span.divider
       |
     редактирование
 
 = render 'form'
+
+- if %w(chief_accountant general_director administrative_director).include?(@current_user.roles.first.name)
+  :javascript
+    window.old_info_state_act = "#{@documents_beznal_rashod.info_state_act}";
+    window.old_beznal_rashod_state = "#{@documents_beznal_rashod.state}";
+    window.doc_url = "#{company_beznal_rashod_path(@documents_beznal_rashod)}";
+    window.doc_type = 'documents_beznal_rashod';
 
 - content_for :title do
   Компания - редактирование безналичного расхода
