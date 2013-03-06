@@ -52,6 +52,9 @@ Configuration.for('replacement_machine') {
   documents {
     summ '"#{RuPropisju.rublej_extended_format(@documents.map(&:summ).reduce(:+))}"'
     nds  '"#{RuPropisju.rublej_extended_format(@documents.map(&:nds).reduce(:+))}"'
+
+    summ_digit '"#{@documents.map(&:summ).reduce(:+)} р."'
+    nds_digit  '"#{@documents.map(&:nds).reduce(:+)} р."'
   }
 
   today {
