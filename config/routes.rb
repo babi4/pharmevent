@@ -38,7 +38,7 @@ Rails3BootstrapDeviseCancan::Application.routes.draw do
     put 'change_pass', :on => :member
   end
 
-  root :to => 'documents#index'
+  root :to => 'home#index'
 
   get "/auth", :to => "auth#new", :as => 'new_user_session'
   post "/auth", :to => "auth#create", :as => 'user_session'

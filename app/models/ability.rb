@@ -217,6 +217,8 @@ class Ability
       can :update, document, :user_id => @user[:id]
       can :remove, document, :user_id => @user[:id]
     end
+
+    can :root_path, :events # Root - Мероприятия
   end
 
   def admin
