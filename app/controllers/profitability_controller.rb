@@ -4,7 +4,7 @@ class ProfitabilityController < ApplicationController
 
   def index
     @event = PseudoEvent.company_event
-    if params[:from] and params[:to]
+    if params[:from].present? and params[:to].present?
       params[:from] = Date.parse(params[:from])
       params[:to] = Date.parse(params[:to])
       @events = Event.where('(date_start >= ? and date_start <= ?) or (date_end >= ? and date_end <= ?)', params[:from], params[:to], params[:from], params[:to]) 
@@ -14,6 +14,8 @@ class ProfitabilityController < ApplicationController
       @events = Event.all
       @documents_nal_rashods = DocumentsNalRashod.by_company
       @documents_beznal_rashods = DocumentsBeznalRashod.by_company
+      params[:from] = nil
+      params[:to] = nil
     end
     @rashod_summ = @documents_nal_rashods.sum(:summ) + @documents_beznal_rashods.sum(:summ)
   end
