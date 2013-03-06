@@ -9,7 +9,7 @@
   - if @events.count > 0
     .row
       .span12
-        %h4.pagination-centered= "#{current_user.name} - расчет прибыли менеджера за январь 2013"
+        %h4.pagination-centered= "#{current_user.name} - расчет прибыли менеджера за #{Russian::strftime(@report_from, '%b %Y')}"
         %table.table.table-condensed.table-bordered.table-center.table-reports
           %thead
             %tr
