@@ -23,7 +23,7 @@
             - @events.each_with_index do |event, index|
               - prihod_summ = event.documents_nal_prihods.sum(:summ) + event.documents_beznal_schets.sum(:summ)
               - rashod_summ = event.documents_nal_rashods.sum(:summ) + event.documents_beznal_rashods.sum(:summ)
-              - nds_k_uplate = event.documents_beznal_schets.sum(:nds)
+              - nds_k_uplate = event.documents_beznal_schets.where('type_schet != 0').sum(:nds)
               - nds_k_zachetu = event.documents_beznal_rashods.where(:type_rashod => 2).sum(:nds)
               - profit = (prihod_summ - rashod_summ) - (nds_k_uplate - nds_k_zachetu)
               - profit_total += profit
