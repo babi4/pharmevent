@@ -1,5 +1,5 @@
 GIT
-  remote: git@github.com:ZubKonst/ru_propisju.git
+  remote: git://github.com/ZubKonst/ru_propisju.git
   revision: 3fa4cc0b4ec8d943ae20a144e89a57bb73218937
   branch: always_kopeek
   specs:
