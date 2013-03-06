@@ -6,7 +6,11 @@ Configuration.for('replacement_machine') {
     name '@event.name'
     city '@event.city'
 
-    agent_bonus '"#{@event.documents_beznal_schets.where(type_schet: SCHET_TYPES.select { |k, v| v[:title] == \'вознаграждение\'  }.keys.first).sum(:summ)} р."'
+    agent_bonus '"#{
+     RuPropisju.rublej_extended_format(@event.documents_beznal_schets.where(type_schet: SCHET_TYPES.select { |k, v| v[:title] == \'вознаграждение\'  }.keys.first).sum(:summ))
+    } в том числе НДС 18%  #{
+     RuPropisju.rublej_extended_format(@event.documents_beznal_schets.where(type_schet: SCHET_TYPES.select { |k, v| v[:title] == \'вознаграждение\'  }.keys.first).sum(:nds))
+    }"'
 
     date {
       end_day   '@event.date_end.day'
@@ -46,8 +50,8 @@ Configuration.for('replacement_machine') {
   }
 
   documents {
-    summ '"#{@documents.map(&:summ).reduce(:+)} р."'
-    nds  '"#{@documents.map(&:nds).reduce(:+)} р."'
+    summ '"#{RuPropisju.rublej_extended_format(@documents.map(&:summ).reduce(:+))}"'
+    nds  '"#{RuPropisju.rublej_extended_format(@documents.map(&:nds).reduce(:+))}"'
   }
 
   today {

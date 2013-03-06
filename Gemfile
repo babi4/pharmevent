@@ -1,5 +1,5 @@
 
-source 'https://rubygems.org'
+source 'http://rubygems.org'
 
 gem 'rails', '3.2.8'
 
@@ -48,6 +48,7 @@ gem "girl_friday", "~> 0.11.2"
 #gem "sidekiq", "~> 2.7.3"
 gem "spreadsheet", "~> 0.8.1"
 gem "configuration", "~> 1.3.2"
+gem "ru_propisju", :git => 'git@github.com:ZubKonst/ru_propisju.git', :branch => 'always_kopeek'
 
 group :development do
   gem "binding_of_caller"

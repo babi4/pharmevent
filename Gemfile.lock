@@ -1,5 +1,12 @@
+GIT
+  remote: git@github.com:ZubKonst/ru_propisju.git
+  revision: 3fa4cc0b4ec8d943ae20a144e89a57bb73218937
+  branch: always_kopeek
+  specs:
+    ru_propisju (2.1.4)
+
 GEM
-  remote: https://rubygems.org/
+  remote: http://rubygems.org/
   specs:
     actionmailer (3.2.8)
       actionpack (= 3.2.8)
@@ -297,6 +304,7 @@ DEPENDENCIES
   rails (= 3.2.8)
   rails_admin (~> 0.2.0)
   rspec-rails (>= 2.11.4)
+  ru_propisju!
   ruby_parser (>= 3.0.1)
   russian (~> 0.6.0)
   sass-rails (~> 3.2.4)
