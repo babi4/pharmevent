@@ -147,7 +147,7 @@
     %h3.pagination-centered 
       Итого НДС к уплате: #{sum_nds_k_uplate} руб.
       %br
-      Прибыль: #{sum_profit - @rashod_summ} руб.
+      Прибыль: #{sum_profit.to_i - @rashod_summ.to_i} руб.
 
 #changeEventStateModal.modal.hide.fade{:role => "dialog", :tabindex => "-1"}
   .modal-header
