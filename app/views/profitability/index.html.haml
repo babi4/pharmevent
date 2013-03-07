@@ -1,6 +1,6 @@
 .row.row-top-actions
   .span8
-    = form_tag profitability_path do
+    = form_tag(profitability_path, :method => 'GET') do
       %input{:type => "hidden", :name => "from", :id => "report-from", :value => params[:from]}
       %input{:type => "hidden", :name => "to", :id => "report-to", :value => params[:to]}
       .input-prepend.pull-left

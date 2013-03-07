@@ -1,6 +1,6 @@
 .row.print-hide
   .span12
-    = form_tag(reports_path, :class => 'form-inline pagination-centered') do
+    = form_tag(reports_path, :class => 'form-inline pagination-centered', :method => 'GET') do
       Отчет за
       = select_month(@report_from)
       = select_year(@report_from, :start_year => 2012, :end_year => Date.today.year)
