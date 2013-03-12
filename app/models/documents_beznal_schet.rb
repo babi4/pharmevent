@@ -54,7 +54,7 @@ class DocumentsBeznalSchet < ActiveRecord::Base
   end
 
   def self.next_num_schet
-    DocumentsBeznalSchet.unscoped.where { date_schet > DateTime.now.beginning_of_year } .count + 1
+    DocumentsBeznalSchet.unscoped.where { date_schet > DateTime.now.beginning_of_year } .count + 11
   end
 
   def self.search(params = {})
