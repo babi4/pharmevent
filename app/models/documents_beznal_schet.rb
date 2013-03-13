@@ -22,6 +22,11 @@ class DocumentsBeznalSchet < ActiveRecord::Base
   #   self.date_schet = DateTime.now
   # end
 
+  after_create do
+    Setting.inc_num_beznal_schet
+  end
+
+
   state_machine :state, :initial => :new do
 
     state :new           # Новый (менеджер, гендир)
@@ -54,7 +59,7 @@ class DocumentsBeznalSchet < ActiveRecord::Base
   end
 
   def self.next_num_schet
-    DocumentsBeznalSchet.unscoped.where { date_schet > DateTime.now.beginning_of_year } .count + 11
+    Setting.next_num_beznal_schet
   end
 
   def self.search(params = {})
