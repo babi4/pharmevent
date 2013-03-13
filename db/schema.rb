@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130305153704) do
+ActiveRecord::Schema.define(:version => 20130313200449) do
 
   create_table "clients", :force => true do |t|
     t.string   "name"
@@ -155,7 +155,7 @@ ActiveRecord::Schema.define(:version => 20130305153704) do
     t.date     "date_schet"
     t.integer  "summ"
     t.decimal  "nds",                  :precision => 12, :scale => 2
-    t.integer  "dogovor_num"
+    t.string   "dogovor_num"
     t.date     "dogovor_date"
     t.boolean  "lectors",                                             :default => false, :null => false
     t.boolean  "entire",                                              :default => false, :null => false
@@ -191,7 +191,7 @@ ActiveRecord::Schema.define(:version => 20130305153704) do
     t.date     "date_schet"
     t.integer  "summ"
     t.decimal  "nds",                  :precision => 12, :scale => 2
-    t.integer  "dogovor_num"
+    t.string   "dogovor_num"
     t.date     "dogovor_date"
     t.date     "payment_date"
     t.string   "info_schet_factura"
