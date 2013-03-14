@@ -28,16 +28,6 @@ class Company < ActiveRecord::Base
     end
   end
 
-  after_create do |company|
-    attrs = {}
-    COMPANY_ADDRESS_FIELDS.each do |attr_name|
-      attrs[attr_name] = company.send(attr_name)
-    end
-    attrs['name'] = "#{company[:company_type]} '#{company[:short_name]}'"
-
-    CouriersCompany.find_or_create_by_name(attrs) # TODO verify only by name?
-  end
-
   def transferred_funds
     self_id = self[:id] # yes, it is necessary
     company_events = Event.where{ company_id == self_id }
