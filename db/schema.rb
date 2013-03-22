@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130313203514) do
+ActiveRecord::Schema.define(:version => 20130322165023) do
 
   create_table "clients", :force => true do |t|
     t.string   "name"
@@ -153,7 +153,7 @@ ActiveRecord::Schema.define(:version => 20130313203514) do
     t.string   "telephone"
     t.integer  "num_schet"
     t.date     "date_schet"
-    t.integer  "summ"
+    t.decimal  "summ",                 :precision => 12, :scale => 2
     t.decimal  "nds",                  :precision => 12, :scale => 2
     t.string   "dogovor_num"
     t.date     "dogovor_date"
@@ -189,7 +189,7 @@ ActiveRecord::Schema.define(:version => 20130313203514) do
     t.string   "telephone"
     t.integer  "num_schet"
     t.date     "date_schet"
-    t.integer  "summ"
+    t.decimal  "summ",                 :precision => 12, :scale => 2
     t.decimal  "nds",                  :precision => 12, :scale => 2
     t.string   "dogovor_num"
     t.date     "dogovor_date"
@@ -221,10 +221,10 @@ ActiveRecord::Schema.define(:version => 20130313203514) do
     t.string   "description"
     t.string   "name"
     t.string   "telephone"
-    t.integer  "summ"
+    t.decimal  "summ",        :precision => 12, :scale => 2
     t.date     "date"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",                                 :null => false
+    t.datetime "updated_at",                                 :null => false
     t.string   "state"
     t.text     "state_note"
     t.time     "deleted_at"
@@ -240,12 +240,12 @@ ActiveRecord::Schema.define(:version => 20130313203514) do
     t.string   "description"
     t.string   "name"
     t.string   "telephone"
-    t.integer  "summ"
+    t.decimal  "summ",        :precision => 12, :scale => 2
     t.date     "date"
-    t.boolean  "lectors",     :default => false, :null => false
-    t.boolean  "entire",      :default => false, :null => false
-    t.datetime "created_at",                     :null => false
-    t.datetime "updated_at",                     :null => false
+    t.boolean  "lectors",                                    :default => false, :null => false
+    t.boolean  "entire",                                     :default => false, :null => false
+    t.datetime "created_at",                                                    :null => false
+    t.datetime "updated_at",                                                    :null => false
     t.string   "state"
     t.text     "state_note"
     t.integer  "type_rashod"
