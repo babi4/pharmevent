@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130322165023) do
+ActiveRecord::Schema.define(:version => 20130327184108) do
 
   create_table "clients", :force => true do |t|
     t.string   "name"
@@ -151,7 +151,7 @@ ActiveRecord::Schema.define(:version => 20130322165023) do
     t.string   "description"
     t.string   "name"
     t.string   "telephone"
-    t.integer  "num_schet"
+    t.string   "num_schet"
     t.date     "date_schet"
     t.decimal  "summ",                 :precision => 12, :scale => 2
     t.decimal  "nds",                  :precision => 12, :scale => 2
