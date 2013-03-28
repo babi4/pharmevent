@@ -66,3 +66,10 @@ $ ->
 
     $('#admindir-return-our').on 'click', ->
       selectDocumentsFilter 'documents_beznal_schet', 'posted', 'Закрывающие документы отправлены'
+
+    $('#gendir-to-sign').on 'click', ->
+      selectDocumentsFilter 'documents_beznal_rashod', 'added', 'На подпись'
+
+    $('#gendir-company-to-sign').on 'click', ->
+      selectDocumentsFilter 'company_consumption', 'added', 'На подпись'
+

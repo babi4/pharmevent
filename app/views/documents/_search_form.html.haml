@@ -15,6 +15,12 @@
           %button#admindir-return{:class => "btn #{params[:document_type] == 'documents_beznal_rashod' && params[:search][:state] == 'received' ? "active" : ""}"} Вернуть акты заказчику
           %button#admindir-receive{:class => "btn #{params[:document_type] == 'documents_beznal_rashod' && params[:search][:state] == 'paid' ? "active" : ""}"} Получить закрывающие документы
           %button#admindir-return-our{:class => "btn #{params[:document_type] == 'documents_beznal_schet' && params[:search][:state] == 'posted' ? "active" : ""}"} Вернуть наши акты
+  - elsif current_user.roles.first.name == 'general_director'
+    .row.row-accountant-actions
+      .span12.pagination-centered
+        .btn-group
+          %button#gendir-to-sign{:class => "btn #{params[:document_type] == 'documents_beznal_rashod' && params[:search][:state] == 'added' ? "active" : ""}"} На подпись: Безналичный расход
+          %button#gendir-company-to-sign{:class => "btn #{params[:document_type] == 'company_consumption' && params[:search][:state] == 'added' ? "active" : ""}"} На подпись: Расходы компании
 
   .row
     .span3

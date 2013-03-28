@@ -11,6 +11,10 @@ class Ability
     end
   end
 
+  def redirect_documents_after_sign?
+    %w[general_director admin].include? @user.roles.pluck(:name).first
+  end
+
   def general_director
     # Генеральный директор: видит все проекты всех менеджеров.
     # Финансовые показатели мероприятия: рентабильность, прибыль.
