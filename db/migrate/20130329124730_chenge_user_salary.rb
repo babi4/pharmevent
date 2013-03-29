@@ -11,8 +11,3 @@ class ChengeUserSalary < ActiveRecord::Migration
 
 end
 
-User.all.each do |t|
-  t.salary = 0 unless t.salary
-  t.percent = 0 unless t.percent
-  t.save
-end
