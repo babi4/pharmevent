@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130327184108) do
+ActiveRecord::Schema.define(:version => 20130329124730) do
 
   create_table "clients", :force => true do |t|
     t.string   "name"
@@ -313,8 +313,8 @@ ActiveRecord::Schema.define(:version => 20130327184108) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "middle_name"
-    t.integer  "salary"
-    t.integer  "percent",                :limit => 2
+    t.integer  "salary",                              :default => 0
+    t.integer  "percent",                :limit => 2, :default => 0
     t.time     "deleted_at"
   end
 
