@@ -34,4 +34,12 @@ class User < ActiveRecord::Base
     self.save
   end
 
+  def bonus(profit_total)
+    if self.salary && self.percent
+      ((profit_total - self.salary) * self.percent / 100).round(2)
+    else
+      0
+    end
+  end
+
 end

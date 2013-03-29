@@ -38,16 +38,16 @@
               %td= "#{number_with_precision profit_total, precision: 2} руб."
             %tr
               %td.text-right{colspan:4} Ваш оклад
-              %td= "#{number_with_precision current_user.salary, precision: 2} руб."
+              %td= "#{number_with_precision (current_user.salary || 0), precision: 2} руб."
             %tr
               %td.text-right{colspan:4} Ваша премия за месяц
-              - bonus =  ((profit_total - current_user.salary) * current_user.percent / 100).round(2)
+              - bonus = current_user.bonus(profit_total)
               %td= "#{number_with_precision bonus, precision: 2} руб."
             %tr
               %td.text-right{colspan:4}
                 %b Итоговая заработная плата
               %td
-                %b= "#{number_with_precision (current_user.salary + bonus), precision: 2} руб."
+                %b= "#{number_with_precision ((current_user.salary || 0) + bonus), precision: 2} руб."
     .row
       .span12.pagination-centered
         %button.btn.btn-print.btn-print-report
