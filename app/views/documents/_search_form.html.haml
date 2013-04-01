@@ -12,7 +12,7 @@
       .span12.pagination-centered
         .btn-group
           %button#admindir-close{:class => "btn #{params[:document_type] == 'documents_beznal_schet' && params[:search][:state] == 'ready_to_post' ? "active" : ""}"} Отправить закрывающие документы
-          %button#admindir-return{:class => "btn #{params[:document_type] == 'documents_beznal_rashod' && params[:search][:state] == 'received' ? "active" : ""}"} Вернуть акты заказчику
+          %button#admindir-return{:class => "btn #{params[:document_type] == 'documents_beznal_rashod' && params[:search][:state] == 'received' ? "active" : ""}"} Вернуть акты поставщику
           %button#admindir-receive{:class => "btn #{params[:document_type] == 'documents_beznal_rashod' && params[:search][:state] == 'paid' ? "active" : ""}"} Получить закрывающие документы
           %button#admindir-return-our{:class => "btn #{params[:document_type] == 'documents_beznal_schet' && params[:search][:state] == 'posted' ? "active" : ""}"} Вернуть наши акты
   - elsif current_user.roles.first.name == 'general_director'
