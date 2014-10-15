@@ -44,7 +44,7 @@
             %ul.dropdown-menu.dropdown-menu-narrow.dropdown-menu-left
               %li
                 = link_to 'Редактировать', edit_event_path(event)
-              - if event.date_end >= DateTime.now.to_date
+              - if event.date_end <= DateTime.now.to_date
                 %li
                   %a.event-to-archive{href: "#", 'data-event-id' => event.id}
                     - if action_name == 'index'

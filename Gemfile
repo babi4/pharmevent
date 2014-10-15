@@ -54,4 +54,5 @@ group :development do
   gem "binding_of_caller"
   gem "better_errors", "~> 0.3.2"
   gem "bullet", "~> 4.3.0"
+  gem "heroku"
 end
